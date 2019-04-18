@@ -1,0 +1,70 @@
+version: '3'
+services:
+
+  # 
+  # dcbr-api
+  #-------------------------------------------------
+  # The API performs the migrations on the database, 
+  # Therefore it needs to come up after the database.
+  #
+  #
+  # We are using a simple sleep command to do this 
+  # for the moment; refer to the `command` section 
+  # of the configuration for details.  It would be 
+  # nice to implement a more deterministic solution.
+  #
+  dcbr-api:
+    build:
+      context: ..
+      dockerfile: docker/api/Dockerfile
+    environment:
+      DATABASE_SERVICE_HOST: ${DATABASE_HOST:-dcbr-db}
+      DATABASE_SERVICE_PORT: ${DATABASE_PORT:-5432}
+      DATABASE_NAME: ${DATABASE_NAME:-dcbr}
+      DATABASE_USER: ${DATABASE_USER:-dcbr}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-dcbr}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-True}
+      # STI_SCRIPTS_PATH=${STI_SCRIPTS_PATH}
+    volumes:
+      - ../api:/app
+    networks:
+      - dcbr
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dcbr-db
+    command: >
+        /bin/bash -c "
+        echo waiting for dcbr-db ...;
+        sleep 5;
+        # if [ $DEBUG ] && [ "$DEBUG" == "true" ]; then
+          python manage.py migrate && \
+          python manage.py runserver 0.0.0.0:8080;
+        # else
+          # ${STI_SCRIPTS_PATH}/run;
+        #   echo NOT YET IMPLEMENTED!
+        #   exit 1
+        # fi"
+
+  # 
+  # dcbr-db
+  # using the same postgresql image we will use on OpenShift
+  # 
+  dcbr-db:
+    image: registry.access.redhat.com/rhscl/postgresql-10-rhel7:latest
+    environment:
+      POSTGRESQL_USER: ${POSTGRESQL_USER:-dcbr}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD:-dcbr}
+      POSTGRESQL_DATABASE: ${POSTGRESQL_DATABASE:-dcbr}
+    networks:
+      - dcbr
+    ports:
+      - 5432:5432
+    volumes:
+      - dcbr-data:/var/lib/pgsql/data
+
+networks:
+  dcbr:
+
+volumes:
+  dcbr-data:
