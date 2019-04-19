@@ -14,9 +14,7 @@ services:
   # nice to implement a more deterministic solution.
   #
   dcbr-api:
-    build:
-      context: ..
-      dockerfile: docker/api/Dockerfile
+    image: dcbr-api
     environment:
       DATABASE_SERVICE_HOST: ${DATABASE_HOST:-dcbr-db}
       DATABASE_SERVICE_PORT: ${DATABASE_PORT:-5432}
@@ -24,9 +22,9 @@ services:
       DATABASE_USER: ${DATABASE_USER:-dcbr}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD:-dcbr}
       DJANGO_DEBUG: ${DJANGO_DEBUG:-True}
-      # STI_SCRIPTS_PATH=${STI_SCRIPTS_PATH}
+      STI_SCRIPTS_PATH: ${STI_SCRIPTS_PATH}
     volumes:
-      - ../api:/app
+      - ../api:/opt/app-root/src
     networks:
       - dcbr
     ports:
@@ -37,14 +35,13 @@ services:
         /bin/bash -c "
         echo waiting for dcbr-db ...;
         sleep 5;
-        # if [ $DEBUG ] && [ "$DEBUG" == "true" ]; then
+        if [ $DEBUG ] && [ "$DEBUG" == "true" ]; then
           python manage.py migrate && \
           python manage.py runserver 0.0.0.0:8080;
-        # else
-          # ${STI_SCRIPTS_PATH}/run;
-        #   echo NOT YET IMPLEMENTED!
-        #   exit 1
-        # fi"
+        else
+          echo running s2i container...;
+          ${STI_SCRIPTS_PATH}/run;
+        fi"
 
   # 
   # dcbr-db
