@@ -26,9 +26,18 @@ usage() {
       build - Build the docker images for the project.
               You need to do this first, since the builds require
               a combination of Docker and S2I builds.
-
-              Examples:    
-              $0 build
+    
+              You can build individual components as shown below, components that have dependencies
+              will have these dependencies built too.
+    
+              Examples:
+               - Build the api only.
+    
+                $0 build dcbr-api
+    
+              By default all containers that components comprise of, will be rebuilt.
+    
+                $0 build 
     
       up -  Creates the application containers from the built images
             and starts the services based on the docker-compose.yml file.
@@ -56,7 +65,7 @@ EOF
 # -----------------------------------------------------------------------------------------------------------------
 # Default Settings:
 # -----------------------------------------------------------------------------------------------------------------
-DEFAULT_CONTAINERS="dcbr-api dcbr-db"
+DEFAULT_CONTAINERS="dcbr-api dcbr-db keycloak keycloak-db"
 # -----------------------------------------------------------------------------------------------------------------
 # Functions:
 # -----------------------------------------------------------------------------------------------------------------
@@ -116,6 +125,19 @@ configureEnvironment() {
   export DEBUG=${DEBUG}
   export DJANGO_SECRET_KEY="(0y1vy1z!l&8n*0t7m#f_7$o$jb%xwswka)30$^90z!8wy(i23"
   export DJANGO_DEBUG=True
+
+  # keycloak-db
+  export KEYCLOAK_DB_NAME="keycloak"
+  export KEYCLOAK_DB_USER="keycloak"
+  export KEYCLOAK_DB_PASSWORD="keycloak"
+
+  # keycloak
+  export KEYCLOAK_DB_VENDOR="POSTGRES"
+  export KEYCLOAK_DB_ADDR="keycloak-db"
+  export KEYCLOAK_USER="admin"
+  export KEYCLOAK_PASSWORD="admin"
+  export KEYCLOAK_LOGLEVEL="WARN"
+  export KEYCLOAK_ROOT_LOGLEVEL="WARN"
 }
 
 getStartupParams() {
@@ -191,7 +213,14 @@ rm|down)
 build)
   _startupParams=$(getStartupParams $@)
   configureEnvironment $@
-  buildImages
+  case "$@" in
+  dcbr-api)
+    build-api
+    ;;
+  *)
+    buildImages
+    ;;
+  esac
   ;;
 *)
   usage
