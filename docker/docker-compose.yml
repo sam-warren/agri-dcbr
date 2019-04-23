@@ -24,7 +24,7 @@ services:
       DJANGO_DEBUG: ${DJANGO_DEBUG:-True}
       STI_SCRIPTS_PATH: ${STI_SCRIPTS_PATH}
     volumes:
-      - ../api:/opt/app-root/src
+      - ../dcbr-api:/opt/app-root/src
     networks:
       - dcbr
     ports:
@@ -36,10 +36,11 @@ services:
         echo waiting for dcbr-db ...;
         sleep 5;
         if [ $DEBUG ] && [ "$DEBUG" == "true" ]; then
+        echo Running in debug mode;
           python manage.py migrate && \
           python manage.py runserver 0.0.0.0:8080;
         else
-          echo running s2i container...;
+          echo Running s2i container...;
           ${STI_SCRIPTS_PATH}/run;
         fi"
 

@@ -64,33 +64,13 @@ build-api() {
   #
   # dcbr-api
   #
-  echo -e "\nBuilding dcbr-api base image"
-  docker build -q \
-    -t 'dcbr-api-s2i' \
-    --build-arg 'base_image=python:3' \
-    -f './api/Dockerfile' './api'
-
-
-  BASE_IMAGE="dcbr-api-s2i"
+  BASE_IMAGE="centos/python-36-centos7"
   echo -e "\nBuilding dcbr-api image from ${BASE_IMAGE}..."
   ${S2I_EXE} build \
+    -e "UPGRADE_PIP_TO_LATEST=true" \
     -e "PIP_NO_CACHE_DIR=" \
     -v "${COMPOSE_PROJECT_NAME}_dcbr-pip-cache:/opt/app-root/.cache/pip" \
-    '../api' \
-    "$BASE_IMAGE" \
-    'dcbr-api'
-}
-
-build-api-2() {
-  #
-  # dcbr-api
-  #
-  BASE_IMAGE="centos/python-35-centos7"
-  echo -e "\nBuilding dcbr-api image from ${BASE_IMAGE}..."
-  ${S2I_EXE} build \
-    -e "PIP_NO_CACHE_DIR=" \
-    -v "${COMPOSE_PROJECT_NAME}_dcbr-pip-cache:/opt/app-root/.cache/pip" \
-    '../api' \
+    '../dcbr-api' \
     "$BASE_IMAGE" \
     'dcbr-api'
 }
