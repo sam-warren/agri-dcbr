@@ -2,8 +2,43 @@ version: '3'
 services:
 
   # 
+  # dcbr-web
+  #
+  dcbr-web:
+    build:
+      context: ..
+      dockerfile: docker/dcbr-web/Dockerfile
+    networks:
+      - dcbr
+    ports:
+      - "8081:8080"
+    depends_on:
+      - dcbr-api
+
+  # 
+  # dcbr-web-dev
+  # -------------------------------------------------
+  # Dockerized vue.js app with hot-reloading, 
+  # for development purposes.
+  #
+  dcbr-web-dev:
+    build:
+      context: ..
+      dockerfile: docker/dcbr-web/Dockerfile-dev
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ../dcbr-web:/app
+    networks:
+      - dcbr
+    ports:
+      - "8081:8080"
+    depends_on:
+      - dcbr-api
+
+  # 
   # dcbr-api
-  #-------------------------------------------------
+  # -------------------------------------------------
   # The API performs the migrations on the database, 
   # Therefore it needs to come up after the database.
   #
@@ -66,37 +101,37 @@ services:
   # keycloak service
   #  
   keycloak:      
-      build:
-        context: ..
-        dockerfile: docker/keycloak/Dockerfile
-      environment:
-        DB_VENDOR: ${KEYCLOAK_DB_VENDOR}
-        DB_ADDR: ${KEYCLOAK_DB_ADDR}
-        DB_DATABASE: ${KEYCLOAK_DB_NAME}
-        DB_USER: ${KEYCLOAK_DB_USER}
-        DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
-        KEYCLOAK_USER: ${KEYCLOAK_USER}
-        KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
-        KEYCLOAK_LOGLEVEL: ${KEYCLOAK_LOGLEVEL}
-        ROOT_LOGLEVEL: ${KEYCLOAK_ROOT_LOGLEVEL}
-      ports:
-        - 8888:8080
-      depends_on:
-        - keycloak-db      
-      command: -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=/tmp/realm.json -Dkeycloak.migration.strategy=IGNORE_EXISTING
+    build:
+      context: ..
+      dockerfile: docker/keycloak/Dockerfile
+    environment:
+      DB_VENDOR: ${KEYCLOAK_DB_VENDOR}
+      DB_ADDR: ${KEYCLOAK_DB_ADDR}
+      DB_DATABASE: ${KEYCLOAK_DB_NAME}
+      DB_USER: ${KEYCLOAK_DB_USER}
+      DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      KEYCLOAK_USER: ${KEYCLOAK_USER}
+      KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+      KEYCLOAK_LOGLEVEL: ${KEYCLOAK_LOGLEVEL}
+      ROOT_LOGLEVEL: ${KEYCLOAK_ROOT_LOGLEVEL}
+    ports:
+      - 8888:8080
+    depends_on:
+      - keycloak-db      
+    command: -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=/tmp/realm.json -Dkeycloak.migration.strategy=IGNORE_EXISTING
   
   # 
   # keycloak-db
   # using the same postgresql image we will use on OpenShift
   # 
   keycloak-db:
-      image: registry.access.redhat.com/rhscl/postgresql-10-rhel7:latest
-      environment:
-        POSTGRESQL_USER: ${KEYCLOAK_DB_USER}
-        POSTGRESQL_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
-        POSTGRESQL_DATABASE: ${KEYCLOAK_DB_NAME}
-      volumes:
-        - keycloak-db-data:/var/lib/pgsql/data
+    image: registry.access.redhat.com/rhscl/postgresql-10-rhel7:latest
+    environment:
+      POSTGRESQL_USER: ${KEYCLOAK_DB_USER}
+      POSTGRESQL_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+      POSTGRESQL_DATABASE: ${KEYCLOAK_DB_NAME}
+    volumes:
+      - keycloak-db-data:/var/lib/pgsql/data
 
 networks:
   dcbr:
