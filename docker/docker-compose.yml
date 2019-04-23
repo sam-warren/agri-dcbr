@@ -1,0 +1,69 @@
+version: '3'
+services:
+
+  # 
+  # dcbr-api
+  #-------------------------------------------------
+  # The API performs the migrations on the database, 
+  # Therefore it needs to come up after the database.
+  #
+  #
+  # We are using a simple sleep command to do this 
+  # for the moment; refer to the `command` section 
+  # of the configuration for details.  It would be 
+  # nice to implement a more deterministic solution.
+  #
+  dcbr-api:
+    image: dcbr-api
+    environment:
+      DATABASE_SERVICE_HOST: ${DATABASE_SERVICE_HOST}
+      DATABASE_SERVICE_PORT: ${DATABASE_SERVICE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DJANGO_DEBUG: ${DJANGO_DEBUG}
+      STI_SCRIPTS_PATH: ${STI_SCRIPTS_PATH}
+    volumes:
+      - ../dcbr-api:/opt/app-root/src
+    networks:
+      - dcbr
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dcbr-db
+    command: >
+        /bin/bash -c "
+        echo waiting for dcbr-db ...;
+        sleep 5;
+        if [ $DEBUG ] && [ "$DEBUG" == "true" ]; then
+        echo Running in debug mode;
+          python manage.py migrate && \
+          python manage.py runserver 0.0.0.0:8080;
+        else
+          echo Running s2i container...;
+          env;
+          ${STI_SCRIPTS_PATH}/run;
+        fi"
+
+  # 
+  # dcbr-db
+  # using the same postgresql image we will use on OpenShift
+  # 
+  dcbr-db:
+    image: registry.access.redhat.com/rhscl/postgresql-10-rhel7:latest
+    environment:
+      POSTGRESQL_USER: ${POSTGRESQL_USER}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD}
+      POSTGRESQL_DATABASE: ${POSTGRESQL_DATABASE}
+    networks:
+      - dcbr
+    ports:
+      - 5432:5432
+    volumes:
+      - dcbr-data:/var/lib/pgsql/data
+
+networks:
+  dcbr:
+
+volumes:
+  dcbr-data:
