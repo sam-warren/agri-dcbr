@@ -114,7 +114,6 @@ configureEnvironment() {
   export DATABASE_USER=${POSTGRESQL_USER}
   export DATABASE_PASSWORD=${POSTGRESQL_PASSWORD}
   export DEBUG=${DEBUG}
-  export DEMO_SITE=${DEMO_SITE-True}
   export DJANGO_SECRET_KEY="(0y1vy1z!l&8n*0t7m#f_7$o$jb%xwswka)30$^90z!8wy(i23"
   export DJANGO_DEBUG=True
 }

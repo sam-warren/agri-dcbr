@@ -16,12 +16,12 @@ services:
   dcbr-api:
     image: dcbr-api
     environment:
-      DATABASE_SERVICE_HOST: ${DATABASE_HOST:-dcbr-db}
-      DATABASE_SERVICE_PORT: ${DATABASE_PORT:-5432}
-      DATABASE_NAME: ${DATABASE_NAME:-dcbr}
-      DATABASE_USER: ${DATABASE_USER:-dcbr}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-dcbr}
-      DJANGO_DEBUG: ${DJANGO_DEBUG:-True}
+      DATABASE_SERVICE_HOST: ${DATABASE_SERVICE_HOST}
+      DATABASE_SERVICE_PORT: ${DATABASE_SERVICE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DJANGO_DEBUG: ${DJANGO_DEBUG}
       STI_SCRIPTS_PATH: ${STI_SCRIPTS_PATH}
     volumes:
       - ../dcbr-api:/opt/app-root/src
@@ -41,6 +41,7 @@ services:
           python manage.py runserver 0.0.0.0:8080;
         else
           echo Running s2i container...;
+          env;
           ${STI_SCRIPTS_PATH}/run;
         fi"
 
@@ -51,9 +52,9 @@ services:
   dcbr-db:
     image: registry.access.redhat.com/rhscl/postgresql-10-rhel7:latest
     environment:
-      POSTGRESQL_USER: ${POSTGRESQL_USER:-dcbr}
-      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD:-dcbr}
-      POSTGRESQL_DATABASE: ${POSTGRESQL_DATABASE:-dcbr}
+      POSTGRESQL_USER: ${POSTGRESQL_USER}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD}
+      POSTGRESQL_DATABASE: ${POSTGRESQL_DATABASE}
     networks:
       - dcbr
     ports:
