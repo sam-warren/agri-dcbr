@@ -193,6 +193,7 @@ shift || COMMAND=usage
 
 case "${COMMAND}" in
 start|up)
+  unset DEBUG
   DEFAULT_CONTAINERS="dcbr-web  $DEFAULT_CONTAINERS"
   _startupParams=$(getStartupParams $@)
   configureEnvironment $@
@@ -200,6 +201,7 @@ start|up)
   docker-compose logs -f
  ;;
 start-dev)
+  export DEBUG=true
   DEFAULT_CONTAINERS="dcbr-web-dev  $DEFAULT_CONTAINERS"
   _startupParams=$(getStartupParams $@)
   configureEnvironment $@
