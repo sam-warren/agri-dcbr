@@ -10,8 +10,8 @@ The `manage` script in this directory contains a set of utilities that help gett
 
 Some of the images used by the project use a source-to-image build strategy and will therefore need to be build before the container can be started. Just run `./manage build` to complete this.
 
-To run the project execute `./manage start`: the api container will be serving content at http://localhost:8080
+To run the project execute `./manage start`: the api container will be serving content at http://localhost:8080, while the frontend container will be serving at http://localhost:8081
 
 ### Development Mode
-During development it is useful to have code hot-reloading enabled, so that containers won't need to be rebuilt after each change. To enable the development mode, set the flag `DEBUG=true` before starting the containers.
-Example: `DEBUG=true ./manage start`.
+During development it is useful to have code hot-reloading enabled, so that containers won't need to be rebuilt after each change.
+To start both the api and frontend container in development mode, using code hot-reloading, run `./manage start-dev`.
