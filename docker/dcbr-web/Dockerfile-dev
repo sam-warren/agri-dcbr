@@ -10,6 +10,8 @@ RUN npm install
 
 COPY dcbr-web/ .
 
+ENV PATH="/app/node_modules/@vue/cli/bin:${PATH}"
+
 RUN npm run build
 
 EXPOSE 8080
