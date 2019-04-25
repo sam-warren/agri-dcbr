@@ -52,6 +52,8 @@ usage() {
 
       start - Same as up
 
+      start-dev - Starts the containers in development mode, using hot-reload for dcbr-api and dcbr-web.
+
       logs - Display the logs from the docker compose run (ctrl-c to exit).
 
       stop - Stops the services.  This is a non-destructive process.  The volumes and containers
