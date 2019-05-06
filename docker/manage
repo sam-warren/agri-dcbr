@@ -72,7 +72,8 @@ EOF
 # -----------------------------------------------------------------------------------------------------------------
 # Default Settings:
 # -----------------------------------------------------------------------------------------------------------------
-DEFAULT_CONTAINERS="dcbr-api dcbr-db keycloak keycloak-db"
+###DEFAULT_CONTAINERS="dcbr-api dcbr-db keycloak keycloak-db"
+DEFAULT_CONTAINERS="dcbr-api dcbr-db"
 # -----------------------------------------------------------------------------------------------------------------
 # Functions:
 # -----------------------------------------------------------------------------------------------------------------
@@ -209,7 +210,7 @@ start|up)
  ;;
 start-dev)
   export DEBUG=true
-  DEFAULT_CONTAINERS="dcbr-web-dev  $DEFAULT_CONTAINERS"
+  ###DEFAULT_CONTAINERS="dcbr-web-dev  $DEFAULT_CONTAINERS"
   _startupParams=$(getStartupParams $@)
   configureEnvironment $@
   docker-compose up -d ${_startupParams} 

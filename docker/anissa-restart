@@ -1,0 +1,1 @@
+./manage stop; ./manage build; ./manage start-dev
