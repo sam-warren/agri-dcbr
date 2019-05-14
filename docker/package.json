@@ -1,0 +1,16 @@
+{
+  "name": "docker",
+  "version": "1.0.0",
+  "description": "## Requirements 1. Have a working installation of [Docker](https://www.docker.com/) 2. Use a shell such as `bash` ( or [Git bash](https://git-scm.com/downloads) if on Windows) 3. Have the [S2I binaries](https://github.com/openshift/source-to-image/releases) on your path",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {},
+  "keywords": []
+}
