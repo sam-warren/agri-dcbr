@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Operator(models.Model):
-      name = models.CharField(max_length=120)
+      name = models.CharField(max_length=40)
       address1 = models.CharField(max_length=200)
       timestamp = models.DateTimeField()
       numDogs = models.IntegerField()
