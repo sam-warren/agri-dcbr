@@ -57,6 +57,9 @@ services:
       DATABASE_USER: ${DATABASE_USER}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DJANGO_DEBUG: ${DJANGO_DEBUG}
+      DJANGO_ADMIN_USER: ${DJANGO_ADMIN_USER}
+      DJANGO_ADMIN_PASSWORD: ${DJANGO_ADMIN_PASSWORD}
+      DJANGO_ADMIN_EMAIL: ${DJANGO_ADMIN_EMAIL}
       STI_SCRIPTS_PATH: ${STI_SCRIPTS_PATH}
     volumes:
       - ../dcbr-api:/opt/app-root/src
@@ -73,6 +76,7 @@ services:
         if [ $DEBUG ] && [ "$DEBUG" == "true" ]; then
         echo Running in debug mode;
           python manage.py migrate && \
+          python manage.py shell < scripts/create_superuser.py && \
           python manage.py runserver 0.0.0.0:8080;
         else
           echo Running s2i container...;

@@ -142,6 +142,9 @@ configureEnvironment() {
   export DEBUG=${DEBUG}
   export DJANGO_SECRET_KEY="(0y1vy1z!l&8n*0t7m#f_7$o$jb%xwswka)30$^90z!8wy(i23"
   export DJANGO_DEBUG=True
+  export DJANGO_ADMIN_USER="admin"
+  export DJANGO_ADMIN_PASSWORD="admin"
+  export DJANGO_ADMIN_EMAIL="dcbr-admin@gov.bc.ca"
 
   # keycloak-db
   export KEYCLOAK_DB_NAME="keycloak"
