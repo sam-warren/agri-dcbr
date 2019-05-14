@@ -135,6 +135,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# https://www.techiediaries.com/django-cors/
+CORS_ORIGIN_ALLOW_ALL = True
+
 CORS_ORIGIN_WHITELIST = (
-         'localhost:8080/'
+ 'http://localhost:8080/',
+ 'http://localhost:8085/',
 )
+         
+

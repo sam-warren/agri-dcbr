@@ -4,7 +4,7 @@ from django.db import models
 class Operator(models.Model):
       name = models.CharField(max_length=120)
       address1 = models.CharField(max_length=200)
-      timestamp = models.TimeField()
+      timestamp = models.DateTimeField()
       numDogs = models.IntegerField()
       numCats = models.IntegerField()
       completed = models.BooleanField(default=False)

@@ -23,5 +23,5 @@ router.register(r'operators', views.OperatorView, 'operator')     # add this
 
 urlpatterns = [
     path('admin/', admin.site.urls),         
-    path('api/', include(router.urls))                # add this
+    path('api/', include(router.urls)),                # add this
 ]
