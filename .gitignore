@@ -107,3 +107,6 @@ Pipfile.lock
 
 # VSCode files
 .vscode
+
+# VUE/Node files
+**/node_modules
