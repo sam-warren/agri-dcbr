@@ -5,7 +5,7 @@ ADMIN_NAME = os.getenv("DJANGO_ADMIN_USER")
 ADMIN_PASSWORD = os.getenv("DJANGO_ADMIN_PASSWORD")
 ADMIN_EMAIL = os.getenv("DJANGO_ADMIN_EMAIL")
 
-Superuser = None
+superuser = None
 
 try:
     superuser = User.objects.get(username=ADMIN_NAME)
