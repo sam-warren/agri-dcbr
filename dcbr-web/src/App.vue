@@ -1,28 +1,32 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <!-- <router-view/> -->
-    <HelloWorld/>
-  </div>
+  <v-app>
+    <!-- <project/> -->
+    <v-content>
+      <Header/>
+
+      <v-container grid-list-xl text-xs-center>
+        <v-layout>
+          <v-flex xs12>
+            <Form/>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld"
+import Project from "@/components/Project";
+import Header from "@/components/Header";
+import Form from "@/components/Form";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    Header,
+    Form,
+    Project
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+
