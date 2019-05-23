@@ -7,3 +7,14 @@ psycopg2==2.8.2
 # Web server
 gunicorn>=19.9.0,<20
 whitenoise>=4.1.2,<4.2
+
+# REST framework
+djangorestframework>=3.9.3,<4
+django-cors-headers>=2.5.3,<3
+djangorestframework-bulk>=0.2.1,<1
+
+# Generators
+drf-generators>=0.3.0
+
+# Documentation
+drf-yasg>=1.15.0,<2
