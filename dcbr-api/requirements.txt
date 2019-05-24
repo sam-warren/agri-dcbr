@@ -15,3 +15,6 @@ djangorestframework-bulk>=0.2.1,<1
 
 # Documentation
 drf-yasg>=1.15.0,<2
+
+# Generators
+drf-generators>=0.3.0

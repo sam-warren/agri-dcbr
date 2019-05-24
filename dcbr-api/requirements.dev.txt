@@ -2,8 +2,5 @@
 black==19.3b0
 flake8>=3.7.7,<4
 
-# Generators
-drf-generators>=0.3.0
-
 # OpenAPI 
 pyyaml==5.1
