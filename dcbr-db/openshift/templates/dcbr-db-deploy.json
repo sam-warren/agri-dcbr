@@ -269,7 +269,7 @@
             "displayName": "Source Image Name",
             "description": "The name of the image to use for this resource.",
             "required": true,
-            "value": "postgresql"
+            "value": "dcbr-db"
         },
         {
             "name": "TAG_NAME",
@@ -283,8 +283,7 @@
             "displayName": "PostgreSQL Database Name",
             "description": "The name of the PostgreSQL database.",
             "required": true,
-            "generate": "expression",
-            "from": "[a-zA-Z_][a-zA-Z0-9_]{10}"
+            "value": "DCBR"
         },
         {
             "name": "POSTGRESQL_USER",

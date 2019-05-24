@@ -40,7 +40,7 @@
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}",
+        "name": "${NAME}-api",
         "labels": {
           "app": "${NAME}",
           "app-group": "${APP_GROUP}"
@@ -67,7 +67,7 @@
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}",
+        "name": "${NAME}-admin",
         "labels": {
           "app": "${NAME}",
           "app-group": "${APP_GROUP}"
