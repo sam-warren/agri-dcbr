@@ -1,0 +1,21 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: dcbr-api
+# Template File: templates/dcbr-api/dcbr-api-deploy.json
+#=========================================================
+NAME=dcbr-api
+APP_GROUP=dcbr
+IMAGE_NAMESPACE=nbup6o-tools
+APPLICATION_DOMAIN=dcbr-api-nbup6o-dev.pathfinder.gov.bc.ca
+API_ROUTE_PATH=/api
+ADMIN_ROUTE_PATH=/admin
+DATABASE_SERVICE_HOST=dcbr-db
+DATABASE_SERVICE_PORT=5432
+DATABASE_NAME=DCBR
+# DJANGO_SECRET_KEY=[\w]{50}
+DJANGO_DEBUG=False
+TAG_NAME=dev
+CPU_REQUEST=100m
+CPU_LIMIT=750m
+MEMORY_REQUEST=100Mi
+MEMORY_LIMIT=512Mi
