@@ -15,7 +15,7 @@ export components="dcbr-db dcbr-api"
 export builds=""
 
 # The images to be tagged after build
-export images=""
+export images="dcbr-db dcbr-api"
 
 # The routes for the project
 export routes=""
