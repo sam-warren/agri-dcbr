@@ -40,6 +40,7 @@
           "sourceStrategy": {
             "from": {
               "kind": "${SOURCE_IMAGE_KIND}",
+              "namespace": "${SOURCE_IMAGE_NAMESPACE}",
               "name": "${SOURCE_IMAGE_NAME}:${SOURCE_IMAGE_TAG}"
             },
             "env": [
@@ -106,6 +107,13 @@
       "required": true,
       "description": "The name of the source image.",
       "value": "python"
+    },
+    {
+      "description": "The namespace where to get the above image name",
+      "displayName": "Source Image Namespace",
+      "name": "SOURCE_IMAGE_NAMESPACE",
+      "required": true,
+      "value": "openshift"
     },
     {
       "name": "SOURCE_IMAGE_TAG",
