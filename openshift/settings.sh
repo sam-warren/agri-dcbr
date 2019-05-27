@@ -9,13 +9,13 @@ export GIT_URI="https://github.com/bcgov/agri-dcbr.git"
 export GIT_REF="master"
 
 # The project components
-export components="dcbr-db dcbr-api"
+export components="dcbr-db dcbr-api dcbr-web"
 
 # The builds to be triggered after buildconfigs created (not auto-triggered)
 export builds=""
 
 # The images to be tagged after build
-export images="dcbr-db dcbr-api"
+export images="dcbr-db dcbr-api dcbr-web"
 
 # The routes for the project
 export routes=""

@@ -1,0 +1,260 @@
+{
+  "apiVersion": "v1",
+  "kind": "Template",
+  "metadata": {
+    "annotations": {
+      "description": "Deployment template for a angular on nginx",
+      "tags": "angular,nginx"
+    },
+    "name": "${NAME}-deployment-template"
+  },
+  "objects": [
+    {
+      "apiVersion": "v1",
+      "kind": "DeploymentConfig",
+      "metadata": {
+        "labels": {
+          "app": "${NAME}",
+          "app-group": "${APP_GROUP}"
+        },
+        "name": "${NAME}"
+      },
+      "spec": {
+        "replicas": 2,
+        "selector": {
+          "app": "${NAME}",
+          "deploymentconfig": "${NAME}"
+        },
+        "strategy": {
+          "rollingParams": {
+            "intervalSeconds": 1,
+            "maxSurge": "25%",
+            "maxUnavailable": "25%",
+            "timeoutSeconds": 600,
+            "updatePeriodSeconds": 1
+          },
+          "type": "Rolling"
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "app": "${NAME}",
+              "deploymentconfig": "${NAME}"
+            }
+          },
+          "spec": {
+            "volumes": [],
+            "containers": [
+              {
+                "image": "${NAME}",
+                "imagePullPolicy": "Always",
+                "name": "${NAME}",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [],
+                "resources": {
+                  "requests": {
+                    "cpu": "${CPU_REQUEST}",
+                    "memory": "${MEMORY_REQUEST}"
+                  },
+                  "limits": {
+                    "cpu": "${CPU_LIMIT}",
+                    "memory": "${MEMORY_LIMIT}"
+                  }
+                },
+                "volumeMounts": [],
+                "livenessProbe": {
+                  "httpGet": {
+                    "path": "/nginx_status",
+                    "port": 8080,
+                    "scheme": "HTTP"
+                  },
+                  "initialDelaySeconds": 30,
+                  "timeoutSeconds": 60,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "failureThreshold": 3
+                },
+                "readinessProbe": {
+                  "httpGet": {
+                    "path": "/nginx_status",
+                    "port": 8080,
+                    "scheme": "HTTP"
+                  },
+                  "initialDelaySeconds": 10,
+                  "timeoutSeconds": 60,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "failureThreshold": 3
+                }
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "securityContext": {},
+            "terminationGracePeriodSeconds": 30
+          }
+        },
+        "test": false,
+        "triggers": [
+          {
+            "type": "ConfigChange"
+          },
+          {
+            "type": "ImageChange",
+            "imageChangeParams": {
+              "automatic": true,
+              "containerNames": [
+                "${NAME}"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "namespace": "${IMAGE_NAMESPACE}",
+                "name": "${NAME}:${TAG_NAME}"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "labels": {
+          "app": "${NAME}",
+          "app-group": "${APP_GROUP}"
+        },
+        "name": "${NAME}"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8080-tcp",
+            "port": 8080,
+            "protocol": "TCP",
+            "targetPort": 8080
+          }
+        ],
+        "selector": {
+          "app": "${NAME}",
+          "deploymentconfig": "${NAME}"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Route",
+      "metadata": {
+        "labels": {
+          "app": "${NAME}",
+          "app-group": "${APP_GROUP}"
+        },
+        "name": "${NAME}"
+      },
+      "spec": {
+        "host": "${APPLICATION_DOMAIN}",
+        "port": {
+          "targetPort": "8080-tcp"
+        },
+        "tls": {
+          "insecureEdgeTerminationPolicy": "Redirect",
+          "termination": "edge"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "${NAME}",
+          "weight": 100
+        }
+      }
+    },
+    {
+      "kind": "HorizontalPodAutoscaler",
+      "apiVersion": "autoscaling/v1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "app": "${NAME}",
+          "app-group": "${APP_GROUP}"
+        }
+      },
+      "spec": {
+        "scaleTargetRef": {
+          "kind": "DeploymentConfig",
+          "name": "${NAME}"
+        },
+        "minReplicas": 2,
+        "maxReplicas": 6
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "description": "The name assigned to all of the openshift objects defined in this template. It is also the name of runtime image you want.",
+      "displayName": "Name",
+      "name": "NAME",
+      "required": true,
+      "value": "dcbr-web"
+    },
+    {
+      "name": "APP_GROUP",
+      "displayName": "App Group",
+      "description": "The name assigned to all of the deployments in this project.",
+      "required": true,
+      "value": "dcbr"
+    },
+    {
+      "description": "The namespace where to get the above image name",
+      "displayName": "Image Namespace",
+      "name": "IMAGE_NAMESPACE",
+      "required": true,
+      "value": "nbup6o-dev"
+    },
+    {
+      "description": "The exposed hostname that will route to the service, e.g., myappname.pathfinder.gov.bc.ca, if left blank a value will be defaulted.",
+      "displayName": "Application Hostname",
+      "name": "APPLICATION_DOMAIN",
+      "value": "dcbr.pathfinder.gov.bc.ca"
+    },
+    {
+      "description": "The TAG name for this environment, e.g., dev, test, prod",
+      "displayName": "Env TAG name",
+      "name": "TAG_NAME",
+      "value": "dev"
+    },
+    {
+      "name": "CPU_REQUEST",
+      "displayName": "Resources CPU Request",
+      "description": "The resources CPU request (in cores) for this build.",
+      "required": true,
+      "value": "10m"
+    },
+    {
+      "name": "CPU_LIMIT",
+      "displayName": "Resources CPU Limit",
+      "description": "The resources CPU limit (in cores) for this build.",
+      "required": true,
+      "value": "250m"
+    },
+    {
+      "name": "MEMORY_REQUEST",
+      "displayName": "Resources Memory Request",
+      "description": "The resources Memory request (in Mi, Gi, etc) for this build.",
+      "required": true,
+      "value": "100Mi"
+    },
+    {
+      "name": "MEMORY_LIMIT",
+      "displayName": "Resources Memory Limit",
+      "description": "The resources Memory limit (in Mi, Gi, etc) for this build.",
+      "required": true,
+      "value": "256Mi"
+    }
+  ]
+}

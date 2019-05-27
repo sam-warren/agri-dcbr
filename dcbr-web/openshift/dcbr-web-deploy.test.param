@@ -1,0 +1,14 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: dcbr-web
+# Template File: templates/dcbr-web/dcbr-web-deploy.json
+#=========================================================
+# NAME=dcbr-web
+# APP_GROUP=dcbr
+# IMAGE_NAMESPACE=nbup6o-tools
+APPLICATION_DOMAIN=dcbr-web-test.pathfinder.gov.bc.ca
+TAG_NAME=test
+# CPU_REQUEST=10m
+# CPU_LIMIT=250m
+# MEMORY_REQUEST=100Mi
+# MEMORY_LIMIT=256Mi
