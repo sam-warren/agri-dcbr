@@ -43,7 +43,20 @@
             }
           },
           "spec": {
-            "volumes": [],
+            "volumes": [
+              {
+                "name": "${NAME}-nginx-config-volume",
+                "configMap": {
+                  "name": "${NGINX_CONFIG_MAP_NAME}",
+                  "items": [
+                    {
+                      "key": "${NGINX_CONFIG_FILE_NAME}",
+                      "path": "${NGINX_CONFIG_FILE_NAME}"
+                    }
+                  ]
+                }
+              }
+            ],
             "containers": [
               {
                 "image": "${NAME}",
@@ -66,7 +79,13 @@
                     "memory": "${MEMORY_LIMIT}"
                   }
                 },
-                "volumeMounts": [],
+                "volumeMounts": [
+                  {
+                    "name": "${NAME}-nginx-config-volume",
+                    "mountPath": "${NGINX_CONFIG_MOUNT_PATH}${NGINX_CONFIG_FILE_NAME}",
+                    "subPath": "${NGINX_CONFIG_FILE_NAME}"
+                  }
+                ],
                 "livenessProbe": {
                   "httpGet": {
                     "path": "/nginx_status",
@@ -189,8 +208,8 @@
           "kind": "DeploymentConfig",
           "name": "${NAME}"
         },
-        "minReplicas": 2,
-        "maxReplicas": 6
+        "minReplicas": 1,
+        "maxReplicas": 2
       }
     }
   ],
@@ -215,6 +234,27 @@
       "name": "IMAGE_NAMESPACE",
       "required": true,
       "value": "nbup6o-dev"
+    },
+    {
+      "name": "NGINX_CONFIG_FILE_NAME",
+      "displayName": "Nginx Config File Name",
+      "description": "The name of the configuration file to be used for Nginx.",
+      "required": true,
+      "value": "nginx.conf"
+    },
+    {
+      "name": "NGINX_CONFIG_MAP_NAME",
+      "displayName": "Nginx Config Map Name",
+      "description": "The name of the configuration map.",
+      "required": true,
+      "value": "dcbr-web-nginx-conf"
+    },
+    {
+      "name": "NGINX_CONFIG_MOUNT_PATH",
+      "displayName": "Config Mount Path",
+      "description": "The path to use to mount the config file.",
+      "required": true,
+      "value": "/etc/nginx/"
     },
     {
       "description": "The exposed hostname that will route to the service, e.g., myappname.pathfinder.gov.bc.ca, if left blank a value will be defaulted.",

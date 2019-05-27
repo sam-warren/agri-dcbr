@@ -213,7 +213,8 @@ shift || COMMAND=usage
 case "${COMMAND}" in
 start|up)
   unset DEBUG
-  DEFAULT_CONTAINERS="dcbr-web  $DEFAULT_CONTAINERS"
+  # DEFAULT_CONTAINERS="dcbr-web  $DEFAULT_CONTAINERS"
+  DEFAULT_CONTAINERS="dcbr-web"
   _startupParams=$(getStartupParams $@)
   configureEnvironment $@
   docker-compose up -d ${_startupParams} 
