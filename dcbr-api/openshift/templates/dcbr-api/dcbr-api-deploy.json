@@ -40,7 +40,7 @@
       "kind": "Route",
       "apiVersion": "v1",
       "metadata": {
-        "name": "${NAME}-api",
+        "name": "${NAME}",
         "labels": {
           "app": "${NAME}",
           "app-group": "${APP_GROUP}"
@@ -48,34 +48,6 @@
       },
       "spec": {
         "host": "${APPLICATION_DOMAIN}",
-        "path": "${API_ROUTE_PATH}",
-        "port": {
-          "targetPort": "8080-tcp"
-        },
-        "tls": {
-          "insecureEdgeTerminationPolicy": "Redirect",
-          "termination": "edge"
-        },
-        "to": {
-          "kind": "Service",
-          "name": "${NAME}",
-          "weight": 100
-        }
-      }
-    },
-    {
-      "kind": "Route",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "${NAME}-admin",
-        "labels": {
-          "app": "${NAME}",
-          "app-group": "${APP_GROUP}"
-        }
-      },
-      "spec": {
-        "host": "${APPLICATION_DOMAIN}",
-        "path": "${ADMIN_ROUTE_PATH}",
         "port": {
           "targetPort": "8080-tcp"
         },
@@ -271,20 +243,6 @@
       "displayName": "Application Hostname",
       "description": "The exposed hostname that will route to the Django service, if left blank a value will be defaulted.",
       "value": "dcbr.pathfinder.gov.bc.ca"
-    },
-    {
-      "name": "API_ROUTE_PATH",
-      "displayName": "Route Path",
-      "description": "The path with which to restrict access on the exposed API route.",
-      "required": false,
-      "value": "/api"
-    },
-    {
-      "name": "ADMIN_ROUTE_PATH",
-      "displayName": "Route Path",
-      "description": "The path with which to restrict access on the exposed admin route.",
-      "required": false,
-      "value": "/admin"
     },
     {
       "name": "DATABASE_SERVICE_HOST",
