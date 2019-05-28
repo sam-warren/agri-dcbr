@@ -25,8 +25,11 @@ def SONAR_SOURCES = './zap/wrk'
 // ZAP Scanner Settings
 // ------------------------------------------------------------------------------------------------
 
-// The name of the target route.  This will be used to dynamically get the URL.
-def TARGET_ROUTE = 'dcbr'
+// The name of the target route for the webapp.  This will be used to dynamically get the app URL.
+def APP_TARGET_ROUTE = 'dcbr-web'
+
+// The name of the target route for the API.  This will be used to dynamically get the API URL.
+def API_TARGET_ROUTE = 'dcbr-api'
 
 // The namespace in which the target route can be found.  This will be used to dynamically get the URL.
 def TARGET_PROJECT_NAMESPACE = 'nbup6o-dev'
@@ -98,10 +101,11 @@ podTemplate(
     stage('ZAP Security Scan') {
 
       // Dynamicaly determine the target URL for the ZAP scan ...
-      def TARGET_URL = getUrlForRoute(TARGET_ROUTE, TARGET_PROJECT_NAMESPACE).trim()
-      def API_TARGET_URL="${TARGET_URL}${API_PATH}/?format=${API_FORMAT}"
+      def TARGET_URL = getUrlForRoute(APP_TARGET_ROUTE, TARGET_PROJECT_NAMESPACE).trim()
+      def API_ENDPOINT_URL = getUrlForRoute(API_TARGET_ROUTE, TARGET_PROJECT_NAMESPACE).trim()
+      def API_TARGET_URL = "${API_ENDPOINT_URL}${API_PATH}/?format=${API_FORMAT}"
 
-      echo "Target URL: ${TARGET_URL}"
+      echo "APP Target URL: ${TARGET_URL}"
       echo "API Target URL: ${API_TARGET_URL}"
 
       dir('zap') {
