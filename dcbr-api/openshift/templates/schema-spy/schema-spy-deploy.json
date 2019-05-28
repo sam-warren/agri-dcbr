@@ -59,7 +59,7 @@
         }
       },
       "spec": {
-        "host": "${NAME}-${APPLICATION_DOMAIN}",
+        "host": "${APPLICATION_DOMAIN}",
         "tls": {
           "insecureEdgeTerminationPolicy": "Redirect",
           "termination": "edge"
@@ -264,7 +264,7 @@
     {
       "name": "APPLICATION_DOMAIN",
       "displayName": "Application Hostname",
-      "description": "The exposed hostname that will route to the Django service, if left blank a value will be defaulted.",
+      "description": "The exposed hostname that will route to the Schema Spy service, if left blank a value will be defaulted.",
       "value": ""
     },
     {
