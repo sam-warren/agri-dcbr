@@ -1,3 +1,14 @@
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
+SonarQube Results:
+
+[![Bugs](https://sonarqube-dcbr.pathfinder.gov.bc.ca/api/badges/measure?key=DCBR&metric=bugs&template=FLAT)](https://sonarqube-dcbr.pathfinder.gov.bc.ca/dashboard?id=DCBR) [![Vulnerabilities](https://sonarqube-dcbr.pathfinder.gov.bc.ca/api/badges/measure?key=DCBR&metric=vulnerabilities&template=FLAT)](https://sonarqube-dcbr.pathfinder.gov.bc.ca/dashboard?id=DCBR) [![Code smells](https://sonarqube-dcbr.pathfinder.gov.bc.ca/api/badges/measure?key=DCBR&metric=code_smells&template=FLAT)](https://sonarqube-dcbr.pathfinder.gov.bc.ca/dashboard?id=DCBR) [![Coverage](https://sonarqube-dcbr.pathfinder.gov.bc.ca/api/badges/measure?key=DCBR&metric=coverage&template=FLAT)](https://sonarqube-dcbr.pathfinder.gov.bc.ca/dashboard?id=DCBR) [![Duplication](https://sonarqube-dcbr.pathfinder.gov.bc.ca/api/badges/measure?key=DCBR&metric=duplicated_lines_density&template=FLAT)](https://sonarqube-dcbr.pathfinder.gov.bc.ca/dashboard?id=DCBR) [![Lines of code](https://sonarqube-dcbr.pathfinder.gov.bc.ca/api/badges/measure?key=DCBR&metric=lines&template=FLAT)](https://sonarqube-dcbr.pathfinder.gov.bc.ca/dashboard?id=DCBR) 
+
+Zap Results:
+
+[![Bugs](https://sonarqube-dcbr.pathfinder.gov.bc.ca/api/badges/measure?key=DCBR-Zap&metric=bugs&template=FLAT)](https://sonarqube-dcbr.pathfinder.gov.bc.ca/dashboard?id=DCBR-Zap) [![Vulnerabilities](https://sonarqube-dcbr.pathfinder.gov.bc.ca/api/badges/measure?key=DCBR-Zap&metric=vulnerabilities&template=FLAT)](https://sonarqube-dcbr.pathfinder.gov.bc.ca/dashboard?id=DCBR-Zap) [![Code smells](https://sonarqube-dcbr.pathfinder.gov.bc.ca/api/badges/measure?key=DCBR-Zap&metric=code_smells&template=FLAT)](https://sonarqube-dcbr.pathfinder.gov.bc.ca/dashboard?id=DCBR-Zap)
+
+
 # Dog and Cat Breeder Registration System (DCBR)
 
 The purpose of the Dog and Cat Breeder Registration System (DCBR) is to act as one of the pillars of the Dog and Cat Breeder Regulatory Framework (DCBF) to target irresponsible dog and cat breeders and sellers (operators). The DCBR will provide a system wherein a person must register in order to be in compliance with the law and legally able to undertake the regulated activity of breeding and/or selling cats and dogs and their offspring.
