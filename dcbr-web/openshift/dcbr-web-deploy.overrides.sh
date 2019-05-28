@@ -2,7 +2,7 @@
 # The generated config map is used for the nginx configuration.
 # ========================================================================
 
-CONFIG_MAP_NAME=decbr-web-nginx-conf
+CONFIG_MAP_NAME=dcbr-web-nginx-conf
 SOURCE_FILE=./config/nginx.conf
 OUTPUT_FORMAT=json
 OUTPUT_FILE=dcbr-web-nginx-conf-configmap_DeploymentConfig.json
