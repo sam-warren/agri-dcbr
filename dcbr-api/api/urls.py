@@ -25,8 +25,10 @@ schema_view = get_schema_view(
 
 router = routers.SimpleRouter()
 
-router.register(r"category", views.CategoryViewSet, "Category")
-router.register(r"entry", views.EntryViewSet, "Entry")
+#router.register(r"category", views.CategoryViewSet, "Category")
+#router.register(r"entry", views.EntryViewSet, "Entry")
+router.register(r"operator", views.OperatorViewSet, "Operator")
+router.register(r"address", views.AddressViewSet, "Address")
 
 # fmt: off
 swaggerpatterns = [
