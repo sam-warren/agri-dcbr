@@ -1,0 +1,17 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: dcbr-web
+# Template File: templates/dcbr-web/dcbr-web-deploy.json
+#=========================================================
+# NAME=dcbr-web
+# APP_GROUP=dcbr
+# IMAGE_NAMESPACE=nbup6o-tools
+# NGINX_CONFIG_FILE_NAME=nginx.conf
+# NGINX_CONFIG_MAP_NAME=dcbr-web-nginx-conf
+# NGINX_CONFIG_MOUNT_PATH=/etc/nginx/
+APPLICATION_DOMAIN=dcbr-web-prod.pathfinder.gov.bc.ca
+TAG_NAME=prod
+# CPU_REQUEST=10m
+# CPU_LIMIT=250m
+# MEMORY_REQUEST=100Mi
+# MEMORY_LIMIT=256Mi

@@ -1,0 +1,21 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: dcbr-db
+# Template File: templates/dcbr-db-deploy.json
+#=========================================================
+# NAME=dcbr-db
+# APP_GROUP=dcbr
+# IMAGE_NAMESPACE=nbup6o-tools
+# SOURCE_IMAGE_NAME=dcbr-db
+TAG_NAME=dev
+# POSTGRESQL_DATABASE_NAME=DCBR
+# POSTGRESQL_USER=[a-zA-Z_][a-zA-Z0-9_]{10}
+# POSTGRESQL_PASSWORD=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
+# POSTGRESQL_ADMIN_PASSWORD=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
+# MOUNT_PATH=/var/lib/pgsql/data
+PERSISTENT_VOLUME_SIZE=5Gi
+# PERSISTENT_VOLUME_CLASS=gluster-file-db
+# CPU_REQUEST=10m
+# CPU_LIMIT=750m
+# MEMORY_REQUEST=10Mi
+# MEMORY_LIMIT=4000Mi

@@ -23,7 +23,7 @@
     "@types/mocha": "^5.2.4",
     "@vue/cli": "^3.6.3",
     "@vue/cli-plugin-babel": "^3.6.0",
-    "@vue/cli-plugin-e2e-nightwatch": "^3.6.0",
+    "@vue/cli-plugin-e2e-nightwatch": "^3.8.0",
     "@vue/cli-plugin-pwa": "^3.6.0",
     "@vue/cli-plugin-typescript": "^3.6.0",
     "@vue/cli-plugin-unit-mocha": "^3.6.0",
