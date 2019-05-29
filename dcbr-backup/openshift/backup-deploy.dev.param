@@ -1,0 +1,42 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: dcbr-backup
+# Template File: templates/backup-deploy.json
+#=========================================================
+# NAME=backup
+# SOURCE_IMAGE_NAME=backup
+# IMAGE_NAMESPACE=nbup6o-tools
+TAG_NAME=dev
+# DATABASE_SERVICE_NAME=dcbr-db
+# DATABASE_NAME=DCBR
+# DATABASE_DEPLOYMENT_NAME=dcbr-db
+# DATABASE_USER_KEY_NAME=database-user
+# DATABASE_PASSWORD_KEY_NAME=database-password
+# BACKUP_STRATEGY=rolling
+# FTP_SECRET_KEY=ftp-secret
+# FTP_URL=
+# FTP_USER=
+# FTP_PASSWORD=
+# WEBHOOK_URL=
+ENVIRONMENT_FRIENDLY_NAME=Dog and Cat Breeder Registry (dev)
+ENVIRONMENT_NAME=nbup6o-dev
+# BACKUP_DIR=/backups/
+# NUM_BACKUPS=
+DAILY_BACKUPS=3
+WEEKLY_BACKUPS=1
+MONTHLY_BACKUPS=0
+# BACKUP_PERIOD=1d
+# CONFIG_FILE_NAME=backup.conf
+# CONFIG_MAP_NAME=backup-conf
+# CONFIG_MOUNT_PATH=/
+# BACKUP_VOLUME_NAME=backup
+BACKUP_VOLUME_SIZE=8Gi
+BACKUP_VOLUME_CLASS=gluster-file
+# VERIFICATION_VOLUME_NAME=backup-verification
+VERIFICATION_VOLUME_SIZE=5Gi
+# VERIFICATION_VOLUME_CLASS=gluster-file-db
+# VERIFICATION_VOLUME_MOUNT_PATH=/var/lib/pgsql/data
+# CPU_REQUEST=0
+# CPU_LIMIT=0
+# MEMORY_REQUEST=0Mi
+# MEMORY_LIMIT=0Mi
