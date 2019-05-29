@@ -11,8 +11,8 @@
       "metadata": {
         "name": "${BACKUP_VOLUME_NAME}",
         "labels": {
-          "app": "${NAME}",
-          "template": "${NAME}-template"
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
         }
       },
       "spec": {
@@ -33,8 +33,8 @@
       "metadata": {
         "name": "${VERIFICATION_VOLUME_NAME}",
         "labels": {
-          "app": "${NAME}",
-          "template": "${NAME}-template"
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
         }
       },
       "spec": {
@@ -53,7 +53,11 @@
       "apiVersion": "v1",
       "kind": "Secret",
       "metadata": {
-        "name": "${FTP_SECRET_KEY}"
+        "name": "${FTP_SECRET_KEY}",
+        "labels": {
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
+        }
       },
       "type": "Opaque",
       "stringData": {
@@ -67,7 +71,8 @@
       "metadata": {
         "name": "${NAME}",
         "labels": {
-          "template": "${NAME}-deployment"
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
         },
         "annotations": {
           "description": "Defines how to deploy the ${NAME} server"
@@ -104,6 +109,7 @@
           "metadata": {
             "name": "${NAME}",
             "labels": {
+              "app": "${APP_GROUP}",          
               "name": "${NAME}"
             }
           },
@@ -268,6 +274,13 @@
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
       "value": "backup"
+    },
+    {
+      "name": "APP_GROUP",
+      "displayName": "App Group",
+      "description": "The name assigned to all of the deployments in this project.",
+      "required": true,
+      "value": "dcbr-tools"
     },
     {
       "name": "SOURCE_IMAGE_NAME",

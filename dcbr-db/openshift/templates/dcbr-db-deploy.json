@@ -16,9 +16,8 @@
                 "name": "${NAME}",
                 "generation": 1,
                 "labels": {
-                    "app": "${NAME}",
-                    "template": "${NAME}-template",          
-                    "app-group": "${APP_GROUP}"
+                  "app": "${APP_GROUP}",          
+                  "name": "${NAME}"
                 }
             },
             "spec": {
@@ -177,9 +176,8 @@
             "metadata": {
                 "name": "${NAME}",
                 "labels": {
-                    "app": "${NAME}",
-                    "template": "${NAME}-template",          
-                    "app-group": "${APP_GROUP}"
+                  "app": "${APP_GROUP}",          
+                  "name": "${NAME}"
                 }
             },
             "spec": {
@@ -200,8 +198,8 @@
             "metadata": {
                 "name": "${NAME}",
                 "labels": {
-                    "app": "${NAME}",          
-                    "app-group": "${APP_GROUP}"
+                  "app": "${APP_GROUP}",          
+                  "name": "${NAME}"
                 }
             },
             "data": {
@@ -217,9 +215,8 @@
             "metadata": {
                 "name": "${NAME}",
                 "labels": {
-                    "app": "${NAME}",
-                    "template": "${NAME}-template",          
-                    "app-group": "${APP_GROUP}"
+                  "app": "${APP_GROUP}",          
+                  "name": "${NAME}"
                 },
                 "annotations": {
                     "template.openshift.io/expose-uri": "postgres://{.spec.clusterIP}:{.spec.ports[?(.name==\"${NAME}\")].port}"

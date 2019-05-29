@@ -15,8 +15,8 @@
       "metadata": {
         "name": "${NAME}",
         "labels": {
-          "app": "${NAME}",          
-          "app-group": "${APP_GROUP}"
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
         }
       },
       "data": {
@@ -30,6 +30,10 @@
       "apiVersion": "v1",
       "metadata": {
         "name": "${NAME}",
+        "labels": {
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
+        },
         "annotations": {
           "description": "Exposes and load balances the application pods"
         }
@@ -54,8 +58,8 @@
       "metadata": {
         "name": "${NAME}",
         "labels": {
-          "app": "${NAME}",          
-          "app-group": "${APP_GROUP}"
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
         }
       },
       "spec": {
@@ -79,8 +83,8 @@
           "description": "Defines how to deploy the container."
         },
         "labels": {
-          "app": "${NAME}",          
-          "app-group": "${APP_GROUP}"
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
         }
       },
       "spec": {
@@ -252,7 +256,7 @@
       "displayName": "App Group",
       "description": "The name assigned to all of the deployments in this project.",
       "required": true,
-      "value": "dcbr"
+      "value": "dcbr-tools"
     },
     {
       "name": "IMAGE_NAMESPACE",

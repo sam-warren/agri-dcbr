@@ -16,8 +16,8 @@
       "metadata": {
         "name": "${NAME}",
         "labels": {
-          "app": "${NAME}",
-          "app-group": "${APP_GROUP}"
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
         }
       },
       "data": {
@@ -35,8 +35,8 @@
           "description": "Exposes and load balances the application pods"
         },
         "labels": {
-          "app": "${NAME}",
-          "app-group": "${APP_GROUP}"
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
         }
       },
       "spec": {
@@ -58,8 +58,8 @@
       "metadata": {
         "name": "${NAME}",
         "labels": {
-          "app": "${NAME}",
-          "app-group": "${APP_GROUP}"
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
         }
       },
       "spec": {
@@ -87,8 +87,8 @@
           "description": "Defines how to deploy the application server"
         },
         "labels": {
-          "app": "${NAME}",
-          "app-group": "${APP_GROUP}"
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
         }
       },
       "spec": {
@@ -236,8 +236,8 @@
       "metadata": {
         "name": "${NAME}",
         "labels": {
-          "app": "${NAME}",
-          "app-group": "${APP_GROUP}"
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
         }
       },
       "spec": {

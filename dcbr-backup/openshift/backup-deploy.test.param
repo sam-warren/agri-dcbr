@@ -4,6 +4,7 @@
 # Template File: templates/backup-deploy.json
 #=========================================================
 # NAME=backup
+# APP_GROUP=dcbr-tools
 # SOURCE_IMAGE_NAME=backup
 # IMAGE_NAMESPACE=nbup6o-tools
 TAG_NAME=test

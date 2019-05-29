@@ -4,7 +4,7 @@
 # Template File: templates/schema-spy/schema-spy-deploy.json
 #=========================================================
 # NAME=schema-spy
-# APP_GROUP=dcbr
+# APP_GROUP=dcbr-tools
 # IMAGE_NAMESPACE=nbup6o-tools
 APPLICATION_DOMAIN=schema-spy-dcbr-dev.pathfinder.gov.bc.ca
 # DATABASE_HOST=dcbr-db
