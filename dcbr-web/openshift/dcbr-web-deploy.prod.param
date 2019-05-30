@@ -9,7 +9,7 @@
 # NGINX_CONFIG_FILE_NAME=nginx.conf
 # NGINX_CONFIG_MAP_NAME=dcbr-web-nginx-conf
 # NGINX_CONFIG_MOUNT_PATH=/etc/nginx/
-APPLICATION_DOMAIN=dcbr-web-prod.pathfinder.gov.bc.ca
+APPLICATION_DOMAIN=dcbr-web.pathfinder.gov.bc.ca
 TAG_NAME=prod
 # CPU_REQUEST=10m
 # CPU_LIMIT=250m
