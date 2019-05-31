@@ -111,9 +111,20 @@ build-api() {
     'dcbr-api'
 }
 
+build-web() {
+  #
+  # dcbr-web
+  #
+  echo -e "\nBuilding dcbr-web image..."
+  docker build \
+    -t 'dcbr-web' \
+    -f '../docker/dcbr-web/Dockerfile' '../'
+}
+
 buildImages() {
   build-api
   build-schema-spy
+  build-web
 }
 
 configureEnvironment() {
@@ -282,6 +293,9 @@ build)
   case "$@" in
   dcbr-api)
     build-api
+    ;;
+  dcbr-web)
+    build-web
     ;;
   *)
     buildImages
