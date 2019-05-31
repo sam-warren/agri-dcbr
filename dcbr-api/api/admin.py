@@ -3,14 +3,14 @@ from api.models import (
     Operator,
     Address,
     Inspection,
-    Risk_Factor_MetaData,
-    Risk_Factor_Data,
+    Risk_Factor_Operation,
+    Risk_Factor_Animals,
     Association_Membership,
 )
 
 admin.site.register(Operator)
 admin.site.register(Address)
 admin.site.register(Inspection)
-admin.site.register(Risk_Factor_MetaData)
-admin.site.register(Risk_Factor_Data)
+admin.site.register(Risk_Factor_Operation)
+admin.site.register(Risk_Factor_Animals)
 admin.site.register(Association_Membership)
