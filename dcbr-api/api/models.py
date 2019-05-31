@@ -1,43 +1,5 @@
 from django.db import models
-from django.core.validators import URLValidator
-
-# from django.template.defaultfilters import slugify
-# from django.contrib.auth.models import User
-
-
-# class Category(models.Model):
-#    name = models.CharField(max_length=32)
-#    slug = models.SlugField(max_length=32, default="", blank=True)
-#    parent = models.ForeignKey("self", blank=True, null=True, on_delete=models.CASCADE)
-
-#    def __str__(self):
-#        return self.name
-
-#    def save(self, *args, **kwargs):
-#        self.slug = slugify(self.name)
-#        super().save(*args, **kwargs)
-
-#    class Meta:
-#        verbose_name_plural = "Categories"
-
-
-# class Entry(models.Model):
-#    title = models.CharField(max_length=64)
-#    slug = models.SlugField(max_length=32, default="", blank=True)
-#    created = models.DateTimeField(auto_now_add=True)
-#    updated = models.DateTimeField(auto_now=True)
-#    content = models.TextField()
-#    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-
-#    def __str__(self):
-#        return self.title
-
-#    def save(self, *args, **kwargs):
-#        self.slug = slugify(self.title)
-#        super().save(*args, **kwargs)
-
-#    class Meta:
-#        verbose_name_plural = "Entries"
+from django.core.validators import URLValidator, MaxValueValidator, MinValueValidator
 
 
 class Operator(models.Model):
@@ -54,23 +16,25 @@ class Operator(models.Model):
         (BOTH, "breeder & seller"),
     )
 
-    regNum = models.CharField(max_length=14)
-    firstName = models.CharField(max_length=32)
-    middleName = models.CharField(max_length=50)
-    lastName = models.CharField(max_length=50)
+    reg_num = models.CharField(max_length=14)
+    first_name = models.CharField(max_length=32)
+    middle_name = models.CharField(max_length=50, default="", blank=True)
+    last_name = models.CharField(max_length=50)
     CONTACT_METHOD_CHOICE = ((EMAIL, "email"), (MAIL, "mail"))
-    type = models.CharField(max_length=10, choices=CONTACT_METHOD_CHOICE, default=EMAIL)
-    operator_type = models.CharField(max_length=20, choices=OPERATOR_TYPE_CHOICES, default=BREEDER)
+    comm_type = models.CharField(max_length=10, choices=CONTACT_METHOD_CHOICE, default=EMAIL)
+    operator_type = models.CharField(
+        max_length=20, choices=OPERATOR_TYPE_CHOICES, default=BREEDER
+    )
 
-    operationName = models.CharField(max_length=32, default="", blank=True)
+    operation_name = models.CharField(max_length=32, default="", blank=True)
 
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (self.regNum, self.lastName, self.firstName)
+        return "Reg ID: \t %s %s , %s" % (self.reg_num, self.last_name, self.first_name)
 
     def save(self, *args, **kwargs):
         # self.slug = slugify(self.regNum)
         super().save(*args, **kwargs)
-        self.regNum = "BC-DCBR-" + str(self.pk).zfill(6)
+        self.reg_num = "BC-DCBR-" + str(self.pk).zfill(6)
         super().save()
 
     # self.regNum = 'BC ' + str(self.kwargs['pk'])
@@ -90,11 +54,16 @@ class Address(models.Model):
     )
     type = models.CharField(max_length=3, choices=TYPE_CHOICES, default=PRIMARY)
 
-    streetNum = models.IntegerField()
+    # street_num = models.IntegerField(
+    #     default=0, validators=[MaxValueValidator(100), MinValueValidator(1)]
+    # )
+    street_num = models.IntegerField(
+        default=0, validators=[MinValueValidator(0)]
+    )
     suite = models.CharField(max_length=32, default="", blank=True)
-    streetName = models.CharField(max_length=32)
+    street_name = models.CharField(max_length=32)
     city = models.CharField(max_length=32)
-    postalCode = models.CharField(max_length=7)
+    postal_code = models.CharField(max_length=7)
     province = models.CharField(max_length=2, default="BC")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -104,7 +73,7 @@ class Address(models.Model):
     )
 
     def __str__(self):
-        return self.streetName
+        return self.street_name
 
     def save(self, *args, **kwargs):
         # self.operator = self.operator
@@ -114,16 +83,12 @@ class Address(models.Model):
         verbose_name_plural = "Addresses"
 
 
-class Risk_Factor_MetaData(models.Model):
+class Risk_Factor_Operation(models.Model):
 
     DOG = "DOG"
     CAT = "CAT"
     BOTH = "DOG & CAT"
-    OPERATOR_TYPE_CHOICES = (
-        (DOG, "dog"),
-        (CAT, "cat"),
-        (BOTH, "dog & cat"),
-    )
+    OPERATOR_TYPE_CHOICES = ((DOG, "dog"), (CAT, "cat"), (BOTH, "dog & cat"))
 
     TATTOO = "TATTOO"
     MICROCHIP = "MICROCHIP"
@@ -141,13 +106,15 @@ class Risk_Factor_MetaData(models.Model):
     num_breeds_cats = models.IntegerField()
     has_vet = models.BooleanField(default=False)
     has_perm_id = models.BooleanField(default=False)
-    perm_id_type = models.CharField(max_length=10, choices=PERMANENT_ID_CHOICES, default=TATTOO)
-    perm_id_other = models.CharField(max_length= 10, default="", blank=True)
+    perm_id_type = models.CharField(
+        max_length=10, choices=PERMANENT_ID_CHOICES, default=TATTOO
+    )
+    perm_id_other = models.CharField(max_length=10, default="", blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     operator = models.ForeignKey(
-        Operator, on_delete=models.CASCADE, related_name="riskmetadata"
+        Operator, on_delete=models.CASCADE, related_name="operationrisk"
     )
 
     def __str__(self):
@@ -158,9 +125,10 @@ class Risk_Factor_MetaData(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "RiskFactorsMeta"
+        verbose_name_plural = "RiskFactorAnimals"
 
-class Risk_Factor_Data(models.Model):
+
+class Risk_Factor_Animals(models.Model):
 
     num_dogs_intact = models.IntegerField(default=0)
     num_litter_whelped = models.IntegerField(default=0)
@@ -176,7 +144,7 @@ class Risk_Factor_Data(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     operator = models.ForeignKey(
-        Operator, on_delete=models.CASCADE, related_name="risk_data"
+        Operator, on_delete=models.CASCADE, related_name="riskfactoranimals"
     )
 
     def __str__(self):
@@ -187,15 +155,14 @@ class Risk_Factor_Data(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "RiskFactorsData"
-
+        verbose_name_plural = "RiskFactorAnimals"
 
 
 class Association_Membership(models.Model):
 
-    assocName = models.CharField(max_length=50, default="", blank=True)
-    membershipNum = models.CharField(max_length=10, default="", blank=True)
-    assoc_URL = models.TextField(validators=[URLValidator()])
+    assoc_name = models.CharField(max_length=50, default="", blank=True)
+    membership_num = models.CharField(max_length=10, default="", blank=True)
+    assoc_URL = models.TextField(validators=[URLValidator()], default="", blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -215,10 +182,10 @@ class Association_Membership(models.Model):
 
 
 class Inspection(models.Model):
-    regNum = models.CharField(max_length=14)
-    op_firstName = models.CharField(max_length=32)
-    op_middleName = models.CharField(max_length=50)
-    op_lastName = models.CharField(max_length=50)
+    reg_num = models.CharField(max_length=14)
+    op_first_name = models.CharField(max_length=32)
+    op_middle_name = models.CharField(max_length=50)
+    op_last_name = models.CharField(max_length=50)
 
     soc_1 = models.BooleanField(default=False)
     soc_2 = models.BooleanField(default=False)
@@ -232,25 +199,23 @@ class Inspection(models.Model):
     soc_10 = models.BooleanField(default=False)
     soc_11 = models.BooleanField(default=False)
 
-    soc_1_comment = models.TextField()
-    soc_2_comment = models.TextField()
-    soc_3_comment = models.TextField()
-    soc_4_comment = models.TextField()
-    soc_5_comment = models.TextField()
-    soc_6_comment = models.TextField()
-    soc_7_comment = models.TextField()
-    soc_8_comment = models.TextField()
-    soc_9_comment = models.TextField()
-    soc_10_comment = models.TextField()
-    soc_11_comment = models.TextField()
-    soc_12_comment = models.TextField()
-    soc_13_comment = models.TextField()
+    soc_1_comment = models.TextField(default="", blank=True)
+    soc_2_comment = models.TextField(default="", blank=True)
+    soc_3_comment = models.TextField(default="", blank=True)
+    soc_4_comment = models.TextField(default="", blank=True)
+    soc_5_comment = models.TextField(default="", blank=True)
+    soc_6_comment = models.TextField(default="", blank=True)
+    soc_7_comment = models.TextField(default="", blank=True)
+    soc_8_comment = models.TextField(default="", blank=True)
+    soc_9_comment = models.TextField(default="", blank=True)
+    soc_10_comment = models.TextField(default="", blank=True)
+    soc_11_comment = models.TextField(default="", blank=True)
 
     def __str__(self):
         return "Reg ID: \t %s %s , %s" % (
-            self.regNum,
-            self.op_lastName,
-            self.op_firstName,
+            self.reg_num,
+            self.op_last_name,
+            self.op_first_name,
         )
 
     def save(self, *args, **kwargs):
