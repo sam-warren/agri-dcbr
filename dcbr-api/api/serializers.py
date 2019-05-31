@@ -5,40 +5,25 @@ from api.models import (
     Operator,
     Address,
     Inspection,
-    Risk_Factor_MetaData,
-    Risk_Factor_Data,
+    Risk_Factor_Operation,
+    Risk_Factor_Animals,
     Association_Membership,
     Inspection,
 )
 
 
-# class CategorySerializer(ModelSerializer):
-#    class Meta:
-#        model = Category
-#        fields = "__all__"
-
-
-# class EntrySerializer(ModelSerializer):
-#    class Meta:
-#        model = Entry
-#        fields = "__all__"
-
-
 class AddressSerializer(ModelSerializer):
     class Meta:
         model = Address
-        # unique_together('operator', 'regNum')
-        # fields = "__all__"
         fields = (
             "id",
             "type",
-            "streetNum",
+            "street_num",
             "suite",
-            "streetName",
+            "street_name",
             "city",
-            "postalCode",
+            "postal_code",
         )
-        # read_only_fields = ("regNum",)
 
 
 class OperatorSerializer(ModelSerializer):
@@ -48,7 +33,7 @@ class OperatorSerializer(ModelSerializer):
         model = Operator
         fields = "__all__"
         # fields = ('id', 'regNum', 'firstName', 'middleName', 'lastName', 'address')
-        read_only_fields = ("regNum",)
+        read_only_fields = ("reg_num",)
 
     def create(self, validated_data):
         addresses_data = validated_data.pop("addresses")
@@ -73,9 +58,9 @@ class OperatorSerializer(ModelSerializer):
 
     def update(self, instance, validated_data):
         addresses_data = validated_data.pop("addresses")
-        instance.firstName = validated_data.get("firstName", instance.firstName)
-        instance.middleName = validated_data.get("middleName", instance.middleName)
-        instance.lastName = validated_data.get("lastName", instance.lastName)
+        instance.first_name = validated_data.get("firstName", instance.first_name)
+        instance.middle_name = validated_data.get("middleName", instance.middle_name)
+        instance.last_name = validated_data.get("lastName", instance.last_name)
         instance.save()
 
         for address_data in addresses_data:
@@ -91,9 +76,9 @@ class OperatorSerializer(ModelSerializer):
         return instance
 
 
-class Risk_Factor_MetaData_Serializer(ModelSerializer):
+class Risk_Factor_Operation_Serializer(ModelSerializer):
     class Meta:
-        model = Risk_Factor_MetaData
+        model = Risk_Factor_Operation
         # unique_together('operator', 'regNum')
         # fields = "__all__"
         fields = (
@@ -111,9 +96,9 @@ class Risk_Factor_MetaData_Serializer(ModelSerializer):
         # read_only_fields = ("regNum",)
 
 
-class Risk_Factor_Data_Serializer(ModelSerializer):
+class Risk_Factor_Animals_Serializer(ModelSerializer):
     class Meta:
-        model = Risk_Factor_Data
+        model = Risk_Factor_Animals
         # unique_together('operator', 'regNum')
         # fields = "__all__"
         fields = (

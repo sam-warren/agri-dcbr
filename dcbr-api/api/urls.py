@@ -30,8 +30,10 @@ router = routers.SimpleRouter()
 router.register(r"operator", views.OperatorViewSet, "Operator")
 router.register(r"address", views.AddressViewSet, "Address")
 router.register(r"inspection", views.InspectionViewSet, "Inspection")
-router.register(r"riskmetadata", views.Risk_Factor_MetaData_ViewSet, "Risk Meta Data")
-router.register(r"riskdata", views.Risk_Factor_Data_ViewSet, "Risk Data")
+router.register(
+    r"riskoperations", views.Risk_Factor_Operation_ViewSet, "RiskOperations"
+)
+router.register(r"riskanimals", views.Risk_Factor_Animals_ViewSet, "RiskAnimals")
 router.register(r"association", views.AssociationViewSet, "Association")
 
 # fmt: off

@@ -7,8 +7,8 @@ from api.serializers import (
     # EntrySerializer,
     OperatorSerializer,
     AddressSerializer,
-    Risk_Factor_Data_Serializer,
-    Risk_Factor_MetaData_Serializer,
+    Risk_Factor_Animals_Serializer,
+    Risk_Factor_Operation_Serializer,
     InspectionSerializer,
     Association_Membership_Serializer,
 )
@@ -18,8 +18,8 @@ from api.models import (
     Operator,
     Address,
     Inspection,
-    Risk_Factor_Data,
-    Risk_Factor_MetaData,
+    Risk_Factor_Animals,
+    Risk_Factor_Operation,
     Association_Membership,
 )
 
@@ -60,22 +60,22 @@ class AddressViewSet(viewsets.ModelViewSet):
     serializer_class = AddressSerializer
 
 
-class Risk_Factor_Data_ViewSet(viewsets.ModelViewSet):
+class Risk_Factor_Animals_ViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing addresses.
     """
 
     queryset = Inspection.objects.all()
-    serializer_class = Risk_Factor_Data_Serializer
+    serializer_class = Risk_Factor_Animals_Serializer
 
 
-class Risk_Factor_MetaData_ViewSet(viewsets.ModelViewSet):
+class Risk_Factor_Operation_ViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing addresses.
     """
 
     queryset = Inspection.objects.all()
-    serializer_class = Risk_Factor_MetaData_Serializer
+    serializer_class = Risk_Factor_Operation_Serializer
 
 
 class InspectionViewSet(viewsets.ModelViewSet):
