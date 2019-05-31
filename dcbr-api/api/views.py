@@ -3,13 +3,25 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from api.serializers import (
-    #CategorySerializer,
-    #EntrySerializer,
+    # CategorySerializer,
+    # EntrySerializer,
     OperatorSerializer,
     AddressSerializer,
+    Risk_Factor_Data_Serializer,
+    Risk_Factor_MetaData_Serializer,
+    InspectionSerializer,
+    Association_Membership_Serializer,
 )
-#from api.models import Category, Entry, Operator, Address
-from api.models import Operator, Address
+
+# from api.models import Category, Entry, Operator, Address
+from api.models import (
+    Operator,
+    Address,
+    Inspection,
+    Risk_Factor_Data,
+    Risk_Factor_MetaData,
+    Association_Membership,
+)
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -17,8 +29,8 @@ class CategoryViewSet(viewsets.ModelViewSet):
     A simple ViewSet for viewing and editing categories.
     """
 
-    #queryset = Category.objects.all()
-    #serializer_class = CategorySerializer
+    # queryset = Category.objects.all()
+    # serializer_class = CategorySerializer
 
 
 class EntryViewSet(viewsets.ModelViewSet):
@@ -26,8 +38,8 @@ class EntryViewSet(viewsets.ModelViewSet):
     A simple ViewSet for viewing and editing entries.
     """
 
-    #queryset = Entry.objects.all()
-    #serializer_class = EntrySerializer
+    # queryset = Entry.objects.all()
+    # serializer_class = EntrySerializer
 
 
 class OperatorViewSet(viewsets.ModelViewSet):
@@ -46,3 +58,40 @@ class AddressViewSet(viewsets.ModelViewSet):
 
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
+
+
+class Risk_Factor_Data_ViewSet(viewsets.ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing addresses.
+    """
+
+    queryset = Inspection.objects.all()
+    serializer_class = Risk_Factor_Data_Serializer
+
+
+class Risk_Factor_MetaData_ViewSet(viewsets.ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing addresses.
+    """
+
+    queryset = Inspection.objects.all()
+    serializer_class = Risk_Factor_MetaData_Serializer
+
+
+class InspectionViewSet(viewsets.ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing addresses.
+    """
+
+    queryset = Inspection.objects.all()
+    serializer_class = InspectionSerializer
+
+
+class AssociationViewSet(viewsets.ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing addresses.
+    """
+
+    queryset = Inspection.objects.all()
+    serializer_class = Association_Membership_Serializer
+
