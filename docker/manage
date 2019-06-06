@@ -173,6 +173,14 @@ configureEnvironment() {
   export DJANGO_ADMIN_USER="admin"
   export DJANGO_ADMIN_PASSWORD="admin"
   export DJANGO_ADMIN_EMAIL="dcbr-admin@gov.bc.ca"
+  export OIDC_OP_JWKS_ENDPOINT="http://localhost:8888/auth/realms/DCBR/protocol/openid-connect/certs"
+  export OIDC_RP_CLIENT_ID="dcbr-api"
+  export OIDC_RP_CLIENT_SECRET="fb4dd0ce-c7c5-4814-92b4-302c6bc8f399"
+  export OIDC_OP_AUTHORIZATION_ENDPOINT="http://localhost:8888/realms/DCBR/protocol/openid-connect/auth"
+  export OIDC_OP_TOKEN_ENDPOINT="http://localhost:8888/realms/DCBR/protocol/openid-connect/token"
+  export OIDC_OP_USER_ENDPOINT="http://localhost:8888/realms/DCBR/protocol/openid-connect/userinfo"
+  export LOGIN_REDIRECT_URL="http://localhost:8080/admin"
+  export LOGOUT_REDIRECT_URL="http://localhost:8080/admin"
 
   # keycloak-db
   export KEYCLOAK_DB_NAME="keycloak"
@@ -182,8 +190,8 @@ configureEnvironment() {
   # keycloak
   export KEYCLOAK_DB_VENDOR="POSTGRES"
   export KEYCLOAK_DB_ADDR="keycloak-db"
-  export KEYCLOAK_USER="admin"
-  export KEYCLOAK_PASSWORD="admin"
+  export KEYCLOAK_USER="dcbr-admin"
+  export KEYCLOAK_PASSWORD="dcbr-admin"
   export KEYCLOAK_LOGLEVEL="WARN"
   export KEYCLOAK_ROOT_LOGLEVEL="WARN"
 }
