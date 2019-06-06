@@ -18,7 +18,7 @@ schema_view = get_schema_view(
         contact=openapi.Contact(**API_METADATA["contact"]),
         license=openapi.License(**API_METADATA["license"]),
     ),
-    # validators=["flex", "ssv"], #TODO: enable validators once we have published schemas
+    validators=["flex", "ssv"],
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
