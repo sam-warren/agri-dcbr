@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 from django.core.validators import URLValidator, MaxValueValidator, MinValueValidator
 
 
@@ -20,8 +21,12 @@ class Operator(models.Model):
     first_name = models.CharField(max_length=32)
     middle_name = models.CharField(max_length=50, default="", blank=True)
     last_name = models.CharField(max_length=50)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     CONTACT_METHOD_CHOICE = ((EMAIL, "email"), (MAIL, "mail"))
-    comm_type = models.CharField(max_length=10, choices=CONTACT_METHOD_CHOICE, default=EMAIL)
+    comm_type = models.CharField(
+        max_length=10, choices=CONTACT_METHOD_CHOICE, default=EMAIL
+    )
     operator_type = models.CharField(
         max_length=20, choices=OPERATOR_TYPE_CHOICES, default=BREEDER
     )
@@ -53,13 +58,7 @@ class Address(models.Model):
         (VETERINARY, "Veterinary"),
     )
     type = models.CharField(max_length=3, choices=TYPE_CHOICES, default=PRIMARY)
-
-    # street_num = models.IntegerField(
-    #     default=0, validators=[MaxValueValidator(100), MinValueValidator(1)]
-    # )
-    street_num = models.IntegerField(
-        default=0, validators=[MinValueValidator(0)]
-    )
+    street_num = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     suite = models.CharField(max_length=32, default="", blank=True)
     street_name = models.CharField(max_length=32)
     city = models.CharField(max_length=32)
@@ -69,7 +68,10 @@ class Address(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     operator = models.ForeignKey(
-        Operator, on_delete=models.CASCADE, related_name="addresses"
+        Operator,
+        on_delete=models.CASCADE,
+        related_name="addresses",
+        related_query_name="addresses",
     )
 
     def __str__(self):
@@ -100,10 +102,10 @@ class Risk_Factor_Operation(models.Model):
     )
 
     accidental_breeding = models.BooleanField(default=False)
-    num_workers = models.IntegerField()
-    opn_URL = models.TextField(validators=[URLValidator()])
-    num_breeds_dogs = models.IntegerField()
-    num_breeds_cats = models.IntegerField()
+    num_workers = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    operation_URL = models.TextField(default="", blank=True)
+    num_breeds_dogs = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_breeds_cats = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     has_vet = models.BooleanField(default=False)
     has_perm_id = models.BooleanField(default=False)
     perm_id_type = models.CharField(
@@ -114,41 +116,47 @@ class Risk_Factor_Operation(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     operator = models.ForeignKey(
-        Operator, on_delete=models.CASCADE, related_name="operationrisk"
+        Operator,
+        on_delete=models.CASCADE,
+        related_name="operationrisk",
     )
 
     def __str__(self):
-        return self.operator_type
+        return "Operation risk for: \t %s " % (self.operator)
 
     def save(self, *args, **kwargs):
         # self.operator = self.operator
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "RiskFactorAnimals"
+        verbose_name_plural = "RiskFactorOperations"
 
 
-class Risk_Factor_Animals(models.Model):
+class Risk_Factor_Animal(models.Model):
 
-    num_dogs_intact = models.IntegerField(default=0)
-    num_litter_whelped = models.IntegerField(default=0)
-    num_cats_intact = models.IntegerField(default=0)
-    num_litter_queened = models.IntegerField(default=0)
-
-    num_sold = models.IntegerField(default=0)
-    num_transferred = models.IntegerField(default=0)
-    num_traded = models.IntegerField(default=0)
-    num_leased = models.IntegerField(default=0)
-
+    num_dogs_intact = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_litter_whelped = models.IntegerField(
+        default=0, validators=[MinValueValidator(0)]
+    )
+    num_cats_intact = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_litter_queened = models.IntegerField(
+        default=0, validators=[MinValueValidator(0)]
+    )
+    num_sold = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_transferred = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_traded = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_leased = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
     operator = models.ForeignKey(
-        Operator, on_delete=models.CASCADE, related_name="riskfactoranimals"
+        Operator,
+        on_delete=models.CASCADE,
+        related_name="risk_factor_animals",
+        related_query_name="risk_factor_animals",
     )
 
     def __str__(self):
-        return self.operator_type
+        return "Animal risk for: \t %s " % (self.operator)
 
     def save(self, *args, **kwargs):
         # self.operator = self.operator
@@ -162,7 +170,7 @@ class Association_Membership(models.Model):
 
     assoc_name = models.CharField(max_length=50, default="", blank=True)
     membership_num = models.CharField(max_length=10, default="", blank=True)
-    assoc_URL = models.TextField(validators=[URLValidator()], default="", blank=True)
+    assoc_URL = models.TextField(default="", blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -171,7 +179,7 @@ class Association_Membership(models.Model):
     )
 
     def __str__(self):
-        return self.assocName
+        return self.assoc_name
 
     def save(self, *args, **kwargs):
         # self.operator = self.operator
@@ -186,6 +194,8 @@ class Inspection(models.Model):
     op_first_name = models.CharField(max_length=32)
     op_middle_name = models.CharField(max_length=50)
     op_last_name = models.CharField(max_length=50)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     soc_1 = models.BooleanField(default=False)
     soc_2 = models.BooleanField(default=False)
