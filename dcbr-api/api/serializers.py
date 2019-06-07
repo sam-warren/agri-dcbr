@@ -42,15 +42,15 @@ class Risk_Factor_Operation_Serializer(ModelSerializer):
 
         fields = (
             "id",
-            # "accidental_breeding",
-            # "num_workers",
-            # "operation_URL",
-            # "num_breeds_dogs",
-            # "num_breeds_cats",
-            # "has_vet",
-            # "has_perm_id",
-            # "perm_id_type",
-            # "perm_id_other",
+            "accidental_breeding",
+            "num_workers",
+            "operation_URL",
+            "num_breeds_dogs",
+            "num_breeds_cats",
+            "has_vet",
+            "has_perm_id",
+            "perm_id_type",
+            "perm_id_other",
         )
         # read_only_fields = ("regNum",)
 
