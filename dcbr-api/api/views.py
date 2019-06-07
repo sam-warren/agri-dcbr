@@ -3,13 +3,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from api.serializers import (
-    # CategorySerializer,
-    # EntrySerializer,
-    OperatorSerializer,
-    AddressSerializer,
-    Risk_Factor_Animals_Serializer,
+    Operator_Serializer,
+    Address_Serializer,
+    Risk_Factor_Animal_Serializer,
     Risk_Factor_Operation_Serializer,
-    InspectionSerializer,
+    Inspection_Serializer,
     Association_Membership_Serializer,
 )
 
@@ -18,55 +16,37 @@ from api.models import (
     Operator,
     Address,
     Inspection,
-    Risk_Factor_Animals,
+    Risk_Factor_Animal,
     Risk_Factor_Operation,
     Association_Membership,
 )
 
 
-class CategoryViewSet(viewsets.ModelViewSet):
-    """
-    A simple ViewSet for viewing and editing categories.
-    """
-
-    # queryset = Category.objects.all()
-    # serializer_class = CategorySerializer
-
-
-class EntryViewSet(viewsets.ModelViewSet):
-    """
-    A simple ViewSet for viewing and editing entries.
-    """
-
-    # queryset = Entry.objects.all()
-    # serializer_class = EntrySerializer
-
-
-class OperatorViewSet(viewsets.ModelViewSet):
+class Operator_ViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing operators.
     """
 
     queryset = Operator.objects.all()
-    serializer_class = OperatorSerializer
+    serializer_class = Operator_Serializer
 
 
-class AddressViewSet(viewsets.ModelViewSet):
+class Address_ViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing addresses.
     """
 
     queryset = Address.objects.all()
-    serializer_class = AddressSerializer
+    serializer_class = Address_Serializer
 
 
-class Risk_Factor_Animals_ViewSet(viewsets.ModelViewSet):
+class Risk_Factor_Animal_ViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing addresses.
     """
 
     queryset = Inspection.objects.all()
-    serializer_class = Risk_Factor_Animals_Serializer
+    serializer_class = Risk_Factor_Animal_Serializer
 
 
 class Risk_Factor_Operation_ViewSet(viewsets.ModelViewSet):
@@ -78,16 +58,16 @@ class Risk_Factor_Operation_ViewSet(viewsets.ModelViewSet):
     serializer_class = Risk_Factor_Operation_Serializer
 
 
-class InspectionViewSet(viewsets.ModelViewSet):
+class Inspection_ViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing addresses.
     """
 
     queryset = Inspection.objects.all()
-    serializer_class = InspectionSerializer
+    serializer_class = Inspection_Serializer
 
 
-class AssociationViewSet(viewsets.ModelViewSet):
+class Association_ViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing addresses.
     """

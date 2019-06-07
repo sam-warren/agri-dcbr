@@ -27,14 +27,14 @@ router = routers.SimpleRouter()
 
 # router.register(r"category", views.CategoryViewSet, "Category")
 # router.register(r"entry", views.EntryViewSet, "Entry")
-router.register(r"operator", views.OperatorViewSet, "Operator")
-router.register(r"address", views.AddressViewSet, "Address")
-router.register(r"inspection", views.InspectionViewSet, "Inspection")
+router.register(r"operator", views.Operator_ViewSet, "Operator")
+router.register(r"address", views.Address_ViewSet, "Address")
+router.register(r"inspection", views.Inspection_ViewSet, "Inspection")
 router.register(
     r"riskoperations", views.Risk_Factor_Operation_ViewSet, "RiskOperations"
 )
-router.register(r"riskanimals", views.Risk_Factor_Animals_ViewSet, "RiskAnimals")
-router.register(r"association", views.AssociationViewSet, "Association")
+router.register(r"riskanimals", views.Risk_Factor_Animal_ViewSet, "RiskAnimals")
+router.register(r"association", views.Association_ViewSet, "Association")
 
 # fmt: off
 swaggerpatterns = [

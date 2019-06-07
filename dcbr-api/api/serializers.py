@@ -6,13 +6,13 @@ from api.models import (
     Address,
     Inspection,
     Risk_Factor_Operation,
-    Risk_Factor_Animals,
+    Risk_Factor_Animal,
     Association_Membership,
     Inspection,
 )
 
 
-class AddressSerializer(ModelSerializer):
+class Address_Serializer(ModelSerializer):
     class Meta:
         model = Address
         fields = (
@@ -26,20 +26,101 @@ class AddressSerializer(ModelSerializer):
         )
 
 
-class OperatorSerializer(ModelSerializer):
-    addresses = AddressSerializer(many=True)
+class Association_Membership_Serializer(ModelSerializer):
+    class Meta:
+        model = Association_Membership
+        # unique_together('operator', 'regNum')
+        # fields = "__all__"
+        fields = ("id", "assoc_name", "membership_num", "assoc_URL")
+
+
+class Risk_Factor_Operation_Serializer(ModelSerializer):
+    class Meta:
+        model = Risk_Factor_Operation
+        # unique_together('operator', 'regNum')
+        # fields = "__all__"
+
+        fields = (
+            "id",
+            # "accidental_breeding",
+            # "num_workers",
+            # "operation_URL",
+            # "num_breeds_dogs",
+            # "num_breeds_cats",
+            # "has_vet",
+            # "has_perm_id",
+            # "perm_id_type",
+            # "perm_id_other",
+        )
+        # read_only_fields = ("regNum",)
+
+
+class Risk_Factor_Animal_Serializer(ModelSerializer):
+    class Meta:
+        model = Risk_Factor_Animal
+        # unique_together('operator', 'regNum')
+        # fields = "__all__"
+        fields = (
+            "id",
+            "num_dogs_intact",
+            "num_litter_whelped",
+            "num_cats_intact",
+            "num_litter_queened",
+            "num_sold",
+            "num_transferred",
+            "num_traded",
+            "num_leased",
+        )
+
+        # read_only_fields = ("regNum",)
+
+
+class Operator_Serializer(ModelSerializer):
+    addresses = Address_Serializer(many=True)
+    associations = Association_Membership_Serializer(many=True)
+    risk_factor_animals = Risk_Factor_Animal_Serializer(many=True)
+    # risk_factor_operations = Risk_Factor_Operation_Serializer(many=True)
 
     class Meta:
         model = Operator
-        fields = "__all__"
-        # fields = ('id', 'regNum', 'firstName', 'middleName', 'lastName', 'address')
+        # fields = "__all__"
+        fields = (
+            "id",
+            "reg_num",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "addresses",
+            "associations",
+            "risk_factor_animals",
+            # "risk_factor_operations",
+        )
         read_only_fields = ("reg_num",)
 
     def create(self, validated_data):
+        print("inside create")
+        print(validated_data)
+
+        risk_factor_animals_data = validated_data.pop("risk_factor_animals")
+        associations_data = validated_data.pop("associations")
         addresses_data = validated_data.pop("addresses")
+        # risk_factor_operations_data = validated_data.pop("risk_factor_operations")
+
         operator = Operator.objects.create(**validated_data)
+
         for address_data in addresses_data:
             Address.objects.create(operator=operator, **address_data)
+        for association_data in associations_data:
+            Association_Membership.objects.create(operator=operator, **association_data)
+        for risk_factor_animal_data in risk_factor_animals_data:
+            Risk_Factor_Animal.objects.create(
+                operator=operator, **risk_factor_animal_data
+            )
+        # for risk_factor_operation_data in risk_factor_operations_data:
+        #     Risk_Factor_Operation.objects.create(
+        #         operator=operator, **risk_factor_operation_data
+        #     )
+
         return operator
 
     # def update(self, instance, validated_data):
@@ -76,55 +157,7 @@ class OperatorSerializer(ModelSerializer):
         return instance
 
 
-class Risk_Factor_Operation_Serializer(ModelSerializer):
-    class Meta:
-        model = Risk_Factor_Operation
-        # unique_together('operator', 'regNum')
-        # fields = "__all__"
-        fields = (
-            "id",
-            "accidental_breeding",
-            "num_workers",
-            "opn_URL",
-            "num_breeds_dogs",
-            "num_breeds_cats",
-            "has_vet",
-            "has_perm_id",
-            "perm_id_type",
-            "perm_id_other",
-        )
-        # read_only_fields = ("regNum",)
-
-
-class Risk_Factor_Animals_Serializer(ModelSerializer):
-    class Meta:
-        model = Risk_Factor_Animals
-        # unique_together('operator', 'regNum')
-        # fields = "__all__"
-        fields = (
-            "id",
-            "num_dogs_intact",
-            "num_litter_whelped",
-            "num_cats_intact",
-            "num_litter_queened",
-            "num_sold",
-            "num_transferred",
-            "num_traded",
-            "num_leased",
-        )
-
-        # read_only_fields = ("regNum",)
-
-
-class Association_Membership_Serializer(ModelSerializer):
-    class Meta:
-        model = Association_Membership
-        # unique_together('operator', 'regNum')
-        # fields = "__all__"
-        fields = ("id", "assoc_name", "membership_num", "assoc_URL")
-
-
-class InspectionSerializer(ModelSerializer):
+class Inspection_Serializer(ModelSerializer):
     class Meta:
         model = Inspection
         fields = "__all__"
