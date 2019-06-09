@@ -108,20 +108,17 @@ class Risk_Factor_Operation(models.Model):
     num_breeds_cats = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     has_vet = models.BooleanField(default=False)
     has_perm_id = models.BooleanField(default=False)
-    operator_type = models.CharField(
-        max_length=10, choices=OPERATOR_TYPE_CHOICES, default=DOG
-    )
     perm_id_type = models.CharField(
         max_length=10, choices=PERMANENT_ID_CHOICES, default=TATTOO
     )
     perm_id_other = models.CharField(max_length=10, default="", blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
     operator = models.ForeignKey(
         Operator,
         on_delete=models.CASCADE,
-        related_name="risk_factor_operations",
-        related_query_name="risk_factor_operations",
+        related_name="operationrisk",
     )
 
     def __str__(self):
@@ -130,6 +127,10 @@ class Risk_Factor_Operation(models.Model):
     def save(self, *args, **kwargs):
         # self.operator = self.operator
         super().save(*args, **kwargs)
+        self.reg_num = "BC-DCBR-" + str(self.pk).zfill(6)
+        super().save()
+
+    # self.regNum = 'BC ' + str(self.kwargs['pk'])
 
     class Meta:
         verbose_name_plural = "RiskFactorOperations"

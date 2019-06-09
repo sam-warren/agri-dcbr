@@ -11,7 +11,7 @@ services:
     networks:
       - dcbr
     ports:
-      - "8081:80"
+      - "8081:8080"
     depends_on:
       - dcbr-api
 
@@ -76,13 +76,43 @@ services:
         if [ $DEBUG ] && [ "$DEBUG" == "true" ]; then
         echo Running in debug mode;
           python manage.py migrate && \
-          python manage.py shell < scripts/create_superuser.py && \
           python manage.py runserver 0.0.0.0:8080;
         else
           echo Running s2i container...;
           env;
           ${STI_SCRIPTS_PATH}/run;
         fi"
+
+  # 
+  # schema-spy
+  #-------------------------------------------------
+  # Needs to wait for the schema to be created/migrated
+  # by the API server; it's not enough to wait for the
+  # database to be available.
+  #
+  # We are using a simple sleep command to do this 
+  # for the moment; refer to the `command` section 
+  # of the configuration for details.  It would be 
+  # nice to implement a more deterministic solution.
+  #
+  schema-spy:
+    image: schema-spy
+    environment:
+      - DATABASE_SERVICE_NAME=${DATABASE_SERVICE_NAME}
+      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
+      - POSTGRESQL_USER=${POSTGRESQL_USER}
+      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
+    networks:
+      - dcbr
+    ports:
+      - 8082:8080
+    depends_on:
+      - dcbr-db
+    command: >
+      /bin/sh -c "
+        echo sleeping ...;
+        sleep 20;
+        ./start.sh;"
 
   # 
   # dcbr-db

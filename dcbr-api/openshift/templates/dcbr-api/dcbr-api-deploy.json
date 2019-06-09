@@ -1,0 +1,368 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "${NAME}-deployment-template",
+    "annotations": {
+      "description": "Deployment template for a django server connected to a PostGreSQL database.",
+      "tags": "django",
+      "iconClass": "icon-python"
+    }
+  },
+  "objects": [
+    {
+      "kind": "Secret",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
+        }
+      },
+      "data": {
+        "admin-user": "${DJANGO_ADMIN_USER}",
+        "admin-password": "${DJANGO_ADMIN_PASSWORD}"
+      },
+      "type": "Opaque"
+    },
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "annotations": {
+          "description": "Exposes and load balances the application pods"
+        },
+        "labels": {
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8080-tcp",
+            "port": 8080,
+            "targetPort": 8080
+          }
+        ],
+        "selector": {
+          "name": "${NAME}"
+        }
+      }
+    },
+    {
+      "kind": "Route",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
+        }
+      },
+      "spec": {
+        "host": "${APPLICATION_DOMAIN}",
+        "port": {
+          "targetPort": "8080-tcp"
+        },
+        "tls": {
+          "insecureEdgeTerminationPolicy": "Redirect",
+          "termination": "edge"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "${NAME}",
+          "weight": 100
+        }
+      }
+    },
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "annotations": {
+          "description": "Defines how to deploy the application server"
+        },
+        "labels": {
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
+        }
+      },
+      "spec": {
+        "strategy": {
+          "type": "Rolling"
+        },
+        "triggers": [
+          {
+            "type": "ImageChange",
+            "imageChangeParams": {
+              "automatic": true,
+              "containerNames": [
+                "${NAME}"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "namespace": "${IMAGE_NAMESPACE}",
+                "name": "${NAME}:${TAG_NAME}"
+              }
+            }
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "replicas": 1,
+        "selector": {
+          "name": "${NAME}"
+        },
+        "template": {
+          "metadata": {
+            "name": "${NAME}",
+            "labels": {
+              "name": "${NAME}"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "${NAME}",
+                "image": " ",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 5,
+                  "periodSeconds": 30,
+                  "initialDelaySeconds": 3,
+                  "timeoutSeconds": 20,
+                  "httpGet": {
+                    "path": "/health",
+                    "port": 8080
+                  }
+                },
+                "livenessProbe": {
+                  "failureThreshold": 5,
+                  "periodSeconds": 60,
+                  "initialDelaySeconds": 30,
+                  "timeoutSeconds": 20,
+                  "httpGet": {
+                    "path": "/health",
+                    "port": 8080
+                  }
+                },
+                "env": [
+                  {
+                    "name": "DATABASE_SERVICE_HOST",
+                    "value": "${DATABASE_SERVICE_HOST}"
+                  },
+                  {
+                    "name": "DATABASE_SERVICE_PORT",
+                    "value": "${DATABASE_SERVICE_PORT}"
+                  },
+                  {
+                    "name": "DATABASE_NAME",
+                    "value": "${DATABASE_NAME}"
+                  },
+                  {
+                    "name": "DATABASE_USER",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${DATABASE_SERVICE_HOST}",
+                        "key": "database-user"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DATABASE_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${DATABASE_SERVICE_HOST}",
+                        "key": "database-password"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DJANGO_SECRET_KEY",
+                    "value": "${DJANGO_SECRET_KEY}"
+                  },
+                  {
+                    "name": "DJANGO_DEBUG",
+                    "value": "${DJANGO_DEBUG}"
+                  },
+                  {
+                    "name": "DJANGO_ADMIN_USER",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${NAME}",
+                        "key": "admin-user"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DJANGO_ADMIN_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${NAME}",
+                        "key": "admin-password"
+                      }
+                    }
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": "${CPU_REQUEST}",
+                    "memory": "${MEMORY_REQUEST}"
+                  },
+                  "limits": {
+                    "cpu": "${CPU_LIMIT}",
+                    "memory": "${MEMORY_LIMIT}"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "HorizontalPodAutoscaler",
+      "apiVersion": "autoscaling/v1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "app": "${APP_GROUP}",          
+          "name": "${NAME}"
+        }
+      },
+      "spec": {
+        "scaleTargetRef": {
+          "kind": "DeploymentConfig",
+          "name": "${NAME}"
+        },
+        "minReplicas": 1,
+        "maxReplicas": 3
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "NAME",
+      "displayName": "Name",
+      "description": "The name assigned to all of the OpenShift resources associated to the server instance.",
+      "required": true,
+      "value": "dcbr-api"
+    },
+    {
+      "name": "APP_GROUP",
+      "displayName": "App Group",
+      "description": "The name assigned to all of the deployments in this project.",
+      "required": true,
+      "value": "dcbr"
+    },
+    {
+      "name": "IMAGE_NAMESPACE",
+      "displayName": "Image Namespace",
+      "required": true,
+      "description": "The namespace of the OpenShift project containing the imagestream for the application.",
+      "value": "nbup6o-tools"
+    },
+    {
+      "name": "APPLICATION_DOMAIN",
+      "displayName": "Application Hostname",
+      "description": "The exposed hostname that will route to the Django service, if left blank a value will be defaulted.",
+      "value": "dcbr.pathfinder.gov.bc.ca"
+    },
+    {
+      "name": "DATABASE_SERVICE_HOST",
+      "displayName": "Database Service Host Name",
+      "description": "The name of the database server/service.",
+      "required": true,
+      "value": "dcbr-db"
+    },
+    {
+      "name": "DATABASE_SERVICE_PORT",
+      "displayName": "Database Service Port Number",
+      "description": "The port number of the database server/service.",
+      "required": true,
+      "value": "5432"
+    },
+    {
+      "name": "DATABASE_NAME",
+      "displayName": "Database Name",
+      "required": true,
+      "description": "Name of the deployed database (see environment variables in deployed database).",
+      "value": "DCBR"
+    },
+    {
+      "name": "DJANGO_SECRET_KEY",
+      "displayName": "Django Secret Key",
+      "description": "Set this to a long random string.",
+      "generate": "expression",
+      "from": "[\\w]{50}"
+    },
+    {
+      "name": "DJANGO_DEBUG",
+      "displayName": "Django Debug",
+      "description": "If Django is in debug mode",
+      "required": true,
+      "value": "False"
+    },
+    {
+      "name": "DJANGO_ADMIN_USER",
+      "displayName": "API Admin Username",
+      "description": "Username for the Django superuser account.  Needs to be base64 encoded.",
+      "required": true,
+      "generate": "expression",
+      "from": "[a-zA-Z_][a-zA-Z0-9_]{10}"
+    },
+    {
+      "name": "DJANGO_ADMIN_PASSWORD",
+      "displayName": "API Admin Password",
+      "description": "Password for the Django superuser account.  Needs to be base64 encoded.",
+      "required": true,
+      "generate": "expression",
+      "from": "[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}"
+    },
+    {
+      "name": "TAG_NAME",
+      "displayName": "Environment TAG name",
+      "description": "The TAG name for this environment, e.g., dev, test, prod",
+      "value": "dev",
+      "required": true
+    },
+    {
+      "name": "CPU_REQUEST",
+      "displayName": "Resources CPU Request",
+      "description": "The resources CPU request (in cores) for this build.",
+      "required": true,
+      "value": "100m"
+    },
+    {
+      "name": "CPU_LIMIT",
+      "displayName": "Resources CPU Limit",
+      "description": "The resources CPU limit (in cores) for this build.",
+      "required": true,
+      "value": "750m"
+    },
+    {
+      "name": "MEMORY_REQUEST",
+      "displayName": "Resources Memory Request",
+      "description": "The resources Memory request (in Mi, Gi, etc) for this build.",
+      "required": true,
+      "value": "100Mi"
+    },
+    {
+      "name": "MEMORY_LIMIT",
+      "displayName": "Resources Memory Limit",
+      "description": "The resources Memory limit (in Mi, Gi, etc) for this build.",
+      "required": true,
+      "value": "512Mi"
+    }
+  ]
+}
