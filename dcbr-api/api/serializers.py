@@ -51,6 +51,7 @@ class Risk_Factor_Operation_Serializer(ModelSerializer):
             "has_perm_id",
             "perm_id_type",
             "perm_id_other",
+            "operator_type",
         )
         # read_only_fields = ("regNum",)
 
@@ -79,7 +80,7 @@ class Operator_Serializer(ModelSerializer):
     addresses = Address_Serializer(many=True)
     associations = Association_Membership_Serializer(many=True)
     risk_factor_animals = Risk_Factor_Animal_Serializer(many=True)
-    # risk_factor_operations = Risk_Factor_Operation_Serializer(many=True)
+    risk_factor_operations = Risk_Factor_Operation_Serializer(many=True)
 
     class Meta:
         model = Operator
@@ -93,7 +94,7 @@ class Operator_Serializer(ModelSerializer):
             "addresses",
             "associations",
             "risk_factor_animals",
-            # "risk_factor_operations",
+            "risk_factor_operations",
         )
         read_only_fields = ("reg_num",)
 
@@ -104,7 +105,7 @@ class Operator_Serializer(ModelSerializer):
         risk_factor_animals_data = validated_data.pop("risk_factor_animals")
         associations_data = validated_data.pop("associations")
         addresses_data = validated_data.pop("addresses")
-        # risk_factor_operations_data = validated_data.pop("risk_factor_operations")
+        risk_factor_operations_data = validated_data.pop("risk_factor_operations")
 
         operator = Operator.objects.create(**validated_data)
 
@@ -116,10 +117,10 @@ class Operator_Serializer(ModelSerializer):
             Risk_Factor_Animal.objects.create(
                 operator=operator, **risk_factor_animal_data
             )
-        # for risk_factor_operation_data in risk_factor_operations_data:
-        #     Risk_Factor_Operation.objects.create(
-        #         operator=operator, **risk_factor_operation_data
-        #     )
+        for risk_factor_operation_data in risk_factor_operations_data:
+            Risk_Factor_Operation.objects.create(
+                operator=operator, **risk_factor_operation_data
+            )
 
         return operator
 
