@@ -112,13 +112,16 @@ class Risk_Factor_Operation(models.Model):
         max_length=10, choices=PERMANENT_ID_CHOICES, default=TATTOO
     )
     perm_id_other = models.CharField(max_length=10, default="", blank=True)
+    operation_type = models.CharField(max_length=10, choices=OPERATOR_TYPE_CHOICES, default=BOTH)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     operator = models.ForeignKey(
         Operator,
         on_delete=models.CASCADE,
-        related_name="operationrisk",
+        related_name="risk_factor_operations",
+        related_query_name="risk_factor_operations",
+
     )
 
     def __str__(self):
