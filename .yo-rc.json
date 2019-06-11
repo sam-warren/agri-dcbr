@@ -1,0 +1,30 @@
+{
+  "generator-bcdk": {
+    "promptValues": {
+      "modules": {
+        "jenkins": {
+          "path": ".jenkins",
+          "namespace": "nbup6o-tools",
+          "name": "jenkins",
+          "version": "1.0.0",
+          "environments": {
+            "build": {
+              "namespace": "nbup6o-tools"
+            },
+            "dev": {
+              "namespace": "nbup6o-tools"
+            },
+            "prod": {
+              "namespace": "nbup6o-tools"
+            }
+          },
+          "jenkinsJobName": "_jenkins",
+          "github_owner": "bcgov",
+          "github_repo": "agri-dcbr",
+          "jenkinsFilePath": ".jenkins/Jenkinsfile",
+          "uuid": "3944473f-9f16-420c-8bbc-50197d7726ab"
+        }
+      }
+    }
+  }
+}
