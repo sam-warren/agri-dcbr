@@ -18,15 +18,23 @@ schema_view = get_schema_view(
         contact=openapi.Contact(**API_METADATA["contact"]),
         license=openapi.License(**API_METADATA["license"]),
     ),
-    # validators=["flex", "ssv"], #TODO: enable validators once we have published schemas
+    validators=["flex", "ssv"],
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
 
 router = routers.SimpleRouter()
 
-router.register(r"category", views.CategoryViewSet, "Category")
-router.register(r"entry", views.EntryViewSet, "Entry")
+# router.register(r"category", views.CategoryViewSet, "Category")
+# router.register(r"entry", views.EntryViewSet, "Entry")
+router.register(r"operator", views.Operator_ViewSet, "Operator")
+router.register(r"address", views.Address_ViewSet, "Address")
+router.register(r"inspection", views.Inspection_ViewSet, "Inspection")
+router.register(
+    r"riskoperations", views.Risk_Factor_Operation_ViewSet, "RiskOperations"
+)
+router.register(r"riskanimals", views.Risk_Factor_Animal_ViewSet, "RiskAnimals")
+router.register(r"association", views.Association_ViewSet, "Association")
 
 # fmt: off
 swaggerpatterns = [

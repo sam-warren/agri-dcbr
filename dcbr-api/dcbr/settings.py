@@ -61,12 +61,12 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "mozilla_django_oidc.middleware.SessionRefresh",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "mozilla_django_oidc.middleware.SessionRefresh",
 ]
 
 AUTHENTICATION_BACKENDS = ("mozilla_django_oidc.auth.OIDCAuthenticationBackend",)
@@ -226,3 +226,5 @@ LOGIN_REDIRECT_URL = os.environ["LOGIN_REDIRECT_URL"]
 LOGOUT_REDIRECT_URL = os.environ["LOGOUT_REDIRECT_URL"]
 
 OIDC_CREATE_USER = False
+
+# OIDC_EXEMPT_URLS = ["/api"]
