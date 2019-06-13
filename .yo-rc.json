@@ -23,6 +23,30 @@
           "github_repo": "agri-dcbr",
           "jenkinsFilePath": ".jenkins/Jenkinsfile",
           "uuid": "3944473f-9f16-420c-8bbc-50197d7726ab"
+        },
+        "dcbr": {
+          "name": "dcbr",
+          "version": "1.0.0",
+          "path": ".",
+          "environments": {
+            "build": {
+              "namespace": "nbup6o-tools"
+            },
+            "dev": {
+              "namespace": "nbup6o-dev"
+            },
+            "test": {
+              "namespace": "nbup6o-test"
+            },
+            "prod": {
+              "namespace": "nbup6o-prod"
+            }
+          },
+          "jenkinsJobName": "dcbr",
+          "github_owner": "bcgov",
+          "github_repo": "agri-dcbr",
+          "jenkinsFilePath": "Jenkinsfile",
+          "uuid": "6d9c4577-5819-463a-ab95-2a1355987b42"
         }
       }
     }
