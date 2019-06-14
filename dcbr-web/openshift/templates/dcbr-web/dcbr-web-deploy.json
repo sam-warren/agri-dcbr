@@ -133,7 +133,7 @@
               "from": {
                 "kind": "ImageStreamTag",
                 "namespace": "${IMAGE_NAMESPACE}",
-                "name": "${NAME}:${TAG_NAME}"
+                "name": "${IMAGE_NAME}:${TAG_NAME}"
               }
             }
           }
@@ -234,6 +234,11 @@
       "name": "IMAGE_NAMESPACE",
       "required": true,
       "value": "nbup6o-dev"
+    },
+    {
+      "description": "same NAME",
+      "name": "IMAGE_NAME",
+      "required": true
     },
     {
       "name": "NGINX_CONFIG_FILE_NAME",
