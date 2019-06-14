@@ -10,12 +10,12 @@ module.exports = (settings)=>{
   let objects = []
   const templatesLocalBaseUrl =oc.toFileUrl(path.resolve(__dirname, '../..'))
 
-  objects.push(...oc.processDeploymentTemplate(`${templatesLocalBaseUrl}/dcbr-web/openshift/templates/dcbr-web-build.json`, {
+  objects.push(...oc.processDeploymentTemplate(`${templatesLocalBaseUrl}/dcbr-web/openshift/templates/dcbr-web/dcbr-web-build.json`, {
     'param':{
       'NAME': `${phases[phase].name}${phases[phase].suffix}`,
       'GIT_REPO_URL': oc.git.http_url,
       'GIT_REF': oc.git.ref,
-      'SOURCE_CONTEXT_DIR': '.',
+      'SOURCE_CONTEXT_DIR': '',
       'DOCKER_FILE_PATH': 'docker/dcbr-web/Dockerfile',
       'OUTPUT_IMAGE_TAG': phases[phase].tag
     }

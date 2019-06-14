@@ -27,6 +27,17 @@
         }
       },
       "spec": {
+        "completionDeadlineSeconds": 12000,
+        "resources":{
+          "requests": {
+            "cpu": "1",
+            "memory": "1Gi"
+          },
+          "limits": {
+            "cpu": "2",
+            "memory": "2Gi"
+          }
+        },
         "source": {
           "type": "Git",
           "git": {
@@ -81,7 +92,7 @@
       "name": "SOURCE_CONTEXT_DIR",
       "displayName": "Source Context Directory",
       "description": "The source context directory.",
-      "required": true,
+      "required": false,
       "value": "."
     },
     {
