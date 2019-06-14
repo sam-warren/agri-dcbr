@@ -21,7 +21,7 @@
           <v-stepper-step editable :complete="e6 > 1" step="1">Profile</v-stepper-step>
 
           <v-stepper-content step="1">
-            <Profile/>
+            <Profile ref="profile"/>
           </v-stepper-content>
 
           <v-stepper-step editable :complete="e6 > 2" step="2">Operation Details</v-stepper-step>
@@ -68,7 +68,14 @@
           </v-stepper-content>
         </v-stepper>
 
-        <v-btn large block round mt-5 class="blue darken-4 white--text">Next</v-btn>
+        <v-btn
+          large
+          block
+          round
+          mt-5
+          class="blue darken-4 white--text"
+          @click.native="createOperator"
+        >Next</v-btn>
       </v-container>
     </v-content>
     <Footer/>
@@ -85,6 +92,7 @@ import Vet from "@/components/Vet";
 import PetId from "@/components/PetId";
 import Breeding from "@/components/Breeding";
 import Footer from "@/components/Footer";
+import axios from "axios";
 
 export default {
   name: "App",
@@ -101,8 +109,68 @@ export default {
   },
   data() {
     return {
-      e6: 1
+      e6: 1,
+      errors: []
     };
+  },
+  methods: {
+    createOperator() {
+      console.log("Next clicked");
+      axios
+        .post(`http://localhost:8080/api/operator/`, {
+          first_name: this.$refs.profile.firstname,
+          middle_name: this.$refs.profile.middlename,
+          last_name: this.$refs.profile.lastname,
+          comm_type: this.$refs.profile.type,
+          addresses: [
+            {
+              type: "PRI",
+              street_num: this.$refs.profile.streetNumber,
+              suite: this.$refs.profile.aptnumber,
+              street_name: this.$refs.profile.streetName,
+              city: this.$refs.profile.city,
+              postal_code: this.$refs.profile.postalCode
+            }
+          ],
+          associations: [
+            {
+              assoc_name: "string",
+              membership_num: "string",
+              assoc_URL: "string"
+            }
+          ],
+          risk_factor_animals: [
+            {
+              num_dogs_intact: 0,
+              num_litter_whelped: 0,
+              num_cats_intact: 0,
+              num_litter_queened: 0,
+              num_sold: 0,
+              num_transferred: 0,
+              num_traded: 0,
+              num_leased: 0
+            }
+          ],
+          risk_factor_operations: [
+            {
+              accidental_breeding: true,
+              num_workers: 0,
+              operation_URL: "string",
+              num_breeds_dogs: 0,
+              num_breeds_cats: 0,
+              has_vet: true,
+              has_perm_id: true,
+              perm_id_type: "TATTOO",
+              perm_id_other: "string",
+              operation_type: "DOG"
+            }
+          ]
+        })
+        .then(response => {})
+        .catch(e => {
+          this.errors.push(e);
+        });
+    }
   }
 };
 </script>

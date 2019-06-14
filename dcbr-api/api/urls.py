@@ -5,6 +5,7 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions, routers
 from rest_framework.urlpatterns import format_suffix_patterns
+# import debug_toolbar
 
 from api import views
 
@@ -42,4 +43,7 @@ swaggerpatterns = [
 ]
 # fmt: on
 
-urlpatterns = format_suffix_patterns(router.urls + swaggerpatterns)
+# urlpatterns = [format_suffix_patterns(router.urls + swaggerpatterns)
+#                 # path(r'^__debug__, include(debug_toolbar.urls')
+# ]
+urlpatterns = format_suffix_patterns(router.urls + swaggerpatterns)               

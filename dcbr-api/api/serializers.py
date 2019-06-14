@@ -91,6 +91,7 @@ class Operator_Serializer(ModelSerializer):
             "first_name",
             "middle_name",
             "last_name",
+            "comm_type",
             "addresses",
             "associations",
             "risk_factor_animals",
@@ -99,7 +100,6 @@ class Operator_Serializer(ModelSerializer):
         read_only_fields = ("reg_num",)
 
     def create(self, validated_data):
-        print("inside create")
         print(validated_data)
 
         risk_factor_animals_data = validated_data.pop("risk_factor_animals")

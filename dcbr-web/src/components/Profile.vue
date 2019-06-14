@@ -18,7 +18,6 @@
                 <v-flex xs12 md4>
                   <v-text-field v-model="firstname" :rules="nameRules" label="First name" required></v-text-field>
                 </v-flex>
-
                 <v-flex xs12 md4>
                   <v-text-field v-model="middlename" label="Middle name (optional)"></v-text-field>
                 </v-flex>
@@ -52,6 +51,17 @@
                     required
                   ></v-text-field>
                 </v-flex>
+                <v-flex xs12 md4>
+                  <v-text-field v-model="city" :rules="nameRules" label="City" required></v-text-field>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-text-field
+                    v-model="postalCode"
+                    :rules="nameRules"
+                    label="Postal Code"
+                    required
+                  ></v-text-field>
+                </v-flex>
               </v-layout>
 
               <!-- contact info  -->
@@ -73,8 +83,8 @@
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="type" row>
-                  <v-radio label="E-mail" value="radio-a"></v-radio>
-                  <v-radio label="Mail" value="radio-b"></v-radio>
+                  <v-radio label="E-mail" value="Email"></v-radio>
+                  <v-radio label="Mail" value="Mail"></v-radio>
                 </v-radio-group>
               </v-layout>
             </v-container>
@@ -94,8 +104,10 @@ export default {
     streetNumber: "",
     aptNumber: "",
     streetName: "",
-    mask: "phone",
+    email: "",
+    mask: "",
     phone: "",
+    type: "",
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
