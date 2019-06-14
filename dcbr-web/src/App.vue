@@ -121,7 +121,9 @@ export default {
           first_name: this.$refs.profile.firstname,
           middle_name: this.$refs.profile.middlename,
           last_name: this.$refs.profile.lastname,
-          comm_type: this.$refs.profile.type,
+          comm_pref: this.$refs.profile.commType,
+          email_address: this.$refs.profile.email,
+          phone_num: this.$refs.profile.phone,
           addresses: [
             {
               type: "PRI",
@@ -129,7 +131,7 @@ export default {
               suite: this.$refs.profile.aptnumber,
               street_name: this.$refs.profile.streetName,
               city: this.$refs.profile.city,
-              postal_code: this.$refs.profile.postalCode
+              postal_code: this.$refs.profile.postalCode,
             }
           ],
           associations: [

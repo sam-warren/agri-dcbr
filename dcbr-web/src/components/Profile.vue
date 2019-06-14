@@ -82,7 +82,7 @@
                 <subheader>What is the best way to contact you?</subheader>
               </v-layout>
               <v-layout mx-2>
-                <v-radio-group v-model="type" row>
+                <v-radio-group v-model="commType" row>
                   <v-radio label="E-mail" value="Email"></v-radio>
                   <v-radio label="Mail" value="Mail"></v-radio>
                 </v-radio-group>
@@ -107,7 +107,7 @@ export default {
     email: "",
     mask: "",
     phone: "",
-    type: "",
+    commType: "",
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"

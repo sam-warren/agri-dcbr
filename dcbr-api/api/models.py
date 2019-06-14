@@ -21,10 +21,12 @@ class Operator(models.Model):
     first_name = models.CharField(max_length=32)
     middle_name = models.CharField(max_length=50, default="", blank=True)
     last_name = models.CharField(max_length=50)
+    phone_num = models.CharField(max_length=50, default="", blank=True)
+    email_address= models.CharField(max_length=50, default="", blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     CONTACT_METHOD_CHOICE = ((EMAIL, "email"), (MAIL, "mail"))
-    comm_type = models.CharField(
+    comm_pref = models.CharField(
         max_length=10, choices=CONTACT_METHOD_CHOICE, default=EMAIL
     )
     operator_type = models.CharField(
