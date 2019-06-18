@@ -41,7 +41,7 @@
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="aptnumber" label="Apt/Suite" required></v-text-field>
+                  <v-text-field v-model="aptNumber" label="Apt/Suite" required></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
@@ -101,9 +101,11 @@ export default {
     firstname: "",
     lastname: "",
     middlename: "",
-    streetNumber: "",
+    streetnumber: "",
     aptNumber: "",
     streetName: "",
+    postalCode: "",
+    city: "",
     email: "",
     mask: "",
     phone: "",

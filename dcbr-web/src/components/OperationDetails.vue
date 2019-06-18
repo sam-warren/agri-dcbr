@@ -16,11 +16,11 @@
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 mr-5>
-                  <v-text-field label="Operation Name"></v-text-field>
+                  <v-text-field v-model="operationName" label="Operation Name"></v-text-field>
                 </v-flex>
 
                 <v-flex xs12 md4>
-                  <v-text-field label="Link to your Website "></v-text-field>
+                  <v-text-field v-model="website" label="Link to your Website "></v-text-field>
                 </v-flex>
               </v-layout>
               <!-- Type of Operator -->
@@ -28,10 +28,10 @@
                 <subheader>What type of operator are you?</subheader>
               </v-layout>
               <v-layout mx-2>
-                <v-radio-group v-model="type" row>
-                  <v-radio label="Breeder" value="radio-a"></v-radio>
-                  <v-radio label="Seller" value="radio-b"></v-radio>
-                  <v-radio label="Breeder & Seller" value="radio-c"></v-radio>
+                <v-radio-group v-model="operationType" row>
+                  <v-radio label="Breeder" value="breeder"></v-radio>
+                  <v-radio label="Seller" value="seller"></v-radio>
+                  <v-radio label="Breeder & Seller" value="breeder & seller"></v-radio>
                 </v-radio-group>
               </v-layout>
               <!-- Type of Animal -->
@@ -107,6 +107,9 @@ export default {
     row: null,
     type: null,
     animal: null,
+    operationName: "",
+    website: "",
+    operationType:"",
 
     nameRules: [
       v => !!v || "Name is required",

@@ -11,7 +11,7 @@ class Operator(models.Model):
     BREEDER = "BREEDER"
     SELLER = "SELLER"
     BOTH = "BREEDER & SELLER"
-    OPERATOR_TYPE_CHOICES = (
+    OPERATION_TYPE_CHOICES = (
         (BREEDER, "breeder"),
         (SELLER, "seller"),
         (BOTH, "breeder & seller"),
@@ -29,11 +29,12 @@ class Operator(models.Model):
     comm_pref = models.CharField(
         max_length=10, choices=CONTACT_METHOD_CHOICE, default=EMAIL
     )
-    operator_type = models.CharField(
-        max_length=20, choices=OPERATOR_TYPE_CHOICES, default=BREEDER
+    operation_type = models.CharField(
+        max_length=20, choices=OPERATION_TYPE_CHOICES, default=BREEDER
     )
 
-    operation_name = models.CharField(max_length=32, default="", blank=True)
+    operation_name = models.CharField(max_length=50, default="", blank=True)
+    operation_URL = models.CharField(max_length=50, default="", blank=True)
 
     def __str__(self):
         return "Reg ID: \t %s %s , %s" % (self.reg_num, self.last_name, self.first_name)
@@ -92,7 +93,8 @@ class Risk_Factor_Operation(models.Model):
     DOG = "DOG"
     CAT = "CAT"
     BOTH = "DOG & CAT"
-    OPERATOR_TYPE_CHOICES = ((DOG, "dog"), (CAT, "cat"), (BOTH, "dog & cat"))
+    
+    ANIMAL_TYPE_CHOICES = ((DOG, "dog"), (CAT, "cat"), (BOTH, "dog & cat"))
 
     TATTOO = "TATTOO"
     MICROCHIP = "MICROCHIP"
@@ -105,7 +107,6 @@ class Risk_Factor_Operation(models.Model):
 
     accidental_breeding = models.BooleanField(default=False)
     num_workers = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    operation_URL = models.TextField(default="", blank=True)
     num_breeds_dogs = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     num_breeds_cats = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     has_vet = models.BooleanField(default=False)
@@ -114,7 +115,7 @@ class Risk_Factor_Operation(models.Model):
         max_length=10, choices=PERMANENT_ID_CHOICES, default=TATTOO
     )
     perm_id_other = models.CharField(max_length=10, default="", blank=True)
-    operation_type = models.CharField(max_length=10, choices=OPERATOR_TYPE_CHOICES, default=BOTH)
+    animal_type = models.CharField(max_length=10, choices=ANIMAL_TYPE_CHOICES, default=BOTH)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

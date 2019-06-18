@@ -27,7 +27,7 @@
           <v-stepper-step editable :complete="e6 > 2" step="2">Operation Details</v-stepper-step>
 
           <v-stepper-content step="2">
-            <OperationDetails/>
+            <OperationDetails ref="operationdetails"/>
           </v-stepper-content>
 
           <v-stepper-step editable :complete="e6 > 3" step="3">Operation Location(s)</v-stepper-step>
@@ -117,18 +117,22 @@ export default {
     createOperator() {
       console.log("Next clicked");
       axios
-        .post(`http://localhost:8080/api/operator/`, {
+        .post(`http://localhost:8083/api/operator/`, {
           first_name: this.$refs.profile.firstname,
           middle_name: this.$refs.profile.middlename,
           last_name: this.$refs.profile.lastname,
           comm_pref: this.$refs.profile.commType,
-          email_address: this.$refs.profile.email,
           phone_num: this.$refs.profile.phone,
+          email_address: this.$refs.profile.email,
+          operation_type: this.$refs.operationdetails.operationType,
+          operation_name: this.$refs.operationdetails.operationName,
+          operation_URL: this.$refs.operationdetails.website,
+          
           addresses: [
             {
               type: "PRI",
               street_num: this.$refs.profile.streetNumber,
-              suite: this.$refs.profile.aptnumber,
+              suite: this.$refs.profile.aptNumber,
               street_name: this.$refs.profile.streetName,
               city: this.$refs.profile.city,
               postal_code: this.$refs.profile.postalCode,
@@ -136,9 +140,9 @@ export default {
           ],
           associations: [
             {
-              assoc_name: "string",
-              membership_num: "string",
-              assoc_URL: "string"
+              assoc_name: "",
+              membership_num: "",
+              assoc_URL: ""
             }
           ],
           risk_factor_animals: [
@@ -157,7 +161,6 @@ export default {
             {
               accidental_breeding: true,
               num_workers: 0,
-              operation_URL: "string",
               num_breeds_dogs: 0,
               num_breeds_cats: 0,
               has_vet: true,

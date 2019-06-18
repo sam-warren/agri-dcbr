@@ -44,14 +44,13 @@ class Risk_Factor_Operation_Serializer(ModelSerializer):
             "id",
             "accidental_breeding",
             "num_workers",
-            "operation_URL",
             "num_breeds_dogs",
             "num_breeds_cats",
             "has_vet",
             "has_perm_id",
             "perm_id_type",
             "perm_id_other",
-            "operation_type",
+            "animal_type",
         )
         # read_only_fields = ("regNum",)
 
@@ -94,6 +93,10 @@ class Operator_Serializer(ModelSerializer):
             "comm_pref",
             "phone_num",
             "email_address",
+            "operation_type",
+            "operation_name",
+            "operation_URL",
+            "comm_pref",
             "addresses",
             "associations",
             "risk_factor_animals",
