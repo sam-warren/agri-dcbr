@@ -29,9 +29,9 @@
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="operationType" row>
-                  <v-radio label="Breeder" value="breeder"></v-radio>
-                  <v-radio label="Seller" value="seller"></v-radio>
-                  <v-radio label="Breeder & Seller" value="breeder & seller"></v-radio>
+                  <v-radio label="Breeder" value="BREEDER"></v-radio>
+                  <v-radio label="Seller" value="SELLER"></v-radio>
+                  <v-radio label="Breeder & Seller" value="BREEDER & SELLER"></v-radio>
                 </v-radio-group>
               </v-layout>
               <!-- Type of Animal -->
@@ -39,10 +39,10 @@
                 <subheader>What type of animal do you work with?</subheader>
               </v-layout>
               <v-layout mx-2>
-                <v-radio-group v-model="animal" row>
-                  <v-radio label="Dogs" value="radio-a"></v-radio>
-                  <v-radio label="Cats" value="radio-b"></v-radio>
-                  <v-radio label="Dogs & Cats" value="radio-c"></v-radio>
+                <v-radio-group v-model="animalType" row>
+                  <v-radio label="Dogs" value="DOG"></v-radio>
+                  <v-radio label="Cats" value="CAT"></v-radio>
+                  <v-radio label="Dogs & Cats" value="DOG & CAT"></v-radio>
                 </v-radio-group>
               </v-layout>
               <!-- ACCIDENTAL BREEDING -->
@@ -106,10 +106,10 @@ export default {
     middlename: "",
     row: null,
     type: null,
-    animal: null,
+    animalType: "",
     operationName: "",
     website: "",
-    operationType:"",
+    operationType: "",
 
     nameRules: [
       v => !!v || "Name is required",

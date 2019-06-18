@@ -44,13 +44,13 @@ class Risk_Factor_Operation_Serializer(ModelSerializer):
             "id",
             "accidental_breeding",
             "num_workers",
+            "animal_type",
             "num_breeds_dogs",
             "num_breeds_cats",
             "has_vet",
             "has_perm_id",
             "perm_id_type",
             "perm_id_other",
-            "animal_type",
         )
         # read_only_fields = ("regNum",)
 

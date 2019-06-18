@@ -12,17 +12,19 @@ class Operator(models.Model):
     SELLER = "SELLER"
     BOTH = "BREEDER & SELLER"
     OPERATION_TYPE_CHOICES = (
-        (BREEDER, "breeder"),
-        (SELLER, "seller"),
-        (BOTH, "breeder & seller"),
+        (BREEDER, "BREEDER"),
+        (SELLER, "SELLER"),
+        (BOTH, "BREEDER & SELLER"),
     )
+
+    
 
     reg_num = models.CharField(max_length=14)
     first_name = models.CharField(max_length=32)
     middle_name = models.CharField(max_length=50, default="", blank=True)
     last_name = models.CharField(max_length=50)
     phone_num = models.CharField(max_length=50, default="", blank=True)
-    email_address= models.CharField(max_length=50, default="", blank=True)
+    email_address = models.CharField(max_length=50, default="", blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     CONTACT_METHOD_CHOICE = ((EMAIL, "email"), (MAIL, "mail"))
@@ -35,6 +37,7 @@ class Operator(models.Model):
 
     operation_name = models.CharField(max_length=50, default="", blank=True)
     operation_URL = models.CharField(max_length=50, default="", blank=True)
+   
 
     def __str__(self):
         return "Reg ID: \t %s %s , %s" % (self.reg_num, self.last_name, self.first_name)
@@ -67,8 +70,8 @@ class Address(models.Model):
     city = models.CharField(max_length=32)
     postal_code = models.CharField(max_length=7)
     province = models.CharField(max_length=2, default="BC")
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     operator = models.ForeignKey(
         Operator,
@@ -90,12 +93,6 @@ class Address(models.Model):
 
 class Risk_Factor_Operation(models.Model):
 
-    DOG = "DOG"
-    CAT = "CAT"
-    BOTH = "DOG & CAT"
-    
-    ANIMAL_TYPE_CHOICES = ((DOG, "dog"), (CAT, "cat"), (BOTH, "dog & cat"))
-
     TATTOO = "TATTOO"
     MICROCHIP = "MICROCHIP"
     OTHER = "OTHER"
@@ -105,8 +102,16 @@ class Risk_Factor_Operation(models.Model):
         (OTHER, "other"),
     )
 
+    DOG = "DOG"
+    CAT = "CAT"
+    BOTH = "DOG & CAT"
+
+    ANIMAL_TYPE_CHOICES = ((DOG, "DOG"), (CAT, "CAT"), (BOTH, "DOG & CAT"))
     accidental_breeding = models.BooleanField(default=False)
     num_workers = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    animal_type = models.CharField(
+        max_length=10, choices=ANIMAL_TYPE_CHOICES, default=BOTH
+    )
     num_breeds_dogs = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     num_breeds_cats = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     has_vet = models.BooleanField(default=False)
@@ -115,16 +120,14 @@ class Risk_Factor_Operation(models.Model):
         max_length=10, choices=PERMANENT_ID_CHOICES, default=TATTOO
     )
     perm_id_other = models.CharField(max_length=10, default="", blank=True)
-    animal_type = models.CharField(max_length=10, choices=ANIMAL_TYPE_CHOICES, default=BOTH)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     operator = models.ForeignKey(
         Operator,
         on_delete=models.CASCADE,
         related_name="risk_factor_operations",
         related_query_name="risk_factor_operations",
-
     )
 
     def __str__(self):
@@ -156,8 +159,8 @@ class Risk_Factor_Animal(models.Model):
     num_transferred = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     num_traded = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     num_leased = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
     operator = models.ForeignKey(
         Operator,
         on_delete=models.CASCADE,
@@ -181,8 +184,8 @@ class Association_Membership(models.Model):
     assoc_name = models.CharField(max_length=50, default="", blank=True)
     membership_num = models.CharField(max_length=10, default="", blank=True)
     assoc_URL = models.TextField(default="", blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     operator = models.ForeignKey(
         Operator, on_delete=models.CASCADE, related_name="associations"
@@ -204,8 +207,8 @@ class Inspection(models.Model):
     op_first_name = models.CharField(max_length=32)
     op_middle_name = models.CharField(max_length=50)
     op_last_name = models.CharField(max_length=50)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     soc_1 = models.BooleanField(default=False)
     soc_2 = models.BooleanField(default=False)

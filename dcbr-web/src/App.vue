@@ -117,7 +117,7 @@ export default {
     createOperator() {
       console.log("Next clicked");
       axios
-        .post(`http://localhost:8083/api/operator/`, {
+        .post(`http://localhost:8080/api/operator/`, {
           first_name: this.$refs.profile.firstname,
           middle_name: this.$refs.profile.middlename,
           last_name: this.$refs.profile.lastname,
@@ -127,7 +127,7 @@ export default {
           operation_type: this.$refs.operationdetails.operationType,
           operation_name: this.$refs.operationdetails.operationName,
           operation_URL: this.$refs.operationdetails.website,
-          
+
           addresses: [
             {
               type: "PRI",
@@ -135,7 +135,7 @@ export default {
               suite: this.$refs.profile.aptNumber,
               street_name: this.$refs.profile.streetName,
               city: this.$refs.profile.city,
-              postal_code: this.$refs.profile.postalCode,
+              postal_code: this.$refs.profile.postalCode
             }
           ],
           associations: [
@@ -161,13 +161,13 @@ export default {
             {
               accidental_breeding: true,
               num_workers: 0,
+              animal_type: this.$refs.operationdetails.animalType,
               num_breeds_dogs: 0,
               num_breeds_cats: 0,
               has_vet: true,
               has_perm_id: true,
               perm_id_type: "TATTOO",
-              perm_id_other: "string",
-              operation_type: "DOG"
+              perm_id_other: "string"
             }
           ]
         })
