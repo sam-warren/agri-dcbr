@@ -6,8 +6,6 @@ services:
   #
   dcbr-web:
     image: dcbr-web
-    environment:
-      VUE_APP_EMILIANO: "Is The Greatest"
     networks:
       - dcbr
     ports:

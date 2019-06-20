@@ -22,7 +22,6 @@ from dcbr import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("authenticate", views.authenticate),
-    path("public-sso-config", views.public_sso_config),
     url(r"^health/", include("health_check.urls")),
     url(r"^api/", include("api.urls")),
     url(r"^oidc/", include("mozilla_django_oidc.urls")),
