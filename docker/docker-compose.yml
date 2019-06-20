@@ -5,9 +5,9 @@ services:
   # dcbr-web
   #
   dcbr-web:
-    build:
-      context: ..
-      dockerfile: docker/dcbr-web/Dockerfile
+    image: dcbr-web
+    environment:
+      VUE_APP_EMILIANO: "Is The Greatest"
     networks:
       - dcbr
     ports:
@@ -60,14 +60,16 @@ services:
       DJANGO_ADMIN_USER: ${DJANGO_ADMIN_USER}
       DJANGO_ADMIN_PASSWORD: ${DJANGO_ADMIN_PASSWORD}
       DJANGO_ADMIN_EMAIL: ${DJANGO_ADMIN_EMAIL}
+      OIDC_RP_SIGN_ALGO: ${OIDC_RP_SIGN_ALGO}
       OIDC_OP_JWKS_ENDPOINT: ${OIDC_OP_JWKS_ENDPOINT}
       OIDC_RP_CLIENT_ID: ${OIDC_RP_CLIENT_ID}
       OIDC_RP_CLIENT_SECRET: ${OIDC_RP_CLIENT_SECRET}
       OIDC_OP_AUTHORIZATION_ENDPOINT: ${OIDC_OP_AUTHORIZATION_ENDPOINT}
       OIDC_OP_TOKEN_ENDPOINT: ${OIDC_OP_TOKEN_ENDPOINT}
       OIDC_OP_USER_ENDPOINT: ${OIDC_OP_USER_ENDPOINT}
-      LOGIN_REDIRECT_URL: ${LOGIN_REDIRECT_URL}
-      LOGOUT_REDIRECT_URL: ${LOGOUT_REDIRECT_URL}
+      KEYCLOAK_PUBLIC_AUTH_URL: ${KEYCLOAK_PUBLIC_AUTH_URL}
+      KEYCLOAK_PUBLIC_CLIENT_ID: ${KEYCLOAK_PUBLIC_CLIENT_ID}
+      KEYCLOAK_PUBLIC_REALM: ${KEYCLOAK_PUBLIC_REALM}
       STI_SCRIPTS_PATH: ${STI_SCRIPTS_PATH}
     volumes:
       - ../dcbr-api:/opt/app-root/src
@@ -142,38 +144,38 @@ services:
   #
   # keycloak service
   #  
-  keycloak:      
-    build:
-      context: ..
-      dockerfile: docker/keycloak/Dockerfile
-    environment:
-      DB_VENDOR: ${KEYCLOAK_DB_VENDOR}
-      DB_ADDR: ${KEYCLOAK_DB_ADDR}
-      DB_DATABASE: ${KEYCLOAK_DB_NAME}
-      DB_USER: ${KEYCLOAK_DB_USER}
-      DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
-      KEYCLOAK_USER: ${KEYCLOAK_USER}
-      KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
-      KEYCLOAK_LOGLEVEL: ${KEYCLOAK_LOGLEVEL}
-      ROOT_LOGLEVEL: ${KEYCLOAK_ROOT_LOGLEVEL}
-    ports:
-      - 8888:8080
-    depends_on:
-      - keycloak-db      
-    command: -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=/tmp/realm.json -Dkeycloak.migration.strategy=IGNORE_EXISTING
+  # keycloak:      
+  #   build:
+  #     context: ..
+  #     dockerfile: docker/keycloak/Dockerfile
+  #   environment:
+  #     DB_VENDOR: ${KEYCLOAK_DB_VENDOR}
+  #     DB_ADDR: ${KEYCLOAK_DB_ADDR}
+  #     DB_DATABASE: ${KEYCLOAK_DB_NAME}
+  #     DB_USER: ${KEYCLOAK_DB_USER}
+  #     DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+  #     KEYCLOAK_USER: ${KEYCLOAK_USER}
+  #     KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+  #     KEYCLOAK_LOGLEVEL: ${KEYCLOAK_LOGLEVEL}
+  #     ROOT_LOGLEVEL: ${KEYCLOAK_ROOT_LOGLEVEL}
+  #   ports:
+  #     - 8888:8080
+  #   depends_on:
+  #     - keycloak-db      
+  #   command: -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=/tmp/realm.json -Dkeycloak.migration.strategy=IGNORE_EXISTING
   
   # 
   # keycloak-db
   # using the same postgresql image we will use on OpenShift
   # 
-  keycloak-db:
-    image: registry.access.redhat.com/rhscl/postgresql-10-rhel7:latest
-    environment:
-      POSTGRESQL_USER: ${KEYCLOAK_DB_USER}
-      POSTGRESQL_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
-      POSTGRESQL_DATABASE: ${KEYCLOAK_DB_NAME}
-    volumes:
-      - keycloak-db-data:/var/lib/pgsql/data
+  # keycloak-db:
+  #   image: registry.access.redhat.com/rhscl/postgresql-10-rhel7:latest
+  #   environment:
+  #     POSTGRESQL_USER: ${KEYCLOAK_DB_USER}
+  #     POSTGRESQL_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
+  #     POSTGRESQL_DATABASE: ${KEYCLOAK_DB_NAME}
+  #   volumes:
+  #     - keycloak-db-data:/var/lib/pgsql/data
 
 networks:
   dcbr:

@@ -9,16 +9,13 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
-console.log('*****', process.env);
+console.log('**********************', process.env.VUE_APP_EMILIANO);
 
 Vue.use(VueKeycloakJs, {
   config: {
     // url: 'http://localhost:8888/auth',
     // clientId: 'vue-app-test',
-    // realm: 'uicn0kkh'
-    url: process.env.VUE_APP_KEYCLOAK_AUTH_URL,
-    clientId: process.env.VUE_APP_KEYCLOAK_CLIENT_ID,
-    realm: process.env.VUE_APP_KEYCLOAK_REALM
+    // realm: 'DCBR'
   },
   onReady: (keycloak: any) => {
     new Vue({

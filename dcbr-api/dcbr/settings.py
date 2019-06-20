@@ -69,7 +69,11 @@ MIDDLEWARE = [
     "mozilla_django_oidc.middleware.SessionRefresh",
 ]
 
-AUTHENTICATION_BACKENDS = ("mozilla_django_oidc.auth.OIDCAuthenticationBackend",)
+AUTHENTICATION_BACKENDS = [
+    # "mozilla_django_oidc.auth.OIDCAuthenticationBackend",
+    "dcbr.oidc_authentication.AdminOIDCAB",
+    # "django.contrib.auth.backends.ModelBackend",
+]
 
 ROOT_URLCONF = "dcbr.urls"
 
@@ -220,14 +224,18 @@ LOGGING = {
 # mozilla-django-oidc
 OIDC_RP_CLIENT_ID = os.environ["OIDC_RP_CLIENT_ID"]
 OIDC_RP_CLIENT_SECRET = os.environ["OIDC_RP_CLIENT_SECRET"]
-
 OIDC_OP_AUTHORIZATION_ENDPOINT = os.environ["OIDC_OP_AUTHORIZATION_ENDPOINT"]
 OIDC_OP_TOKEN_ENDPOINT = os.environ["OIDC_OP_TOKEN_ENDPOINT"]
 OIDC_OP_USER_ENDPOINT = os.environ["OIDC_OP_USER_ENDPOINT"]
+OIDC_RP_SIGN_ALGO = os.environ["OIDC_RP_SIGN_ALGO"]
+OIDC_OP_JWKS_ENDPOINT = os.environ["OIDC_OP_JWKS_ENDPOINT"]
 
-LOGIN_REDIRECT_URL = os.environ["LOGIN_REDIRECT_URL"]
-LOGOUT_REDIRECT_URL = os.environ["LOGOUT_REDIRECT_URL"]
+LOGIN_URL = "/authenticate"
+LOGIN_REDIRECT_URL = "/admin"
+LOGIN_REDIRECT_URL_FAILURE = "/authenticate"
+LOGOUT_REDIRECT_URL = "/authenticate"
 
-OIDC_CREATE_USER = False
-
-# OIDC_EXEMPT_URLS = ["/api"]
+# public-sso-config
+KEYCLOAK_PUBLIC_AUTH_URL = os.environ["KEYCLOAK_PUBLIC_AUTH_URL"]
+KEYCLOAK_PUBLIC_CLIENT_ID = os.environ["KEYCLOAK_PUBLIC_CLIENT_ID"]
+KEYCLOAK_PUBLIC_REALM = os.environ["KEYCLOAK_PUBLIC_REALM"]
