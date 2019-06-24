@@ -71,9 +71,6 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_WHITELIST = ("localhost:8081", "localhost:8083")
-CORS_ORIGIN_REGEX_WHITELIST = ("localhost:8081", "localhost:8083")
 
 ROOT_URLCONF = "dcbr.urls"
 
@@ -174,5 +171,3 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 100,
 }
-
-INTERNAL_IPS =('127.0.0.1',)

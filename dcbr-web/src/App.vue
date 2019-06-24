@@ -52,7 +52,7 @@
 
           <v-stepper-step editable :complete="e6 > 4" step="4">Animal Identification</v-stepper-step>
           <v-stepper-content step="4">
-            <PetId/>
+            <AnimalIdentification/>
           </v-stepper-content>
           <v-stepper-step editable :complete="e6 > 5" step="5">Breeding Details</v-stepper-step>
           <v-stepper-content step="5">
@@ -81,7 +81,7 @@ import Profile from "@/components/Profile";
 import OpLocation from "@/components/OpLocation";
 import OpLocation2 from "@/components/OpLocation2";
 // import Vet from "@/components/Vet";
-import PetId from "@/components/PetId";
+import AnimalIdentification from "@/components/AnimalIdentification";
 import Breeding from "@/components/Breeding";
 import Footer from "@/components/Footer";
 import axios from "axios";
@@ -95,7 +95,7 @@ export default {
     OpLocation,
     OpLocation2,
     // Vet,
-    PetId,
+    AnimalIdentification,
     Breeding,
     Footer
   },
