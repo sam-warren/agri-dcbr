@@ -17,8 +17,6 @@ class Operator(models.Model):
         (BOTH, "BREEDER & SELLER"),
     )
 
-    
-
     reg_num = models.CharField(max_length=14)
     first_name = models.CharField(max_length=32)
     middle_name = models.CharField(max_length=50, default="", blank=True)
@@ -57,11 +55,9 @@ class Operator(models.Model):
 class Address(models.Model):
     PRIMARY = "PRI"
     OPERATION = "OPN"
-    VETERINARY = "VET"
     TYPE_CHOICES = (
         (PRIMARY, "Primary"),
         (OPERATION, "Operation"),
-        (VETERINARY, "Veterinary"),
     )
     type = models.CharField(max_length=3, choices=TYPE_CHOICES, default=PRIMARY)
     street_num = models.IntegerField(default=0, validators=[MinValueValidator(0)])
@@ -182,8 +178,8 @@ class Risk_Factor_Animal(models.Model):
 class Association_Membership(models.Model):
 
     assoc_name = models.CharField(max_length=50, default="", blank=True)
-    membership_num = models.CharField(max_length=10, default="", blank=True)
-    assoc_URL = models.TextField(default="", blank=True)
+    membership_num = models.CharField(max_length=20, default="", blank=True)
+    assoc_URL = models.CharField(max_length=50, default="", blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 

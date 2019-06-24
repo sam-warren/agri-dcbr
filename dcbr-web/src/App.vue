@@ -44,26 +44,18 @@
             <OpLocation2/>
           </v-stepper-content>
 
-          <v-stepper-step editable :complete="e6 > 4" step="4">Veterinary Relationship</v-stepper-step>
+          <!-- <v-stepper-step editable :complete="e6 > 4" step="4">Veterinary Relationship</v-stepper-step>
           <v-stepper-content step="4">
-            <v-layout mx-5 mt-4>
-              <subheader>Do you have a client veterinary relationship</subheader>
-            </v-layout>
-            <v-layout mx-5>
-              <v-radio-group v-model="row" row>
-                <v-radio label="Yes" value="radio-1"></v-radio>
-                <v-radio label="No" value="radio-2"></v-radio>
-              </v-radio-group>
-            </v-layout>
+            
             <Vet/>
-          </v-stepper-content>
+          </v-stepper-content>-->
 
-          <v-stepper-step editable :complete="e6 > 5" step="5">Animal Identification</v-stepper-step>
-          <v-stepper-content step="5">
+          <v-stepper-step editable :complete="e6 > 4" step="4">Animal Identification</v-stepper-step>
+          <v-stepper-content step="4">
             <PetId/>
           </v-stepper-content>
-          <v-stepper-step editable :complete="e6 > 6" step="6">Breeding Details</v-stepper-step>
-          <v-stepper-content step="6">
+          <v-stepper-step editable :complete="e6 > 5" step="5">Breeding Details</v-stepper-step>
+          <v-stepper-content step="5">
             <Breeding/>
           </v-stepper-content>
         </v-stepper>
@@ -88,7 +80,7 @@ import OperationDetails from "@/components/OperationDetails";
 import Profile from "@/components/Profile";
 import OpLocation from "@/components/OpLocation";
 import OpLocation2 from "@/components/OpLocation2";
-import Vet from "@/components/Vet";
+// import Vet from "@/components/Vet";
 import PetId from "@/components/PetId";
 import Breeding from "@/components/Breeding";
 import Footer from "@/components/Footer";
@@ -102,7 +94,7 @@ export default {
     OperationDetails,
     OpLocation,
     OpLocation2,
-    Vet,
+    // Vet,
     PetId,
     Breeding,
     Footer
@@ -126,7 +118,7 @@ export default {
           email_address: this.$refs.profile.email,
           operation_type: this.$refs.operationdetails.operationType,
           operation_name: this.$refs.operationdetails.operationName,
-          operation_URL: this.$refs.operationdetails.website,
+          operation_URL: this.$refs.operationdetails.opWebsite,
 
           addresses: [
             {
@@ -140,9 +132,9 @@ export default {
           ],
           associations: [
             {
-              assoc_name: "",
-              membership_num: "",
-              assoc_URL: ""
+              assoc_name: this.$refs.operationdetails.assocName,
+              membership_num: this.$refs.operationdetails.assocMembership,
+              assoc_URL: this.$refs.operationdetails.assocWebsite
             }
           ],
           risk_factor_animals: [
@@ -159,12 +151,12 @@ export default {
           ],
           risk_factor_operations: [
             {
-              accidental_breeding: true,
-              num_workers: 0,
+              accidental_breeding: this.$refs.operationdetails.accident,
+              num_workers: this.$refs.operationdetails.numWorkers,
               animal_type: this.$refs.operationdetails.animalType,
-              num_breeds_dogs: 0,
-              num_breeds_cats: 0,
-              has_vet: true,
+              num_breeds_dogs: this.$refs.operationdetails.numDogBreeds,
+              num_breeds_cats: this.$refs.operationdetails.numCatBreeds,
+              has_vet: this.$refs.operationdetails.hasVet,
               has_perm_id: true,
               perm_id_type: "TATTOO",
               perm_id_other: "string"

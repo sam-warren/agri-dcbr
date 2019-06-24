@@ -20,7 +20,7 @@
                 </v-flex>
 
                 <v-flex xs12 md4>
-                  <v-text-field v-model="website" label="Link to your Website "></v-text-field>
+                  <v-text-field v-model="opWebsite" label="Link to your Website "></v-text-field>
                 </v-flex>
               </v-layout>
               <!-- Type of Operator -->
@@ -50,21 +50,40 @@
                 <subheader>Over the past calendar year, did you have an accidental breeding?</subheader>
               </v-layout>
               <v-layout mx-2>
-                <v-radio-group v-model="row" row>
-                  <v-radio label="Yes" value="radio-1"></v-radio>
-                  <v-radio label="No" value="radio-2"></v-radio>
+                <v-radio-group v-model="accident" row>
+                  <v-radio label="Yes" value="true"></v-radio>
+                  <v-radio label="No" value="false"></v-radio>
                 </v-radio-group>
               </v-layout>
+              <!-- VET RELATIONSHIP -->
+              <v-layout mx-2 mt-4>
+                <subheader>Do you have a client veterinary relationship</subheader>
+              </v-layout>
+              <v-layout mx-2>
+                <v-radio-group v-model="hasVet" row>
+                  <v-radio label="Yes" value="true"></v-radio>
+                  <v-radio label="No" value="false"></v-radio>
+                </v-radio-group>
+              </v-layout>
+
               <!-- How many breeds -->
               <v-layout mx-2 mt-4>
                 <subheader>How many breeds of animals are you currently breeding/selling?</subheader>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="phone" :mask="digit" label="Number of Dog Breeds"></v-text-field>
+                  <v-text-field
+                    v-model.number="numDogBreeds"
+                    type="number"
+                    label="Number of Dog Breeds"
+                  ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="phone" :mask="digit" label="Number of Cat Breeds"></v-text-field>
+                  <v-text-field
+                    v-model.number="numCatBreeds"
+                    type="number"
+                    label="Number of Cat Breeds"
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
               <!-- NUMBER OF EMPLOYEES -->
@@ -73,7 +92,7 @@
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="phone" :mask="digit" label="Number of Employees"></v-text-field>
+                  <v-text-field v-model.number="numWorkers" type="number" label="Number of workers"></v-text-field>
                 </v-flex>
               </v-layout>
               <!--ASSOCIATION REALTION -->
@@ -82,13 +101,13 @@
               </v-layout>
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field label="Association Name"></v-text-field>
+                  <v-text-field v-model="assocName" label="Association Name"></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field label="Membership #"></v-text-field>
+                  <v-text-field v-model="assocMembership" label="Membership #"></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field label="Website "></v-text-field>
+                  <v-text-field v-model="assocWebsite" label="Website "></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -102,14 +121,19 @@
 export default {
   data: () => ({
     valid: false,
-
-    middlename: "",
-    row: null,
+    numWorkers: null,
+    accident: null,
+    hasVet: null,
     type: null,
     animalType: "",
     operationName: "",
-    website: "",
+    opWebsite: "",
     operationType: "",
+    numDogBreeds: null,
+    numCatBreeds: null,
+    assocName: "",
+    assocMembership: "",
+    assocWebsite: "",
 
     nameRules: [
       v => !!v || "Name is required",

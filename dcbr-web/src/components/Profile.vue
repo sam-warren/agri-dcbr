@@ -121,6 +121,8 @@ export default {
     ],
     streetNumber: "",
     streetNumberRules: [v => !!v || "Street number is required"]
+
+    //numberRules: [v => v.|| "Enter a valid number"]
   })
 };
 </script>
