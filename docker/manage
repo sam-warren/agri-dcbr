@@ -251,7 +251,7 @@ start|up)
  ;;
 start-dev)
   export DEBUG=true
-  DEFAULT_CONTAINERS="dcbr-web-dev  $DEFAULT_CONTAINERS"
+  DEFAULT_CONTAINERS="dcbr-web-dev dcbr-api dcbr-db"
   _startupParams=$(getStartupParams $@)
   configureEnvironment $@
   docker-compose up -d ${_startupParams} 
