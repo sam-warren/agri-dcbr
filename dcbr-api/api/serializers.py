@@ -44,7 +44,7 @@ class Risk_Factor_Operation_Serializer(ModelSerializer):
             "id",
             "accidental_breeding",
             "num_workers",
-            "operation_URL",
+            "animal_type",
             "num_breeds_dogs",
             "num_breeds_cats",
             "has_vet",
@@ -79,7 +79,7 @@ class Operator_Serializer(ModelSerializer):
     addresses = Address_Serializer(many=True)
     associations = Association_Membership_Serializer(many=True)
     risk_factor_animals = Risk_Factor_Animal_Serializer(many=True)
-    # risk_factor_operations = Risk_Factor_Operation_Serializer(many=True)
+    risk_factor_operations = Risk_Factor_Operation_Serializer(many=True)
 
     class Meta:
         model = Operator
@@ -90,21 +90,27 @@ class Operator_Serializer(ModelSerializer):
             "first_name",
             "middle_name",
             "last_name",
+            "comm_pref",
+            "phone_num",
+            "email_address",
+            "operation_type",
+            "operation_name",
+            "operation_URL",
+            "comm_pref",
             "addresses",
             "associations",
             "risk_factor_animals",
-            # "risk_factor_operations",
+            "risk_factor_operations",
         )
         read_only_fields = ("reg_num",)
 
     def create(self, validated_data):
-        print("inside create")
         print(validated_data)
 
         risk_factor_animals_data = validated_data.pop("risk_factor_animals")
         associations_data = validated_data.pop("associations")
         addresses_data = validated_data.pop("addresses")
-        # risk_factor_operations_data = validated_data.pop("risk_factor_operations")
+        risk_factor_operations_data = validated_data.pop("risk_factor_operations")
 
         operator = Operator.objects.create(**validated_data)
 
@@ -116,10 +122,10 @@ class Operator_Serializer(ModelSerializer):
             Risk_Factor_Animal.objects.create(
                 operator=operator, **risk_factor_animal_data
             )
-        # for risk_factor_operation_data in risk_factor_operations_data:
-        #     Risk_Factor_Operation.objects.create(
-        #         operator=operator, **risk_factor_operation_data
-        #     )
+        for risk_factor_operation_data in risk_factor_operations_data:
+            Risk_Factor_Operation.objects.create(
+                operator=operator, **risk_factor_operation_data
+            )
 
         return operator
 

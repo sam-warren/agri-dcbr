@@ -18,7 +18,6 @@
                 <v-flex xs12 md4>
                   <v-text-field v-model="firstname" :rules="nameRules" label="First name" required></v-text-field>
                 </v-flex>
-
                 <v-flex xs12 md4>
                   <v-text-field v-model="middlename" label="Middle name (optional)"></v-text-field>
                 </v-flex>
@@ -42,13 +41,24 @@
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="aptnumber" label="Apt/Suite" required></v-text-field>
+                  <v-text-field v-model="aptNumber" label="Apt/Suite" required></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="streetName"
                     :rules="nameRules"
                     label="Street name"
+                    required
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-text-field v-model="city" :rules="nameRules" label="City" required></v-text-field>
+                </v-flex>
+                <v-flex xs12 md4>
+                  <v-text-field
+                    v-model="postalCode"
+                    :rules="nameRules"
+                    label="Postal Code"
                     required
                   ></v-text-field>
                 </v-flex>
@@ -72,9 +82,9 @@
                 <subheader>What is the best way to contact you?</subheader>
               </v-layout>
               <v-layout mx-2>
-                <v-radio-group v-model="type" row>
-                  <v-radio label="E-mail" value="radio-a"></v-radio>
-                  <v-radio label="Mail" value="radio-b"></v-radio>
+                <v-radio-group v-model="commType" row>
+                  <v-radio label="E-mail" value="Email"></v-radio>
+                  <v-radio label="Mail" value="Mail"></v-radio>
                 </v-radio-group>
               </v-layout>
             </v-container>
@@ -91,11 +101,15 @@ export default {
     firstname: "",
     lastname: "",
     middlename: "",
-    streetNumber: "",
+    streetnumber: "",
     aptNumber: "",
     streetName: "",
-    mask: "phone",
+    postalCode: "",
+    city: "",
+    email: "",
+    mask: "",
     phone: "",
+    commType: "",
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
@@ -107,6 +121,8 @@ export default {
     ],
     streetNumber: "",
     streetNumberRules: [v => !!v || "Street number is required"]
+
+    //numberRules: [v => v.|| "Enter a valid number"]
   })
 };
 </script>
