@@ -81,7 +81,8 @@ EOF
 # -----------------------------------------------------------------------------------------------------------------
 # Default Settings:
 # -----------------------------------------------------------------------------------------------------------------
-DEFAULT_CONTAINERS="dcbr-api dcbr-db keycloak keycloak-db schema-spy"
+# DEFAULT_CONTAINERS="dcbr-api dcbr-db keycloak keycloak-db schema-spy"
+DEFAULT_CONTAINERS="dcbr-api dcbr-db "
 
 # -----------------------------------------------------------------------------------------------------------------
 # Functions:

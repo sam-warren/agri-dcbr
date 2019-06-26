@@ -17,9 +17,9 @@
                 <subheader>Do you maintain a permanent identification of your animals?</subheader>
               </v-layout>
               <v-layout mx-2>
-                <v-radio-group v-model="type" row>
-                  <v-radio label="Yes" value="radio-a"></v-radio>
-                  <v-radio label="No" value="radio-b"></v-radio>
+                <v-radio-group v-model="hasId" row>
+                  <v-radio label="Yes" value="true"></v-radio>
+                  <v-radio label="No" value="false"></v-radio>
                 </v-radio-group>
               </v-layout>
               <!-- Type of Animal -->
@@ -27,15 +27,15 @@
                 <subheader>What type of identification technology do you use?</subheader>
               </v-layout>
               <v-layout mx-2>
-                <v-radio-group v-model="animal" row>
-                  <v-radio label="Microchip" value="radio-a"></v-radio>
-                  <v-radio label="Tattoo" value="radio-b"></v-radio>
-                  <v-radio label="Other" value="radio-c"></v-radio>
+                <v-radio-group v-model="idType" row>
+                  <v-radio label="Microchip" value="MICROCHIP"></v-radio>
+                  <v-radio label="Tattoo" value="TATTOO"></v-radio>
+                  <v-radio label="Other" value="OTHER"></v-radio>
                 </v-radio-group>
               </v-layout>
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field label="Other Method"></v-text-field>
+                  <v-text-field v-model="otherId" label="Other Method"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -49,11 +49,9 @@
 export default {
   data: () => ({
     valid: false,
-
-    middlename: "",
-    row: null,
-    type: null,
-    animal: null,
+    hasId: null,
+    idType: null,
+    otherId: "",
 
     nameRules: [
       v => !!v || "Name is required",

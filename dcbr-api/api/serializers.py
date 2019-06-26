@@ -66,10 +66,14 @@ class Risk_Factor_Animal_Serializer(ModelSerializer):
             "num_litter_whelped",
             "num_cats_intact",
             "num_litter_queened",
-            "num_sold",
-            "num_transferred",
-            "num_traded",
-            "num_leased",
+            "num_dog_sold",
+            "num_dog_transferred",
+            "num_dog_traded",
+            "num_dog_leased",
+            "num_cat_sold",
+            "num_cat_transferred",
+            "num_cat_traded",
+            "num_cat_leased",
         )
 
         # read_only_fields = ("regNum",)

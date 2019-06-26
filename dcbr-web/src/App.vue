@@ -19,13 +19,11 @@
       <v-container fluid>
         <v-stepper non-linear v-model="e6" vertical>
           <v-stepper-step editable :complete="e6 > 1" step="1">Profile</v-stepper-step>
-
           <v-stepper-content step="1">
             <Profile ref="profile"/>
           </v-stepper-content>
 
           <v-stepper-step editable :complete="e6 > 2" step="2">Operation Details</v-stepper-step>
-
           <v-stepper-content step="2">
             <OperationDetails ref="operationdetails"/>
           </v-stepper-content>
@@ -33,6 +31,7 @@
           <v-stepper-step editable :complete="e6 > 3" step="3">Operation Location(s)</v-stepper-step>
 
           <v-stepper-content step="3">
+            <OperationLocations ref="operationlocations"/>
             <v-layout mt-4>
               <subheader>Is your operation location(s) different than your home address?</subheader>
             </v-layout>
@@ -51,13 +50,16 @@
           </v-stepper-content>-->
 
           <v-stepper-step editable :complete="e6 > 4" step="4">Animal Identification</v-stepper-step>
-          <v-stepper-content step="4">
+          <AnimalIdentification ref="animalidentification"/>
+          <!-- <v-stepper-content step="4">
             <AnimalIdentification/>
-          </v-stepper-content>
+          </v-stepper-content>-->
+
           <v-stepper-step editable :complete="e6 > 5" step="5">Breeding Details</v-stepper-step>
-          <v-stepper-content step="5">
-            <Breeding/>
-          </v-stepper-content>
+          <BreedingDetails ref="breedingdetails"/>
+          <!-- <v-stepper-content step="5">
+            <BreedingDetails/>
+          </v-stepper-content>-->
         </v-stepper>
 
         <v-btn
@@ -80,9 +82,8 @@ import OperationDetails from "@/components/OperationDetails";
 import Profile from "@/components/Profile";
 import OpLocation from "@/components/OpLocation";
 import OpLocation2 from "@/components/OpLocation2";
-// import Vet from "@/components/Vet";
 import AnimalIdentification from "@/components/AnimalIdentification";
-import Breeding from "@/components/Breeding";
+import BreedingDetails from "@/components/BreedingDetails";
 import Footer from "@/components/Footer";
 import axios from "axios";
 
@@ -96,7 +97,7 @@ export default {
     OpLocation2,
     // Vet,
     AnimalIdentification,
-    Breeding,
+    BreedingDetails,
     Footer
   },
   data() {
@@ -139,14 +140,18 @@ export default {
           ],
           risk_factor_animals: [
             {
-              num_dogs_intact: 0,
-              num_litter_whelped: 0,
-              num_cats_intact: 0,
-              num_litter_queened: 0,
-              num_sold: 0,
-              num_transferred: 0,
-              num_traded: 0,
-              num_leased: 0
+              num_dogs_intact: this.$refs.breedingdetails.femaleDogNum,
+              num_litter_whelped: this.$refs.breedingdetails.littersWhelped,
+              num_cats_intact: this.$refs.breedingdetails.femaleIntactCat,
+              num_litter_queened: this.$refs.breedingdetails.littersQueened,
+              num_dog_sold: this.$refs.breedingdetails.dogsSold,
+              num_dog_transferred: this.$refs.breedingdetails.dogsTransferred,
+              num_dog_traded: this.$refs.breedingdetails.dogsTraded,
+              num_dog_leased: this.$refs.breedingdetails.dogsLeased,
+              num_cat_sold: this.$refs.breedingdetails.catsSold,
+              num_cat_transferred: this.$refs.breedingdetails.catsTransferred,
+              num_cat_traded: this.$refs.breedingdetails.catsTraded,
+              num_cat_leased: this.$refs.breedingdetails.catsLeased
             }
           ],
           risk_factor_operations: [
@@ -157,9 +162,9 @@ export default {
               num_breeds_dogs: this.$refs.operationdetails.numDogBreeds,
               num_breeds_cats: this.$refs.operationdetails.numCatBreeds,
               has_vet: this.$refs.operationdetails.hasVet,
-              has_perm_id: true,
-              perm_id_type: "TATTOO",
-              perm_id_other: "string"
+              has_perm_id: this.$refs.animalidentification.hasId,
+              perm_id_type: this.$refs.animalidentification.idType,
+              perm_id_other: this.$refs.animalidentification.otherId
             }
           ]
         })

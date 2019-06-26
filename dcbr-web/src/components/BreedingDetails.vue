@@ -17,7 +17,11 @@
 
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field label="Number of Female Dogs"></v-text-field>
+                  <v-text-field
+                    v-model.number="femaleDogNum"
+                    type="number"
+                    label="Number of Female Dogs"
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
               <!-- INTACT BREEDING CAT -->
@@ -27,7 +31,11 @@
 
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field label="Number of Female Cats"></v-text-field>
+                  <v-text-field
+                    v-model.number="femaleIntactCat"
+                    type="number"
+                    label="Number of Female Cats"
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
               <!-- Type of Animal -->
@@ -37,7 +45,11 @@
 
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field label="Whelped Litters"></v-text-field>
+                  <v-text-field
+                    v-model.number="littersWhelped"
+                    type="number"
+                    label="Whelped Litters"
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
               <!-- Type of Animal -->
@@ -47,7 +59,11 @@
 
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field label="Queened Litters"></v-text-field>
+                  <v-text-field
+                    v-model.number="littersQueened"
+                    type="number"
+                    label="Queened Litters"
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
 
@@ -57,16 +73,16 @@
 
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field label="Transfer"></v-text-field>
+                  <v-text-field v-model.number="dogsTransferred" type="number" label="Transfer"></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field label="Sell"></v-text-field>
+                  <v-text-field v-model.number="dogsSold" type="number" label="Sell"></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field label="Trade"></v-text-field>
+                  <v-text-field v-model.number="dogsTraded" type="number" label="Trade"></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field label="Lease"></v-text-field>
+                  <v-text-field v-model.number="dogsLeased" type="number" label="Lease"></v-text-field>
                 </v-flex>
               </v-layout>
               <v-layout mx-2 mt-4>
@@ -75,16 +91,16 @@
 
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field label="Transfer"></v-text-field>
+                  <v-text-field v-model.number="catsTransferred" type="number" label="Transfer"></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field label="Sell"></v-text-field>
+                  <v-text-field v-model.number="catsSold" type="number" label="Sell"></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field label="Trade"></v-text-field>
+                  <v-text-field v-model.number="catsTraded" type="number" label="Trade"></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field label="Lease"></v-text-field>
+                  <v-text-field v-model.number="catsLeased" type="number" label="Lease"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -98,11 +114,18 @@
 export default {
   data: () => ({
     valid: false,
-
-    middlename: "",
-    row: null,
-    type: null,
-    animal: null,
+    femaleDogNum: null,
+    femaleIntactCat: null,
+    littersWhelped: null,
+    littersQueened: null,
+    dogsTransferred: null,
+    dogsSold: null,
+    dogsTraded: null,
+    dogsLeased: null,
+    catsTransferred: null,
+    catsSold: null,
+    catsTraded: null,
+    catsLeased: null,
 
     nameRules: [
       v => !!v || "Name is required",

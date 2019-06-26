@@ -93,9 +93,9 @@ class Risk_Factor_Operation(models.Model):
     MICROCHIP = "MICROCHIP"
     OTHER = "OTHER"
     PERMANENT_ID_CHOICES = (
-        (TATTOO, "tattoo"),
-        (MICROCHIP, "microchip"),
-        (OTHER, "other"),
+        (TATTOO, "TATTOO"),
+        (MICROCHIP, "MICROCHIP"),
+        (OTHER, "OTHER"),
     )
 
     DOG = "DOG"
@@ -151,10 +151,14 @@ class Risk_Factor_Animal(models.Model):
     num_litter_queened = models.IntegerField(
         default=0, validators=[MinValueValidator(0)]
     )
-    num_sold = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_transferred = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_traded = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_leased = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_dog_sold = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_dog_transferred = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_dog_traded = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_dog_leased = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_cat_sold = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_cat_transferred = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_cat_traded = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_cat_leased = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     operator = models.ForeignKey(
