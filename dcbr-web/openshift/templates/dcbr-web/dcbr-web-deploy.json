@@ -3,8 +3,8 @@
   "kind": "Template",
   "metadata": {
     "annotations": {
-      "description": "Deployment template for a angular on nginx",
-      "tags": "angular,nginx"
+      "description": "Deployment template for a angular served by a Caddy webserver",
+      "tags": "angular, caddy"
     },
     "name": "${NAME}-deployment-template"
   },
@@ -14,7 +14,7 @@
       "kind": "DeploymentConfig",
       "metadata": {
         "labels": {
-          "app": "${APP_GROUP}",          
+          "app": "${APP_GROUP}",
           "name": "${NAME}"
         },
         "name": "${NAME}"
@@ -45,13 +45,13 @@
           "spec": {
             "volumes": [
               {
-                "name": "${NAME}-nginx-config-volume",
+                "name": "${NAME}-caddy-config-volume",
                 "configMap": {
-                  "name": "${NGINX_CONFIG_MAP_NAME}",
+                  "name": "${CADDY_CONFIG_MAP_NAME}",
                   "items": [
                     {
-                      "key": "${NGINX_CONFIG_FILE_NAME}",
-                      "path": "${NGINX_CONFIG_FILE_NAME}"
+                      "key": "${CADDY_CONFIG_FILE_NAME}",
+                      "path": "${CADDY_CONFIG_FILE_NAME}"
                     }
                   ]
                 }
@@ -68,7 +68,28 @@
                     "protocol": "TCP"
                   }
                 ],
-                "env": [],
+                "env": [
+                  {
+                    "name": "WEB_HOST_NAME",
+                    "value": "${WEB_HOST_NAME}"
+                  },
+                  {
+                    "name": "WEB_HOST_PORT",
+                    "value": "${WEB_HOST_PORT}"
+                  },
+                  {
+                    "name": "WEB_HOST_TLS",
+                    "value": "${WEB_HOST_TLS}"
+                  },
+                  {
+                    "name": "DCBR_API_HOST",
+                    "value": "${DCBR_API_HOST}"
+                  },
+                  {
+                    "name": "DCBR_API_PORT",
+                    "value": "${DCBR_API_PORT}"
+                  }
+                ],
                 "resources": {
                   "requests": {
                     "cpu": "${CPU_REQUEST}",
@@ -81,14 +102,14 @@
                 },
                 "volumeMounts": [
                   {
-                    "name": "${NAME}-nginx-config-volume",
-                    "mountPath": "${NGINX_CONFIG_MOUNT_PATH}${NGINX_CONFIG_FILE_NAME}",
-                    "subPath": "${NGINX_CONFIG_FILE_NAME}"
+                    "name": "${NAME}-caddy-config-volume",
+                    "mountPath": "${CADDY_CONFIG_MOUNT_PATH}${CADDY_CONFIG_FILE_NAME}",
+                    "subPath": "${CADDY_CONFIG_FILE_NAME}"
                   }
                 ],
                 "livenessProbe": {
                   "httpGet": {
-                    "path": "/nginx_status",
+                    "path": "/health",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
@@ -100,7 +121,7 @@
                 },
                 "readinessProbe": {
                   "httpGet": {
-                    "path": "/nginx_status",
+                    "path": "/health",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
@@ -127,9 +148,7 @@
             "type": "ImageChange",
             "imageChangeParams": {
               "automatic": true,
-              "containerNames": [
-                "${NAME}"
-              ],
+              "containerNames": ["${NAME}"],
               "from": {
                 "kind": "ImageStreamTag",
                 "namespace": "${IMAGE_NAMESPACE}",
@@ -145,7 +164,7 @@
       "kind": "Service",
       "metadata": {
         "labels": {
-          "app": "${APP_GROUP}",          
+          "app": "${APP_GROUP}",
           "name": "${NAME}"
         },
         "name": "${NAME}"
@@ -172,7 +191,7 @@
       "kind": "Route",
       "metadata": {
         "labels": {
-          "app": "${APP_GROUP}",          
+          "app": "${APP_GROUP}",
           "name": "${NAME}"
         },
         "name": "${NAME}"
@@ -199,7 +218,7 @@
       "metadata": {
         "name": "${NAME}",
         "labels": {
-          "app": "${APP_GROUP}",          
+          "app": "${APP_GROUP}",
           "name": "${NAME}"
         }
       },
@@ -236,25 +255,60 @@
       "value": "nbup6o-dev"
     },
     {
-      "name": "NGINX_CONFIG_FILE_NAME",
-      "displayName": "Nginx Config File Name",
-      "description": "The name of the configuration file to be used for Nginx.",
+      "name": "CADDY_CONFIG_FILE_NAME",
+      "displayName": "CAddy Config File Name",
+      "description": "The name of the configuration file to be used for Caddy.",
       "required": true,
-      "value": "nginx.conf"
+      "value": "Caddyfile"
     },
     {
-      "name": "NGINX_CONFIG_MAP_NAME",
-      "displayName": "Nginx Config Map Name",
+      "name": "CADDY_CONFIG_MAP_NAME",
+      "displayName": "Caddyfile Config Map Name",
       "description": "The name of the configuration map.",
       "required": true,
-      "value": "dcbr-web-nginx-conf"
+      "value": "dcbr-web-caddy-conf"
     },
     {
-      "name": "NGINX_CONFIG_MOUNT_PATH",
+      "name": "CADDY_CONFIG_MOUNT_PATH",
       "displayName": "Config Mount Path",
       "description": "The path to use to mount the config file.",
       "required": true,
-      "value": "/etc/nginx/"
+      "value": "/etc/"
+    },
+    {
+      "name": "WEB_HOST_NAME",
+      "displayName": "Web Host Name",
+      "description": "The host name used by Caddy.",
+      "required": true,
+      "value": "0.0.0.0"
+    },
+    {
+      "name": "WEB_HOST_PORT",
+      "displayName": "Web Host Port",
+      "description": "The port used by Caddy to serve content.",
+      "required": true,
+      "value": "8080"
+    },
+    {
+      "name": "WEB_HOST_TLS",
+      "displayName": "Config Mount Path",
+      "description": "The path to use to mount the config file.",
+      "required": true,
+      "value": "off"
+    },
+    {
+      "name": "DCBR_API_HOST",
+      "displayName": "API Service Name",
+      "description": "The name of the API service.",
+      "required": true,
+      "value": "dcbr-api"
+    },
+    {
+      "name": "DCBR_API_PORT",
+      "displayName": "API Service Port",
+      "description": "The port used by the API service.",
+      "required": true,
+      "value": "8080"
     },
     {
       "description": "The exposed hostname that will route to the service, e.g., myappname.pathfinder.gov.bc.ca, if left blank a value will be defaulted.",
