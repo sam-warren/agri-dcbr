@@ -119,7 +119,7 @@ build-web() {
   echo -e "\nBuilding dcbr-web image..."
   docker build \
     -t 'dcbr-web' \
-    -f '../docker/dcbr-web/Dockerfile' '../'
+    -f '../docker/dcbr-web/Dockerfile-prod' '../'
 }
 
 buildImages() {

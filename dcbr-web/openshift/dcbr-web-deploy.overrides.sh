@@ -1,11 +1,11 @@
 # ========================================================================
-# The generated config map is used for the nginx configuration.
+# The generated config map is used for the configuration of Caddy.
 # ========================================================================
 
-CONFIG_MAP_NAME=dcbr-web-nginx-conf
-SOURCE_FILE=./config/nginx.conf
+CONFIG_MAP_NAME=dcbr-web-caddy-conf
+SOURCE_FILE=./config/Caddyfile
 OUTPUT_FORMAT=json
-OUTPUT_FILE=dcbr-web-nginx-conf-configmap_DeploymentConfig.json
+OUTPUT_FILE=dcbr-web-caddy-conf-configmap_DeploymentConfig.json
 
 generateConfigMap() {  
   _config_map_name=${1}
