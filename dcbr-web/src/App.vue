@@ -109,7 +109,7 @@ export default {
     createOperator() {
       console.log("Next clicked");
       axios
-        .post(`http://localhost:8080/api/operator/`, {
+        .post("/api/operator/", {
           first_name: this.$refs.profile.firstname,
           middle_name: this.$refs.profile.middlename,
           last_name: this.$refs.profile.lastname,

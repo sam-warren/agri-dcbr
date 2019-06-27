@@ -175,6 +175,13 @@ configureEnvironment() {
   export DJANGO_ADMIN_PASSWORD="admin"
   export DJANGO_ADMIN_EMAIL="dcbr-admin@gov.bc.ca"
 
+  # dcbr-web
+  export WEB_HOST_NAME="0.0.0.0"
+  export WEB_HOST_PORT="8080"
+  export WEB_HOST_TLS="off"
+  export DCBR_API_HOST="dcbr-api"
+  export DCBR_API_PORT="8080"
+
   # keycloak-db
   export KEYCLOAK_DB_NAME="keycloak"
   export KEYCLOAK_DB_USER="keycloak"

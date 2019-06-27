@@ -5,9 +5,15 @@ services:
   # dcbr-web
   #
   dcbr-web:
-    build:
-      context: ..
-      dockerfile: docker/dcbr-web/Dockerfile
+    image: dcbr-web
+    environment:
+      WEB_HOST_NAME: ${WEB_HOST_NAME}
+      WEB_HOST_PORT: ${WEB_HOST_PORT}
+      WEB_HOST_TLS: ${WEB_HOST_TLS}
+      DCBR_API_HOST: ${DCBR_API_HOST}
+      DCBR_API_PORT: ${DCBR_API_PORT}
+    volumes:
+      - ../dcbr-web/openshift/config/Caddyfile:/etc/Caddyfile
     networks:
       - dcbr
     ports:
