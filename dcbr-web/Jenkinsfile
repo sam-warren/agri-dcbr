@@ -8,7 +8,8 @@ def APP_NAME = 'dcbr-web'
 def TAG_NAMES = ['dev', 'test', 'prod']
 
 // You shouldn't have to edit these if you're following the conventions
-def BUILD_CONFIG = APP_NAME
+def ARTIFACT_BUILD_CONFIG = APP_NAME + '-vue'
+def RUNTIME_BUILD_CONFIG = APP_NAME
 
 //EDIT LINE BELOW (Change `IMAGESTREAM_NAME` so it matches the name of your *output*/deployable image stream.)
 def IMAGESTREAM_NAME = APP_NAME
@@ -94,12 +95,23 @@ void build(String buildConfigName, int waitTimeout) {
 node {
   if( triggerBuild(CONTEXT_DIRECTORY) ) {
 
-    stage("Build ${BUILD_CONFIG}") {
+    stage("Build ${ARTIFACT_BUILD_CONFIG}") {
       script {
         openshift.withCluster() {
           openshift.withProject() {
             echo "Building the application artifacts ..."
-            build("${BUILD_CONFIG}", WAIT_TIMEOUT)
+            build("${ARTIFACT_BUILD_CONFIG}", WAIT_TIMEOUT)
+          }
+        }
+      }
+    }
+
+    stage("Build ${RUNTIME_BUILD_CONFIG}") {
+      script {
+        openshift.withCluster() {
+          openshift.withProject() {
+            echo "Building the application runtime ..."
+            build("${RUNTIME_BUILD_CONFIG}", WAIT_TIMEOUT)
           }
         }
       }

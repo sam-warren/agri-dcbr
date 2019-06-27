@@ -4,8 +4,11 @@
 # Template File: templates/dcbr-web/dcbr-web-build.json
 #=========================================================
 NAME=dcbr-web
-GIT_REPO_URL=https://github.com/bcgov/agri-dcbr.git
-GIT_REF=master
-SOURCE_CONTEXT_DIR=.
-DOCKER_FILE_PATH=docker/dcbr-web/Dockerfile
 OUTPUT_IMAGE_TAG=latest
+SOURCE_IMAGE_TAG=latest
+SOURCE_IMAGE_NAME=abiosoft/caddy
+SOURCE_IMAGE_KIND=DockerImage
+ARTIFACT_IMAGE_NAME=dcbr-web-vue
+ARTIFACT_IMAGE_TAG=latest
+ARTIFACT_IMAGE_NAMESPACE=nbup6o-tools
+ARTIFACT_IMAGE_KIND=ImageStreamTag
