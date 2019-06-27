@@ -1,15 +1,79 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/secret">Secret</router-link>|
-      <router-link to="/register">Operator Registration</router-link>
-      <br>
-      <br>
-      <!-- <button @click="$keycloak.logoutFn" v-if="$keycloak.authenticated">Log out</button> -->
-    </div>
-    <router-view/>
-  </div>
+  <v-app class="grey lighten-4">
+    <Navbar/>
+    <v-stepper flat>
+      <v-stepper-header>
+        <v-stepper-step complete editable step="1">Registration</v-stepper-step>
+
+        <v-divider></v-divider>
+
+        <v-stepper-step step="2">Payment($0)</v-stepper-step>
+
+        <v-divider></v-divider>
+
+        <v-stepper-step step="3">Review & submit</v-stepper-step>
+      </v-stepper-header>
+    </v-stepper>
+
+    <v-content class="mx-4 mb-4 my-4">
+      <v-container fluid>
+        <v-stepper non-linear v-model="e6" vertical>
+          <v-stepper-step editable :complete="e6 > 1" step="1">Profile</v-stepper-step>
+          <v-stepper-content step="1">
+            <Profile ref="profile"/>
+          </v-stepper-content>
+
+          <v-stepper-step editable :complete="e6 > 2" step="2">Operation Details</v-stepper-step>
+          <v-stepper-content step="2">
+            <OperationDetails ref="operationdetails"/>
+          </v-stepper-content>
+
+          <v-stepper-step editable :complete="e6 > 3" step="3">Operation Location(s)</v-stepper-step>
+
+          <v-stepper-content step="3">
+            <OperationLocations ref="operationlocations"/>
+            <v-layout mt-4>
+              <subheader>Is your operation location(s) different than your home address?</subheader>
+            </v-layout>
+            <v-radio-group v-model="row" row>
+              <v-radio label="Yes" value="radio-1"></v-radio>
+              <v-radio label="No" value="radio-2"></v-radio>
+            </v-radio-group>
+            <OpLocation/>
+            <OpLocation2/>
+          </v-stepper-content>
+
+          <!-- <v-stepper-step editable :complete="e6 > 4" step="4">Veterinary Relationship</v-stepper-step>
+          <v-stepper-content step="4">
+            
+            <Vet/>
+          </v-stepper-content>-->
+
+          <v-stepper-step editable :complete="e6 > 4" step="4">Animal Identification</v-stepper-step>
+          <AnimalIdentification ref="animalidentification"/>
+          <!-- <v-stepper-content step="4">
+            <AnimalIdentification/>
+          </v-stepper-content>-->
+
+          <v-stepper-step editable :complete="e6 > 5" step="5">Breeding Details</v-stepper-step>
+          <BreedingDetails ref="breedingdetails"/>
+          <!-- <v-stepper-content step="5">
+            <BreedingDetails/>
+          </v-stepper-content>-->
+        </v-stepper>
+
+        <v-btn
+          large
+          block
+          round
+          mt-5
+          class="blue darken-4 white--text"
+          @click.native="createOperator"
+        >Next</v-btn>
+      </v-container>
+    </v-content>
+    <Footer/>
+  </v-app>
 </template>
 
 <script>
@@ -46,7 +110,7 @@ export default {
     createOperator() {
       console.log("Next clicked");
       axios
-        .post("/api/operator/", {
+        .post(`http://localhost:8080/api/operator/`, {
           first_name: this.$refs.profile.firstname,
           middle_name: this.$refs.profile.middlename,
           last_name: this.$refs.profile.lastname,
@@ -112,22 +176,15 @@ export default {
   }
 };
 </script>
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+© 2019 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
