@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/secret">Secret</router-link>|
-      <router-link to="/register">Operator Registration</router-link>
+      <router-link to="/">AGRI site</router-link>|
+      <router-link to="/preamble">Preamble</router-link>|
+      <router-link to="/register">Registration</router-link>|
+      <router-link to="/payment">Payment</router-link>|
+      <router-link to="/review">Review</router-link>|
+      <router-link to="/confirmation">Confirmation</router-link>
       <br>
       <br>
       <!-- <button @click="$keycloak.logoutFn" v-if="$keycloak.authenticated">Log out</button> -->

@@ -28,7 +28,7 @@
             <OperationDetails ref="operationdetails"/>
           </v-stepper-content>
 
-          <v-stepper-step editable :complete="e6 > 3" step="3">Operation Location(s)</v-stepper-step>
+          <!-- <v-stepper-step editable :complete="e6 > 3" step="3">Operation Location(s)</v-stepper-step>
 
           <v-stepper-content step="3">
             <OperationLocations ref="operationlocations"/>
@@ -41,7 +41,7 @@
             </v-radio-group>
             <OpLocation/>
             <OpLocation2/>
-          </v-stepper-content>
+          </v-stepper-content>-->
 
           <!-- <v-stepper-step editable :complete="e6 > 4" step="4">Veterinary Relationship</v-stepper-step>
           <v-stepper-content step="4">
@@ -49,13 +49,13 @@
             <Vet/>
           </v-stepper-content>-->
 
-          <v-stepper-step editable :complete="e6 > 4" step="4">Animal Identification</v-stepper-step>
+          <v-stepper-step editable :complete="e6 > 3" step="3">Animal Identification</v-stepper-step>
           <AnimalIdentification ref="animalidentification"/>
           <!-- <v-stepper-content step="4">
             <AnimalIdentification/>
           </v-stepper-content>-->
 
-          <v-stepper-step editable :complete="e6 > 5" step="5">Breeding Details</v-stepper-step>
+          <v-stepper-step editable :complete="e6 > 4" step="4">Breeding Details</v-stepper-step>
           <BreedingDetails ref="breedingdetails"/>
           <!-- <v-stepper-content step="5">
             <BreedingDetails/>
@@ -69,7 +69,7 @@
           mt-5
           class="blue darken-4 white--text"
           @click.native="createOperator"
-        >Next</v-btn>
+        >Submit</v-btn>
       </v-container>
     </v-content>
     <Footer/>
@@ -80,8 +80,8 @@
 import Navbar from "@/components/Navbar";
 import OperationDetails from "@/components/OperationDetails";
 import Profile from "@/components/Profile";
-import OpLocation from "@/components/OpLocation";
-import OpLocation2 from "@/components/OpLocation2";
+//import OpLocation from "@/components/OpLocation";
+//import OpLocation2 from "@/components/OpLocation2";
 import AnimalIdentification from "@/components/AnimalIdentification";
 import BreedingDetails from "@/components/BreedingDetails";
 import Footer from "@/components/Footer";
@@ -93,8 +93,8 @@ export default {
     Navbar,
     Profile,
     OperationDetails,
-    OpLocation,
-    OpLocation2,
+    //OpLocation,
+    //OpLocation2,
     // Vet,
     AnimalIdentification,
     BreedingDetails,

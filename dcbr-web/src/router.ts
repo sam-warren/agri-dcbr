@@ -3,6 +3,10 @@ import Router from "vue-router";
 
 import Home from "./views/Home.vue";
 import OperationRegistration from "./views/OperationRegistration.vue";
+import Preamble from "./views/Preamble.vue";
+import Payment from "./views/Payment.vue";
+import Review from "./views/Review.vue";
+import Confirmation from "./views/Confirmation.vue";
 
 Vue.use(Router);
 
@@ -22,11 +26,11 @@ const router = new Router({
       component: Home
     },
     {
-      path: "/secret",
-      name: "secret",
+      path: "/preamble",
+      name: "preamble",
       component: () =>
         // import(/* webpackChunkName: "secret" */ "./views/Secret.vue"),
-        import("./views/Secret.vue"),
+        import("./views/Preamble.vue"),
       meta: {
         requiresAuth: false
       }
@@ -43,6 +47,36 @@ const router = new Router({
       //   requiresAuth: false
       // }
       component: OperationRegistration
+    },
+    {
+      path: "/payment",
+      name: "payment",
+      component: () =>
+        // import(/* webpackChunkName: "secret" */ "./views/Secret.vue"),
+        import("./views/Payment.vue"),
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/review",
+      name: "review",
+      component: () =>
+        // import(/* webpackChunkName: "secret" */ "./views/Secret.vue"),
+        import("./views/Review.vue"),
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/confirmation",
+      name: "confirmation",
+      component: () =>
+        // import(/* webpackChunkName: "secret" */ "./views/Secret.vue"),
+        import("./views/Confirmation.vue"),
+      meta: {
+        requiresAuth: false
+      }
     }
   ]
 });
