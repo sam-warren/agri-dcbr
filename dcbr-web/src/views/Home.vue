@@ -6,13 +6,8 @@
   </div>
 </template>
 
-// <script>
-// import Preamble from "../components/Preamble.vue";
-// export default {
-//   name: "Preamble",
-//   components: {
-//     Preamble
-//   }
-// };
-//
+<script>
+export default {
+  components: {}
+};
 </script>

@@ -1,6 +1,6 @@
 <template>
   <v-app class="grey lighten-4">
-    <Navbar/>
+    <Navbar />
     <v-stepper flat>
       <v-stepper-header>
         <v-stepper-step complete editable step="1">Registration</v-stepper-step>
@@ -20,12 +20,12 @@
         <v-stepper non-linear v-model="e6" vertical>
           <v-stepper-step editable :complete="e6 > 1" step="1">Profile</v-stepper-step>
           <v-stepper-content step="1">
-            <Profile ref="profile"/>
+            <Profile ref="profile" />
           </v-stepper-content>
 
           <v-stepper-step editable :complete="e6 > 2" step="2">Operation Details</v-stepper-step>
           <v-stepper-content step="2">
-            <OperationDetails ref="operationdetails"/>
+            <OperationDetails ref="operationdetails" />
           </v-stepper-content>
 
           <!-- <v-stepper-step editable :complete="e6 > 3" step="3">Operation Location(s)</v-stepper-step>
@@ -50,13 +50,13 @@
           </v-stepper-content>-->
 
           <v-stepper-step editable :complete="e6 > 3" step="3">Animal Identification</v-stepper-step>
-          <AnimalIdentification ref="animalidentification"/>
+          <AnimalIdentification ref="animalidentification" />
           <!-- <v-stepper-content step="4">
             <AnimalIdentification/>
           </v-stepper-content>-->
 
           <v-stepper-step editable :complete="e6 > 4" step="4">Breeding Details</v-stepper-step>
-          <BreedingDetails ref="breedingdetails"/>
+          <BreedingDetails ref="breedingdetails" />
           <!-- <v-stepper-content step="5">
             <BreedingDetails/>
           </v-stepper-content>-->
@@ -72,7 +72,7 @@
         >Submit</v-btn>
       </v-container>
     </v-content>
-    <Footer/>
+    <Footer />
   </v-app>
 </template>
 
@@ -108,9 +108,9 @@ export default {
   },
   methods: {
     createOperator() {
-      console.log("Next clicked");
+      console.log("Submit clicked");
       axios
-        .post(`http://localhost:8080/api/operator/`, {
+        .post("api/operator/", {
           first_name: this.$refs.profile.firstname,
           middle_name: this.$refs.profile.middlename,
           last_name: this.$refs.profile.lastname,
