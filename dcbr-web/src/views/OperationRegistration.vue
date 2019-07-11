@@ -46,7 +46,7 @@
               <component :is="child" :key="child.name" v-bind:number="index+1"></component>
             </div>-->
 
-            <div v-for="(child, index) in children">
+            <div v-for="(location, index) in locations">
               <OperationLocation ref="operationlocation{{index+1}}" v-bind:number="index+1" />
             </div>
 
@@ -78,45 +78,39 @@
         >Submit</v-btn>
       </v-container>
     </v-content>
-    <!-- <Footer /> -->
   </v-app>
 </template>
 
 
 <script>
-//import Navbar from "@/components/Navbar";
 import OperationDetails from "@/components/OperationDetails";
 import Profile from "@/components/Profile";
 import OperationLocation from "@/components/OperationLocation";
-//import OpLocation2 from "@/components/OpLocation2";
 import AnimalIdentification from "@/components/AnimalIdentification";
 import BreedingDetails from "@/components/BreedingDetails";
-import Footer from "@/components/Footer";
+//import Footer from "@/components/Footer";
 import axios from "axios";
 
 export default {
   name: "App",
   components: {
-    //Navbar,
     Profile,
     OperationDetails,
     OperationLocation,
-    //OpLocation2,
-    // Vet,
     AnimalIdentification,
-    BreedingDetails,
-    Footer
+    BreedingDetails
   },
   data() {
     return {
       e6: 1,
       errors: [],
-      children: []
+      locations: []
     };
   },
   methods: {
     createOperator() {
       console.log("Submit clicked");
+
       axios
         .post("http://localhost:8080/api/operator/", {
           // for localhost, use "http://localhost:8080/api/operator"
@@ -182,16 +176,17 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
+      this.$router.push("payment");
     },
     addLocation() {
       // <OperationLocations ref="operationlocations" />;
       // this.children.push(OperationLocation);
-      this.children.push(OperationLocation);
+      this.locations.push(OperationLocation);
     },
     removeLocation() {
       // <OperationLocations ref="operationlocations" />;
       // this.children.push(OperationLocation);
-      this.children.pop();
+      this.locations.pop();
     }
   }
 };
