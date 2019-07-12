@@ -23,7 +23,7 @@
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="aptnumber" label="Apt/Suite" required></v-text-field>
+                  <v-text-field v-model="aptNumber" label="Apt/Suite" required></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
@@ -33,14 +33,16 @@
                     required
                   ></v-text-field>
                 </v-flex>
-              </v-layout>
-
-              <v-layout row wrap mx-2>
-                <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="aptnumber" label="Postal Code" required></v-text-field>
+                <v-flex xs12 md4>
+                  <v-text-field v-model="city" :rules="nameRules" label="City" required></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model="streetName" :rules="nameRules" label="City" required></v-text-field>
+                  <v-text-field
+                    v-model="postalCode"
+                    :rules="nameRules"
+                    label="Postal Code"
+                    required
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -55,22 +57,13 @@ export default {
   props: ["number"],
   data: () => ({
     valid: false,
-    firstname: "",
-    lastname: "",
-    middlename: "",
-    streetNumber: "",
     aptNumber: "",
     streetName: "",
-    mask: "phone",
-    phone: "",
+    postalCode: "",
+    city: "",
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
-    ],
-    email: "",
-    emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+/.test(v) || "E-mail must be valid"
     ],
     streetNumber: "",
     streetNumberRules: [v => !!v || "Street number is required"]

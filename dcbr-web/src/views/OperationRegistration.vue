@@ -16,6 +16,11 @@
 
     <v-content class="mx-4 mb-4 my-4">
       <v-container fluid>
+        <!-- <v-btn @click="prepopulate()">
+          <v-btn-text>prepopulate</v-btn-text>
+          <v-icon dark>add</v-icon>
+        </v-btn>-->
+
         <v-stepper non-linear v-model="e6" vertical>
           <v-stepper-step editable :complete="e6 > 1" step="1">Profile</v-stepper-step>
           <v-stepper-content step="1">
@@ -47,7 +52,7 @@
             </div>-->
 
             <div v-for="(location, index) in locations">
-              <OperationLocation ref="operationlocation{{index+1}}" v-bind:number="index+1" />
+              <OperationLocation ref="operationlocation1" v-bind:number="index+1" />
             </div>
 
             <v-btn @click="addLocation()">
@@ -134,6 +139,14 @@ export default {
               city: this.$refs.profile.city,
               postal_code: this.$refs.profile.postalCode
             }
+            // {
+            //   type: "OP",
+            //   street_num: this.$refs.operationlocation1.streetNumber,
+            //   suite: this.$refs.operationlocation1.aptNumber,
+            //   street_name: this.$refs.operationlocation1.streetName,
+            //   city: this.$refs.operationlocation1.city,
+            //   postal_code: this.$refs.operationlocation1.postalCode
+            // }
           ],
           associations: [
             {
@@ -179,14 +192,62 @@ export default {
       this.$router.push("payment");
     },
     addLocation() {
-      // <OperationLocations ref="operationlocations" />;
-      // this.children.push(OperationLocation);
       this.locations.push(OperationLocation);
     },
     removeLocation() {
-      // <OperationLocations ref="operationlocations" />;
-      // this.children.push(OperationLocation);
       this.locations.pop();
+    },
+    prepopulate() {
+      this.$refs.profile.firstname = "Anissa";
+      this.$refs.profile.middlename = "none";
+      this.$refs.profile.lastname = "Agahcnen";
+      this.$refs.profile.commType = "Email";
+      this.$refs.profile.phone = "243-322-1234";
+      this.$refs.profile.email = "john@smith.com";
+      this.$refs.profile.streetNumber = "1";
+      this.$refs.profile.aptNumber = "2";
+      this.$refs.profile.streetName = "Douglas";
+      this.$refs.profile.city = "Duncan";
+      this.$refs.profile.postalCode = "V6R 5T6";
+
+      // this.$refs.operationlocation1.streetNumber = "45";
+      // this.$refs.operationlocation1.aptNumber = "21";
+      // this.$refs.operationlocation1.streetName = "Cook";
+      // this.$refs.operationlocation1.city = "Nanaimo";
+      // this.$refs.operationlocation1.postalCode = "R5T 5R5";
+
+      // this.locations[0].streetNumber = "45";
+
+      this.$refs.breedingdetails.femaleDogNum = 1;
+      this.$refs.breedingdetails.littersWhelped = 2;
+      this.$refs.breedingdetails.femaleIntactCat = 3;
+      this.$refs.breedingdetails.littersQueened = 4;
+      this.$refs.breedingdetails.dogsSold = 5;
+      this.$refs.breedingdetails.dogsTransferred = 6;
+      this.$refs.breedingdetails.dogsTraded = 7;
+      this.$refs.breedingdetails.dogsLeased = 8;
+      this.$refs.breedingdetails.catsSold = 9;
+      this.$refs.breedingdetails.catsTransferred = 10;
+      this.$refs.breedingdetails.catsTraded = 11;
+      this.$refs.breedingdetails.catsLeased = 12;
+
+      this.$refs.operationdetails.operationType = "SELLER";
+      this.$refs.operationdetails.operationName = "Abe dogs";
+      this.$refs.operationdetails.opWebsite = "https://abcdogs.com";
+      this.$refs.operationdetails.assocName = "ABC Assoc";
+      this.$refs.operationdetails.assocMembership = "1234";
+      this.$refs.operationdetails.assocWebsite =
+        "https://www.abc-associations.com";
+      this.$refs.operationdetails.accident = "true";
+      this.$refs.operationdetails.numWorkers = 1;
+      this.$refs.operationdetails.animalType = "DOG";
+      this.$refs.operationdetails.numDogBreeds = 1;
+      this.$refs.operationdetails.numCatBreeds = 2;
+      this.$refs.operationdetails.hasVet = "false";
+
+      this.$refs.animalidentification.hasId = "true";
+      this.$refs.animalidentification.idType = "MICROCHIP";
+      // this.$refs.animalidentification.otherId = null;
     }
   }
 };
