@@ -29,9 +29,9 @@
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="operationType" row>
-                  <v-radio label="Breeder" value="BREEDER"></v-radio>
-                  <v-radio label="Seller" value="SELLER"></v-radio>
-                  <v-radio label="Breeder & Seller" value="BREEDER & SELLER"></v-radio>
+                  <v-radio label="Breeder" value="BREEDER" @click="this.$store.commit('setOperationType', 'BREEDER')"></v-radio>
+                  <v-radio label="Seller" value="SELLER" @click="this.$store.commit('setOperationType', 'SELLER')"></v-radio>
+                  <v-radio label="Breeder & Seller" value="BREEDER & SELLER" @click="this.$store.commit('setOperationType', 'BREEDER & SELLER')"></v-radio>
                 </v-radio-group>
               </v-layout>
               <!-- Type of Animal -->
@@ -57,7 +57,7 @@
               </v-layout>
               <!-- VET RELATIONSHIP -->
               <v-layout mx-2 mt-4>
-                <subheader>Do you have a client veterinary relationship</subheader>
+                <subheader>Do you have a client veterinary relationship?</subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="hasVet" row>
@@ -67,18 +67,18 @@
               </v-layout>
 
               <!-- How many breeds -->
-              <v-layout mx-2 mt-4>
+              <v-layout mx-2 mt-4 v-if="this.operationType != '' && this.animalType != ''">
                 <subheader>How many breeds of animals are you currently breeding/selling?</subheader>
               </v-layout>
-              <v-layout row wrap mx-2>
-                <v-flex xs12 md4 lg6>
+              <v-layout row wrap mx-2 v-if="this.operationType != '' && this.animalType != ''">
+                <v-flex xs12 md4 lg6 v-if="this.animalType == 'DOG' || this.animalType == 'DOG & CAT'">
                   <v-text-field
                     v-model.number="numDogBreeds"
                     type="number"
                     label="Number of Dog Breeds"
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 md4 lg6>
+                <v-flex xs12 md4 lg6 v-if="this.animalType == 'CAT' || this.animalType == 'DOG & CAT'">
                   <v-text-field
                     v-model.number="numCatBreeds"
                     type="number"
@@ -144,6 +144,12 @@ export default {
       v => !!v || "E-mail is required",
       v => /.+@.+/.test(v) || "E-mail must be valid"
     ]
-  })
+  }),
+
+  methods: {
+    setOperationType (type)  {
+      this.$store.dispatch('setOperationType', type);
+    }
+  },
 };
 </script>
