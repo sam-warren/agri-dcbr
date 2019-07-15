@@ -68,7 +68,7 @@
               </v-layout>
 
               <v-layout mx-2 mt-4>
-                <subheader>What number of puppies did you ............... in the previous calendar year?</subheader>
+                <subheader>What number of puppies did you ............... in the previous calendar year? </subheader>
               </v-layout>
 
               <v-layout row wrap ma-2>
@@ -111,6 +111,8 @@
   </v-container>
 </template>
 <script>
+import {mapState} from 'vuex'
+
 export default {
   data: () => ({
     valid: false,
@@ -136,6 +138,10 @@ export default {
       v => !!v || "E-mail is required",
       v => /.+@.+/.test(v) || "E-mail must be valid"
     ]
+  }),
+
+  computed: mapState({
+    operationType: state => state.operationType
   })
 };
 </script>
