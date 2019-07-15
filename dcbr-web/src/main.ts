@@ -1,5 +1,6 @@
 import "./plugins/vuetify";
 import "./registerServiceWorker";
+import {store} from './store/store';
 
 //import VueKeycloakJs from "@dsb-norge/vue-keycloak-js";
 import axios from "axios";
@@ -12,6 +13,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
-  //store,
+  store,
   render: h => h(App)
 }).$mount("#app");
