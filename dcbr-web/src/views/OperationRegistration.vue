@@ -16,10 +16,10 @@
 
     <v-content class="mx-4 mb-4 my-4">
       <v-container fluid>
-        <!-- <v-btn @click="prepopulate()">
+        <v-btn @click="prepopulate()">
           <v-btn-text>prepopulate</v-btn-text>
           <v-icon dark>add</v-icon>
-        </v-btn>-->
+        </v-btn>
 
         <v-stepper non-linear v-model="e6" vertical>
           <v-stepper-step editable :complete="e6 > 1" step="1">Profile</v-stepper-step>
@@ -126,8 +126,8 @@ export default {
           comm_pref: this.$refs.profile.commType,
           phone_num: this.$refs.profile.phone,
           email_address: this.$refs.profile.email,
-          operation_type: this.$refs.operationdetails.operationType,
-          operation_name: this.$refs.operationdetails.operationName,
+          operation_type: this.$store.getters.operationType,
+          operation_name: this.$store.getters.operationName,
           operation_URL: this.$refs.operationdetails.opWebsite,
 
           addresses: [
@@ -231,13 +231,14 @@ export default {
       this.$refs.breedingdetails.catsTraded = 11;
       this.$refs.breedingdetails.catsLeased = 12;
 
-      this.$refs.operationdetails.operationType = "SELLER";
-      this.$refs.operationdetails.operationName = "Abe dogs";
+      //this.$refs.operationdetails.operationType = "SELLER";
+      this.$refs.operationdetails.operationType = this.$store.getters.operationType;
+      this.$refs.operationdetails.operationName = "ABC dogs";
       this.$refs.operationdetails.opWebsite = "https://abcdogs.com";
       this.$refs.operationdetails.assocName = "ABC Assoc";
       this.$refs.operationdetails.assocMembership = "1234";
       this.$refs.operationdetails.assocWebsite =
-        "https://www.abc-associations.com";
+        "https://www.dce-associations.com";
       this.$refs.operationdetails.accident = "true";
       this.$refs.operationdetails.numWorkers = 1;
       this.$refs.operationdetails.animalType = "DOG";
