@@ -16,10 +16,10 @@
 
     <v-content class="mx-4 mb-4 my-4">
       <v-container fluid>
-        <!-- <v-btn @click="prepopulate()">
+        <v-btn @click="prepopulate()">
           <v-btn-text>prepopulate</v-btn-text>
           <v-icon dark>add</v-icon>
-        </v-btn>-->
+        </v-btn>
 
         <v-stepper non-linear v-model="e6" vertical>
           <v-stepper-step editable :complete="e6 > 1" step="1">Profile</v-stepper-step>
@@ -117,9 +117,7 @@ export default {
       console.log("Submit clicked");
 
       axios
-        .post("http://localhost:8080/api/operator/", {
-          // for localhost, use "http://localhost:8080/api/operator"
-          // before deploying to Openshift, use "/api/operator"
+        .post("/api/operator/", {
           first_name: this.$refs.profile.firstname,
           middle_name: this.$refs.profile.middlename,
           last_name: this.$refs.profile.lastname,
