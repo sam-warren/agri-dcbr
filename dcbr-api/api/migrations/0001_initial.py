@@ -83,7 +83,7 @@ class Migration(migrations.Migration):
                 ('has_perm_id', models.BooleanField(default=False)),
                 ('perm_id_type', models.CharField(choices=[('TATTOO', 'tattoo'), ('MICROCHIP', 'microchip'), ('OTHER', 'other')], default='TATTOO', max_length=10)),
                 ('perm_id_other', models.CharField(blank=True, default='', max_length=10)),
-                ('operation_type', models.CharField(choices=[('DOG', 'dog'), ('CAT', 'cat'), ('DOG & CAT', 'dog & cat')], default='DOG & CAT', max_length=10)),
+                ('operation_type', models.CharField(choices=[('DOG', 'dog'), ('CAT', 'cat'), ('DOG&CAT', 'dog & cat')], default='DOG&CAT', max_length=10)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('operator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='risk_factor_operations', related_query_name='risk_factor_operations', to='api.Operator')),
