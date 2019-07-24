@@ -61,7 +61,7 @@
                 <subheader>Do you have a client veterinary relationship?</subheader>
               </v-layout>
               <v-layout mx-2>
-                <v-radio-group v-model="hasVet" row>
+                <v-radio-group v-model="hasVet" name="hasVet" row>
                   <v-radio label="Yes" value="true"></v-radio>
                   <v-radio label="No" value="false"></v-radio>
                 </v-radio-group>
@@ -77,6 +77,7 @@
                     v-model.number="numDogBreeds"
                     type="number"
                     label="Number of Dog Breeds"
+                    name="numDogBreeds"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>
@@ -84,6 +85,7 @@
                     v-model.number="numCatBreeds"
                     type="number"
                     label="Number of Cat Breeds"
+                    name="numCatBreeds"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -240,6 +242,37 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("animalType", value);
+      }
+    },
+    numDogBreeds: {
+      // getter
+      get() {
+        return this.$store.getters.numDogBreeds;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("dogBreedsNum", value);
+      }
+    },
+    numCatBreeds: {
+      // getter
+      get() {
+        return this.$store.getters.numCatBreeds;
+      },
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("catBreedsNum", value);
+      },
+    },
+    hasVet: {
+      // getter
+      get() {
+        return this.$store.getters.hasVet;
+      },
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("hasVet", value);
       }
     }
   },
