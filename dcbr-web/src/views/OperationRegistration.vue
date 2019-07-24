@@ -160,7 +160,7 @@ export default {
               num_cat_sold: this.$store.getters.catsSold,
               num_cat_transferred: this.$store.getters.catsTransferred,
               num_cat_traded: this.$store.getters.catsTraded,
-              num_cat_leased: this.$store.getterss.catsLeased
+              num_cat_leased: this.$store.getterss.catsLeased,
             }
           ],
           risk_factor_operations: [
@@ -171,9 +171,9 @@ export default {
               num_breeds_dogs: this.$store.getters.numDogBreeds,
               num_breeds_cats: this.$store.getters.numCatBreeds,
               has_vet: this.$store.getters.hasVet,
-              has_perm_id: this.$store.getters.hasId,
-              perm_id_type: this.$store.getters.idType,
-              perm_id_other: this.$store.getters.otherId
+              has_perm_id: this.$store.getters.hasPermId,
+              perm_id_type: this.$store.getters.permIdType,
+              perm_id_other: this.$store.getters.otherPermIdType
             }
           ]
         })

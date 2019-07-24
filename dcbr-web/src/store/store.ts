@@ -29,6 +29,9 @@ export const store = new Vuex.Store({
            accidentalBreeding: "false",
            numWorkers: 1,
            animalType: "DOG",
+           numDogBreeds: 1,
+           numCatBreeds: 2,
+           hasVet: "false",
 
            //Breeding Details
            femaleIntactDogNum: 1,
@@ -44,11 +47,7 @@ export const store = new Vuex.Store({
            catsTraded: 11,
            catsLeased: 12,
 
-           //not wired up
-
-           numDogBreeds: 1,
-           numCatBreeds: 2,
-           hasVet: "false",
+           //Animal Identification
            hasPermId: "true",
            permIdType: "MICROCHIP",
            otherPermIdType: "future ID"
@@ -138,6 +137,15 @@ export const store = new Vuex.Store({
            animalType(state: { animalType: String }, payload: String) {
              state.animalType = payload;
            },
+           numDogBreeds(state: { numDogBreeds: String }, payload: String) {
+            state.numDogBreeds = payload;
+           },
+           numCatBreeds(state: { numCatBreeds: String }, payload: String) {
+            state.numCatBreeds = payload;
+           },
+           hasVet(state: { hasVet: String }, payload: String) {
+             state.hasVet = payload;
+           },
 
            //Mutations - breeding details
            femaleIntactDogNum(
@@ -193,7 +201,18 @@ export const store = new Vuex.Store({
            },
            catsLeased(state: { catsLeased: String }, payload: String) {
              state.catsLeased = payload;
-           }
+           },
+
+           //Mutations - animal identification
+           hasPermId(state: { hasPermId: String }, payload: String) {
+             state.hasPermId = payload;
+           },
+           permIdType(state: { permIdType: String }, payload: String) {
+             state.permIdType = payload;
+           },
+           otherPermIdType(state: { otherPermIdType: String }, payload: String) {
+             state.otherPermIdType = payload;
+           },
          },
 
          actions: {
@@ -262,6 +281,15 @@ export const store = new Vuex.Store({
            animalType(context: any, payload: any) {
              context.commit("animalType", payload);
            },
+           numDogBreeds(context: any, payload: any) {
+            context.commit("numDogBreeds", payload);
+           },
+           numCatBreeds(context: any, payload: any) {
+            context.commit("numCatBreeds", payload);
+           },
+           hasVet(context: any, payload: any) {
+             context.commit("hasVet", payload);
+           },
 
            //action - breeding details
            femaleIntactDogNum(context: any, payload: any) {
@@ -299,7 +327,18 @@ export const store = new Vuex.Store({
            },
            catsLeased(context: any, payload: any) {
              context.commit("catsLeased", payload);
-           }
+           },
+
+           //action - animal identification
+           hasPermId(context: any, payload: any) {
+             context.commit("hasPermId", payload);
+           },
+           permIdType(context: any, payload: any) {
+             context.commit("permIdType", payload);
+           },
+           otherPermIdType(context: any, payload: any) {
+             context.commit("otherPermIdType", payload);
+           },
          },
 
          getters: {
@@ -366,6 +405,15 @@ export const store = new Vuex.Store({
            animalType(state: { animalType: String }) {
              return state.animalType;
            },
+           numDogBreeds(state: { numDogBreeds: String }) {
+            return state.numDogBreeds;
+           },
+           numCatBreeds(state: { numCatBreeds: String }) {
+            return state.numCatBreeds;
+           },
+           hasVet(state: { hasVet: String }) {
+             return state.hasVet;
+           },
 
            //getters - breeding details
            femaleIntactDogNum(state: { femaleIntactDogNum: String }) {
@@ -403,6 +451,17 @@ export const store = new Vuex.Store({
            },
            catsLeased(state: { catsLeased: String }) {
              return state.catsLeased;
-           }
-         }
+           },
+
+           //getters - animal identification
+           hasPermId(state: { hasPermId: String }) {
+             return state.hasPermId;
+           },
+           permIdType(state: { permIdType: String }) {
+             return state.permIdType;
+           },
+           otherPermIdType(state: { otherPermIdType: String }) {
+             return state.otherPermIdType;
+           },
+         },
        });
