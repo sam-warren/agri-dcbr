@@ -18,9 +18,10 @@
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
                   <v-text-field
-                    v-model.number="femaleDogNum"
+                    v-model.number="femaleIntactDogNum"
                     type="number"
                     label="Number of Female Dogs"
+                    name="femaleIntactDogNum"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -32,9 +33,10 @@
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
                   <v-text-field
-                    v-model.number="femaleIntactCat"
+                    v-model.number="femaleIntactCatNum"
                     type="number"
                     label="Number of Female Cats"
+                    name="femaleIntactCatNum"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -49,6 +51,7 @@
                     v-model.number="littersWhelped"
                     type="number"
                     label="Whelped Litters"
+                    name="littersWhelped"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -63,26 +66,47 @@
                     v-model.number="littersQueened"
                     type="number"
                     label="Queened Litters"
+                    name="littersQueened"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
 
               <v-layout mx-2 mt-4>
-                <subheader>What number of puppies did you ............... in the previous calendar year? </subheader>
+                <subheader>What number of puppies did you ............... in the previous calendar year?</subheader>
               </v-layout>
 
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field v-model.number="dogsTransferred" type="number" label="Transfer"></v-text-field>
+                  <v-text-field
+                    v-model.number="dogsTransferred"
+                    type="number"
+                    label="Transfer"
+                    name="dogsTransferred"
+                  ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model.number="dogsSold" type="number" label="Sell"></v-text-field>
+                  <v-text-field
+                    v-model.number="dogsSold"
+                    type="number"
+                    label="Sell"
+                    name="dogsSold"
+                  ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model.number="dogsTraded" type="number" label="Trade"></v-text-field>
+                  <v-text-field
+                    v-model.number="dogsTraded"
+                    type="number"
+                    label="Trade"
+                    name="dogsTraded"
+                  ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model.number="dogsLeased" type="number" label="Lease"></v-text-field>
+                  <v-text-field
+                    v-model.number="dogsLeased"
+                    type="number"
+                    label="Lease"
+                    name="dogsLeased"
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
               <v-layout mx-2 mt-4>
@@ -91,16 +115,36 @@
 
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field v-model.number="catsTransferred" type="number" label="Transfer"></v-text-field>
+                  <v-text-field
+                    v-model.number="catsTransferred"
+                    type="number"
+                    label="Transfer"
+                    name="catsTransferred"
+                  ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model.number="catsSold" type="number" label="Sell"></v-text-field>
+                  <v-text-field
+                    v-model.number="catsSold"
+                    type="number"
+                    label="Sell"
+                    name="catsSold"
+                  ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model.number="catsTraded" type="number" label="Trade"></v-text-field>
+                  <v-text-field
+                    v-model.number="catsTraded"
+                    type="number"
+                    label="Trade"
+                    name="catsTraded"
+                  ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model.number="catsLeased" type="number" label="Lease"></v-text-field>
+                  <v-text-field
+                    v-model.number="catsLeased"
+                    type="number"
+                    label="Lease"
+                    name="catsLeased"
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -111,37 +155,158 @@
   </v-container>
 </template>
 <script>
-import {mapState} from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   data: () => ({
     valid: false,
-    femaleDogNum: null,
-    femaleIntactCat: null,
-    littersWhelped: null,
-    littersQueened: null,
-    dogsTransferred: null,
-    dogsSold: null,
-    dogsTraded: null,
-    dogsLeased: null,
-    catsTransferred: null,
-    catsSold: null,
-    catsTraded: null,
-    catsLeased: null,
 
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
     ],
-    email: "",
+
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+/.test(v) || "E-mail must be valid"
     ]
   }),
 
-  computed: mapState({
-    operationType: state => state.operationType
-  })
+  computed: {
+    femaleIntactDogNum: {
+      // getter
+      get() {
+        return this.$store.getters.femaleIntactDogNum;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("femaleIntactDogNum", value);
+      }
+    },
+
+    femaleIntactCatNum: {
+      // getter
+      get() {
+        return this.$store.getters.femaleIntactCatNum;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("femaleIntactCatNum", value);
+      }
+    },
+    littersWhelped: {
+      // getter
+      get() {
+        return this.$store.getters.littersWhelped;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("littersWhelped", value);
+      }
+    },
+
+    littersQueened: {
+      // getter
+      get() {
+        return this.$store.getters.littersQueened;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("littersQueened", value);
+      }
+    },
+    dogsTransferred: {
+      // getter
+      get() {
+        return this.$store.getters.dogsTransferred;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("dogsTransferred", value);
+      }
+    },
+    dogsSold: {
+      // getter
+      get() {
+        return this.$store.getters.dogsSold;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("dogsSold", value);
+      }
+    },
+    dogsTraded: {
+      // getter
+      get() {
+        return this.$store.getters.dogsTraded;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("dogsTraded", value);
+      }
+    },
+    dogsLeased: {
+      // getter
+      get() {
+        return this.$store.getters.dogsLeased;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("dogsLeased", value);
+      }
+    },
+    catsTransferred: {
+      // getter
+      get() {
+        return this.$store.getters.catsTransferred;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("catsTransferred", value);
+      }
+    },
+    catsSold: {
+      // getter
+      get() {
+        return this.$store.getters.catsSold;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("catsSold", value);
+      }
+    },
+    catsTraded: {
+      // getter
+      get() {
+        return this.$store.getters.catsTraded;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("catsTraded", value);
+      }
+    },
+    catsLeased: {
+      // getter
+      get() {
+        return this.$store.getters.catsLeased;
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("catsLeased", value);
+      }
+    }
+  }
 };
 </script>
