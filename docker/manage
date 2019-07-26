@@ -262,7 +262,7 @@ start-dev)
   DEFAULT_CONTAINERS="dcbr-web-dev dcbr-api dcbr-db"
   _startupParams=$(getStartupParams $@)
   configureEnvironment $@
-  docker-compose up -d ${_startupParams} 
+  docker-compose up -d --build ${_startupParams} 
   docker-compose logs -f
  ;;
 start-api)
