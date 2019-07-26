@@ -117,9 +117,7 @@ export default {
       console.log("Submit clicked");
 
       axios
-        .post("http://localhost:8080/api/operator/", {
-          // for localhost, use "http://localhost:8080/api/operator"
-          // before deploying to Openshift, use "/api/operator"
+        .post("/api/operator/", {
           first_name: this.$store.getters.firstName,
           middle_name: this.$store.getters.middleName,
           last_name: this.$store.getters.lastName,
@@ -128,7 +126,7 @@ export default {
           email_address: this.$store.getters.email,
           operation_type: this.$store.getters.operationType,
           operation_name: this.$store.getters.operationName,
-          operation_URL: this.store.getters.opWebsite,
+          operation_URL: this.$store.getters.opWebsite,
 
           addresses: [
             {
@@ -160,7 +158,7 @@ export default {
               num_cat_sold: this.$store.getters.catsSold,
               num_cat_transferred: this.$store.getters.catsTransferred,
               num_cat_traded: this.$store.getters.catsTraded,
-              num_cat_leased: this.$store.getterss.catsLeased,
+              num_cat_leased: this.$store.getterss.catsLeased
             }
           ],
           risk_factor_operations: [
