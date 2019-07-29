@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import Vuex, { StoreOptions } from 'vuex';
+import Vue from "vue";
+import Vuex, { StoreOptions } from "vuex";
 
-import { profile } from './registration';
-import { RootState } from './types';
+import { profile } from "./registration";
+import { RootState } from "./types";
 
 Vue.use(Vuex);
 

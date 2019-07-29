@@ -1,11 +1,11 @@
-import './plugins/vuetify';
-import './registerServiceWorker';
+import "./plugins/vuetify";
+import "./registerServiceWorker";
 
-import router from '@/router';
-import store from '@/store/store';
-import Vue from 'vue';
+import router from "@/router";
+import store from "@/store/store";
+import Vue from "vue";
 
-import App from './App.vue';
+import App from "./App.vue";
 
 Vue.config.productionTip = false;
 

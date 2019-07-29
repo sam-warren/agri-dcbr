@@ -1,7 +1,7 @@
-import { GetterTree } from 'vuex';
+import { GetterTree } from "vuex";
 
-import { RootState } from '../types';
-import { RegistrationState } from './types';
+import { RootState } from "../types";
+import { RegistrationState } from "./types";
 
 export const getters: GetterTree<RegistrationState, RootState> = {
   //getters - profile

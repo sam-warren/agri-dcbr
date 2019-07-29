@@ -1,6 +1,6 @@
-import { MutationTree } from 'vuex';
+import { MutationTree } from "vuex";
 
-import { RegistrationState } from '../registration/types';
+import { RegistrationState } from "../registration/types";
 
 export const mutations: MutationTree<RegistrationState> = {
   firstName(state, payload: string) {
