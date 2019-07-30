@@ -1,30 +1,27 @@
-# import logging
+import logging
 
-# from django.conf import settings
-# from django.db import connection
-# from django.http import JsonResponse
-# from drf_yasg import openapi
-# from drf_yasg.utils import swagger_auto_schema
-# from rest_framework import permissions
-# from rest_framework.decorators import (api_view, authentication_classes,
-#                                        parser_classes, permission_classes)
-# from rest_framework.parsers import FormParser
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-# LOGGER = logging.getLogger(__name__)
+from .tasks import send_registration_email
 
-# @api_view(["POST"])
-# @authentication_classes(())
-# @permission_classes((permissions.AllowAny,))
-# @parser_classes((FormParser,))
-# def send_feedback(request, *args, **kwargs):
-#     x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
-#     if x_forwarded_for:
-#         ip_addr = x_forwarded_for.split(",")[0]
-#     else:
-#         ip_addr = request.META.get("REMOTE_ADDR")
-#     from_name = request.POST.get("from_name")
-#     from_email = request.POST.get("from_email")
-#     reason = request.POST.get("reason")
-#     comments = request.POST.get("comments")
-#     email_feedback(ip_addr, from_name, from_email, reason, comments)
-#     return JsonResponse({"status": "ok"})
+LOGGER = logging.getLogger(__name__)
+
+
+class EmailNotification(APIView):
+    def post(self, request, user_id):
+
+        # user_id = self.kwargs["user_id"]
+
+        try:
+            send_registration_email(user_id)
+            return Response(status=status.HTTP_200_OK)
+
+        except Exception:
+            LOGGER.error(
+                "Email notification for user with id {} was not sent correctly".format(
+                    user_id
+                )
+            )
+            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
