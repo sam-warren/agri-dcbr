@@ -3,47 +3,47 @@ import { MutationTree } from "vuex";
 import { RegistrationState } from "../registration/types";
 
 export const mutations: MutationTree<RegistrationState> = {
-  firstName(state: any, payload: string) {
+  firstName(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.firstName = payload;
   },
-  middleName(state: any, payload: string) {
+  middleName(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.middleName = payload;
   },
-  lastName(state: any, payload: string) {
+  lastName(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.lastName = payload;
   },
-  commType(state: any, payload: string) {
+  commType(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.commType = payload;
   },
-  phone(state: any, payload: string) {
+  phone(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.phone = payload;
   },
-  email(state: any, payload: string) {
+  email(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.email = payload;
   },
-  streetNumber(state: any, payload: number) {
+  streetNumber(state: RegistrationState, payload: number) {
     state.error = false;
     state.profile!.streetNumber = payload;
   },
-  aptNumber(state: any, payload: number) {
+  aptNumber(state: RegistrationState, payload: number) {
     state.error = false;
     state.profile!.aptNumber = payload;
   },
-  streetName(state: any, payload: string) {
+  streetName(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.streetName = payload;
   },
-  city(state: any, payload: string) {
+  city(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.city = payload;
   },
-  postalCode(state: any, payload: string) {
+  postalCode(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.postalCode = payload;
   }

@@ -5,47 +5,47 @@ import { RegistrationState } from "./types";
 
 export const getters: GetterTree<RegistrationState, RootState> = {
   //getters - profile
-  firstName(state: any): string {
+  firstName(state: RegistrationState): string {
     const { profile } = state;
     return profile!.firstName || "";
   },
-  middleName(state: any): string {
+  middleName(state: RegistrationState): string {
     const { profile } = state;
     return profile!.middleName || "";
   },
-  lastName(state: any): string {
+  lastName(state: RegistrationState): string {
     const { profile } = state;
     return profile!.lastName || "";
   },
-  commType(state: any): string {
+  commType(state: RegistrationState): string {
     const { profile } = state;
     return profile!.commType || "";
   },
-  phone(state: any): string {
+  phone(state: RegistrationState): string {
     const { profile } = state;
     return profile!.phone || "";
   },
-  email(state: any): string {
+  email(state: RegistrationState): string {
     const { profile } = state;
     return profile!.email || "";
   },
-  streetNumber(state: any): number {
+  streetNumber(state: RegistrationState): number {
     const { profile } = state;
     return profile!.streetNumber || 0;
   },
-  aptNumber(state: any): number {
+  aptNumber(state: RegistrationState): number {
     const { profile } = state;
     return profile!.aptNumber || 0;
   },
-  streetName(state: any): string {
+  streetName(state: RegistrationState): string {
     const { profile } = state;
     return profile!.streetName || "";
   },
-  city(state: any): string {
+  city(state: RegistrationState): string {
     const { profile } = state;
     return profile!.city || "";
   },
-  postalCode(state: any): string {
+  postalCode(state: RegistrationState): string {
     const { profile } = state;
     return profile!.postalCode || "";
   }

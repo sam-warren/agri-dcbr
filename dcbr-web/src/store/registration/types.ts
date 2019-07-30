@@ -1,4 +1,4 @@
-export interface Profile {
+export interface ProfileTypes {
   firstName: string;
   middleName: string;
   lastName: string;
@@ -13,6 +13,6 @@ export interface Profile {
 }
 
 export interface RegistrationState {
-  profile?: Profile;
+  profile?: ProfileTypes;
   error: boolean;
 }
