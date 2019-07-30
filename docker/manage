@@ -147,7 +147,6 @@ configureEnvironment() {
     esac
   done
 
-
   export COMPOSE_PROJECT_NAME="${COMPOSE_PROJECT_NAME:-dcbr}"
 
   export STI_SCRIPTS_PATH=${STI_SCRIPTS_PATH:-/usr/libexec/s2i}
@@ -175,6 +174,9 @@ configureEnvironment() {
   export DJANGO_ADMIN_USER="admin"
   export DJANGO_ADMIN_PASSWORD="admin"
   export DJANGO_ADMIN_EMAIL="dcbr-admin@gov.bc.ca"
+  export EMAIL_HOST="localhost"
+  export EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
+  export EMAIL_USE_TLS="False"
 
   # dcbr-web
   export WEB_HOST_NAME="0.0.0.0"

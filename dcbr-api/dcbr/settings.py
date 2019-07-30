@@ -52,10 +52,12 @@ INSTALLED_APPS = [
     "health_check.db",
     "rest_framework",
     "drf_yasg",
-    "dcbr",
     "corsheaders",
+    "post_office",
+    "background_task",
+    "dcbr",
     "api",
-    # "debug_toolbar",
+    "email_service.apps.EmailServiceConfig",
 ]
 
 MIDDLEWARE = [
@@ -68,7 +70,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "debug_toolbar.middleware.DebugToolbarMiddleware"
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -172,3 +173,9 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 100,
 }
+
+# e-mail management
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+POST_OFFICE = {"BATCH_SIZE": 50}

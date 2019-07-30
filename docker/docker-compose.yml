@@ -57,6 +57,7 @@ services:
   dcbr-api:
     image: dcbr-api
     environment:
+      STI_SCRIPTS_PATH: ${STI_SCRIPTS_PATH}
       DATABASE_SERVICE_HOST: ${DATABASE_SERVICE_HOST}
       DATABASE_SERVICE_PORT: ${DATABASE_SERVICE_PORT}
       DATABASE_NAME: ${DATABASE_NAME}
@@ -66,7 +67,9 @@ services:
       DJANGO_ADMIN_USER: ${DJANGO_ADMIN_USER}
       DJANGO_ADMIN_PASSWORD: ${DJANGO_ADMIN_PASSWORD}
       DJANGO_ADMIN_EMAIL: ${DJANGO_ADMIN_EMAIL}
-      STI_SCRIPTS_PATH: ${STI_SCRIPTS_PATH}
+      EMAIL_HOST: ${EMAIL_HOST}
+      EMAIL_BACKEND: ${EMAIL_BACKEND}
+      EMAIL_USE_TLS: ${EMAIL_USE_TLS}
     volumes:
       - ../dcbr-api:/opt/app-root/src
     networks:
