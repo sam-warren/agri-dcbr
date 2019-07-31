@@ -87,6 +87,7 @@
                   <v-checkbox
                     v-model="homeAsOperation"
                     :label="`My home address is also my operation address`"
+                    name="homeAsOperation"
                   ></v-checkbox>
                   <!-- <label for="homeAsOperation">My home address is also my operation address</label> -->
                   <!-- <input type="checkbox" v-model="homeAsOperation" /> -->
@@ -130,6 +131,7 @@
   </v-container>
 </template>
 <script>
+import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   data: () => ({
     valid: false,
@@ -146,126 +148,140 @@ export default {
   }),
 
   computed: {
+    ...mapState({
+      profile: state => state.profile
+    }),
     firstName: {
       // getter
       get() {
-        return this.$store.getters.firstName;
+        return this.$store.getters["profile/firstName"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("firstName", value);
+        this.$store.dispatch("profile/firstName", value);
       }
     },
 
     middleName: {
       // getter
       get() {
-        return this.$store.getters.middleName;
+        return this.$store.getters["profile/middleName"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("middleName", value);
+        this.$store.dispatch("profile/middleName", value);
       }
     },
     lastName: {
       // getter
       get() {
-        return this.$store.getters.lastName;
+        return this.$store.getters["profile/lastName"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("lastName", value);
+        this.$store.dispatch("profile/lastName", value);
       }
     },
     commType: {
       // getter
       get() {
-        return this.$store.getters.commType;
+        return this.$store.getters["profile/commType"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("commType", value);
+        this.$store.dispatch("profile/commType", value);
       }
     },
     phone: {
       // getter
       get() {
-        return this.$store.getters.phone;
+        return this.$store.getters["profile/phone"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("phone", value);
+        this.$store.dispatch("profile/phone", value);
       }
     },
     email: {
       // getter
       get() {
-        return this.$store.getters.email;
+        return this.$store.getters["profile/email"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("email", value);
+        this.$store.dispatch("profile/email", value);
       }
     },
     streetNumber: {
       // getter
       get() {
-        return this.$store.getters.streetNumber;
+        return this.$store.getters["profile/streetNumber"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("streetNumber", value);
+        this.$store.dispatch("profile/streetNumber", value);
       }
     },
     aptNumber: {
       // getter
       get() {
-        return this.$store.getters.aptNumber;
+        return this.$store.getters["profile/aptNumber"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("aptNumber", value);
+        this.$store.dispatch("profile/aptNumber", value);
       }
     },
     streetName: {
       // getter
       get() {
-        return this.$store.getters.streetName;
+        return this.$store.getters["profile/streetName"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("streetName", value);
+        this.$store.dispatch("profile/streetName", value);
       }
     },
     city: {
       // getter
       get() {
-        return this.$store.getters.city;
+        return this.$store.getters["profile/city"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("city", value);
+        this.$store.dispatch("profile/city", value);
       }
     },
     postalCode: {
       // getter
       get() {
-        return this.$store.getters.postalCode;
+        return this.$store.getters["profile/postalCode"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("postalCode", value);
+        this.$store.dispatch("profile/postalCode", value);
+      }
+    },
+    homeAsOperation: {
+      // getter
+      get() {
+        return this.$store.getters["profile/homeAsOperation"];
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("profile/homeAsOperation", value);
       }
     }
   }
