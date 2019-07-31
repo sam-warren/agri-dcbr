@@ -46,5 +46,10 @@ export const mutations: MutationTree<RegistrationState> = {
   postalCode(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.postalCode = payload;
+  },
+  homeAsOperation(state: RegistrationState, payload: boolean) {
+    state.error = false;
+    state.profile!.homeAsOperation = payload;
+    console.log("VUEX: homeAsOperation updated to " + payload);
   }
 };

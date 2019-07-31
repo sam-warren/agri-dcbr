@@ -10,6 +10,7 @@ export interface ProfileTypes {
   streetName: string;
   city: string;
   postalCode: string;
+  homeAsOperation: boolean;
 }
 
 export interface RegistrationState {

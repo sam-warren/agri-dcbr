@@ -48,5 +48,9 @@ export const getters: GetterTree<RegistrationState, RootState> = {
   postalCode(state: RegistrationState): string {
     const { profile } = state;
     return profile!.postalCode || "";
+  },
+  homeAsOperation(state: RegistrationState): boolean {
+    const { profile } = state;
+    return profile!.homeAsOperation || false;
   }
 };

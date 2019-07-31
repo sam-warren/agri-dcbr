@@ -19,6 +19,7 @@ export const state: RegistrationState = {
     streetName: "Imaginary",
     city: "CodeTown",
     postalCode: "A1B2C3",
+    homeAsOperation: true,
   },
   error: false
 };
