@@ -76,6 +76,7 @@
                     v-model.number="numDogBreeds"
                     type="number"
                     label="Number of Dog Breeds"
+                    disabled
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>

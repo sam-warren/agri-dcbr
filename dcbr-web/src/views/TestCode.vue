@@ -21,26 +21,57 @@
           <v-icon dark>add</v-icon>
         </v-btn>
 
-        <div>
-          <Profile ref="profile" />
-        </div>
+        <v-stepper non-linear v-model="e6" vertical>
+          <v-stepper-step editable :complete="e6 > 1" step="1">Profile</v-stepper-step>
+          <v-stepper-content step="1">
+            <Profile ref="profile" />
+          </v-stepper-content>
 
-        <div editable :complete="e6 > 2" step="2">
-          <OperationDetails ref="operationdetails" />
-        </div>
+          <v-stepper-step editable :complete="e6 > 2" step="2">Operation Details</v-stepper-step>
+          <v-stepper-content step="2">
+            <OperationDetails ref="operationdetails" />
+          </v-stepper-content>
 
-        <div v-for="(location, index) in locations">
-          <OperationLocation ref="operationlocation1" v-bind:number="index+1" />
-        </div>
+          <v-stepper-step editable :complete="e6 > 3" step="3">Operation Locations</v-stepper-step>
 
-        <!-- OPERATION LOCATION MENU -->
-        <div>
-          <MenuOperationLocation />
-        </div>
-        <div>
+          <v-stepper-content step="3">
+            <v-layout mt-4>
+              <subheader>Do you have additional operation locations?</subheader>
+            </v-layout>
+            <v-radio-group v-model="row" row>
+              <v-radio label="Yes" value="radio-1"></v-radio>
+              <v-radio label="No" value="radio-2"></v-radio>
+            </v-radio-group>
+            <!-- <OperationLocation ref="operationlocation" /> -->
+            <v-card-title primary-title>
+              <h2>Operation Location(s)</h2>
+            </v-card-title>
+
+            <!-- <div v-for="(child, index) in children">
+              <component :is="child" :key="child.name" v-bind:number="index+1"></component>
+            </div>-->
+
+            <div v-for="(location, index) in locations">
+              <OperationLocation ref="operationlocation1" v-bind:number="index+1" />
+            </div>
+
+            <v-btn @click="addLocation()">
+              <v-btn-text>Add</v-btn-text>
+              <v-icon dark>add</v-icon>
+            </v-btn>
+
+            <v-btn @click="removeLocation()">
+              <v-btn-text>Remove</v-btn-text>
+              <v-icon dark>remove</v-icon>
+            </v-btn>
+          </v-stepper-content>
+
+          <v-stepper-step editable :complete="e6 > 4" step="4">Animal Identification</v-stepper-step>
           <AnimalIdentification ref="animalidentification" />
-        </div>
-        <BreedingDetails ref="breedingdetails" />
+
+          <v-stepper-step editable :complete="e6 > 5" step="5">Breeding Details</v-stepper-step>
+          <BreedingDetails ref="breedingdetails" />
+        </v-stepper>
 
         <v-btn
           large
@@ -62,7 +93,6 @@ import Profile from "@/components/Profile";
 import OperationLocation from "@/components/OperationLocation";
 import AnimalIdentification from "@/components/AnimalIdentification";
 import BreedingDetails from "@/components/BreedingDetails";
-import MenuOperationLocation from "@/components/MenuOperationLocation";
 //import Footer from "@/components/Footer";
 import axios from "axios";
 
@@ -73,8 +103,7 @@ export default {
     OperationDetails,
     OperationLocation,
     AnimalIdentification,
-    BreedingDetails,
-    MenuOperationLocation
+    BreedingDetails
   },
   data() {
     return {
@@ -222,3 +251,29 @@ export default {
 };
 </script>
 
+
+
+   <v-layout mt-4>
+            <subheader>Do you have additional operation locations?</subheader>
+          </v-layout>
+
+          <v-radio-group v-model="row" row>
+            <v-radio label="Yes" value="radio-1"></v-radio>
+            <v-radio label="No" value="radio-2"></v-radio>
+          </v-radio-group>
+          <!-- <OperationLocation ref="operationlocation" /> -->
+
+          <v-card-title primary-title>
+            <h2>Operation Location(s)</h2>
+          </v-card-title>
+
+          <v-btn @click="addLocation()">
+            <v-btn-text>Add</v-btn-text>
+            <v-icon dark>add</v-icon>
+          </v-btn>
+
+          <v-btn @click="removeLocation()">
+            <v-btn-text>Remove</v-btn-text>
+            <v-icon dark>remove</v-icon>
+          </v-btn>
+        </div>
