@@ -72,6 +72,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+CORS_URLS_REGEX = r"^/(api|email)/.*$"
 CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = "dcbr.urls"
@@ -145,6 +146,10 @@ STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# Set up support for proxy headers (provide correct URL in swagger UI)
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # API Metadata
 # fmt: off
