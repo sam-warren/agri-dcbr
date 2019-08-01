@@ -1,10 +1,7 @@
 import Vue from "vue";
 import Vuex, { StoreOptions } from "vuex";
 
-import { profile } from "./registration";
-import { operationDetails } from "./registration";
-import { breedingDetails } from "./registration";
-import { animalIdentification } from "./registration";
+import { profile, operationDetails, breedingDetails, animalIdentification } from "./registration";
 import { RootState } from "./types";
 
 Vue.use(Vuex);

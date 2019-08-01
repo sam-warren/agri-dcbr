@@ -128,6 +128,7 @@
   </v-container>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data: () => ({
     valid: false,
@@ -142,15 +143,18 @@ export default {
   }),
 
   computed: {
+    ...mapState({
+      operationDetails: state => state.operationDetails
+    }),
     operationName: {
       // getter
       get() {
-        return this.$store.getters.operationName;
+        return this.$store.getters["operationDetails/operationName"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("operationName", value);
+        this.$store.dispatch("operationDetails/operationName", value);
       }
     },
 

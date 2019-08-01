@@ -131,7 +131,7 @@
   </v-container>
 </template>
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState } from "vuex";
 export default {
   data: () => ({
     valid: false,
