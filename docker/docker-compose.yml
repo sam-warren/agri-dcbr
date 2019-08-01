@@ -57,6 +57,7 @@ services:
   dcbr-api:
     image: dcbr-api
     environment:
+      APP_SCRIPT: ${APP_SCRIPT}
       STI_SCRIPTS_PATH: ${STI_SCRIPTS_PATH}
       DATABASE_SERVICE_HOST: ${DATABASE_SERVICE_HOST}
       DATABASE_SERVICE_PORT: ${DATABASE_SERVICE_PORT}
@@ -84,10 +85,9 @@ services:
         sleep 5;
         if [ $DEBUG ] && [ "$DEBUG" == "true" ]; then
         echo Running in debug mode;
-          python manage.py migrate && \
-          python manage.py runserver 0.0.0.0:8080 & disown;
-          sleep 5;
-          python manage.py process_tasks;
+          python manage.py migrate;
+          python manage.py process_tasks & disown;
+          python manage.py runserver 0.0.0.0:8080;
         else
           echo Running s2i container...;
           env;

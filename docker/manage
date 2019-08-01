@@ -111,6 +111,15 @@ build-api() {
     '../dcbr-api' \
     "$BASE_IMAGE" \
     'dcbr-api'
+
+  # this is only required in Windows
+  if [[ "$OSTYPE" == "msys" ]]; then
+    echo -e "\nFixing file permissions in final dcbr-api image"
+    docker build -q \
+      --build-arg BASE_IMAGE='dcbr-api:latest' \
+      -t 'dcbr-api' \
+      -f 'utils/fix-permissions/Dockerfile' 'utils/'
+  fi
 }
 
 build-web() {
@@ -177,6 +186,7 @@ configureEnvironment() {
   export EMAIL_HOST="localhost"
   export EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
   export EMAIL_USE_TLS="False"
+  export APP_SCRIPT="app-dcbr.sh"
 
   # dcbr-web
   export WEB_HOST_NAME="0.0.0.0"
