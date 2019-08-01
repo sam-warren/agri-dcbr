@@ -21,12 +21,73 @@ export const state: RegistrationState = {
     postalCode: "A1B2C3",
     homeAsOperation: true,
   },
+
+  operationDetails: {
+    operationName: "Quartech Breeders Ltd.",
+    opWebsite: "www.google.com",
+    operationType: "BREEDER&SELLER",
+    assocName: "Quartech",
+    assocMembership: 142,
+    assocWebsite: "www.quartech.com",
+    accidentalBreeding: true,
+    numWorkers: 14,
+    animalType: "CAT&DOG",
+    numDogBreeds: 10,
+    numCatBreeds: 4,
+    hasVet: true
+  },
+
+  breedingDetails: {
+    femaleIntactDogNum: 23,
+    femaleIntactCatNum: 15,
+    littersWhelped: 4,
+    littersQueened: 3,
+    dogsSold: 3,
+    dogsTransferred: 4,
+    dogsTraded: 2,
+    dogsLeased: 0,
+    catsSold: 3,
+    catsTransferred: 2,
+    catsTraded: 0,
+    catsLeased: 6
+  },
+
+  animalIdentification: {
+    hasPermId: false,
+    permIdType: "OTHER",
+    otherPermIdType: "Paper & pen"
+  },
+
   error: false
 };
 
 const namespaced: boolean = true;
 
 export const profile: Module<RegistrationState, RootState> = {
+  namespaced,
+  state,
+  getters,
+  actions,
+  mutations
+};
+
+export const operationDetails: Module<RegistrationState, RootState> = {
+  namespaced,
+  state,
+  getters,
+  actions,
+  mutations
+};
+
+export const breedingDetails: Module<RegistrationState, RootState> = {
+  namespaced,
+  state,
+  getters,
+  actions,
+  mutations
+};
+
+export const animalIdentification: Module<RegistrationState, RootState> = {
   namespaced,
   state,
   getters,
