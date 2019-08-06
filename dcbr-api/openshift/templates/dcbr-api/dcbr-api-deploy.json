@@ -16,7 +16,7 @@
       "metadata": {
         "name": "${NAME}",
         "labels": {
-          "app": "${APP_GROUP}",          
+          "app": "${APP_GROUP}",
           "name": "${NAME}"
         }
       },
@@ -35,7 +35,7 @@
           "description": "Exposes and load balances the application pods"
         },
         "labels": {
-          "app": "${APP_GROUP}",          
+          "app": "${APP_GROUP}",
           "name": "${NAME}"
         }
       },
@@ -58,7 +58,7 @@
       "metadata": {
         "name": "${NAME}",
         "labels": {
-          "app": "${APP_GROUP}",          
+          "app": "${APP_GROUP}",
           "name": "${NAME}"
         }
       },
@@ -87,7 +87,7 @@
           "description": "Defines how to deploy the application server"
         },
         "labels": {
-          "app": "${APP_GROUP}",          
+          "app": "${APP_GROUP}",
           "name": "${NAME}"
         }
       },
@@ -100,9 +100,7 @@
             "type": "ImageChange",
             "imageChangeParams": {
               "automatic": true,
-              "containerNames": [
-                "${NAME}"
-              ],
+              "containerNames": ["${NAME}"],
               "from": {
                 "kind": "ImageStreamTag",
                 "namespace": "${IMAGE_NAMESPACE}",
@@ -212,6 +210,10 @@
                         "key": "admin-password"
                       }
                     }
+                  },
+                  {
+                    "name": "APP_SCRIPT",
+                    "value": "${APP_SCRIPT}"
                   }
                 ],
                 "resources": {
@@ -236,7 +238,7 @@
       "metadata": {
         "name": "${NAME}",
         "labels": {
-          "app": "${APP_GROUP}",          
+          "app": "${APP_GROUP}",
           "name": "${NAME}"
         }
       },
@@ -335,6 +337,12 @@
       "description": "The TAG name for this environment, e.g., dev, test, prod",
       "value": "dev",
       "required": true
+    },
+    {
+      "name": "APP_SCRIPT",
+      "displayName": "Application Startup Script",
+      "description": "Used to run the application from a Bash script. This should be a path to a Bash script (defaults to app.sh unless set to null) that will be used to start the application (optional).",
+      "value": "app-dcbr.sh"
     },
     {
       "name": "CPU_REQUEST",

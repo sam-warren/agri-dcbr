@@ -52,10 +52,12 @@ INSTALLED_APPS = [
     "health_check.db",
     "rest_framework",
     "drf_yasg",
-    "dcbr",
     "corsheaders",
+    "post_office",
+    "background_task",
+    "dcbr",
     "api",
-    # "debug_toolbar",
+    "email_service.apps.EmailServiceConfig",
 ]
 
 MIDDLEWARE = [
@@ -68,9 +70,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # "debug_toolbar.middleware.DebugToolbarMiddleware"
 ]
 
+CORS_URLS_REGEX = r"^/(api|email)/.*$"
 CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = "dcbr.urls"
@@ -145,6 +147,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+# Set up support for proxy headers (provide correct URL in swagger UI)
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 # API Metadata
 # fmt: off
 API_METADATA = {
@@ -172,3 +178,9 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 100,
 }
+
+# e-mail management
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+POST_OFFICE = {"BATCH_SIZE": 50}

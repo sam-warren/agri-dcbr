@@ -18,8 +18,9 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
-    path('admin/doc/', include('django.contrib.admindocs.urls')),
-    path('admin/', admin.site.urls),
-    url(r'^health/', include('health_check.urls')),
-    url(r'^api/', include('api.urls')),
+    path("admin/doc/", include("django.contrib.admindocs.urls")),
+    path("admin/", admin.site.urls),
+    url(r"^health/", include("health_check.urls")),
+    url(r"^api/", include("api.urls")),
+    url(r"^email/", include("email_service.urls")),
 ]

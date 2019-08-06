@@ -57,6 +57,8 @@ services:
   dcbr-api:
     image: dcbr-api
     environment:
+      APP_SCRIPT: ${APP_SCRIPT}
+      STI_SCRIPTS_PATH: ${STI_SCRIPTS_PATH}
       DATABASE_SERVICE_HOST: ${DATABASE_SERVICE_HOST}
       DATABASE_SERVICE_PORT: ${DATABASE_SERVICE_PORT}
       DATABASE_NAME: ${DATABASE_NAME}
@@ -66,7 +68,9 @@ services:
       DJANGO_ADMIN_USER: ${DJANGO_ADMIN_USER}
       DJANGO_ADMIN_PASSWORD: ${DJANGO_ADMIN_PASSWORD}
       DJANGO_ADMIN_EMAIL: ${DJANGO_ADMIN_EMAIL}
-      STI_SCRIPTS_PATH: ${STI_SCRIPTS_PATH}
+      EMAIL_HOST: ${EMAIL_HOST}
+      EMAIL_BACKEND: ${EMAIL_BACKEND}
+      EMAIL_USE_TLS: ${EMAIL_USE_TLS}
     volumes:
       - ../dcbr-api:/opt/app-root/src
     networks:
@@ -81,7 +85,8 @@ services:
         sleep 5;
         if [ $DEBUG ] && [ "$DEBUG" == "true" ]; then
         echo Running in debug mode;
-          python manage.py migrate && \
+          python manage.py migrate;
+          python manage.py process_tasks & disown;
           python manage.py runserver 0.0.0.0:8080;
         else
           echo Running s2i container...;
