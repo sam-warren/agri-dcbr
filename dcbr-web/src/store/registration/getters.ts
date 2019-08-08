@@ -2,10 +2,14 @@ import { GetterTree } from "vuex";
 
 import { RootState } from "../types";
 import { RegistrationState } from "./types";
+import { ProfileTypes } from "./types"
+import { OperationDetailsTypes } from "./types"
+import { BreedingDetailsTypes } from "./types"
+import { AnimalIdentificationTypes } from "./types"
 
 export const getters: GetterTree<RegistrationState, RootState> = {
   // Profile
-  firstName(state: RegistrationState): string {
+  firstName(state: any): string {
     const { profile } = state;
     return profile!.firstName || "";
   },

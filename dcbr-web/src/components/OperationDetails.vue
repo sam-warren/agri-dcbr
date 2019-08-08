@@ -52,8 +52,8 @@
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="accidentalBreeding" name="accidentalBreeding" row>
-                  <v-radio label="Yes" value="true"></v-radio>
-                  <v-radio label="No" value="false"></v-radio>
+                  <v-radio label="Yes" :value="true"></v-radio>
+                  <v-radio label="No" :value="false"></v-radio>
                 </v-radio-group>
               </v-layout>
               <!-- VET RELATIONSHIP -->
@@ -62,8 +62,8 @@
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="hasVet" row>
-                  <v-radio label="Yes" value="true"></v-radio>
-                  <v-radio label="No" value="false"></v-radio>
+                  <v-radio label="Yes" :value="true"></v-radio>
+                  <v-radio label="No" :value="false"></v-radio>
                 </v-radio-group>
               </v-layout>
 
@@ -77,6 +77,7 @@
                     v-model.number="numDogBreeds"
                     type="number"
                     label="Number of Dog Breeds"
+                    name="numDogBreeds"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>
@@ -84,6 +85,7 @@
                     v-model.number="numCatBreeds"
                     type="number"
                     label="Number of Cat Breeds"
+                    name="numCatBreeds"
                   ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -161,89 +163,122 @@ export default {
     operationType: {
       // getter
       get() {
-        return this.$store.getters.operationType;
+        return this.$store.getters["operationDetails/operationType"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("operationType", value);
+        this.$store.dispatch("operationDetails/operationType", value);
       }
     },
     opWebsite: {
       // getter
       get() {
-        return this.$store.getters.opWebsite;
+        return this.$store.getters["operationDetails/opWebsite"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("opWebsite", value);
+        this.$store.dispatch("operationDetails/opWebsite", value);
       }
     },
     assocName: {
       // getter
       get() {
-        return this.$store.getters.assocName;
+        return this.$store.getters["operationDetails/assocName"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("assocName", value);
+        this.$store.dispatch("operationDetails/assocName", value);
       }
     },
     assocMembership: {
       // getter
       get() {
-        return this.$store.getters.assocMembership;
+        return this.$store.getters["operationDetails/assocMembership"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("assocMembership", value);
+        this.$store.dispatch("operationDetails/assocMembership", value);
       }
     },
     assocWebsite: {
       // getter
       get() {
-        return this.$store.getters.assocWebsite;
+        return this.$store.getters["operationDetails/assocWebsite"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("assocWebsite", value);
+        this.$store.dispatch("operationDetails/assocWebsite", value);
       }
     },
     accidentalBreeding: {
       // getter
       get() {
-        return this.$store.getters.accidentalBreeding;
+        return this.$store.getters["operationDetails/accidentalBreeding"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("accidentalBreeding", value);
+        this.$store.dispatch("operationDetails/accidentalBreeding", value);
+      }
+    },
+    hasVet: {
+      // getter
+      get() {
+        return this.$store.getters["operationDetails/hasVet"];
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("operationDetails/hasVet", value);
+      }
+    },
+    numDogBreeds: {
+      // getter
+      get() {
+        return this.$store.getters["operationDetails/numDogBreeds"];
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("operationDetails/numDogBreeds", value);
+      }
+    },
+    numCatBreeds: {
+      // getter
+      get() {
+        return this.$store.getters["operationDetails/numCatBreeds"];
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("operationDetails/numCatBreeds", value);
       }
     },
     numWorkers: {
       // getter
       get() {
-        return this.$store.getters.numWorkers;
+        return this.$store.getters["operationDetails/numWorkers"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("numWorkers", value);
+        this.$store.dispatch("operationDetails/numWorkers", value);
       }
     },
     animalType: {
       // getter
       get() {
-        return this.$store.getters.animalType;
+        return this.$store.getters["operationDetails/animalType"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("animalType", value);
+        this.$store.dispatch("operationDetails/animalType", value);
       }
     }
   },
@@ -251,3 +286,4 @@ export default {
   methods: {}
 };
 </script>
+ 

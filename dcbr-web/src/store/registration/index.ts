@@ -31,7 +31,7 @@ export const state: RegistrationState = {
     assocWebsite: "www.quartech.com",
     accidentalBreeding: true,
     numWorkers: 14,
-    animalType: "CAT&DOG",
+    animalType: "DOG&CAT",
     numDogBreeds: 10,
     numCatBreeds: 4,
     hasVet: true
@@ -53,7 +53,7 @@ export const state: RegistrationState = {
   },
 
   animalIdentification: {
-    hasPermId: false,
+    hasPermId: true,
     permIdType: "OTHER",
     otherPermIdType: "Paper & pen"
   },

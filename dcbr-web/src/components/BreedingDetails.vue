@@ -176,135 +176,135 @@ export default {
     femaleIntactDogNum: {
       // getter
       get() {
-        return this.$store.getters.femaleIntactDogNum;
+        return this.$store.getters["breedingDetails/femaleIntactDogNum"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("femaleIntactDogNum", value);
+        this.$store.dispatch("breedingDetails/femaleIntactDogNum", value);
       }
     },
 
     femaleIntactCatNum: {
       // getter
       get() {
-        return this.$store.getters.femaleIntactCatNum;
+        return this.$store.getters["breedingDetails/femaleIntactCatNum"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("femaleIntactCatNum", value);
+        this.$store.dispatch("breedingDetails/femaleIntactCatNum", value);
       }
     },
     littersWhelped: {
       // getter
       get() {
-        return this.$store.getters.littersWhelped;
+        return this.$store.getters["breedingDetails/littersWhelped"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("littersWhelped", value);
+        this.$store.dispatch("breedingDetails/littersWhelped", value);
       }
     },
 
     littersQueened: {
       // getter
       get() {
-        return this.$store.getters.littersQueened;
+        return this.$store.getters["breedingDetails/littersQueened"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("littersQueened", value);
+        this.$store.dispatch("breedingDetails/littersQueened", value);
       }
     },
     dogsTransferred: {
       // getter
       get() {
-        return this.$store.getters.dogsTransferred;
+        return this.$store.getters["breedingDetails/dogsTransferred"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("dogsTransferred", value);
+        this.$store.dispatch("breedingDetails/dogsTransferred", value);
       }
     },
     dogsSold: {
       // getter
       get() {
-        return this.$store.getters.dogsSold;
+        return this.$store.getters["breedingDetails/dogsSold"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("dogsSold", value);
+        this.$store.dispatch("breedingDetails/dogsSold", value);
       }
     },
     dogsTraded: {
       // getter
       get() {
-        return this.$store.getters.dogsTraded;
+        return this.$store.getters["breedingDetails/dogsTraded"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("dogsTraded", value);
+        this.$store.dispatch("breedingDetails/dogsTraded", value);
       }
     },
     dogsLeased: {
       // getter
       get() {
-        return this.$store.getters.dogsLeased;
+        return this.$store.getters["breedingDetails/dogsLeased"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("dogsLeased", value);
+        this.$store.dispatch("breedingDetails/dogsLeased", value);
       }
     },
     catsTransferred: {
       // getter
       get() {
-        return this.$store.getters.catsTransferred;
+        return this.$store.getters["breedingDetails/catsTransferred"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("catsTransferred", value);
+        this.$store.dispatch("breedingDetails/catsTransferred", value);
       }
     },
     catsSold: {
       // getter
       get() {
-        return this.$store.getters.catsSold;
+        return this.$store.getters["breedingDetails/catsSold"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("catsSold", value);
+        this.$store.dispatch("breedingDetails/catsSold", value);
       }
     },
     catsTraded: {
       // getter
       get() {
-        return this.$store.getters.catsTraded;
+        return this.$store.getters["breedingDetails/catsTraded"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("catsTraded", value);
+        this.$store.dispatch("breedingDetails/catsTraded", value);
       }
     },
     catsLeased: {
       // getter
       get() {
-        return this.$store.getters.catsLeased;
+        return this.$store.getters["breedingDetails/catsLeased"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("catsLeased", value);
+        this.$store.dispatch("breedingDetails/catsLeased", value);
       }
     }
   }
