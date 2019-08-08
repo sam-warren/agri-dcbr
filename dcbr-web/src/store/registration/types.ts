@@ -11,6 +11,7 @@ export interface ProfileTypes {
   city: string;
   postalCode: string;
   homeAsOperation: boolean;
+  error: boolean;
 }
 
 export interface OperationDetailsTypes {
@@ -26,27 +27,30 @@ export interface OperationDetailsTypes {
   numDogBreeds: number;
   numCatBreeds: number;
   hasVet: boolean;
+  error: boolean;
 }
 
 export interface BreedingDetailsTypes {
-  femaleIntactDogNum: number,
-  femaleIntactCatNum: number,
-  littersWhelped: number,
-  littersQueened: number,
-  dogsSold: number,
-  dogsTransferred: number,
-  dogsTraded: number,
-  dogsLeased: number,
-  catsSold: number,
-  catsTransferred: number,
-  catsTraded: number,
-  catsLeased: number,
+  femaleIntactDogNum: number;
+  femaleIntactCatNum: number;
+  littersWhelped: number;
+  littersQueened: number;
+  dogsSold: number;
+  dogsTransferred: number;
+  dogsTraded: number;
+  dogsLeased: number;
+  catsSold: number;
+  catsTransferred: number;
+  catsTraded: number;
+  catsLeased: number;
+  error: boolean;
 }
 
 export interface AnimalIdentificationTypes {
-  hasPermId: boolean,
-  permIdType: string,
+  hasPermId: boolean;
+  permIdType: string;
   otherPermIdType: string
+  error: boolean;
 }
 
 export interface RegistrationState {
