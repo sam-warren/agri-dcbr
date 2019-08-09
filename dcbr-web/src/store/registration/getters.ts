@@ -37,9 +37,9 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { profile } = state;
     return profile!.streetNumber || 0;
   },
-  aptNumber(state: RegistrationState): number {
+  aptNumber(state: RegistrationState): string {
     const { profile } = state;
-    return profile!.aptNumber || 0;
+    return profile!.aptNumber || "";
   },
   streetName(state: RegistrationState): string {
     const { profile } = state;

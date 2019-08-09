@@ -32,7 +32,7 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.profile!.streetNumber = payload;
   },
-  aptNumber(state: RegistrationState, payload: number) {
+  aptNumber(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.aptNumber = payload;
   },

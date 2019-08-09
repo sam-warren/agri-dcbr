@@ -103,9 +103,9 @@ class Risk_Factor_Operation(models.Model):
 
     DOG = "DOG"
     CAT = "CAT"
-    BOTH = "DOG & CAT"
+    BOTH = "DOG&CAT"
 
-    ANIMAL_TYPE_CHOICES = ((DOG, "DOG"), (CAT, "CAT"), (BOTH, "DOG & CAT"),)
+    ANIMAL_TYPE_CHOICES = ((DOG, "DOG"), (CAT, "CAT"), (BOTH, "DOG&CAT"),)
     accidental_breeding = models.BooleanField(default=False)
     num_workers = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     animal_type = models.CharField(

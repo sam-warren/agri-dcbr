@@ -6,7 +6,7 @@ export interface ProfileTypes {
   phone: string;
   email: string;
   streetNumber: number;
-  aptNumber: number;
+  aptNumber: string;
   streetName: string;
   city: string;
   postalCode: string;

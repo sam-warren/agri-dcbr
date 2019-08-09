@@ -18,7 +18,7 @@ export const ProfileState: ProfileTypes = {
   phone: "2501234567",
   email: "johnrj@gmail.com",
   streetNumber: 123,
-  aptNumber: 456,
+  aptNumber: "456",
   streetName: "Imaginary",
   city: "CodeTown",
   postalCode: "A1B2C3",
@@ -26,7 +26,7 @@ export const ProfileState: ProfileTypes = {
   error: false
 }
 
-export const OperationDetailsState = {
+export const OperationDetailsState: OperationDetailsTypes = {
   operationName: "Quartech Breeders Ltd.",
   opWebsite: "www.google.com",
   operationType: "BREEDER&SELLER",
@@ -42,7 +42,7 @@ export const OperationDetailsState = {
   error: false
 }
 
-export const BreedingDetailsState = {
+export const BreedingDetailsState: BreedingDetailsTypes = {
   femaleIntactDogNum: 23,
   femaleIntactCatNum: 15,
   littersWhelped: 4,
@@ -58,7 +58,7 @@ export const BreedingDetailsState = {
   error: false
 }
 
-export const AnimalIdentificationState = {
+export const AnimalIdentificationState: AnimalIdentificationTypes = {
   hasPermId: true,
   permIdType: "OTHER",
   otherPermIdType: "Paper & pen",

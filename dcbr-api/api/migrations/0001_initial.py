@@ -63,7 +63,7 @@ class Migration(migrations.Migration):
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('comm_pref', models.CharField(choices=[('Email', 'email'), ('Mail', 'mail')], default='Email', max_length=10)),
-                ('operator_type', models.CharField(choices=[('BREEDER', 'breeder'), ('SELLER', 'seller'), ('BREEDER & SELLER', 'breeder & seller')], default='BREEDER', max_length=20)),
+                ('operator_type', models.CharField(choices=[('BREEDER', 'breeder'), ('SELLER', 'seller'), ('BREEDER&SELLER', 'breeder & seller')], default='BREEDER', max_length=20)),
                 ('operation_name', models.CharField(blank=True, default='', max_length=50)),
                 ('operation_URL', models.TextField(blank=True, default='', max_length=50)),
             ],
