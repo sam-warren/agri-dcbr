@@ -166,7 +166,7 @@ export default {
       v => v.length <= 50 || "Name must be less than 50 characters"
     ],
 
-     Rules: [
+    emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+/.test(v) || "E-mail must be valid"
     ]

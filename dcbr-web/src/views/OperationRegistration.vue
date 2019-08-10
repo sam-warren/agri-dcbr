@@ -187,7 +187,7 @@ export default {
     },
     removeLocation() {
       this.locations.pop();
-    },
+    }
   }
 };
 </script>
