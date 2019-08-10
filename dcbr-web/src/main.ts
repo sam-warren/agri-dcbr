@@ -2,12 +2,11 @@ import "./plugins/vuetify";
 import "./registerServiceWorker";
 import {store} from './store/store';
 
-//import VueKeycloakJs from "@dsb-norge/vue-keycloak-js";
-import axios from "axios";
+import router from "@/router";
+import store from "@/store/store";
 import Vue from "vue";
 
 import App from "./App.vue";
-import router from "./router";
 
 Vue.config.productionTip = false;
 

@@ -51,7 +51,7 @@
               <component :is="child" :key="child.name" v-bind:number="index+1"></component>
             </div>-->
 
-            <div v-for="(location, index) in locations">
+            <div v-for="(location, index) in locations" :key="index">
               <OperationLocation ref="operationlocation1" v-bind:number="index+1" />
             </div>
 
@@ -115,69 +115,68 @@ export default {
   methods: {
     createOperator() {
       console.log("Submit clicked");
+      let obj = {
+        first_name: this.$store.getters["profile/firstName"],
+        middle_name: this.$store.getters["profile/middleName"],
+        last_name: this.$store.getters["profile/lastName"],
+        comm_pref: this.$store.getters["profile/commType"],
+        phone_num: this.$store.getters["profile/phone"],
+        email_address: this.$store.getters["profile/email"],
+        operation_type: this.$store.getters["operationDetails/operationType"],
+        operation_name: this.$store.getters["operationDetails/operationName"],
+        operation_URL: this.$store.getters["operationDetails/opWebsite"],
 
+        addresses: [
+          {
+            type: "PRI",
+            street_num: this.$store.getters["profile/streetNumber"], 
+            suite: this.$store.getters["profile/aptNumber"],
+            street_name: this.$store.getters["profile/streetName"],
+            city: this.$store.getters["profile/city"],
+            postal_code: this.$store.getters["profile/postalCode"]
+          }
+        ],
+        associations: [
+          {
+            assoc_name: this.$store.getters["operationDetails/assocName"],
+            membership_num: this.$store.getters["operationDetails/assocMembership"],
+            assoc_URL: this.$store.getters["operationDetails/assocWebsite"]
+          }
+        ],
+        risk_factor_animals: [
+          {
+            num_dogs_intact: this.$store.getters["breedingDetails/femaleIntactDogNum"],
+            num_litter_whelped: this.$store.getters["breedingDetails/littersWhelped"],
+            num_cats_intact: this.$store.getters["breedingDetails/femaleIntactCatNum"],
+            num_litter_queened: this.$store.getters["breedingDetails/littersQueened"],
+            num_dog_sold: this.$store.getters["breedingDetails/dogsSold"],
+            num_dog_transferred: this.$store.getters["breedingDetails/dogsTransferred"],
+            num_dog_traded: this.$store.getters["breedingDetails/dogsTraded"],
+            num_dog_leased: this.$store.getters["breedingDetails/dogsLeased"],
+            num_cat_sold: this.$store.getters["breedingDetails/catsSold"],
+            num_cat_transferred: this.$store.getters["breedingDetails/catsTransferred"],
+            num_cat_traded: this.$store.getters["breedingDetails/catsTraded"],
+            num_cat_leased: this.$store.getters["breedingDetails/catsLeased"]
+          }
+        ],
+        risk_factor_operations: [
+          {
+            accidental_breeding: this.$store.getters["breedingDetails/accidentalBreeding"],
+            num_workers: this.$store.getters["breedingDetails/numWorkers"],
+            animal_type: this.$store.getters["breedingDetails/animalType"],
+            num_breeds_dogs: this.$store.getters["breedingDetails/numDogBreeds"],
+            num_breeds_cats: this.$store.getters["breedingDetails/numCatBreeds"],
+            has_vet: this.$store.getters["breedingDetails/hasVet"],
+            has_perm_id: this.$store.getters["animalIdentification/hasPermId"],
+            perm_id_type: this.$store.getters["animalIdentification/permIdType"],
+            perm_id_other: this.$store.getters["animalIdentification/otherPermIdType"]
+          }
+        ]
+      };
+      console.log(obj);
       axios
-        .post("http://localhost:8080/api/operator/", {
-          // for localhost, use "http://localhost:8080/api/operator"
-          // before deploying to Openshift, use "/api/operator"
-          first_name: this.$store.getters.firstName,
-          middle_name: this.$store.getters.middleName,
-          last_name: this.$store.getters.lastName,
-          comm_pref: this.$store.getters.commType,
-          phone_num: this.$store.getters.phone,
-          email_address: this.$store.getters.email,
-          operation_type: this.$store.getters.operationType,
-          operation_name: this.$store.getters.operationName,
-          operation_URL: this.store.getters.opWebsite,
-
-          addresses: [
-            {
-              type: "PRI",
-              street_num: this.$store.getters.streetNumber,
-              suite: this.$store.getters.aptNumber,
-              street_name: this.$store.getters.streetName,
-              city: this.$store.getters.city,
-              postal_code: this.$store.getters.postalCode
-            }
-          ],
-          associations: [
-            {
-              assoc_name: this.$store.getterss.assocName,
-              membership_num: this.$store.getters.assocMembership,
-              assoc_URL: this.$store.getters.assocWebsite
-            }
-          ],
-          risk_factor_animals: [
-            {
-              num_dogs_intact: this.$store.getters.femaleIntactDogNum,
-              num_litter_whelped: this.$store.getters.littersWhelped,
-              num_cats_intact: this.$store.getters.femaleIntactCatNum,
-              num_litter_queened: this.$store.getters.littersQueened,
-              num_dog_sold: this.$store.getters.dogsSold,
-              num_dog_transferred: this.$store.getters.dogsTransferred,
-              num_dog_traded: this.$store.getters.dogsTraded,
-              num_dog_leased: this.$store.getters.dogsLeased,
-              num_cat_sold: this.$store.getters.catsSold,
-              num_cat_transferred: this.$store.getters.catsTransferred,
-              num_cat_traded: this.$store.getters.catsTraded,
-              num_cat_leased: this.$store.getterss.catsLeased,
-            }
-          ],
-          risk_factor_operations: [
-            {
-              accidental_breeding: this.$store.getters.accidentalBreeding,
-              num_workers: this.$store.getters.numWorkers,
-              animal_type: this.$store.getters.animalType,
-              num_breeds_dogs: this.$store.getters.numDogBreeds,
-              num_breeds_cats: this.$store.getters.numCatBreeds,
-              has_vet: this.$store.getters.hasVet,
-              has_perm_id: this.$store.getters.hasPermId,
-              perm_id_type: this.$store.getters.permIdType,
-              perm_id_other: this.$store.getters.otherPermIdType
-            }
-          ]
-        })
-        .then(response => {})
+        .post("/api/operator/", obj)
+        .then(response => {console.log(response)})
         .catch(e => {
           this.errors.push(e);
         });

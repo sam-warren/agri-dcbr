@@ -52,8 +52,8 @@
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="accidentalBreeding" name="accidentalBreeding" row>
-                  <v-radio label="Yes" value="true"></v-radio>
-                  <v-radio label="No" value="false"></v-radio>
+                  <v-radio label="Yes" :value="true"></v-radio>
+                  <v-radio label="No" :value="false"></v-radio>
                 </v-radio-group>
               </v-layout>
               <!-- VET RELATIONSHIP -->
@@ -61,9 +61,9 @@
                 <subheader>Do you have a client veterinary relationship?</subheader>
               </v-layout>
               <v-layout mx-2>
-                <v-radio-group v-model="hasVet" name="hasVet" row>
-                  <v-radio label="Yes" value="true"></v-radio>
-                  <v-radio label="No" value="false"></v-radio>
+                <v-radio-group v-model="hasVet" row>
+                  <v-radio label="Yes" :value="true"></v-radio>
+                  <v-radio label="No" :value="false"></v-radio>
                 </v-radio-group>
               </v-layout>
 
@@ -130,6 +130,7 @@
   </v-container>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data: () => ({
     valid: false,
@@ -144,135 +145,140 @@ export default {
   }),
 
   computed: {
+    ...mapState({
+      operationDetails: state => state.operationDetails
+    }),
     operationName: {
       // getter
       get() {
-        return this.$store.getters.operationName;
+        return this.$store.getters["operationDetails/operationName"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("operationName", value);
+        this.$store.dispatch("operationDetails/operationName", value);
       }
     },
 
     operationType: {
       // getter
       get() {
-        return this.$store.getters.operationType;
+        return this.$store.getters["operationDetails/operationType"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("operationType", value);
+        this.$store.dispatch("operationDetails/operationType", value);
       }
     },
     opWebsite: {
       // getter
       get() {
-        return this.$store.getters.opWebsite;
+        return this.$store.getters["operationDetails/opWebsite"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("opWebsite", value);
+        this.$store.dispatch("operationDetails/opWebsite", value);
       }
     },
     assocName: {
       // getter
       get() {
-        return this.$store.getters.assocName;
+        return this.$store.getters["operationDetails/assocName"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("assocName", value);
+        this.$store.dispatch("operationDetails/assocName", value);
       }
     },
     assocMembership: {
       // getter
       get() {
-        return this.$store.getters.assocMembership;
+        return this.$store.getters["operationDetails/assocMembership"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("assocMembership", value);
+        this.$store.dispatch("operationDetails/assocMembership", value);
       }
     },
     assocWebsite: {
       // getter
       get() {
-        return this.$store.getters.assocWebsite;
+        return this.$store.getters["operationDetails/assocWebsite"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("assocWebsite", value);
+        this.$store.dispatch("operationDetails/assocWebsite", value);
       }
     },
     accidentalBreeding: {
       // getter
       get() {
-        return this.$store.getters.accidentalBreeding;
+        return this.$store.getters["operationDetails/accidentalBreeding"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("accidentalBreeding", value);
+        this.$store.dispatch("operationDetails/accidentalBreeding", value);
       }
     },
-    numWorkers: {
+    hasVet: {
       // getter
       get() {
-        return this.$store.getters.numWorkers;
+        return this.$store.getters["operationDetails/hasVet"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("numWorkers", value);
-      }
-    },
-    animalType: {
-      // getter
-      get() {
-        return this.$store.getters.animalType;
-      },
-      // setter
-      set(value) {
-        console.log(value);
-        this.$store.dispatch("animalType", value);
+        this.$store.dispatch("operationDetails/hasVet", value);
       }
     },
     numDogBreeds: {
       // getter
       get() {
-        return this.$store.getters.numDogBreeds;
+        return this.$store.getters["operationDetails/numDogBreeds"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("dogBreedsNum", value);
+        this.$store.dispatch("operationDetails/numDogBreeds", value);
       }
     },
     numCatBreeds: {
       // getter
       get() {
-        return this.$store.getters.numCatBreeds;
+        return this.$store.getters["operationDetails/numCatBreeds"];
       },
+      // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("catBreedsNum", value);
-      },
+        this.$store.dispatch("operationDetails/numCatBreeds", value);
+      }
     },
-    hasVet: {
+    numWorkers: {
       // getter
       get() {
-        return this.$store.getters.hasVet;
+        return this.$store.getters["operationDetails/numWorkers"];
       },
+      // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("hasVet", value);
+        this.$store.dispatch("operationDetails/numWorkers", value);
+      }
+    },
+    animalType: {
+      // getter
+      get() {
+        return this.$store.getters["operationDetails/animalType"];
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("operationDetails/animalType", value);
       }
     }
   },
@@ -280,3 +286,4 @@ export default {
   methods: {}
 };
 </script>
+ 
