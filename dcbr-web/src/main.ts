@@ -1,6 +1,5 @@
 import "./plugins/vuetify";
 import "./registerServiceWorker";
-import {store} from './store/store';
 
 import router from "@/router";
 import store from "@/store/store";
