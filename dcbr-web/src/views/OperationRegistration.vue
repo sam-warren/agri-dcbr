@@ -38,9 +38,9 @@
             <v-layout mt-4>
               <subheader>Do you have additional operation locations?</subheader>
             </v-layout>
-            <v-radio-group v-model="row" row>
-              <v-radio label="Yes" value="radio-1"></v-radio>
-              <v-radio label="No" value="radio-2"></v-radio>
+            <v-radio-group v-model="hasAdditionalLocations" name="hasAdditionalLocations" row>
+              <v-radio label="Yes" :value="true"></v-radio>
+              <v-radio label="No" :value="false"></v-radio>
             </v-radio-group>
             <!-- <OperationLocation ref="operationlocation" /> -->
             <v-card-title primary-title>
@@ -52,7 +52,7 @@
             </div>-->
 
             <div v-for="(location, index) in locations" :key="index">
-              <OperationLocation ref="operationlocation1" v-bind:number="index+1" />
+              <OperationLocation :number="index" />
             </div>
 
             <v-btn @click="addLocation()">
@@ -109,12 +109,32 @@ export default {
     return {
       e6: 1,
       errors: [],
-      locations: []
+      // locations: [OperationLocation, OperationLocation]
     };
   },
   methods: {
     createOperator() {
       console.log("Submit clicked");
+      let addresses = [ 
+        {
+          type: "PRI",
+          street_num: this.$store.getters["profile/streetNumber"], 
+          suite: this.$store.getters["profile/aptNumber"],
+          street_name: this.$store.getters["profile/streetName"],
+          city: this.$store.getters["profile/city"],
+          postal_code: this.$store.getters["profile/postalCode"]
+        },
+      ];
+      this.$store.getters["operationLocations/locations"].forEach((location) => {
+        addresses.push({
+          type: "OPN",
+          street_num: location.streetNumber,
+          suite: location.aptNumber,
+          street_name: location.streetName,
+          city: location.city,
+          postal_code: location.postalCode
+        });
+      });
       let obj = {
         first_name: this.$store.getters["profile/firstName"],
         middle_name: this.$store.getters["profile/middleName"],
@@ -126,16 +146,7 @@ export default {
         operation_name: this.$store.getters["operationDetails/operationName"],
         operation_URL: this.$store.getters["operationDetails/opWebsite"],
 
-        addresses: [
-          {
-            type: "PRI",
-            street_num: this.$store.getters["profile/streetNumber"], 
-            suite: this.$store.getters["profile/aptNumber"],
-            street_name: this.$store.getters["profile/streetName"],
-            city: this.$store.getters["profile/city"],
-            postal_code: this.$store.getters["profile/postalCode"]
-          }
-        ],
+        addresses: addresses,
         associations: [
           {
             assoc_name: this.$store.getters["operationDetails/assocName"],
@@ -183,12 +194,30 @@ export default {
       this.$router.push("payment");
     },
     addLocation() {
-      this.locations.push(OperationLocation);
+      this.$store.dispatch("operationLocations/locations", { operation: "add" });
     },
     removeLocation() {
-      this.locations.pop();
+      this.$store.dispatch("operationLocations/locations", { operation: "remove" });
     }
-  }
+  },
+  computed: {
+    hasAdditionalLocations: {
+      // getter
+      get() {
+        return this.$store.getters["operationLocations/hasAdditionalLocations"];
+      },
+      // setter
+      set(value) {
+        this.$store.dispatch("operationLocations/hasAdditionalLocations", value);
+      }
+    },
+    locations: {
+      // getter
+      get() { 
+        return this.$store.getters["operationLocations/locations"];
+      },
+    }
+  },
 };
 </script>
 

@@ -1,6 +1,5 @@
 import { MutationTree } from "vuex";
-
-import { RegistrationState } from "../registration/types";
+import { RegistrationState, Location } from "../registration/types";
 
 export const mutations: MutationTree<RegistrationState> = {
   // Profile
@@ -101,6 +100,39 @@ export const mutations: MutationTree<RegistrationState> = {
   hasVet(state: RegistrationState, payload: boolean) {
     state.error = false;
     state.operationDetails!.hasVet = payload;
+  },
+
+  // Operation Locations
+  hasAdditionalLocations(state: RegistrationState, payload: boolean) {
+    state.error = false;
+    state.operationLocations!.hasAdditionalLocations = payload;
+    state.operationLocations!.locations = [];
+  },
+  locations(state: RegistrationState, payload: { operation: string }) {
+    state.error = false;
+    if (payload.operation === "add") {
+      let newLocation: Location = {
+        streetNumber: 0, 
+        aptNumber: "", 
+        streetName: "", 
+        city: "", 
+        postalCode: ""
+      }
+      state.operationLocations!.locations.push(newLocation);
+    } else if (payload.operation === "remove") {
+      state.operationLocations!.locations.pop();
+    } else {
+      console.error("Could not perform requested mutation: add/remove location.");
+    }
+    // state.operationLocations!.locations = payload;
+  },
+  updateLocationProperty(state: RegistrationState, payload: {index: number, property: string, value: any}) {
+    state.error = false;
+    if (state && state.operationLocations && state.operationLocations.locations) {
+      let location: any = state.operationLocations.locations[payload.index];
+      location[payload.property] = payload.value;
+      state.operationLocations.locations[payload.index] = location;
+    }
   },
 
   // Breeding Details

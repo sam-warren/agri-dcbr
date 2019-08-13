@@ -4,7 +4,7 @@ import { RootState } from "../types";
 import { actions } from "./actions";
 import { getters } from "./getters";
 import { mutations } from "./mutations";
-import { RegistrationState } from "./types";
+import { RegistrationState, OperationLocationsTypes } from "./types";
 import { ProfileTypes } from "./types";
 import { OperationDetailsTypes } from "./types"
 import { BreedingDetailsTypes } from "./types"
@@ -42,6 +42,26 @@ export const OperationDetailsState: OperationDetailsTypes = {
   error: false
 }
 
+export const OperationLocationsState: OperationLocationsTypes = {
+  hasAdditionalLocations: true,
+  locations: [
+    {
+      streetNumber: 1234,
+      aptNumber: "13B",
+      streetName: "Boulevard Avenue",
+      city: "Chicoga",
+      postalCode: "123ABC"
+    },
+    {
+      streetNumber: 1936,
+      streetName: "Broken Drive",
+      aptNumber: "",
+      city: "Now Yerk",
+      postalCode: "ABC123"
+    }
+  ]
+}
+
 export const BreedingDetailsState: BreedingDetailsTypes = {
   femaleIntactDogNum: 23,
   femaleIntactCatNum: 15,
@@ -68,6 +88,7 @@ export const AnimalIdentificationState: AnimalIdentificationTypes = {
 export const state: RegistrationState = {
   profile: ProfileState,
   operationDetails: OperationDetailsState,
+  operationLocations: OperationLocationsState,
   breedingDetails: BreedingDetailsState,
   animalIdentification: AnimalIdentificationState,
   error: false
@@ -84,6 +105,14 @@ export const profile: Module<RegistrationState, RootState> = {
 };
 
 export const operationDetails: Module<RegistrationState, RootState> = {
+  namespaced,
+  state,
+  getters,
+  actions,
+  mutations
+};
+
+export const operationLocations: Module<RegistrationState, RootState> = {
   namespaced,
   state,
   getters,

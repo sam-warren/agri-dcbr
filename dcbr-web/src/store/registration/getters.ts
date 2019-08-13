@@ -2,10 +2,7 @@ import { GetterTree } from "vuex";
 
 import { RootState } from "../types";
 import { RegistrationState } from "./types";
-import { ProfileTypes } from "./types"
-import { OperationDetailsTypes } from "./types"
-import { BreedingDetailsTypes } from "./types"
-import { AnimalIdentificationTypes } from "./types"
+import { Location } from "./types";
 
 export const getters: GetterTree<RegistrationState, RootState> = {
   // Profile
@@ -108,6 +105,16 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     return operationDetails!.hasVet || false;
   },
 
+  // Operation Locations
+  hasAdditionalLocations(state: RegistrationState): boolean {
+    const { operationLocations } = state;
+    return operationLocations!.hasAdditionalLocations || false;
+  },
+  locations(state: RegistrationState): Location[] {
+    const { operationLocations } = state;
+    return operationLocations!.locations || [];
+  },
+  
   // Breeding Details
   femaleIntactDogNum(state: RegistrationState): number {
     const { breedingDetails } = state;
