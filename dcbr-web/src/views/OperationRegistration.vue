@@ -32,7 +32,7 @@
         <div v-for="(location, index) in locations">
           <OperationLocation ref="operationlocation1" v-bind:number="index+1" />
         </div>
-
+        <BreedingDetails ref="breedingdetails" />
         <!-- OPERATION LOCATION MENU -->
         <div>
           <MenuOperationLocation />
@@ -40,7 +40,6 @@
         <div>
           <AnimalIdentification ref="animalidentification" />
         </div>
-        <BreedingDetails ref="breedingdetails" />
 
         <v-btn
           large
