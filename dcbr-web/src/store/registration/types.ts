@@ -30,6 +30,19 @@ export interface OperationDetailsTypes {
   error: boolean;
 }
 
+export interface OperationLocationsTypes {
+  hasAdditionalLocations: boolean;
+  locations: Location[]
+}
+
+export interface Location {
+  streetNumber: number, 
+  aptNumber: string, 
+  streetName: string, 
+  city: string, 
+  postalCode: string
+}
+
 export interface BreedingDetailsTypes {
   femaleIntactDogNum: number;
   femaleIntactCatNum: number;
@@ -56,6 +69,7 @@ export interface AnimalIdentificationTypes {
 export interface RegistrationState {
   profile?: ProfileTypes;
   operationDetails?: OperationDetailsTypes;
+  operationLocations?: OperationLocationsTypes;
   breedingDetails?: BreedingDetailsTypes;
   animalIdentification?: AnimalIdentificationTypes;
   error: boolean;

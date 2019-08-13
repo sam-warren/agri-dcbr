@@ -2,6 +2,7 @@ import { ActionTree } from "vuex";
 
 import { RootState } from "../types";
 import { RegistrationState } from "./types";
+import { Location } from "./types";
 
 export const actions: ActionTree<RegistrationState, RootState> = {
   // Profile
@@ -23,7 +24,7 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   email(context: any, payload: string) {
     context.commit("email", payload);
   },
-  streetNumber(context: any, payload: string) {
+  streetNumber(context: any, payload: number) {
     context.commit("streetNumber", payload);
   },
   aptNumber(context: any, payload: string) {
@@ -38,94 +39,105 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   postalCode(context: any, payload: string) {
     context.commit("postalCode", payload);
   },
-  homeAsOperation(context: any, payload: string) {
+  homeAsOperation(context: any, payload: boolean) {
       context.commit("homeAsOperation", payload);
   },
 
   // Operation Details
-  operationName(context: any, payload: any) {
+  operationName(context: any, payload: string) {
     context.commit("operationName", payload);
   },
-  operationType(context: any, payload: any) {
+  operationType(context: any, payload: string) {
     context.commit("operationType", payload);
   },
-  opWebsite(context: any, payload: any) {
+  opWebsite(context: any, payload: string) {
     context.commit("opWebsite", payload);
   },
-  assocName(context: any, payload: any) {
+  assocName(context: any, payload: string) {
     context.commit("assocName", payload);
   },
-  assocMembership(context: any, payload: any) {
+  assocMembership(context: any, payload: number) {
     context.commit("assocMembership", payload);
   },
-  assocWebsite(context: any, payload: any) {
+  assocWebsite(context: any, payload: string) {
     context.commit("assocWebsite", payload);
   },
-  accidentalBreeding(context: any, payload: any) {
+  accidentalBreeding(context: any, payload: boolean) {
     context.commit("accidentalBreeding", payload);
   },
-  numWorkers(context: any, payload: any) {
+  numWorkers(context: any, payload: number) {
     context.commit("numWorkers", payload);
   },
-  animalType(context: any, payload: any) {
+  animalType(context: any, payload: string) {
     context.commit("animalType", payload);
   },
-  numDogBreeds(context: any, payload: any) {
+  numDogBreeds(context: any, payload: number) {
    context.commit("numDogBreeds", payload);
   },
-  numCatBreeds(context: any, payload: any) {
+  numCatBreeds(context: any, payload: number) {
    context.commit("numCatBreeds", payload);
   },
-  hasVet(context: any, payload: any) {
+  hasVet(context: any, payload: boolean) {
     context.commit("hasVet", payload);
   },
 
+  // Operation Locations
+  hasAdditionalLocations(context: any, payload: boolean) {
+    context.commit("hasAdditionalLocations", payload);
+  },
+  locations(context: any, payload: { operation: string }) {
+    context.commit("locations", payload);
+  },
+  updateLocationProperty(context: any, payload: {index: number, property: string, value: any}) {
+    context.commit("updateLocationProperty", payload);
+  },
+
   // Breeding Details
-  femaleIntactDogNum(context: any, payload: any) {
+  femaleIntactDogNum(context: any, payload: number) {
     context.commit("femaleIntactDogNum", payload);
   },
-  femaleIntactCatNum(context: any, payload: any) {
+  femaleIntactCatNum(context: any, payload: number) {
     context.commit("femaleIntactCatNum", payload);
   },
-  littersWhelped(context: any, payload: any) {
+  littersWhelped(context: any, payload: number) {
     context.commit("littersWhelped", payload);
   },
-  littersQueened(context: any, payload: any) {
+  littersQueened(context: any, payload: number) {
     context.commit("littersQueened", payload);
   },
-  dogsTransferred(context: any, payload: any) {
+  dogsTransferred(context: any, payload: number) {
     context.commit("dogsTransferred", payload);
   },
-  dogsSold(context: any, payload: any) {
+  dogsSold(context: any, payload: number) {
     context.commit("dogsSold", payload);
   },
-  dogsTraded(context: any, payload: any) {
+  dogsTraded(context: any, payload: number) {
     context.commit("dogsTraded", payload);
   },
-  dogsLeased(context: any, payload: any) {
+  dogsLeased(context: any, payload: number) {
     context.commit("dogsLeased", payload);
   },
-  catsTransferred(context: any, payload: any) {
+  catsTransferred(context: any, payload: number) {
     context.commit("catsTransferred", payload);
   },
-  catsSold(context: any, payload: any) {
+  catsSold(context: any, payload: number) {
     context.commit("catsSold", payload);
   },
-  catsTraded(context: any, payload: any) {
+  catsTraded(context: any, payload: number) {
     context.commit("catsTraded", payload);
   },
-  catsLeased(context: any, payload: any) {
+  catsLeased(context: any, payload: number) {
     context.commit("catsLeased", payload);
   },
 
   // Animal Identification
-  hasPermId(context: any, payload: any) {
+  hasPermId(context: any, payload: boolean) {
     context.commit("hasPermId", payload);
   },
-  permIdType(context: any, payload: any) {
+  permIdType(context: any, payload: string) {
     context.commit("permIdType", payload);
   },
-  otherPermIdType(context: any, payload: any) {
+  otherPermIdType(context: any, payload: string) {
     context.commit("otherPermIdType", payload);
   },
 };
