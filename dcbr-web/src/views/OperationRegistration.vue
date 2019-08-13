@@ -1,5 +1,5 @@
 <template>
-  <v-app class="grey lighten-4">
+  <div class="grey lighten-4">
     <v-stepper flat>
       <v-stepper-header>
         <v-stepper-step complete editable step="1">Registration</v-stepper-step>
@@ -16,62 +16,21 @@
 
     <v-content class="mx-4 mb-4 my-4">
       <v-container fluid>
-        <!-- <v-btn @click="prepopulate()">
-          <v-btn-text>prepopulate</v-btn-text>
-          <v-icon dark>add</v-icon>
-        </v-btn>-->
+        <div>
+          <Profile ref="profile" />
+        </div>
 
-        <v-stepper non-linear v-model="e6" vertical>
-          <v-stepper-step editable :complete="e6 > 1" step="1">Profile</v-stepper-step>
-          <v-stepper-content step="1">
-            <Profile ref="profile" />
-          </v-stepper-content>
-
-          <v-stepper-step editable :complete="e6 > 2" step="2">Operation Details</v-stepper-step>
-          <v-stepper-content step="2">
-            <OperationDetails ref="operationdetails" />
-          </v-stepper-content>
-
-          <v-stepper-step editable :complete="e6 > 3" step="3">Operation Locations</v-stepper-step>
-
-          <v-stepper-content step="3">
-            <v-layout mt-4>
-              <subheader>Do you have additional operation locations?</subheader>
-            </v-layout>
-            <v-radio-group v-model="hasAdditionalLocations" name="hasAdditionalLocations" row>
-              <v-radio label="Yes" :value="true"></v-radio>
-              <v-radio label="No" :value="false"></v-radio>
-            </v-radio-group>
-            <!-- <OperationLocation ref="operationlocation" /> -->
-            <v-card-title primary-title>
-              <h2>Operation Location(s)</h2>
-            </v-card-title>
-
-            <!-- <div v-for="(child, index) in children">
-              <component :is="child" :key="child.name" v-bind:number="index+1"></component>
-            </div>-->
-
-            <div v-for="(location, index) in locations" :key="index">
-              <OperationLocation :number="index" />
-            </div>
-
-            <v-btn @click="addLocation()">
-              <v-btn-text>Add</v-btn-text>
-              <v-icon dark>add</v-icon>
-            </v-btn>
-
-            <v-btn @click="removeLocation()">
-              <v-btn-text>Remove</v-btn-text>
-              <v-icon dark>remove</v-icon>
-            </v-btn>
-          </v-stepper-content>
-
-          <v-stepper-step editable :complete="e6 > 4" step="4">Animal Identification</v-stepper-step>
+        <div editable :complete="e6 > 2" step="2">
+          <OperationDetails ref="operationdetails" />
+        </div>
+        <BreedingDetails ref="breedingdetails" />
+        <!-- OPERATION LOCATION MENU -->
+        <div>
+          <MenuOperationLocation />
+        </div>
+        <div>
           <AnimalIdentification ref="animalidentification" />
-
-          <v-stepper-step editable :complete="e6 > 5" step="5">Breeding Details</v-stepper-step>
-          <BreedingDetails ref="breedingdetails" />
-        </v-stepper>
+        </div>
 
         <v-btn
           large
@@ -83,7 +42,7 @@
         >Submit</v-btn>
       </v-container>
     </v-content>
-  </v-app>
+  </div>
 </template>
 
 
@@ -93,6 +52,7 @@ import Profile from "@/components/Profile";
 import OperationLocation from "@/components/OperationLocation";
 import AnimalIdentification from "@/components/AnimalIdentification";
 import BreedingDetails from "@/components/BreedingDetails";
+import MenuOperationLocation from "@/components/MenuOperationLocation";
 //import Footer from "@/components/Footer";
 import axios from "axios";
 
@@ -103,7 +63,8 @@ export default {
     OperationDetails,
     OperationLocation,
     AnimalIdentification,
-    BreedingDetails
+    BreedingDetails,
+    MenuOperationLocation
   },
   data() {
     return {
@@ -193,30 +154,6 @@ export default {
         });
       this.$router.push("payment");
     },
-    addLocation() {
-      this.$store.dispatch("operationLocations/locations", { operation: "add" });
-    },
-    removeLocation() {
-      this.$store.dispatch("operationLocations/locations", { operation: "remove" });
-    }
-  },
-  computed: {
-    hasAdditionalLocations: {
-      // getter
-      get() {
-        return this.$store.getters["operationLocations/hasAdditionalLocations"];
-      },
-      // setter
-      set(value) {
-        this.$store.dispatch("operationLocations/hasAdditionalLocations", value);
-      }
-    },
-    locations: {
-      // getter
-      get() { 
-        return this.$store.getters["operationLocations/locations"];
-      },
-    }
   },
 };
 </script>
