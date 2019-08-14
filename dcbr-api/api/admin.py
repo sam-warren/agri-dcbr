@@ -1,5 +1,6 @@
 from django.contrib import admin
 from api.models import (
+    Registration,
     Operator,
     Address,
     Inspection,
@@ -8,6 +9,7 @@ from api.models import (
     Association_Membership,
 )
 
+admin.site.register(Registration)
 admin.site.register(Operator)
 admin.site.register(Address)
 admin.site.register(Inspection)

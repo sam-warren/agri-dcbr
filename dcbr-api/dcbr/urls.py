@@ -17,6 +17,10 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import path
 
+admin.site.site_header = "Dog and Cat Breeder Registry"
+admin.site.site_title = "Dog and Cat Breeder Registry"
+admin.site.index_title = "Dog and Cat Breeder Registry"
+
 urlpatterns = [
     path("admin/doc/", include("django.contrib.admindocs.urls")),
     path("admin/", admin.site.urls),

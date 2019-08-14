@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from api.serializers import (
+    Registration_Serializer,
     Operator_Serializer,
     Address_Serializer,
     Risk_Factor_Animal_Serializer,
@@ -13,6 +14,7 @@ from api.serializers import (
 
 # from api.models import Category, Entry, Operator, Address
 from api.models import (
+    Registration,
     Operator,
     Address,
     Inspection,
@@ -21,6 +23,13 @@ from api.models import (
     Association_Membership,
 )
 
+class Registration_ViewSet(viewsets.ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing operators.
+    """
+
+    queryset = Registration.objects.all()
+    serializer_class = Registration_Serializer
 
 class Operator_ViewSet(viewsets.ModelViewSet):
     """

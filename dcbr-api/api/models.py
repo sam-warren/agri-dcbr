@@ -4,6 +4,37 @@ from django.core.validators import URLValidator, MaxValueValidator, MinValueVali
 from django.utils.translation import gettext as _
 
 
+class Registration(models.Model):
+    ACTIVE = "ACTIVE"
+    SUSPENDED = "SUSPENDED"
+    CANCELLED = "CANCELLED"
+    PENDING_PAYMENT = "PENDING_PAYMENT"
+    PENDING_INSPECTOR_REVIEW = "PENDING_INSPECTOR_REVIEW"
+    PENDING_RENEWAL = "PENDING_RENEWAL"
+
+    REG_STATUS_CHOICES = (
+        (ACTIVE, "ACTIVE"),
+        (SUSPENDED, "SUSPENDED"),
+        (CANCELLED, "CANCELLED"),
+        (PENDING_PAYMENT, "PENDING_PAYMENT"),
+        (PENDING_INSPECTOR_REVIEW, "PENDING_INSPECTOR_REVIEW"),
+        (PENDING_RENEWAL, "PENDING_RENEWAL"),
+    )
+
+    operator_status = models.CharField(
+        max_length=50, choices=REG_STATUS_CHOICES, default=ACTIVE
+    )  
+    def __str__(self):
+        return "Reg Number: \t %s " % (self.pk)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = "Registrations"
+        verbose_name = "new registration"
+
+
 class Operator(models.Model):
 
     EMAIL = "Email"

@@ -25,8 +25,7 @@ schema_view = get_schema_view(
 
 router = routers.SimpleRouter()
 
-# router.register(r"category", views.CategoryViewSet, "Category")
-# router.register(r"entry", views.EntryViewSet, "Entry")
+router.register(r"registration", views.Registration_ViewSet, "Registration")
 router.register(r"operator", views.Operator_ViewSet, "Operator")
 router.register(r"address", views.Address_ViewSet, "Address")
 router.register(r"inspection", views.Inspection_ViewSet, "Inspection")

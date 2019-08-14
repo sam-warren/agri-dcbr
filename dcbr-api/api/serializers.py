@@ -2,6 +2,7 @@ from rest_framework.serializers import ModelSerializer
 
 # from api.models import Category, Entry, Operator, Address
 from api.models import (
+    Registration,
     Operator,
     Address,
     Inspection,
@@ -10,6 +11,13 @@ from api.models import (
     Association_Membership,
     Inspection,
 )
+
+class Registration_Serializer(ModelSerializer):
+    class Meta:
+        model = Registration
+        fields = "__all__"
+
+
 
 
 class Address_Serializer(ModelSerializer):
