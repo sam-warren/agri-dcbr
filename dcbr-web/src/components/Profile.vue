@@ -115,7 +115,7 @@
                 </v-flex>
               </v-layout>
               <v-layout mx-2 mt-5>
-                <subheader>What is the best way to contact you?</subheader>
+                <v-subheader>What is the best way to contact you?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="commType" name="commType" row>

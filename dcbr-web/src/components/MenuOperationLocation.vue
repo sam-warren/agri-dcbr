@@ -14,7 +14,7 @@
 
               <!-- Type of Operator -->
               <v-layout mt-4>
-                <subheader>Do you have additional operation locations?</subheader>
+                <v-subheader>Do you have additional operation locations?</v-subheader>
               </v-layout>
 
               <v-radio-group v-model="hasAdditionalLocations" row>
@@ -27,14 +27,16 @@
               <div v-for="(location, index) in locations" :key="index">
                 <OperationLocation :number="index" />
               </div>
-              <v-btn @click="addLocation()">
-                <v-btn-text>Add</v-btn-text>
-                <v-icon dark>add</v-icon>
-              </v-btn>
-              <v-btn @click="removeLocation()">
-                <v-btn-text>Remove</v-btn-text>
-                <v-icon dark>remove</v-icon>
-              </v-btn>
+              <div class="text-center">
+                <v-btn @click="addLocation()">
+                  Add
+                  <v-icon dark>add</v-icon>
+                </v-btn>
+                <v-btn @click="removeLocation()">
+                  Remove
+                  <v-icon dark>remove</v-icon>
+                </v-btn>
+              </div>
             </v-container>
           </v-form>
         </v-card>

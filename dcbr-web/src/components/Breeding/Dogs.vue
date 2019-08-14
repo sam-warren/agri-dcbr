@@ -11,7 +11,7 @@
           <v-card flat>
             <!-- INTACT BREEDING DOG -->
             <v-layout mx-2 mt-4>
-              <subheader>How many intact breeding female dogs over the age of eight months do you have?</subheader>
+              <v-subheader>How many intact breeding female dogs over the age of eight months do you have?</v-subheader>
             </v-layout>
 
             <v-layout row wrap ma-2>
@@ -25,7 +25,7 @@
             </v-layout>
             <!-- Type of Animal -->
             <v-layout mx-2 mt-4>
-              <subheader>How many litters were whelped in one calendar year overall (all female dogs combined)?</subheader>
+              <v-subheader>How many litters were whelped in one calendar year overall (all female dogs combined)?</v-subheader>
             </v-layout>
 
             <v-layout row wrap ma-2>
@@ -35,7 +35,7 @@
             </v-layout>
 
             <v-layout mx-2 mt-4>
-              <subheader>What number of puppies did you ............... in the previous calendar year?</subheader>
+              <v-subheader>What number of puppies did you ............... in the previous calendar year?</v-subheader>
             </v-layout>
 
             <v-layout row wrap ma-2>

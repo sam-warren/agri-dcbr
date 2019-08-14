@@ -12,7 +12,7 @@
             <v-container>
               <!--OPERATION DETAILS-NAME  -->
               <v-layout mx-2 mt-4>
-                <subheader>Does your operation run under a specific name? i.e "business name" (Optional)</subheader>
+                <v-subheader>Does your operation run under a specific name? i.e "business name" (Optional)</v-subheader>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 mr-5>
@@ -25,7 +25,7 @@
               </v-layout>
               <!-- Type of Operator -->
               <v-layout mx-2 mt-4>
-                <subheader>What type of operator are you?</subheader>
+                <v-subheader>What type of operator are you?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="operationType" name="operationType" row>
@@ -37,7 +37,7 @@
               </v-layout>
               <!-- Type of Animal -->
               <v-layout mx-2 mt-4>
-                <subheader>What type of animal do you work with?</subheader>
+                <v-subheader>What type of animal do you work with?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="animalType" row>
@@ -48,7 +48,7 @@
               </v-layout>
               <!-- ACCIDENTAL BREEDING -->
               <v-layout mx-2 mt-4>
-                <subheader>Over the past calendar year, did you have an accidental breeding?</subheader>
+                <v-subheader>Over the past calendar year, did you have an accidental breeding?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="accidentalBreeding" name="accidentalBreeding" row>
@@ -58,7 +58,7 @@
               </v-layout>
               <!-- VET RELATIONSHIP -->
               <v-layout mx-2 mt-4>
-                <subheader>Do you have a client veterinary relationship?</subheader>
+                <v-subheader>Do you have a client veterinary relationship?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="hasVet" row>
@@ -69,7 +69,7 @@
 
               <!-- How many breeds -->
               <v-layout mx-2 mt-4>
-                <subheader>How many breeds of animals are you currently breeding/selling?</subheader>
+                <v-subheader>How many breeds of animals are you currently breeding/selling?</v-subheader>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 lg6>
@@ -91,7 +91,7 @@
               </v-layout>
               <!-- NUMBER OF EMPLOYEES -->
               <v-layout mx-2 mt-4>
-                <subheader>How many people are currently working in your operation including yourself?</subheader>
+                <v-subheader>How many people are currently working in your operation including yourself?</v-subheader>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 lg6>
@@ -105,7 +105,7 @@
               </v-layout>
               <!--ASSOCIATION REALTION -->
               <v-layout mx-2 mt-4>
-                <subheader>Are you a member of a relevant breeding or selling association? (Optional)</subheader>
+                <v-subheader>Are you a member of a relevant breeding or selling association? (Optional)</v-subheader>
               </v-layout>
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>

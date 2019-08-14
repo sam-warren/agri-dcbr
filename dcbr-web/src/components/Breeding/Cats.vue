@@ -10,7 +10,7 @@
         <v-card flat>
           <!-- INTACT BREEDING CAT -->
           <v-layout mx-2 mt-4>
-            <subheader>How many intact breeding female cats over the age of xxxx months do you have?</subheader>
+            <v-subheader>How many intact breeding female cats over the age of xxxx months do you have?</v-subheader>
           </v-layout>
 
           <v-layout row wrap ma-2>
@@ -24,7 +24,7 @@
           </v-layout>
           <!-- Type of Animal -->
           <v-layout mx-2 mt-4>
-            <subheader>How many litters were queened in one calendar year overall (all female cats combined)?</subheader>
+            <v-subheader>How many litters were queened in one calendar year overall (all female cats combined)?</v-subheader>
           </v-layout>
 
           <v-layout row wrap ma-2>
@@ -34,7 +34,7 @@
           </v-layout>
 
           <v-layout mx-2 mt-4>
-            <subheader>What numnber of kittens did you ............... in the previous calendar year?</subheader>
+            <v-subheader>What numnber of kittens did you ............... in the previous calendar year?</v-subheader>
           </v-layout>
 
           <v-layout row wrap ma-2>

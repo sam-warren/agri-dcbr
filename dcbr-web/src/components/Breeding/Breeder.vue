@@ -9,7 +9,7 @@
         </v-card-title>
         <v-card flat>
           <v-layout mx-2>
-            <subheader>Breeder related questions will go here ?</subheader>
+            <v-subheader>Breeder related questions will go here ?</v-subheader>
           </v-layout>
           <v-layout mx-2>
             <v-radio-group v-model="hasId" row>

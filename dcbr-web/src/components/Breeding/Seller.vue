@@ -9,7 +9,7 @@
         </v-card-title>
         <v-card flat>
           <v-layout mx-2>
-            <subheader>Seller related questions will go here ?</subheader>
+            <v-subheader>Seller related questions will go here ?</v-subheader>
           </v-layout>
           <v-layout mx-2>
             <v-radio-group v-model="hasId" row>

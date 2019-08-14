@@ -14,7 +14,7 @@
 
               <!-- Type of Operator -->
               <v-layout mx-2 mt-4>
-                <subheader>Do you maintain a permanent identification of your animals?</subheader>
+                <v-subheader>Do you maintain a permanent identification of your animals?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="hasPermId" name="hasPermId" row>
@@ -24,7 +24,7 @@
               </v-layout>
               <!-- Type of Animal -->
               <v-layout mx-2 mt-4>
-                <subheader>What type of identification technology do you use?</subheader>
+                <v-subheader>What type of identification technology do you use?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="permIdType" name="permIdType" row>
