@@ -134,6 +134,8 @@ import { mapState } from "vuex";
 export default {
   data: () => ({
     valid: false,
+    accidentalBreedingVisited: false,
+    hasVetVisited: false,
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
@@ -196,7 +198,7 @@ export default {
     assocMembership: {
       // getter
       get() {
-        return this.$store.getters["operationDetails/assocMembership"];
+        return this.$store.getters["operationDetails/assocMembership"] || "";
       },
       // setter
       set(value) {
@@ -218,10 +220,17 @@ export default {
     accidentalBreeding: {
       // getter
       get() {
-        return this.$store.getters["operationDetails/accidentalBreeding"] || "";
+        if (this.accidentalBreedingVisited == false) {
+          return "";
+        } else {
+          return this.$store.getters["operationDetails/accidentalBreeding"];
+        }
       },
       // setter
       set(value) {
+        if (this.accidentalBreeding == "") {
+          this.accidentalBreedingVisited = true;
+        }
         console.log(value);
         this.$store.dispatch("operationDetails/accidentalBreeding", value);
       }
@@ -229,10 +238,17 @@ export default {
     hasVet: {
       // getter
       get() {
-        return this.$store.getters["operationDetails/hasVet"] || "";
+        if (this.hasVetVisited == false) {
+          return "";
+        } else {
+          return this.$store.getters["operationDetails/hasVet"];
+        }
       },
       // setter
       set(value) {
+        if (this.hasVet == "") {
+          this.hasVetVisited = true;
+        }
         console.log(value);
         this.$store.dispatch("operationDetails/hasVet", value);
       }

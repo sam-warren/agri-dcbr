@@ -51,7 +51,7 @@
 export default {
   data: () => ({
     valid: false,
-
+    visited: false,
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
@@ -67,10 +67,17 @@ export default {
     hasPermId: {
       // getter
       get() {
-        return this.$store.getters["animalIdentification/hasPermId"] || "";
+        if (this.visited == false) {
+          return "";
+        } else {
+          return this.$store.getters["animalIdentification/hasPermId"];
+        }
       },
       // setter
       set(value) {
+        if (this.hasPermId == "") {
+          this.visited = true;
+        }
         console.log(value);
         this.$store.dispatch("animalIdentification/hasPermId", value);
         if (value == false) {

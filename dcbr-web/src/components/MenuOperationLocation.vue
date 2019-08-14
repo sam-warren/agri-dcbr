@@ -51,6 +51,7 @@ import OperationLocation from "@/components/OperationLocation";
 export default {
   data: () => ({
     valid: false,
+    visited: false,
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
@@ -78,10 +79,17 @@ export default {
     hasAdditionalLocations: {
       // getter
       get() {
-        return this.$store.getters["operationLocations/hasAdditionalLocations"] || "";
+        if (this.visited == false) {
+          return "";
+        } else {
+          return this.$store.getters["operationLocations/hasAdditionalLocations"];
+        }
       },
       // setter
       set(value) {
+        if (this.hasAdditionalLocations == "") {
+          this.visited = true;
+        }
         this.$store.dispatch("operationLocations/hasAdditionalLocations", value);
         if(value == true) {
           if(value == true && this.$store.getters["operationLocations/locations"].length == 0) {
