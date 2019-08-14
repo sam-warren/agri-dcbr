@@ -66,7 +66,7 @@ export default {
     femaleIntactCatNum: {
       // getter
       get() {
-        return this.$store.getters["breedingDetails/femaleIntactCatNum"];
+        return this.$store.getters["breedingDetails/femaleIntactCatNum"] || "";
       },
       // setter
       set(value) {
@@ -77,7 +77,7 @@ export default {
     littersQueened: {
       // getter
       get() {
-        return this.$store.getters["breedingDetails/littersQueened"];
+        return this.$store.getters["breedingDetails/littersQueened"] || "";
       },
       // setter
       set(value) {
@@ -88,7 +88,7 @@ export default {
     catsTransferred: {
       // getter
       get() {
-        return this.$store.getters["breedingDetails/catsTransferred"];
+        return this.$store.getters["breedingDetails/catsTransferred"] || "";
       },
       // setter
       set(value) {
@@ -99,7 +99,7 @@ export default {
     catsSold: {
       // getter
       get() {
-        return this.$store.getters["breedingDetails/catsSold"];
+        return this.$store.getters["breedingDetails/catsSold"] || "";
       },
       // setter
       set(value) {
@@ -110,7 +110,7 @@ export default {
     catsTraded: {
       // getter
       get() {
-        return this.$store.getters["breedingDetails/catsTraded"];
+        return this.$store.getters["breedingDetails/catsTraded"] || "";
       },
       // setter
       set(value) {
@@ -121,7 +121,7 @@ export default {
     catsLeased: {
       // getter
       get() {
-        return this.$store.getters["breedingDetails/catsLeased"];
+        return this.$store.getters["breedingDetails/catsLeased"] || "";
       },
       // setter
       set(value) {

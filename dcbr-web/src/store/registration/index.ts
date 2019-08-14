@@ -11,77 +11,62 @@ import { BreedingDetailsTypes } from "./types"
 import { AnimalIdentificationTypes } from "./types"
 
 export const ProfileState: ProfileTypes = {
-  firstName: "John",
-  middleName: "Ray",
-  lastName: "Johnson",
-  commType: "Email",
-  phone: "2501234567",
-  email: "johnrj@gmail.com",
-  streetNumber: 123,
-  aptNumber: "456",
-  streetName: "Imaginary",
-  city: "CodeTown",
-  postalCode: "A1B2C3",
-  homeAsOperation: true,
+  firstName: "",
+  middleName: "",
+  lastName: "",
+  commType: "",
+  phone: "",
+  email: "",
+  streetNumber: 0,
+  aptNumber: "",
+  streetName: "",
+  city: "",
+  postalCode: "",
+  homeAsOperation: false,
   error: false
 }
 
 export const OperationDetailsState: OperationDetailsTypes = {
-  operationName: "Quartech Breeders Ltd.",
-  opWebsite: "www.google.com",
-  operationType: "BREEDER&SELLER",
-  assocName: "Quartech",
-  assocMembership: 142,
-  assocWebsite: "www.quartech.com",
-  accidentalBreeding: true,
-  numWorkers: 14,
-  animalType: "DOG&CAT",
-  numDogBreeds: 10,
-  numCatBreeds: 4,
-  hasVet: true,
+  operationName: "",
+  opWebsite: "",
+  operationType: "",
+  assocName: "",
+  assocMembership: 0,
+  assocWebsite: "",
+  accidentalBreeding: false,
+  numWorkers: 0,
+  animalType: "0",
+  numDogBreeds: 0,
+  numCatBreeds: 0,
+  hasVet: false,
   error: false
 }
 
 export const OperationLocationsState: OperationLocationsTypes = {
-  hasAdditionalLocations: true,
-  locations: [
-    {
-      streetNumber: 1234,
-      aptNumber: "13B",
-      streetName: "Boulevard Avenue",
-      city: "Chicoga",
-      postalCode: "123ABC"
-    },
-    {
-      streetNumber: 1936,
-      streetName: "Broken Drive",
-      aptNumber: "",
-      city: "Now Yerk",
-      postalCode: "ABC123"
-    }
-  ]
+  hasAdditionalLocations: false,
+  locations: []
 }
 
 export const BreedingDetailsState: BreedingDetailsTypes = {
-  femaleIntactDogNum: 23,
-  femaleIntactCatNum: 15,
-  littersWhelped: 4,
-  littersQueened: 3,
-  dogsSold: 3,
-  dogsTransferred: 4,
-  dogsTraded: 2,
+  femaleIntactDogNum: 0,
+  femaleIntactCatNum: 0,
+  littersWhelped: 0,
+  littersQueened: 0,
+  dogsSold: 0,
+  dogsTransferred: 0,
+  dogsTraded: 0,
   dogsLeased: 0,
-  catsSold: 3,
-  catsTransferred: 2,
+  catsSold: 0,
+  catsTransferred: 0,
   catsTraded: 0,
-  catsLeased: 6,
+  catsLeased: 0,
   error: false
 }
 
 export const AnimalIdentificationState: AnimalIdentificationTypes = {
-  hasPermId: true,
-  permIdType: "OTHER",
-  otherPermIdType: "Files",
+  hasPermId: false,
+  permIdType: "",
+  otherPermIdType: "",
   error: false
 }
 

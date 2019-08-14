@@ -53,7 +53,6 @@ import OperationLocation from "@/components/OperationLocation";
 import AnimalIdentification from "@/components/AnimalIdentification";
 import BreedingDetails from "@/components/BreedingDetails";
 import MenuOperationLocation from "@/components/MenuOperationLocation";
-//import Footer from "@/components/Footer";
 import axios from "axios";
 
 export default {
@@ -70,7 +69,6 @@ export default {
     return {
       e6: 1,
       errors: [],
-      // locations: [OperationLocation, OperationLocation]
     };
   },
   methods: {

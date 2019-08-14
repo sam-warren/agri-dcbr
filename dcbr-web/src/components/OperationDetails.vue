@@ -72,7 +72,7 @@
                 <v-subheader>How many breeds of animals are you currently breeding/selling?</v-subheader>
               </v-layout>
               <v-layout row wrap mx-2>
-                <v-flex xs12 md4 lg6>
+                <v-flex xs12 md4 lg6 v-if="this.animalType != 'CAT'">
                   <v-text-field
                     v-model.number="numDogBreeds"
                     type="number"
@@ -80,7 +80,7 @@
                     name="numDogBreeds"
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 md4 lg6>
+                <v-flex xs12 md4 lg6 v-if="this.animalType != 'DOG'">
                   <v-text-field
                     v-model.number="numCatBreeds"
                     type="number"
@@ -134,6 +134,8 @@ import { mapState } from "vuex";
 export default {
   data: () => ({
     valid: false,
+    accidentalBreedingVisited: false,
+    hasVetVisited: false,
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
@@ -196,7 +198,7 @@ export default {
     assocMembership: {
       // getter
       get() {
-        return this.$store.getters["operationDetails/assocMembership"];
+        return this.$store.getters["operationDetails/assocMembership"] || "";
       },
       // setter
       set(value) {
@@ -218,10 +220,17 @@ export default {
     accidentalBreeding: {
       // getter
       get() {
-        return this.$store.getters["operationDetails/accidentalBreeding"];
+        if (this.accidentalBreedingVisited == false) {
+          return "";
+        } else {
+          return this.$store.getters["operationDetails/accidentalBreeding"];
+        }
       },
       // setter
       set(value) {
+        if (this.accidentalBreeding == "") {
+          this.accidentalBreedingVisited = true;
+        }
         console.log(value);
         this.$store.dispatch("operationDetails/accidentalBreeding", value);
       }
@@ -229,10 +238,17 @@ export default {
     hasVet: {
       // getter
       get() {
-        return this.$store.getters["operationDetails/hasVet"];
+        if (this.hasVetVisited == false) {
+          return "";
+        } else {
+          return this.$store.getters["operationDetails/hasVet"];
+        }
       },
       // setter
       set(value) {
+        if (this.hasVet == "") {
+          this.hasVetVisited = true;
+        }
         console.log(value);
         this.$store.dispatch("operationDetails/hasVet", value);
       }
@@ -240,7 +256,7 @@ export default {
     numDogBreeds: {
       // getter
       get() {
-        return this.$store.getters["operationDetails/numDogBreeds"];
+        return this.$store.getters["operationDetails/numDogBreeds"] || "";
       },
       // setter
       set(value) {
@@ -251,7 +267,7 @@ export default {
     numCatBreeds: {
       // getter
       get() {
-        return this.$store.getters["operationDetails/numCatBreeds"];
+        return this.$store.getters["operationDetails/numCatBreeds"] || "";
       },
       // setter
       set(value) {
@@ -262,7 +278,7 @@ export default {
     numWorkers: {
       // getter
       get() {
-        return this.$store.getters["operationDetails/numWorkers"];
+        return this.$store.getters["operationDetails/numWorkers"] || "";
       },
       // setter
       set(value) {
@@ -279,10 +295,26 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("operationDetails/animalType", value);
+        if (value == "DOG") {
+          this.$store.dispatch("operationDetails/numCatBreeds", 0)
+          this.$store.dispatch("breedingDetails/catsLeased", 0);
+          this.$store.dispatch("breedingDetails/catsSold", 0);
+          this.$store.dispatch("breedingDetails/catsTraded", 0);
+          this.$store.dispatch("breedingDetails/catsTransferred", 0);
+          this.$store.dispatch("breedingDetails/femaleIntactCatNum", 0);
+          this.$store.dispatch("breedingDetails/littersQueened", 0);
+        } else if (value == "CAT") {
+          this.$store.dispatch("operationDetails/numDogBreeds", 0)
+          this.$store.dispatch("breedingDetails/dogsLeased", 0);
+          this.$store.dispatch("breedingDetails/dogsSold", 0);
+          this.$store.dispatch("breedingDetails/dogsTraded", 0);
+          this.$store.dispatch("breedingDetails/dogsTransferred", 0);
+          this.$store.dispatch("breedingDetails/femaleIntactDogNum", 0);
+          this.$store.dispatch("breedingDetails/littersWhelped", 0);
+        }
       }
     }
   },
-
   methods: {}
 };
 </script>
