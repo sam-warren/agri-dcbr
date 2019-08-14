@@ -21,21 +21,23 @@
                 <v-radio label="Yes" :value="true"></v-radio>
                 <v-radio label="No" :value="false"></v-radio>
               </v-radio-group>
-              <v-card-title primary-title>
-                <h2>Operation Location(s)</h2>
-              </v-card-title>
-              <div v-for="(location, index) in locations" :key="index">
-                <OperationLocation :number="index" />
-              </div>
-              <div class="text-center">
-                <v-btn @click="addLocation()">
-                  Add
-                  <v-icon dark>add</v-icon>
-                </v-btn>
-                <v-btn @click="removeLocation()">
-                  Remove
-                  <v-icon dark>remove</v-icon>
-                </v-btn>
+              <div v-if="this.hasAdditionalLocations">
+                <v-card-title primary-title>
+                  <h2>Operation Location(s)</h2>
+                </v-card-title>
+                <div v-for="(location, index) in locations" :key="index">
+                  <OperationLocation :number="index" />
+                </div>
+                <div class="text-center">
+                  <v-btn @click="addLocation()">
+                    Add
+                    <v-icon dark>add</v-icon>
+                  </v-btn>
+                  <v-btn @click="removeLocation()" :disabled="this.locations.length == 1">
+                    Remove
+                    <v-icon dark>remove</v-icon>
+                  </v-btn>
+                </div>
               </div>
             </v-container>
           </v-form>
@@ -67,26 +69,33 @@ export default {
       this.$store.dispatch("operationLocations/locations", { operation: "add" });
     },
     removeLocation() {
-      this.$store.dispatch("operationLocations/locations", { operation: "remove" });
+      if (this.$store.getters["operationLocations/locations"].length > 1) {
+        this.$store.dispatch("operationLocations/locations", { operation: "remove" });
+      }
     }
   },
   computed: {
-  hasAdditionalLocations: {
-    // getter
-    get() {
-      return this.$store.getters["operationLocations/hasAdditionalLocations"];
+    hasAdditionalLocations: {
+      // getter
+      get() {
+        return this.$store.getters["operationLocations/hasAdditionalLocations"] || "";
+      },
+      // setter
+      set(value) {
+        this.$store.dispatch("operationLocations/hasAdditionalLocations", value);
+        if(value == true) {
+          if(value == true && this.$store.getters["operationLocations/locations"].length == 0) {
+            this.$store.dispatch("operationLocations/locations", { operation: "add" });
+          }
+        }
+      }
     },
-    // setter
-    set(value) {
-      this.$store.dispatch("operationLocations/hasAdditionalLocations", value);
-    }
+    locations: {
+      // getter
+      get() { 
+        return this.$store.getters["operationLocations/locations"];
+      },
+    },
   },
-  locations: {
-    // getter
-    get() { 
-      return this.$store.getters["operationLocations/locations"];
-    },
-  }
-},
 };
 </script>

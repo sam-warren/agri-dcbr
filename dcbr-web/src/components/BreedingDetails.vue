@@ -9,8 +9,8 @@
         </v-card-title>
 
         <v-card flat>
-          <Cats />
-          <Dogs />
+          <Cats v-if="this.animalType != 'DOG'"/>
+          <Dogs v-if="this.animalType != 'CAT'"/>
           <!-- <Breeder /> -->
           <!-- <Seller /> -->
         </v-card>
@@ -31,6 +31,14 @@ export default {
     Breeder,
     Cats,
     Dogs
+  },
+  computed: {
+    animalType: {
+      // getter
+      get() {
+        return this.$store.getters["operationDetails/animalType"]
+      },
+    }
   }
 };
 </script>

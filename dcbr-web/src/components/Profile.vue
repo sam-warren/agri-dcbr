@@ -221,7 +221,7 @@ export default {
     streetNumber: {
       // getter
       get() {
-        return this.$store.getters["profile/streetNumber"];
+        return this.$store.getters["profile/streetNumber"] || "";
       },
       // setter
       set(value) {
