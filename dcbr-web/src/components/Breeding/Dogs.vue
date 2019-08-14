@@ -11,13 +11,13 @@
           <v-card flat>
             <!-- INTACT BREEDING DOG -->
             <v-layout mx-2 mt-4>
-              <subheader>How many intact breeding female dogs over the age of eight months do you have?</subheader>
+              <v-subheader>How many intact breeding female dogs over the age of eight months do you have?</v-subheader>
             </v-layout>
 
             <v-layout row wrap ma-2>
               <v-flex xs12 md4>
                 <v-text-field
-                  v-model.number="femaleDogNum"
+                  v-model.number="femaleIntactDogNum"
                   type="number"
                   label="Number of Female Dogs"
                 ></v-text-field>
@@ -25,7 +25,7 @@
             </v-layout>
             <!-- Type of Animal -->
             <v-layout mx-2 mt-4>
-              <subheader>How many litters were whelped in one calendar year overall (all female dogs combined)?</subheader>
+              <v-subheader>How many litters were whelped in one calendar year overall (all female dogs combined)?</v-subheader>
             </v-layout>
 
             <v-layout row wrap ma-2>
@@ -35,7 +35,7 @@
             </v-layout>
 
             <v-layout mx-2 mt-4>
-              <subheader>What number of puppies did you ............... in the previous calendar year?</subheader>
+              <v-subheader>What number of puppies did you ............... in the previous calendar year?</v-subheader>
             </v-layout>
 
             <v-layout row wrap ma-2>
@@ -62,11 +62,74 @@
 export default {
   data: () => ({
     valid: false,
-    femaleDogNum: null,
-    dogsTransferred: null,
-    dogsSold: null,
-    dogsTraded: null,
-    dogsLeased: null
-  })
+  }),
+  computed: {
+    femaleIntactDogNum: {
+      // getter
+      get() {
+        return this.$store.getters["breedingDetails/femaleIntactDogNum"];
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("breedingDetails/femaleIntactDogNum", value);
+      }
+    },
+    littersWhelped: {
+      // getter
+      get() {
+        return this.$store.getters["breedingDetails/littersWhelped"];
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("breedingDetails/littersWhelped", value);
+      }
+    },
+    dogsTransferred: {
+      // getter
+      get() {
+        return this.$store.getters["breedingDetails/dogsTransferred"];
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("breedingDetails/dogsTransferred", value);
+      }
+    },
+    dogsSold: {
+      // getter
+      get() {
+        return this.$store.getters["breedingDetails/dogsSold"];
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("breedingDetails/dogsSold", value);
+      }
+    },
+    dogsTraded: {
+      // getter
+      get() {
+        return this.$store.getters["breedingDetails/dogsTraded"];
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("breedingDetails/dogsTraded", value);
+      }
+    },
+    dogsLeased: {
+      // getter
+      get() {
+        return this.$store.getters["breedingDetails/dogsLeased"];
+      },
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("breedingDetails/dogsLeased", value);
+      }
+    },
+  }
 };
 </script>

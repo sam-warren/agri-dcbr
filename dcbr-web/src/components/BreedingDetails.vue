@@ -19,9 +19,6 @@
   </v-container>
 </template>
 
-
-
-
 <script>
 import Seller from "@/components/Breeding/Seller";
 import Breeder from "@/components/Breeding/Breeder";
@@ -32,12 +29,8 @@ export default {
   components: {
     Seller,
     Breeder,
-
     Cats,
     Dogs
   }
 };
 </script>
-
-<style>
-</style>
