@@ -177,6 +177,14 @@ services:
       POSTGRESQL_DATABASE: ${KEYCLOAK_DB_NAME}
     volumes:
       - keycloak-db-data:/var/lib/pgsql/data
+  
+  #
+  # Weasyprint server for HTML to PDF printing
+  #
+  weasyprint:
+    image: bcgovimages/weasyprint
+    ports:
+      - 5001:5001
 
 networks:
   dcbr:
