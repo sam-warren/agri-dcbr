@@ -36,7 +36,11 @@
                 </v-layout>
                 <v-layout row wrap ma-2>
                   <v-flex xs12 md4 v-if="permIdType == 'OTHER'">
-                    <v-text-field v-model="otherPermIdType" label="Other Method" name="otherPermIdType"></v-text-field>
+                    <v-text-field
+                      v-model="otherPermIdType"
+                      label="Other Method"
+                      name="otherPermIdType"
+                    ></v-text-field>
                   </v-flex>
                 </v-layout>
               </div>
@@ -81,10 +85,13 @@ export default {
         console.log(value);
         this.$store.dispatch("animalIdentification/hasPermId", value);
         if (value == false) {
-          this.$store.dispatch("animalIdentification/permIdType", "");
+          this.$store.dispatch(
+            "animalIdentification/permIdType",
+            "NOT_APPLICABLE"
+          );
           this.$store.dispatch("animalIdentification/otherPermIdType", "");
         }
-      },
+      }
     },
     permIdType: {
       // getter
@@ -98,7 +105,7 @@ export default {
         if (value != "OTHER") {
           this.$store.dispatch("animalIdentification/otherPermIdType", "");
         }
-      },
+      }
     },
     otherPermIdType: {
       // getter
@@ -109,7 +116,7 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("animalIdentification/otherPermIdType", value);
-      },
+      }
     }
   }
 };
