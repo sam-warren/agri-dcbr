@@ -1,0 +1,14 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: weasyprint
+# Template File: templates/weasyprint-deploy.json
+#=========================================================
+# NAME=weasyprint
+# APP_GROUP=dcbr-tools
+# IMAGE_NAMESPACE=nbup6o-tools
+# SOURCE_IMAGE_NAME=weasyprint
+TAG_NAME=prod
+# CPU_REQUEST=10m
+# CPU_LIMIT=200m
+# MEMORY_REQUEST=10Mi
+# MEMORY_LIMIT=512Mi
