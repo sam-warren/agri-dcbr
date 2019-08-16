@@ -95,10 +95,12 @@ class Risk_Factor_Operation(models.Model):
     TATTOO = "TATTOO"
     MICROCHIP = "MICROCHIP"
     OTHER = "OTHER"
+    NOT_APPLICABLE = "NOT_APPLICABLE"
     PERMANENT_ID_CHOICES = (
         (TATTOO, "TATTOO"),
         (MICROCHIP, "MICROCHIP"),
         (OTHER, "OTHER"),
+        (NOT_APPLICABLE, "NOT_APPLICABLE")
     )
 
     DOG = "DOG"
@@ -116,9 +118,9 @@ class Risk_Factor_Operation(models.Model):
     has_vet = models.BooleanField(default=False)
     has_perm_id = models.BooleanField(default=False)
     perm_id_type = models.CharField(
-        max_length=10, choices=PERMANENT_ID_CHOICES, default=TATTOO
+        max_length=15, choices=PERMANENT_ID_CHOICES, default=NOT_APPLICABLE
     )
-    perm_id_other = models.CharField(max_length=10, default="", blank=True)
+    perm_id_other = models.CharField(max_length=15, default="", blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
