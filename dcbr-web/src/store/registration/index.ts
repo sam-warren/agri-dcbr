@@ -6,9 +6,9 @@ import { getters } from "./getters";
 import { mutations } from "./mutations";
 import { RegistrationState, OperationLocationsTypes } from "./types";
 import { ProfileTypes } from "./types";
-import { OperationDetailsTypes } from "./types"
-import { BreedingDetailsTypes } from "./types"
-import { AnimalIdentificationTypes } from "./types"
+import { OperationDetailsTypes } from "./types";
+import { BreedingDetailsTypes } from "./types";
+import { AnimalIdentificationTypes } from "./types";
 
 export const ProfileState: ProfileTypes = {
   firstName: "",
@@ -24,7 +24,7 @@ export const ProfileState: ProfileTypes = {
   postalCode: "",
   homeAsOperation: false,
   error: false
-}
+};
 
 export const OperationDetailsState: OperationDetailsTypes = {
   operationName: "",
@@ -40,12 +40,12 @@ export const OperationDetailsState: OperationDetailsTypes = {
   numCatBreeds: 0,
   hasVet: false,
   error: false
-}
+};
 
 export const OperationLocationsState: OperationLocationsTypes = {
   hasAdditionalLocations: false,
   locations: []
-}
+};
 
 export const BreedingDetailsState: BreedingDetailsTypes = {
   femaleIntactDogNum: 0,
@@ -61,14 +61,14 @@ export const BreedingDetailsState: BreedingDetailsTypes = {
   catsTraded: 0,
   catsLeased: 0,
   error: false
-}
+};
 
 export const AnimalIdentificationState: AnimalIdentificationTypes = {
   hasPermId: false,
   permIdType: "",
   otherPermIdType: "",
   error: false
-}
+};
 
 export const state: RegistrationState = {
   profile: ProfileState,
@@ -86,7 +86,7 @@ export const profile: Module<RegistrationState, RootState> = {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 };
 
 export const operationDetails: Module<RegistrationState, RootState> = {
