@@ -5,6 +5,12 @@ import { RegistrationState } from "./types";
 import { Location } from "./types";
 
 export const getters: GetterTree<RegistrationState, RootState> = {
+  // App
+  formType(state: any): string {
+    const { app } = state;
+    return app!.formType || "";
+  },
+  
   // Profile
   firstName(state: any): string {
     const { profile } = state;

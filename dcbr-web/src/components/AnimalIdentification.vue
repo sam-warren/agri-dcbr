@@ -71,7 +71,7 @@ export default {
     hasPermId: {
       // getter
       get() {
-        if (this.visited == false) {
+        if (this.visited == false && this.$store.getters["app/formType"] == "PROD") {
           return "";
         } else {
           return this.$store.getters["animalIdentification/hasPermId"];

@@ -5,6 +5,11 @@ import { RegistrationState } from "./types";
 import { Location } from "./types";
 
 export const actions: ActionTree<RegistrationState, RootState> = {
+  // App
+  formType(context: any, payload: string) {
+    context.commit("formType", payload);
+  },
+  
   // Profile
   firstName(context: any, payload: string) {
     context.commit("firstName", payload);

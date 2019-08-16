@@ -1,3 +1,8 @@
+export interface AppTypes {
+  formType: string;
+  error: boolean;
+}
+
 export interface ProfileTypes {
   firstName: string;
   middleName: string;
@@ -32,7 +37,8 @@ export interface OperationDetailsTypes {
 
 export interface OperationLocationsTypes {
   hasAdditionalLocations: boolean;
-  locations: Location[]
+  locations: Location[];
+  error: boolean;
 }
 
 export interface Location {
@@ -67,6 +73,7 @@ export interface AnimalIdentificationTypes {
 }
 
 export interface RegistrationState {
+  app?: AppTypes;
   profile?: ProfileTypes;
   operationDetails?: OperationDetailsTypes;
   operationLocations?: OperationLocationsTypes;

@@ -2,6 +2,12 @@ import { MutationTree } from "vuex";
 import { RegistrationState, Location } from "../registration/types";
 
 export const mutations: MutationTree<RegistrationState> = {
+  // App
+  formType(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.app!.formType = payload;
+  },
+  
   // Profile
   firstName(state: RegistrationState, payload: string) {
     state.error = false;
