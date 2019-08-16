@@ -20,3 +20,9 @@ swagger_spec_validator>=2.4.3
 
 # Health Check
 django-health-check>=3.10.2
+
+# Email
+django-post_office>=3.2.1,<4
+
+# Recurring task scheduling
+django-background-tasks>=1.2,<2
