@@ -161,6 +161,8 @@ services:
       KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
       KEYCLOAK_LOGLEVEL: ${KEYCLOAK_LOGLEVEL}
       ROOT_LOGLEVEL: ${KEYCLOAK_ROOT_LOGLEVEL}
+    networks:
+      - dcbr
     ports:
       - 8888:8080
     depends_on:
@@ -179,12 +181,16 @@ services:
       POSTGRESQL_DATABASE: ${KEYCLOAK_DB_NAME}
     volumes:
       - keycloak-db-data:/var/lib/pgsql/data
+    networks:
+      - dcbr
   
   #
   # Weasyprint server for HTML to PDF printing
   #
   weasyprint:
     image: bcgovimages/weasyprint
+    networks:
+      - dcbr
     ports:
       - 5001:5001
 

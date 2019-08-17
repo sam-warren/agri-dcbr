@@ -184,8 +184,3 @@ EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
 POST_OFFICE = {"BATCH_SIZE": 50}
-
-# pdf generation
-PDF_PRINT_URL = (
-    os.getenv("WEASYPRINT_HOST") + ":" + os.getenv("WEASYPRINT_PORT") + "/pdf?filename="
-)

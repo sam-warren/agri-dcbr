@@ -10,6 +10,9 @@ module.exports = {
         target: "http://weasyprint:5001",
         ws: true,
         changeOrigin: true,
+        pathRewrite: {
+          '^/print-certificate': '/pdf'
+        },
       }
     }
   }

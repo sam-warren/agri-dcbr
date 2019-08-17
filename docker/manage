@@ -272,7 +272,7 @@ start|up)
  ;;
 start-dev)
   export DEBUG=true
-  DEFAULT_CONTAINERS="dcbr-web-dev dcbr-api dcbr-db"
+  DEFAULT_CONTAINERS="dcbr-web-dev dcbr-api dcbr-db weasyprint"
   _startupParams=$(getStartupParams $@)
   configureEnvironment $@
   docker-compose up -d --build ${_startupParams} 
