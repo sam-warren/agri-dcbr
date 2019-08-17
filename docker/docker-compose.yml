@@ -71,6 +71,8 @@ services:
       EMAIL_HOST: ${EMAIL_HOST}
       EMAIL_BACKEND: ${EMAIL_BACKEND}
       EMAIL_USE_TLS: ${EMAIL_USE_TLS}
+      WEASYPRINT_HOST: ${WEASYPRINT_HOST}
+      WEASYPRINT_PORT: ${WEASYPRINT_PORT}
     volumes:
       - ../dcbr-api:/opt/app-root/src
     networks:

@@ -186,6 +186,8 @@ configureEnvironment() {
   export EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
   export EMAIL_USE_TLS="False"
   export APP_SCRIPT="app-dcbr.sh"
+  export WEASYPRINT_HOST="weasyprint"
+  export WEASYPRINT_PORT=5001
 
   # dcbr-web
   export WEB_HOST_NAME="0.0.0.0"
