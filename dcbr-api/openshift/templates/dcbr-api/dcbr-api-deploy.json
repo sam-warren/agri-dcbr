@@ -216,14 +216,6 @@
                     "value": "${APP_SCRIPT}"
                   },
                   {
-                    "name": "WEASYPRINT_HOST",
-                    "value": "${WEASYPRINT_HOST}"
-                  },
-                  {
-                    "name": "WEASYPRINT_PORT",
-                    "value": "${WEASYPRINT_PORT}"
-                  },
-                  {
                     "name": "EMAIL_HOST",
                     "value": "${EMAIL_HOST}"
                   },
@@ -384,20 +376,6 @@
       "description": "Wether to use TLS or not to authenticate to the email server.",
       "required": true,
       "value": "True"
-    },
-    {
-      "name": "WEASYPRINT_HOST",
-      "displayName": "The WeasyPrint host",
-      "description": "The WeasyPrint host.",
-      "required": true,
-      "value": "weasyprint"
-    },
-    {
-      "name": "WEASYPRINT_PORT",
-      "displayName": "The WeasyPrint port",
-      "description": "The WeasyPrint port.",
-      "required": true,
-      "value": "5001"
     },
     {
       "name": "CPU_REQUEST",
