@@ -52,8 +52,8 @@
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="accidentalBreeding" name="accidentalBreeding" row>
-                  <v-radio label="Yes" :value="true"></v-radio>
-                  <v-radio label="No" :value="false"></v-radio>
+                  <v-radio label="Yes" value="true"></v-radio>
+                  <v-radio label="No" value="false"></v-radio>
                 </v-radio-group>
               </v-layout>
               <!-- VET RELATIONSHIP -->
@@ -62,8 +62,8 @@
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="hasVet" row>
-                  <v-radio label="Yes" :value="true"></v-radio>
-                  <v-radio label="No" :value="false"></v-radio>
+                  <v-radio label="Yes" value="true"></v-radio>
+                  <v-radio label="No" value="false"></v-radio>
                 </v-radio-group>
               </v-layout>
 
@@ -220,36 +220,20 @@ export default {
     accidentalBreeding: {
       // getter
       get() {
-        if (this.accidentalBreedingVisited == false) {
-          return "";
-        } else {
-          return this.$store.getters["operationDetails/accidentalBreeding"];
-        }
+        return this.$store.getters["operationDetails/accidentalBreeding"];
       },
       // setter
       set(value) {
-        if (this.accidentalBreeding == "") {
-          this.accidentalBreedingVisited = true;
-        }
-        console.log(value);
         this.$store.dispatch("operationDetails/accidentalBreeding", value);
       }
     },
     hasVet: {
       // getter
       get() {
-        if (this.hasVetVisited == false) {
-          return "";
-        } else {
-          return this.$store.getters["operationDetails/hasVet"];
-        }
+        return this.$store.getters["operationDetails/hasVet"];
       },
       // setter
       set(value) {
-        if (this.hasVet == "") {
-          this.hasVetVisited = true;
-        }
-        console.log(value);
         this.$store.dispatch("operationDetails/hasVet", value);
       }
     },

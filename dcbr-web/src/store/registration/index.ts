@@ -11,62 +11,63 @@ import { BreedingDetailsTypes } from "./types";
 import { AnimalIdentificationTypes } from "./types";
 
 export const ProfileState: ProfileTypes = {
-  firstName: "",
-  middleName: "",
-  lastName: "",
-  commType: "",
-  phone: "",
-  email: "",
-  streetNumber: 0,
-  aptNumber: "",
-  streetName: "",
-  city: "",
-  postalCode: "",
-  homeAsOperation: false,
+  firstName: "John",
+  middleName: "Alexander",
+  lastName: "Macdonald",
+  commType: "Email",
+  phone: "1234567890",
+  email: "jam@gov.bc.ca",
+  streetNumber: 123,
+  aptNumber: "2B",
+  streetName: "Government St",
+  city: "Langley",
+  postalCode: "V4W1J1",
+  homeAsOperation: "true",
   error: false
 };
 
 export const OperationDetailsState: OperationDetailsTypes = {
-  operationName: "",
-  opWebsite: "",
-  operationType: "",
-  assocName: "",
-  assocMembership: 0,
-  assocWebsite: "",
-  accidentalBreeding: false,
-  numWorkers: 0,
-  animalType: "0",
-  numDogBreeds: 0,
-  numCatBreeds: 0,
-  hasVet: false,
+  operationName: "JaM Breeding Co.",
+  opWebsite: "https://www.jambreeding.gov.bc.ca",
+  operationType: "BREEDER",
+  assocName: "Canada Breeding",
+  assocMembership: 14819,
+  assocWebsite: "https://www.canadabreeding.gov.bc.ca",
+  accidentalBreeding: "false",
+  numWorkers: 142,
+  animalType: "DOG&CAT",
+  numDogBreeds: 12,
+  numCatBreeds: 16,
+  hasVet: "true",
   error: false
 };
 
 export const OperationLocationsState: OperationLocationsTypes = {
-  hasAdditionalLocations: false,
-  locations: []
+  hasAdditionalLocations: "false",
+  locations: [],
+  error: false,
 };
 
 export const BreedingDetailsState: BreedingDetailsTypes = {
-  femaleIntactDogNum: 0,
-  femaleIntactCatNum: 0,
-  littersWhelped: 0,
-  littersQueened: 0,
-  dogsSold: 0,
-  dogsTransferred: 0,
-  dogsTraded: 0,
-  dogsLeased: 0,
-  catsSold: 0,
-  catsTransferred: 0,
-  catsTraded: 0,
+  femaleIntactDogNum: 52,
+  femaleIntactCatNum: 43,
+  littersWhelped: 6,
+  littersQueened: 5,
+  dogsSold: 16,
+  dogsTransferred: 11,
+  dogsTraded: 6,
+  dogsLeased: 2,
+  catsSold: 20,
+  catsTransferred: 5,
+  catsTraded: 2,
   catsLeased: 0,
   error: false
 };
 
 export const AnimalIdentificationState: AnimalIdentificationTypes = {
-  hasPermId: false,
-  permIdType: "",
-  otherPermIdType: "",
+  hasPermId: "true",
+  permIdType: "OTHER",
+  otherPermIdType: "Paper",
   error: false
 };
 

@@ -50,9 +50,9 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { profile } = state;
     return profile!.postalCode || "";
   },
-  homeAsOperation(state: RegistrationState): boolean {
+  homeAsOperation(state: RegistrationState): string {
     const { profile } = state;
-    return profile!.homeAsOperation || false;
+    return profile!.homeAsOperation || "";
   },
 
   // Operation Details
@@ -80,9 +80,9 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { operationDetails } = state;
     return operationDetails!.assocWebsite || "";
   },
-  accidentalBreeding(state: RegistrationState): boolean {
+  accidentalBreeding(state: RegistrationState): string {
     const { operationDetails } = state;
-    return operationDetails!.accidentalBreeding || false;
+    return operationDetails!.accidentalBreeding || "";
   },
   numWorkers(state: RegistrationState): number {
     const { operationDetails } = state;
@@ -100,15 +100,15 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { operationDetails } = state;
     return operationDetails!.numCatBreeds || 0;
   },
-  hasVet(state: RegistrationState): boolean {
+  hasVet(state: RegistrationState): string {
     const { operationDetails } = state;
-    return operationDetails!.hasVet || false;
+    return operationDetails!.hasVet || "";
   },
 
   // Operation Locations
-  hasAdditionalLocations(state: RegistrationState): boolean {
+  hasAdditionalLocations(state: RegistrationState): string {
     const { operationLocations } = state;
-    return operationLocations!.hasAdditionalLocations || false;
+    return operationLocations!.hasAdditionalLocations || "";
   },
   locations(state: RegistrationState): Location[] {
     const { operationLocations } = state;
@@ -166,9 +166,9 @@ export const getters: GetterTree<RegistrationState, RootState> = {
   },
  
   // Animal Identification
-  hasPermId(state: RegistrationState): boolean {
+  hasPermId(state: RegistrationState): string {
     const { animalIdentification } = state;
-    return animalIdentification!.hasPermId || false;
+    return animalIdentification!.hasPermId || "";
   },
   permIdType(state: RegistrationState): string {
     const { animalIdentification } = state;

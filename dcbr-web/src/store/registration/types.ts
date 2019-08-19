@@ -10,7 +10,7 @@ export interface ProfileTypes {
   streetName: string;
   city: string;
   postalCode: string;
-  homeAsOperation: boolean;
+  homeAsOperation: string;
   error: boolean;
 }
 
@@ -21,18 +21,19 @@ export interface OperationDetailsTypes {
   assocName: string;
   assocMembership: number;
   assocWebsite: string;
-  accidentalBreeding: boolean;
+  accidentalBreeding: string;
   numWorkers: number;
   animalType: string;
   numDogBreeds: number;
   numCatBreeds: number;
-  hasVet: boolean;
+  hasVet: string;
   error: boolean;
 }
 
 export interface OperationLocationsTypes {
-  hasAdditionalLocations: boolean;
-  locations: Location[]
+  hasAdditionalLocations: string;
+  locations: Location[];
+  error: boolean;
 }
 
 export interface Location {
@@ -60,7 +61,7 @@ export interface BreedingDetailsTypes {
 }
 
 export interface AnimalIdentificationTypes {
-  hasPermId: boolean;
+  hasPermId: string;
   permIdType: string;
   otherPermIdType: string
   error: boolean;
