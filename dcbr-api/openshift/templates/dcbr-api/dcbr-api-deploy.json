@@ -232,6 +232,10 @@
                     "value": "${EMAIL_USE_TLS}"
                   },
                   {
+                    "name": "AGRI_EMAIL",
+                    "value": "${AGRI_EMAIL}"
+                  },
+                  {
                     "name": "WEASYPRINT_HOST",
                     "value": "${WEASYPRINT_HOST}"
                   },
@@ -409,6 +413,13 @@
       "description": "The port to be used for the weasyprint service.",
       "required": true,
       "value": "5001"
+    },
+    {
+      "name": "AGRI_EMAIL",
+      "displayName": "AGRI recipient Email",
+      "description": "The AGRI email address to be used as recipient (from) in outbound messages.",
+      "required": true,
+      "value": "AgriServiceBC@gov.bc.ca"
     },
     {
       "name": "CPU_REQUEST",

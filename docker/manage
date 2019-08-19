@@ -186,6 +186,7 @@ configureEnvironment() {
   export EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
   export EMAIL_PORT="587"
   export EMAIL_USE_TLS="False"
+  export AGRI_EMAIL="AgriServiceBC@gov.bc.ca"
   export APP_SCRIPT="app-dcbr.sh"
 
   # dcbr-web
