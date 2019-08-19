@@ -226,6 +226,14 @@
                   {
                     "name": "EMAIL_USE_TLS",
                     "value": "${EMAIL_USE_TLS}"
+                  },
+                  {
+                    "name": "WEASYPRINT_HOST",
+                    "value": "${WEASYPRINT_HOST}"
+                  },
+                  {
+                    "name": "WEASYPRINT_PORT",
+                    "value": "${WEASYPRINT_HOST}"
                   }
                 ],
                 "resources": {
@@ -376,6 +384,20 @@
       "description": "Wether to use TLS or not to authenticate to the email server.",
       "required": true,
       "value": "True"
+    },
+    {
+      "name": "WEASYPRINT_HOST",
+      "displayName": "Weasyprint Host",
+      "description": "The host name for the Weasyprint service.",
+      "required": true,
+      "value": "weasyprint"
+    },
+    {
+      "name": "WEASYPRINT_PORT",
+      "displayName": "Weasyprint Port",
+      "description": "The port to be used for the weasyprint service.",
+      "required": true,
+      "value": "5001"
     },
     {
       "name": "CPU_REQUEST",

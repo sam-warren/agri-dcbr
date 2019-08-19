@@ -185,3 +185,12 @@ EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
 POST_OFFICE = {"LOG_LEVEL": 2, "BATCH_SIZE": 50, "BACKENDS": {"default": EMAIL_BACKEND}}
+
+# PDF printing
+WEASYPRINT_HOST = os.getenv("WEASYPRINT_HOST")
+WEASYPRINT_PORT = os.getenv("WEASYPRINT_PORT")
+
+if WEASYPRINT_HOST is not None and WEASYPRINT_PORT is not None:
+    WEASYPRINT_REQUEST_URL = (
+        "http://" + WEASYPRINT_HOST + ":" + WEASYPRINT_PORT + "/pdf?filename="
+    )

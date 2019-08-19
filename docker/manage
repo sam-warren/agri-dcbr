@@ -194,6 +194,8 @@ configureEnvironment() {
   export WEB_HOST_TLS="off"
   export DCBR_API_HOST="dcbr-api"
   export DCBR_API_PORT="8080"
+
+  # weasyprint
   export WEASYPRINT_HOST="weasyprint"
   export WEASYPRINT_PORT=5001
 
