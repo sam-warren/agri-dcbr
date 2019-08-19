@@ -1,17 +1,25 @@
 import json
+import logging
 
-import django.conf
 import requests
 from background_task import background
 from django.conf import settings
+from django.core import management
 from django.core.files.base import ContentFile
 from post_office import mail
+
+LOGGER = logging.getLogger(__name__)
+
+
+@background(queue="outgoing-email")
+def send_queued_mail():
+    management.call_command("send_queued_mail")
 
 
 @background(queue="membership-reminder")
 def send_reminder_email():
     # TODO: implement logic
-    print("Sending new reminder emails to operators...")
+    LOGGER.debug("Sending new reminder emails to operators...")
 
 
 @background(queue="member-registration")
@@ -37,4 +45,4 @@ def send_registration_email(email_addr):
         attachments={"certificate.pdf": ContentFile(response.content)},
     )
 
-    print("Registration confirmation sent to {}".format(email_addr))
+    LOGGER.info("Registration confirmation sent to {}".format(email_addr))
