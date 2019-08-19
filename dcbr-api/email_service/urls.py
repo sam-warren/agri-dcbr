@@ -1,7 +1,5 @@
-from django.conf.urls import include, url
-from django.contrib import admin
-from django.urls import path
+from django.conf.urls import url
 
 from .views import EmailNotification
 
-urlpatterns = [url("^(?P<user_id>.+)/$", EmailNotification.as_view())]
+urlpatterns = [url("^(?P<email_addr>.+)/$", EmailNotification.as_view())]

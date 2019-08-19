@@ -184,6 +184,7 @@ configureEnvironment() {
   export DJANGO_ADMIN_EMAIL="dcbr-admin@gov.bc.ca"
   export EMAIL_HOST="localhost"
   export EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
+  export EMAIL_PORT="587"
   export EMAIL_USE_TLS="False"
   export APP_SCRIPT="app-dcbr.sh"
 

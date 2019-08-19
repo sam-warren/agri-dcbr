@@ -182,5 +182,6 @@ REST_FRAMEWORK = {
 # e-mail management
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
 EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
-POST_OFFICE = {"BATCH_SIZE": 50}
+POST_OFFICE = {"LOG_LEVEL": 2, "BATCH_SIZE": 50, "BACKENDS": {"default": EMAIL_BACKEND}}
