@@ -17,6 +17,7 @@ APPLICATION_DOMAIN=dcbr-api-test.pathfinder.gov.bc.ca
 TAG_NAME=test
 # APP_SCRIPT=app-dcbr.sh
 # EMAIL_HOST=
+# EMAIL_PORT=587
 # EMAIL_BACKEND=smtp.EmailBackend
 # EMAIL_USE_TLS=True
 # WEASYPRINT_HOST=weasyprint

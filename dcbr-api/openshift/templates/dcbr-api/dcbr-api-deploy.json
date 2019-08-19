@@ -220,6 +220,10 @@
                     "value": "${EMAIL_HOST}"
                   },
                   {
+                    "name": "EMAIL_PORT",
+                    "value": "${EMAIL_PORT}"
+                  },
+                  {
                     "name": "EMAIL_BACKEND",
                     "value": "${EMAIL_BACKEND}"
                   },
@@ -370,6 +374,13 @@
       "description": "The host for the SMTP server.",
       "required": true,
       "value": ""
+    },
+    {
+      "name": "EMAIL_PORT",
+      "displayName": "The email server port",
+      "description": "The port used by the SMTP server.",
+      "required": true,
+      "value": "587"
     },
     {
       "name": "EMAIL_BACKEND",
