@@ -2,12 +2,6 @@ import { MutationTree } from "vuex";
 import { RegistrationState, Location } from "../registration/types";
 
 export const mutations: MutationTree<RegistrationState> = {
-  // App
-  formType(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.app!.formType = payload;
-  },
-  
   // Profile
   firstName(state: RegistrationState, payload: string) {
     state.error = false;
@@ -53,7 +47,7 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.profile!.postalCode = payload;
   },
-  homeAsOperation(state: RegistrationState, payload: boolean) {
+  homeAsOperation(state: RegistrationState, payload: string) {
     state.error = false;
     state.profile!.homeAsOperation = payload;
   },
@@ -83,7 +77,7 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.operationDetails!.assocWebsite = payload;
   },
-  accidentalBreeding(state: RegistrationState, payload: boolean) {
+  accidentalBreeding(state: RegistrationState, payload: string) {
     state.error = false;
     state.operationDetails!.accidentalBreeding = payload;
   },
@@ -103,13 +97,13 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.operationDetails!.numCatBreeds = payload;
   },
-  hasVet(state: RegistrationState, payload: boolean) {
+  hasVet(state: RegistrationState, payload: string) {
     state.error = false;
     state.operationDetails!.hasVet = payload;
   },
 
   // Operation Locations
-  hasAdditionalLocations(state: RegistrationState, payload: boolean) {
+  hasAdditionalLocations(state: RegistrationState, payload: string) {
     state.error = false;
     state.operationLocations!.hasAdditionalLocations = payload;
     state.operationLocations!.locations = [];
@@ -192,7 +186,7 @@ export const mutations: MutationTree<RegistrationState> = {
   },
 
   // Animal Identification
-  hasPermId(state: RegistrationState, payload: boolean) {
+  hasPermId(state: RegistrationState, payload: string) {
     state.error = false;
     state.animalIdentification!.hasPermId = payload;
   },

@@ -4,16 +4,11 @@ import { RootState } from "../types";
 import { actions } from "./actions";
 import { getters } from "./getters";
 import { mutations } from "./mutations";
-import { RegistrationState, OperationLocationsTypes, AppTypes } from "./types";
+import { RegistrationState, OperationLocationsTypes } from "./types";
 import { ProfileTypes } from "./types";
 import { OperationDetailsTypes } from "./types";
 import { BreedingDetailsTypes } from "./types";
 import { AnimalIdentificationTypes } from "./types";
-
-export const AppState: AppTypes = {
-  formType: "PROD",
-  error: false
-}
 
 export const ProfileState: ProfileTypes = {
   firstName: "John",
@@ -27,7 +22,7 @@ export const ProfileState: ProfileTypes = {
   streetName: "Government St",
   city: "Langley",
   postalCode: "V4W1J1",
-  homeAsOperation: true,
+  homeAsOperation: "true",
   error: false
 };
 
@@ -38,17 +33,17 @@ export const OperationDetailsState: OperationDetailsTypes = {
   assocName: "Canada Breeding",
   assocMembership: 14819,
   assocWebsite: "https://www.canadabreeding.gov.bc.ca",
-  accidentalBreeding: false,
+  accidentalBreeding: "false",
   numWorkers: 142,
   animalType: "DOG&CAT",
   numDogBreeds: 12,
   numCatBreeds: 16,
-  hasVet: true,
+  hasVet: "true",
   error: false
 };
 
 export const OperationLocationsState: OperationLocationsTypes = {
-  hasAdditionalLocations: false,
+  hasAdditionalLocations: "false",
   locations: [],
   error: false,
 };
@@ -70,14 +65,13 @@ export const BreedingDetailsState: BreedingDetailsTypes = {
 };
 
 export const AnimalIdentificationState: AnimalIdentificationTypes = {
-  hasPermId: true,
+  hasPermId: "true",
   permIdType: "OTHER",
   otherPermIdType: "Paper",
   error: false
 };
 
 export const state: RegistrationState = {
-  app: AppState,
   profile: ProfileState,
   operationDetails: OperationDetailsState,
   operationLocations: OperationLocationsState,
@@ -87,14 +81,6 @@ export const state: RegistrationState = {
 };
 
 const namespaced: boolean = true;
-
-export const app: Module<RegistrationState, RootState> = {
-  namespaced,
-  state,
-  getters,
-  actions,
-  mutations
-}
 
 export const profile: Module<RegistrationState, RootState> = {
   namespaced,

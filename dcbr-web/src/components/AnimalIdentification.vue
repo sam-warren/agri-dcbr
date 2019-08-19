@@ -18,12 +18,12 @@
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="hasPermId" name="hasPermId" row>
-                  <v-radio label="Yes" :value="true"></v-radio>
-                  <v-radio label="No" :value="false"></v-radio>
+                  <v-radio label="Yes" value="true"></v-radio>
+                  <v-radio label="No" value="false"></v-radio>
                 </v-radio-group>
               </v-layout>
               <!-- Type of Animal -->
-              <div v-if="hasPermId == true">
+              <div v-if="hasPermId == 'true'">
                 <v-layout mx-2 mt-4>
                   <v-subheader>What type of identification technology do you use?</v-subheader>
                 </v-layout>
@@ -71,18 +71,10 @@ export default {
     hasPermId: {
       // getter
       get() {
-        if (this.visited == false && this.$store.getters["app/formType"] == "PROD") {
-          return "";
-        } else {
-          return this.$store.getters["animalIdentification/hasPermId"];
-        }
+        return this.$store.getters["animalIdentification/hasPermId"];
       },
       // setter
       set(value) {
-        if (this.hasPermId == "") {
-          this.visited = true;
-        }
-        console.log(value);
         this.$store.dispatch("animalIdentification/hasPermId", value);
         if (value == false) {
           this.$store.dispatch(
