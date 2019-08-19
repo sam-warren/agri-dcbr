@@ -84,10 +84,8 @@ export default {
       // setter
       set(value) {
         this.$store.dispatch("operationLocations/hasAdditionalLocations", value);
-        if(value == "true") {
-          if(this.$store.getters["operationLocations/locations"].length == 0) {
-            this.$store.dispatch("operationLocations/locations", { operation: "add" });
-          }
+        if(value == "true" && this.$store.getters["operationLocations/locations"].length == 0) {
+          this.$store.dispatch("operationLocations/locations", { operation: "add" });
         }
       }
     },
