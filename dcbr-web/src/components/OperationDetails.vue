@@ -52,8 +52,8 @@
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="accidentalBreeding" name="accidentalBreeding" row>
-                  <v-radio label="Yes" :value="true"></v-radio>
-                  <v-radio label="No" :value="false"></v-radio>
+                  <v-radio label="Yes" value="true"></v-radio>
+                  <v-radio label="No" value="false"></v-radio>
                 </v-radio-group>
               </v-layout>
               <!-- VET RELATIONSHIP -->
@@ -62,8 +62,8 @@
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="hasVet" row>
-                  <v-radio label="Yes" :value="true"></v-radio>
-                  <v-radio label="No" :value="false"></v-radio>
+                  <v-radio label="Yes" value="true"></v-radio>
+                  <v-radio label="No" value="false"></v-radio>
                 </v-radio-group>
               </v-layout>
 
@@ -72,7 +72,7 @@
                 <v-subheader>How many breeds of animals are you currently breeding/selling?</v-subheader>
               </v-layout>
               <v-layout row wrap mx-2>
-                <v-flex xs12 md4 lg6 v-if="this.animalType != 'CAT'">
+                <v-flex xs12 md4 lg6 v-if="this.animalType !== 'CAT'">
                   <v-text-field
                     v-model.number="numDogBreeds"
                     type="number"
@@ -80,7 +80,7 @@
                     name="numDogBreeds"
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 md4 lg6 v-if="this.animalType != 'DOG'">
+                <v-flex xs12 md4 lg6 v-if="this.animalType !== 'DOG'">
                   <v-text-field
                     v-model.number="numCatBreeds"
                     type="number"
@@ -220,36 +220,20 @@ export default {
     accidentalBreeding: {
       // getter
       get() {
-        if (this.accidentalBreedingVisited == false) {
-          return "";
-        } else {
-          return this.$store.getters["operationDetails/accidentalBreeding"];
-        }
+        return this.$store.getters["operationDetails/accidentalBreeding"];
       },
       // setter
       set(value) {
-        if (this.accidentalBreeding == "") {
-          this.accidentalBreedingVisited = true;
-        }
-        console.log(value);
         this.$store.dispatch("operationDetails/accidentalBreeding", value);
       }
     },
     hasVet: {
       // getter
       get() {
-        if (this.hasVetVisited == false) {
-          return "";
-        } else {
-          return this.$store.getters["operationDetails/hasVet"];
-        }
+        return this.$store.getters["operationDetails/hasVet"];
       },
       // setter
       set(value) {
-        if (this.hasVet == "") {
-          this.hasVetVisited = true;
-        }
-        console.log(value);
         this.$store.dispatch("operationDetails/hasVet", value);
       }
     },
@@ -295,7 +279,7 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("operationDetails/animalType", value);
-        if (value == "DOG") {
+        if (value === "DOG") {
           this.$store.dispatch("operationDetails/numCatBreeds", 0)
           this.$store.dispatch("breedingDetails/catsLeased", 0);
           this.$store.dispatch("breedingDetails/catsSold", 0);
@@ -303,7 +287,7 @@ export default {
           this.$store.dispatch("breedingDetails/catsTransferred", 0);
           this.$store.dispatch("breedingDetails/femaleIntactCatNum", 0);
           this.$store.dispatch("breedingDetails/littersQueened", 0);
-        } else if (value == "CAT") {
+        } else if (value === "CAT") {
           this.$store.dispatch("operationDetails/numDogBreeds", 0)
           this.$store.dispatch("breedingDetails/dogsLeased", 0);
           this.$store.dispatch("breedingDetails/dogsSold", 0);

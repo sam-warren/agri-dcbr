@@ -39,7 +39,7 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   postalCode(context: any, payload: string) {
     context.commit("postalCode", payload);
   },
-  homeAsOperation(context: any, payload: boolean) {
+  homeAsOperation(context: any, payload: string) {
       context.commit("homeAsOperation", payload);
   },
 
@@ -62,7 +62,7 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   assocWebsite(context: any, payload: string) {
     context.commit("assocWebsite", payload);
   },
-  accidentalBreeding(context: any, payload: boolean) {
+  accidentalBreeding(context: any, payload: string) {
     context.commit("accidentalBreeding", payload);
   },
   numWorkers(context: any, payload: number) {
@@ -77,12 +77,12 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   numCatBreeds(context: any, payload: number) {
    context.commit("numCatBreeds", payload);
   },
-  hasVet(context: any, payload: boolean) {
+  hasVet(context: any, payload: string) {
     context.commit("hasVet", payload);
   },
 
   // Operation Locations
-  hasAdditionalLocations(context: any, payload: boolean) {
+  hasAdditionalLocations(context: any, payload: string) {
     context.commit("hasAdditionalLocations", payload);
   },
   locations(context: any, payload: { operation: string }) {
@@ -131,7 +131,7 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   },
 
   // Animal Identification
-  hasPermId(context: any, payload: boolean) {
+  hasPermId(context: any, payload: string) {
     context.commit("hasPermId", payload);
   },
   permIdType(context: any, payload: string) {
