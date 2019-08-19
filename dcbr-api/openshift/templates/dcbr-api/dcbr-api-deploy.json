@@ -387,7 +387,7 @@
       "displayName": "The email backend",
       "description": "The Django email backend used to process email messages.",
       "required": true,
-      "value": "smtp.EmailBackend"
+      "value": "post_office.EmailBackend"
     },
     {
       "name": "EMAIL_USE_TLS",

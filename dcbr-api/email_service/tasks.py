@@ -29,6 +29,7 @@ def send_registration_email(email_addr):
     )
 
     mail.send(
+        ["AgriServiceBC@gov.bc.ca"],
         email_addr,
         template="registration_email",  # Could be an EmailTemplate instance or name
         context={"user": json.dumps(user), "registration_number": registration_number},
