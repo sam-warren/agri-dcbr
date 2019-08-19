@@ -21,7 +21,7 @@
                 <v-radio label="Yes" value="true"></v-radio>
                 <v-radio label="No" value="false"></v-radio>
               </v-radio-group>
-              <div v-if="this.hasAdditionalLocations == 'true'">
+              <div v-if="this.hasAdditionalLocations === 'true'">
                 <v-card-title primary-title>
                   <h2>Operation Location(s)</h2>
                 </v-card-title>
@@ -33,7 +33,7 @@
                     Add
                     <v-icon dark>add</v-icon>
                   </v-btn>
-                  <v-btn @click="removeLocation()" :disabled="this.locations.length == 1">
+                  <v-btn @click="removeLocation()" :disabled="this.locations.length === 1">
                     Remove
                     <v-icon dark>remove</v-icon>
                   </v-btn>
@@ -84,7 +84,7 @@ export default {
       // setter
       set(value) {
         this.$store.dispatch("operationLocations/hasAdditionalLocations", value);
-        if(value == "true" && this.$store.getters["operationLocations/locations"].length == 0) {
+        if(value === "true" && this.$store.getters["operationLocations/locations"].length === 0) {
           this.$store.dispatch("operationLocations/locations", { operation: "add" });
         }
       }

@@ -9,8 +9,8 @@
         </v-card-title>
 
         <v-card flat>
-          <Cats v-if="this.animalType != 'DOG'"/>
-          <Dogs v-if="this.animalType != 'CAT'"/>
+          <Cats v-if="this.animalType !== 'DOG'"/>
+          <Dogs v-if="this.animalType !== 'CAT'"/>
           <!-- <Breeder /> -->
           <!-- <Seller /> -->
         </v-card>

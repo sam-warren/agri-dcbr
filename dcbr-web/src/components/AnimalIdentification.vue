@@ -23,7 +23,7 @@
                 </v-radio-group>
               </v-layout>
               <!-- Type of Animal -->
-              <div v-if="hasPermId == 'true'">
+              <div v-if="hasPermId === 'true'">
                 <v-layout mx-2 mt-4>
                   <v-subheader>What type of identification technology do you use?</v-subheader>
                 </v-layout>
@@ -35,7 +35,7 @@
                   </v-radio-group>
                 </v-layout>
                 <v-layout row wrap ma-2>
-                  <v-flex xs12 md4 v-if="permIdType == 'OTHER'">
+                  <v-flex xs12 md4 v-if="permIdType === 'OTHER'">
                     <v-text-field
                       v-model="otherPermIdType"
                       label="Other Method"
@@ -76,7 +76,7 @@ export default {
       // setter
       set(value) {
         this.$store.dispatch("animalIdentification/hasPermId", value);
-        if (value == false) {
+        if (value === "false") {
           this.$store.dispatch(
             "animalIdentification/permIdType",
             "NOT_APPLICABLE"
@@ -94,7 +94,7 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("animalIdentification/permIdType", value);
-        if (value != "OTHER") {
+        if (value !== "OTHER") {
           this.$store.dispatch("animalIdentification/otherPermIdType", "");
         }
       }
