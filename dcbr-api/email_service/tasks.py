@@ -1,4 +1,3 @@
-import json
 import logging
 import os
 import tempfile
@@ -7,7 +6,6 @@ import requests
 from background_task import background
 from django.conf import settings
 from django.core import management
-from django.core.files.base import ContentFile
 from post_office import mail
 
 LOGGER = logging.getLogger(__name__)
@@ -60,11 +58,12 @@ def send_registration_email(email_addr):
             settings.AGRI_EMAIL,
             template="registration_email",  # Could be an EmailTemplate instance or name
             context={
-                "user": json.dumps(user),
+                "user": user,
                 "registration_number": registration_number,
             },
             render_on_delivery=True,
             attachments={"certificate.pdf": DEST_FILE},
+            priority="now",
         )
 
     finally:
