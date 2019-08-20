@@ -97,6 +97,8 @@ printStatusMsg "Creating a set of random superuser credentials ..."
 writeParameter "DJANGO_ADMIN_USER" $(generateUsername) "true"
 writeParameter "DJANGO_ADMIN_PASSWORD" $(generatePassword) "true"
 
+readParameter "EMAIL_HOST - Please provide the SMTP host address. If left blank, 'localhost' will be used:" EMAIL_HOST "localhost"
+
 SPECIALDEPLOYPARMS="--param-file=${_overrideParamFile}"
 echo ${SPECIALDEPLOYPARMS}
 # ================================================================================================================
