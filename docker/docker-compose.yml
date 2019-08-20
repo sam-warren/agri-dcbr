@@ -12,6 +12,8 @@ services:
       WEB_HOST_TLS: ${WEB_HOST_TLS}
       DCBR_API_HOST: ${DCBR_API_HOST}
       DCBR_API_PORT: ${DCBR_API_PORT}
+      WEASYPRINT_HOST: ${WEASYPRINT_HOST}
+      WEASYPRINT_PORT: ${WEASYPRINT_PORT}
     volumes:
       - ../dcbr-web/openshift/config/Caddyfile:/etc/Caddyfile
     networks:
@@ -159,6 +161,8 @@ services:
       KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
       KEYCLOAK_LOGLEVEL: ${KEYCLOAK_LOGLEVEL}
       ROOT_LOGLEVEL: ${KEYCLOAK_ROOT_LOGLEVEL}
+    networks:
+      - dcbr
     ports:
       - 8888:8080
     depends_on:
@@ -177,6 +181,18 @@ services:
       POSTGRESQL_DATABASE: ${KEYCLOAK_DB_NAME}
     volumes:
       - keycloak-db-data:/var/lib/pgsql/data
+    networks:
+      - dcbr
+  
+  #
+  # Weasyprint server for HTML to PDF printing
+  #
+  weasyprint:
+    image: bcgovimages/weasyprint
+    networks:
+      - dcbr
+    ports:
+      - 5001:5001
 
 networks:
   dcbr:

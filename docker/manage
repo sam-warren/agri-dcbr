@@ -81,8 +81,7 @@ EOF
 # -----------------------------------------------------------------------------------------------------------------
 # Default Settings:
 # -----------------------------------------------------------------------------------------------------------------
-# DEFAULT_CONTAINERS="dcbr-api dcbr-db keycloak keycloak-db schema-spy"
-DEFAULT_CONTAINERS="dcbr-api dcbr-db "
+DEFAULT_CONTAINERS="dcbr-api dcbr-db keycloak keycloak-db schema-spy weasyprint"
 
 # -----------------------------------------------------------------------------------------------------------------
 # Functions:
@@ -194,6 +193,8 @@ configureEnvironment() {
   export WEB_HOST_TLS="off"
   export DCBR_API_HOST="dcbr-api"
   export DCBR_API_PORT="8080"
+  export WEASYPRINT_HOST="weasyprint"
+  export WEASYPRINT_PORT=5001
 
   # keycloak-db
   export KEYCLOAK_DB_NAME="keycloak"
@@ -271,7 +272,7 @@ start|up)
  ;;
 start-dev)
   export DEBUG=true
-  DEFAULT_CONTAINERS="dcbr-web-dev dcbr-api dcbr-db"
+  DEFAULT_CONTAINERS="dcbr-web-dev dcbr-api dcbr-db weasyprint"
   _startupParams=$(getStartupParams $@)
   configureEnvironment $@
   docker-compose up -d --build ${_startupParams} 
