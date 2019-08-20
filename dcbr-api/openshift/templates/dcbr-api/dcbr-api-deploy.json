@@ -214,6 +214,18 @@
                   {
                     "name": "APP_SCRIPT",
                     "value": "${APP_SCRIPT}"
+                  },
+                  {
+                    "name": "EMAIL_HOST",
+                    "value": "${EMAIL_HOST}"
+                  },
+                  {
+                    "name": "EMAIL_BACKEND",
+                    "value": "${EMAIL_BACKEND}"
+                  },
+                  {
+                    "name": "EMAIL_USE_TLS",
+                    "value": "${EMAIL_USE_TLS}"
                   }
                 ],
                 "resources": {
@@ -343,6 +355,27 @@
       "displayName": "Application Startup Script",
       "description": "Used to run the application from a Bash script. This should be a path to a Bash script (defaults to app.sh unless set to null) that will be used to start the application (optional).",
       "value": "app-dcbr.sh"
+    },
+    {
+      "name": "EMAIL_HOST",
+      "displayName": "The email server",
+      "description": "The host for the SMTP server.",
+      "required": true,
+      "value": ""
+    },
+    {
+      "name": "EMAIL_BACKEND",
+      "displayName": "The email backend",
+      "description": "The Django email backend used to process email messages.",
+      "required": true,
+      "value": "smtp.EmailBackend"
+    },
+    {
+      "name": "EMAIL_USE_TLS",
+      "displayName": "Email use TLS",
+      "description": "Wether to use TLS or not to authenticate to the email server.",
+      "required": true,
+      "value": "True"
     },
     {
       "name": "CPU_REQUEST",
