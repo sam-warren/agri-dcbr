@@ -1,5 +1,7 @@
 import json
 import logging
+import os
+import tempfile
 
 import requests
 from background_task import background
@@ -30,19 +32,45 @@ def send_registration_email(email_addr):
 
     registration_number = "DCBR-123456"
 
+    LOGGER.debug(
+        "Requesting PDF certificate for registration #{}".format(registration_number)
+    )
     response = requests.post(
         settings.WEASYPRINT_REQUEST_URL + "certificate.pdf",
         data="<h1>TEST CERTIFICATE</h1><p>A paragraph.</p>",
         headers={"content-type": "text/html"},
     )
 
-    mail.send(
-        email_addr,
-        settings.AGRI_EMAIL,
-        template="registration_email",  # Could be an EmailTemplate instance or name
-        context={"user": json.dumps(user), "registration_number": registration_number},
-        render_on_delivery=True,
-        attachments={"certificate.pdf": ContentFile(response.content)},
-    )
+    TMP_DIR = tempfile.gettempdir()
+    DEST_FILE = os.path.join(TMP_DIR, registration_number + ".pdf")
+
+    try:
+
+        with open(DEST_FILE, "wb") as cert_file:
+            cert_file.write(response.content)
+            cert_file.close()
+
+        LOGGER.debug(
+            "Sending registration confirmation for registration #{}".format(
+                registration_number
+            )
+        )
+        mail.send(
+            email_addr,
+            settings.AGRI_EMAIL,
+            template="registration_email",  # Could be an EmailTemplate instance or name
+            context={
+                "user": json.dumps(user),
+                "registration_number": registration_number,
+            },
+            render_on_delivery=True,
+            attachments={"certificate.pdf": DEST_FILE},
+        )
+
+    finally:
+        # delete file when done
+        if os.path.exists(DEST_FILE):
+            LOGGER.debug("Removing temporary file {}".format(DEST_FILE))
+            os.remove(DEST_FILE)
 
     LOGGER.info("Registration confirmation sent to {}".format(email_addr))
