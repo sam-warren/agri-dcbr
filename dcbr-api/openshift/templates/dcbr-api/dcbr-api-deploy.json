@@ -384,7 +384,7 @@
       "displayName": "The email server port",
       "description": "The port used by the SMTP server.",
       "required": true,
-      "value": "587"
+      "value": "25"
     },
     {
       "name": "EMAIL_BACKEND",
