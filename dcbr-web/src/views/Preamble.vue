@@ -20,7 +20,7 @@
               <br>2. Education and Awareness
               <br>3. Enforceable provincial minimum Standards of Care for all commercial dog and cat breeders, and sellers of their offspring
               <br>4. Inspection and Compliance with graduated enforcement
-          </p class="text-md-left">
+          </p>
           <v-subheader>This regulatory framework was established to; 1) ensure a high level of animal care and well-being for dogs and cats bred and sold in BC.2) provide consumers with a means to verify a particular breeder or seller is adhering to the regulatory framework.</v-subheader>1. A repository where breeders/sellers will register their operation(s)
           <br>2. A means for breeders/sellers to agree to follow a minimum standard of care.
           <br>3. Communicate important documents (provincial minimum Standards of Care regulation) and educational documents with operators
