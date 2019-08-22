@@ -184,7 +184,9 @@ configureEnvironment() {
   export DJANGO_ADMIN_EMAIL="dcbr-admin@gov.bc.ca"
   export EMAIL_HOST="localhost"
   export EMAIL_BACKEND="django.core.mail.backends.console.EmailBackend"
+  export EMAIL_PORT="25"
   export EMAIL_USE_TLS="False"
+  export AGRI_EMAIL="AgriServiceBC@gov.bc.ca"
   export APP_SCRIPT="app-dcbr.sh"
 
   # dcbr-web
@@ -193,6 +195,8 @@ configureEnvironment() {
   export WEB_HOST_TLS="off"
   export DCBR_API_HOST="dcbr-api"
   export DCBR_API_PORT="8080"
+
+  # weasyprint
   export WEASYPRINT_HOST="weasyprint"
   export WEASYPRINT_PORT=5001
 
@@ -280,7 +284,7 @@ start-dev)
  ;;
 start-api)
   export DEBUG=true
-  DEFAULT_CONTAINERS="dcbr-api dcbr-db"
+  DEFAULT_CONTAINERS="dcbr-api dcbr-db weasyprint"
   _startupParams=$(getStartupParams $@)
   configureEnvironment $@
   docker-compose up -d ${_startupParams} 

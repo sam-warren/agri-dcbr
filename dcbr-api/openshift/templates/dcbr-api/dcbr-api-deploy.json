@@ -220,12 +220,28 @@
                     "value": "${EMAIL_HOST}"
                   },
                   {
+                    "name": "EMAIL_PORT",
+                    "value": "${EMAIL_PORT}"
+                  },
+                  {
                     "name": "EMAIL_BACKEND",
                     "value": "${EMAIL_BACKEND}"
                   },
                   {
                     "name": "EMAIL_USE_TLS",
                     "value": "${EMAIL_USE_TLS}"
+                  },
+                  {
+                    "name": "AGRI_EMAIL",
+                    "value": "${AGRI_EMAIL}"
+                  },
+                  {
+                    "name": "WEASYPRINT_HOST",
+                    "value": "${WEASYPRINT_HOST}"
+                  },
+                  {
+                    "name": "WEASYPRINT_PORT",
+                    "value": "${WEASYPRINT_HOST}"
                   }
                 ],
                 "resources": {
@@ -364,11 +380,18 @@
       "value": ""
     },
     {
+      "name": "EMAIL_PORT",
+      "displayName": "The email server port",
+      "description": "The port used by the SMTP server.",
+      "required": true,
+      "value": "25"
+    },
+    {
       "name": "EMAIL_BACKEND",
       "displayName": "The email backend",
       "description": "The Django email backend used to process email messages.",
       "required": true,
-      "value": "smtp.EmailBackend"
+      "value": "post_office.EmailBackend"
     },
     {
       "name": "EMAIL_USE_TLS",
@@ -376,6 +399,27 @@
       "description": "Wether to use TLS or not to authenticate to the email server.",
       "required": true,
       "value": "True"
+    },
+    {
+      "name": "WEASYPRINT_HOST",
+      "displayName": "Weasyprint Host",
+      "description": "The host name for the Weasyprint service.",
+      "required": true,
+      "value": "weasyprint"
+    },
+    {
+      "name": "WEASYPRINT_PORT",
+      "displayName": "Weasyprint Port",
+      "description": "The port to be used for the weasyprint service.",
+      "required": true,
+      "value": "5001"
+    },
+    {
+      "name": "AGRI_EMAIL",
+      "displayName": "AGRI recipient Email",
+      "description": "The AGRI email address to be used as recipient (from) in outbound messages.",
+      "required": true,
+      "value": "AgriServiceBC@gov.bc.ca"
     },
     {
       "name": "CPU_REQUEST",
