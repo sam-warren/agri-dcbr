@@ -17,6 +17,7 @@
             <v-flex xs12 md4>
               <v-text-field
                 v-model.number="femaleIntactCatNum"
+                :rules="numberRules"
                 type="number"
                 label="Number of Female Cats"
               ></v-text-field>
@@ -29,7 +30,7 @@
 
           <v-layout row wrap ma-2>
             <v-flex xs12 md4>
-              <v-text-field v-model.number="littersQueened" type="number" label="Queened Litters"></v-text-field>
+              <v-text-field v-model.number="littersQueened" :rules="numberRules" type="number" label="Queened Litters"></v-text-field>
             </v-flex>
           </v-layout>
 
@@ -39,16 +40,16 @@
 
           <v-layout row wrap ma-2>
             <v-flex xs12 md4>
-              <v-text-field v-model.number="catsTransferred" type="number" label="Transfer"></v-text-field>
+              <v-text-field v-model.number="catsTransferred" :rules="numberRules" type="number" label="Transfer"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field v-model.number="catsSold" type="number" label="Sell"></v-text-field>
+              <v-text-field v-model.number="catsSold" :rules="numberRules" type="number" label="Sell"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field v-model.number="catsTraded" type="number" label="Trade"></v-text-field>
+              <v-text-field v-model.number="catsTraded" :rules="numberRules" type="number" label="Trade"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field v-model.number="catsLeased" type="number" label="Lease"></v-text-field>
+              <v-text-field v-model.number="catsLeased" :rules="numberRules" type="number" label="Lease"></v-text-field>
             </v-flex>
           </v-layout>
         </v-card>
@@ -61,6 +62,9 @@
 export default {
   data: () => ({
     valid: false,
+    numberRules: [
+      v => v >= 0 || "Number cannot be negative"
+    ],
   }),
   computed: {
     femaleIntactCatNum: {

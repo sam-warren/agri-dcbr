@@ -16,11 +16,11 @@
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 mr-5>
-                  <v-text-field v-model="operationName" label="Operation Name" name="operationName"></v-text-field>
+                  <v-text-field v-model="operationName" :rules="notRequiredNameRules" label="Operation Name" name="operationName"></v-text-field>
                 </v-flex>
 
                 <v-flex xs12 md4>
-                  <v-text-field v-model="opWebsite" label="Link to your Website " name="opWebsite"></v-text-field>
+                  <v-text-field v-model="opWebsite" :rules="websiteRules" label="Link to your Website " name="opWebsite"></v-text-field>
                 </v-flex>
               </v-layout>
               <!-- Type of Operator -->
@@ -76,6 +76,7 @@
                   <v-text-field
                     v-model.number="numDogBreeds"
                     type="number"
+                    :rules="numberRules"
                     label="Number of Dog Breeds"
                     name="numDogBreeds"
                   ></v-text-field>
@@ -84,6 +85,7 @@
                   <v-text-field
                     v-model.number="numCatBreeds"
                     type="number"
+                    :rules="numberRules"
                     label="Number of Cat Breeds"
                     name="numCatBreeds"
                   ></v-text-field>
@@ -98,6 +100,7 @@
                   <v-text-field
                     v-model.number="numWorkers"
                     type="number"
+                    :rules="numberRules"
                     label="Number of workers"
                     name="numWorkers"
                   ></v-text-field>
@@ -109,17 +112,18 @@
               </v-layout>
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field v-model="assocName" label="Association Name" name="assocName"></v-text-field>
+                  <v-text-field v-model="assocName" :rules="notRequiredNameRules" label="Association Name" name="assocName"></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="assocMembership"
+                    :rules="membershipNumberRules"
                     label="Membership #"
                     name="assocMembership"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model="assocWebsite" label="Website " name="assocWebsite"></v-text-field>
+                  <v-text-field v-model="assocWebsite" :rules="websiteRules" label="Website " name="assocWebsite"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -140,10 +144,23 @@ export default {
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
     ],
+    notRequiredNameRules: [
+      v => v.length <= 50 || "Name must be less than 50 characters"
+    ],
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+/.test(v) || "E-mail must be valid"
-    ]
+    ],
+    websiteRules: [
+      v => /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/.test(v) || "URL must be valid",
+      v => v.length <= 50 || "Url must be less than 50 characters"
+    ],
+    numberRules: [
+      v => v >= 0 || "Number cannot be negative"
+    ],
+    membershipNumberRules: [
+      v => v.length <= 20 || "Membership number must be less than 20 characters"
+    ],
   }),
 
   computed: {

@@ -27,7 +27,7 @@
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="middleName"
-                    :rules="nameRules"
+                    :rules="middleNameRules"
                     label="Middle name (optional)"
                     name="middleName"
                   ></v-text-field>
@@ -55,29 +55,42 @@
                     :rules="streetNumberRules"
                     label="Street number"
                     name="streetNumber"
-                    required
+                    type="number"
+                    onkeydown="return event.keyCode != 69"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="aptNumber" label="Apt/Suite" name="aptNumber" required></v-text-field>
+                  <v-text-field 
+                    v-model="aptNumber" 
+                    label="Apt/Suite (optional)" 
+                    name="aptNumber" 
+                    :rules="suiteRules"
+                    required
+                  ></v-text-field>
                 </v-flex>
 
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="streetName"
-                    :rules="nameRules"
+                    :rules="streetNameRules"
                     label="Street name"
                     name="streetName"
                     required
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model="city" :rules="nameRules" label="City" name="city" required></v-text-field>
+                  <v-text-field 
+                    v-model="city" 
+                    :rules="cityRules" 
+                    label="City" 
+                    name="city" 
+                    required
+                  ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="postalCode"
-                    :rules="nameRules"
+                    :rules="postalCodeRules"
                     label="Postal Code"
                     name="postalCode"
                     required
@@ -111,7 +124,13 @@
                 </v-flex>
                 <!-- phone number -->
                 <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="phone" :mask="mask" label="Phone" name="phone"></v-text-field>
+                  <v-text-field 
+                    v-model="phone" 
+                    :mask="mask" 
+                    :rules="phoneNumberRules" 
+                    label="Phone" 
+                    name="phone"
+                  ></v-text-field>
                 </v-flex>
               </v-layout>
               <v-layout mx-2 mt-5>
@@ -140,11 +159,37 @@ export default {
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
     ],
+    middleNameRules: [
+      v => v.length <= 50 || "Name must be less than 50 characters"
+    ],
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+/.test(v) || "E-mail must be valid"
     ],
-    streetNumberRules: [v => !!v || "Street number is required"]
+    streetNumberRules: [
+      v => !!v || "Street number is required",
+      v => v >= 0 || "Street number cannot be negative"
+    ],
+    suiteRules: [
+      v => v.length <= 32 || "Apt/Suite name must be less than 32 characters"
+    ],
+    streetNameRules: [
+      v => !!v || "Street name is required",
+      v => v.length <= 32 || "Street name must be less than 32 characters"
+    ],
+    cityRules: [
+      v => !!v || "City name is required",
+      v => v.length <= 32 || "City name must be less than 32 characters"
+    ],
+    postalCodeRules: [
+      v => !!v || "Postal code is required",
+      v => /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(v) || "Postal code must be valid"
+    ],
+    phoneNumberRules: [
+      v => !!v || "Phone number is required",
+      v => /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/.test(v) || "Phone number must be valid"
+    ]
+
   }),
 
   computed: {
