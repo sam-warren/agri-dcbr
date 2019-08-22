@@ -25,14 +25,14 @@ schema_view = get_schema_view(
 
 router = routers.SimpleRouter()
 
-router.register(r"registrationNumber", views.RegistrationNumber_ViewSet, "RegistrationNumber")
+router.register(r"registration_Number", views.Registration_Number_ViewSet, "Registration_Number")
 router.register(r"operator", views.Operator_ViewSet, "Operator")
 router.register(r"address", views.Address_ViewSet, "Address")
 router.register(r"inspection", views.Inspection_ViewSet, "Inspection")
 router.register(
-    r"riskoperations", views.Risk_Factor_Operation_ViewSet, "RiskOperations"
+    r"operationrisk", views.Operation_Risk_Factor_ViewSet, "OperationRisk"
 )
-router.register(r"riskanimals", views.Risk_Factor_Animal_ViewSet, "RiskAnimals")
+router.register(r"animalrisk", views.Animal_Risk_Factor_ViewSet, "AnimalRisk")
 router.register(r"association", views.Association_ViewSet, "Association")
 
 # fmt: off

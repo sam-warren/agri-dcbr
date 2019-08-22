@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 
 
 
-class RegistrationNumber(models.Model):
+class Registration_Number(models.Model):
     ACTIVE = "ACTIVE"
     SUSPENDED = "SUSPENDED"
     CANCELLED = "CANCELLED"
@@ -33,7 +33,7 @@ class RegistrationNumber(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "RegistrationNumbers"
+        verbose_name_plural = "Registration_Numbers"
         verbose_name = "new registration"
 
 
@@ -52,8 +52,8 @@ class Operator(models.Model):
     )
 
     description = _("An operator is a seller/breeder of cats and/or dogs")
-    registrationNumber = models.OneToOneField(
-        RegistrationNumber,
+    registration_Number = models.OneToOneField(
+        Registration_Number,
         on_delete=models.CASCADE,
         related_name="operator",
         related_query_name="operators",
@@ -82,7 +82,7 @@ class Operator(models.Model):
     
 
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (self.registrationNumber, self.last_name, self.first_name)
+        return "Reg ID: \t %s %s , %s" % (self.registration_Number, self.last_name, self.first_name)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -97,8 +97,8 @@ class Address(models.Model):
     PRIMARY = "PRI"
     OPERATION = "OPN"
     TYPE_CHOICES = ((PRIMARY, "Primary"), (OPERATION, "Operation"))
-    registrationNumber = models.ForeignKey(
-        RegistrationNumber,
+    registration_Number = models.ForeignKey(
+        Registration_Number,
         on_delete=models.CASCADE,
         related_name="addresses",
         related_query_name="addresses",
@@ -116,7 +116,7 @@ class Address(models.Model):
     
 
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (self.registrationNumber, self.type, self.street_name)
+        return "Reg ID: \t %s %s , %s" % (self.registration_Number, self.type, self.street_name)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -125,7 +125,7 @@ class Address(models.Model):
         verbose_name_plural = "Addresses"
 
 
-class Risk_Factor_Operation(models.Model):
+class Operation_Risk_Factor(models.Model):
 
     TATTOO = "TATTOO"
     MICROCHIP = "MICROCHIP"
@@ -138,25 +138,16 @@ class Risk_Factor_Operation(models.Model):
         (NOT_APPLICABLE, "NOT_APPLICABLE"),
     )
 
-    DOG = "DOG"
-    CAT = "CAT"
-    BOTH = "DOG&CAT"
-
-    ANIMAL_TYPE_CHOICES = ((DOG, "DOG"), (CAT, "CAT"), (BOTH, "DOG&CAT"))
-    registrationNumber = models.ForeignKey(
-        RegistrationNumber,
+    
+    registration_Number = models.ForeignKey(
+        Registration_Number,
         on_delete=models.CASCADE,
-        related_name="risk_factor_operations",
-        related_query_name="risk_factor_operations",
+        related_name="operation_risk_factors",
+        related_query_name="operation_risk_factors",
     )
 
     accidental_breeding = models.BooleanField(default=False)
     num_workers = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    animal_type = models.CharField(
-        max_length=10, choices=ANIMAL_TYPE_CHOICES, default=BOTH
-    )
-    num_breeds_dogs = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_breeds_cats = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     has_vet = models.BooleanField(default=False)
     has_perm_id = models.BooleanField(default=False)
     perm_id_type = models.CharField(
@@ -169,8 +160,8 @@ class Risk_Factor_Operation(models.Model):
     
 
     def __str__(self):
-        return "Operation risk for: \t %s " % (self.registrationNumber)
-        return "Reg ID: \t %s %s" % (self.registrationNumber, self.animal_type)
+        return "Operation risk for: \t %s " % (self.registration_Number)
+        return "Reg ID: \t %s %s" % (self.registration_Number, self.animal_type)
 
     def publish(self):
         "operator = breeder / seller"
@@ -179,56 +170,58 @@ class Risk_Factor_Operation(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "RiskFactorOperations"
+        verbose_name_plural = "Operation_Risk_Factors"
 
 
-class Risk_Factor_Animal(models.Model):
+class Animal_Risk_Factor(models.Model):
 
-    registrationNumber = models.ForeignKey(
-        RegistrationNumber,
+    registration_Number = models.ForeignKey(
+        Registration_Number,
         on_delete=models.CASCADE,
-        related_name="risk_factor_animals",
-        related_query_name="risk_factor_animals",
+        related_name="animal_risk_factors",
+        related_query_name="animals_risk_factors",
     )
 
-    num_dogs_intact = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_litter_whelped = models.IntegerField(
+    DOG = "DOG"
+    CAT = "CAT"
+    BOTH = "DOG&CAT"
+
+    ANIMAL_TYPE_CHOICES = ((DOG, "DOG"), (CAT, "CAT"))
+
+    animal_type = models.CharField(
+        max_length=10, choices=ANIMAL_TYPE_CHOICES, default=DOG
+    )
+    num_breeds = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+
+    num_females_intact = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_litter = models.IntegerField(
         default=0, validators=[MinValueValidator(0)]
     )
-    num_cats_intact = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_litter_queened = models.IntegerField(
+    
+    num_sold = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_transferred = models.IntegerField(
         default=0, validators=[MinValueValidator(0)]
     )
-    num_dog_sold = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_dog_transferred = models.IntegerField(
-        default=0, validators=[MinValueValidator(0)]
-    )
-    num_dog_traded = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_dog_leased = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_cat_sold = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_cat_transferred = models.IntegerField(
-        default=0, validators=[MinValueValidator(0)]
-    )
-    num_cat_traded = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_cat_leased = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_traded = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_leased = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     
 
     def __str__(self):
-        return "Reg ID:: \t %s " % (self.registrationNumber)
+        return "Reg ID:: \t %s " % (self.registration_Number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "RiskFactorAnimals"
+        verbose_name_plural = "Animal_Risk_Factors"
 
 
 class Association_Membership(models.Model):
 
-    registrationNumber = models.ForeignKey(
-        RegistrationNumber, on_delete=models.CASCADE, related_name="associations"
+    registration_Number = models.ForeignKey(
+        Registration_Number, on_delete=models.CASCADE, related_name="associations"
     )
 
     assoc_name = models.CharField(max_length=50, default="", blank=True)
@@ -238,7 +231,7 @@ class Association_Membership(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Reg ID:: \t %s " % (self.registrationNumber)
+        return "Reg ID:: \t %s " % (self.registration_Number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -248,8 +241,8 @@ class Association_Membership(models.Model):
 
 
 class Inspection(models.Model):
-    registrationNumber = models.ForeignKey(
-        RegistrationNumber,
+    registration_Number = models.ForeignKey(
+        Registration_Number,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -263,8 +256,7 @@ class Inspection(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     soc_1 = models.BooleanField(default=False)
-    # soc_1_comment = models.TextField(default="", blank=True)
-    soc_1_comment = models.CharField(max_length=4000, default="", blank=True)
+    soc_1_comment = models.TextField(default="", blank=True)
     soc_2 = models.BooleanField(default=False)
     soc_2_comment = models.TextField(default="", blank=True)
     soc_3 = models.BooleanField(default=False)
@@ -288,7 +280,7 @@ class Inspection(models.Model):
 
     def __str__(self):
         return "Reg ID: \t %s %s , %s" % (
-            self.registrationNumber,
+            self.registration_Number,
             self.op_last_name,
             self.op_first_name,
         )

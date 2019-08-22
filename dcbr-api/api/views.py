@@ -3,34 +3,34 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from api.serializers import (
-    RegistrationNumber_Serializer,
+    Registration_Number_Serializer,
     Operator_Serializer,
     Address_Serializer,
-    Risk_Factor_Animal_Serializer,
-    Risk_Factor_Operation_Serializer,
+    Animal_Risk_Factor_Serializer,
+    Operation_Risk_Factor_Serializer,
     Inspection_Serializer,
     Association_Membership_Serializer,
 )
 
 # from api.models import Category, Entry, Operator, Address
 from api.models import (
-    RegistrationNumber,
+    Registration_Number,
     Operator,
     Address,
     Inspection,
-    Risk_Factor_Animal,
-    Risk_Factor_Operation,
+    Animal_Risk_Factor,
+    Operation_Risk_Factor,
     Association_Membership,
 )
 
 
-class RegistrationNumber_ViewSet(viewsets.ModelViewSet):
+class Registration_Number_ViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing registration numbers.
     """
 
-    queryset = RegistrationNumber.objects.all()
-    serializer_class = RegistrationNumber_Serializer
+    queryset = Registration_Number.objects.all()
+    serializer_class = Registration_Number_Serializer
 
 
 class Operator_ViewSet(viewsets.ModelViewSet):
@@ -51,22 +51,22 @@ class Address_ViewSet(viewsets.ModelViewSet):
     serializer_class = Address_Serializer
 
 
-class Risk_Factor_Animal_ViewSet(viewsets.ModelViewSet):
+class Animal_Risk_Factor_ViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing addresses.
     """
 
     queryset = Inspection.objects.all()
-    serializer_class = Risk_Factor_Animal_Serializer
+    serializer_class = Animal_Risk_Factor_Serializer
 
 
-class Risk_Factor_Operation_ViewSet(viewsets.ModelViewSet):
+class Operation_Risk_Factor_ViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing addresses.
     """
 
     queryset = Inspection.objects.all()
-    serializer_class = Risk_Factor_Operation_Serializer
+    serializer_class = Operation_Risk_Factor_Serializer
 
 
 class Inspection_ViewSet(viewsets.ModelViewSet):

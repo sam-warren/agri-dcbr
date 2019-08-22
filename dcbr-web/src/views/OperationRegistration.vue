@@ -118,7 +118,7 @@ export default {
             assoc_URL: this.$store.getters["operationDetails/assocWebsite"]
           }
         ],
-        risk_factor_animals: [
+        animal_risk_factors: [
           {
             num_dogs_intact: this.$store.getters[
               "breedingDetails/femaleIntactDogNum"
@@ -146,7 +146,7 @@ export default {
             num_cat_leased: this.$store.getters["breedingDetails/catsLeased"]
           }
         ],
-        risk_factor_operations: [
+        operation_risk_factors: [
           {
             accidental_breeding: this.$store.getters[
               "breedingDetails/accidentalBreeding"
@@ -172,7 +172,7 @@ export default {
       };
       console.log(obj);
       axios
-        .post("/api/registrationNumber/", obj)
+        .post("/api/registration_Number/", obj)
         .then(response => {
           console.log(response);
         })
