@@ -63,7 +63,7 @@ def send_registration_email(email_addr):
             },
             render_on_delivery=True,
             attachments={"certificate.pdf": DEST_FILE},
-            priority="now",
+            # priority="now", # can't use now at this time: https://github.com/ui/django-post_office/issues/218
         )
 
     finally:

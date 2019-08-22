@@ -10,7 +10,7 @@ LOGGER = logging.getLogger(__name__)
 
 
 class EmailNotification(APIView):
-    def put(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
 
         email_addr = self.kwargs["email_addr"]
 
