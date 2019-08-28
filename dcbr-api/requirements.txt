@@ -30,3 +30,6 @@ django-background-tasks>=1.2,<2
 
 # Export to CSV
 django-import-export
+
+# Authentication
+mozilla-django-oidc>=1.2.2

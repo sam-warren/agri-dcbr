@@ -15,3 +15,18 @@ To run the project execute `./manage start`: the api container will be serving c
 ### Development Mode
 During development it is useful to have code hot-reloading enabled, so that containers won't need to be rebuilt after each change.
 To start both the api and frontend container in development mode, using code hot-reloading, run `./manage start-dev`.
+
+###ObtainingaclientsecretfromKeycloakInordertostarttheprojectandusetheSSOfunctionalityprovidedbyKeycloak,youwillneed:-anIDIRusername/password-aclientsecrettobeinjectedintheconfigurationYoucanrequestaclientsecretforthe"dcbr-admin"clientfromoneoftheteammemberwhoareadminsinKeycloak.IfyouhaveaccesstotheKeycloakdashboard,youcan:-signintoyourkeycloakinstance(usethedevinstanceifyou'redevelopingonyourlocalmachine)-click"clients"onthemenutotheleftandselectthe"dcbr-admin"clientfromthelistofclients-gotothe"Installation"tabandselect"KeycloakOIDCJSON"-thesecretwillbedisplayedinthetextareaonthepage
+
+In order to start the project and use the SSO functionality provided by Keycloak, you will need:
+
+- an IDIR username/password
+- a client secret to be injected in the configuration
+
+You can request a client secret for the "dcbr-admin" client from one of the team member who are admins in Keycloak.
+If you have access to the Keycloak dashboard, you can:
+
+- sign in to your keycloak instance (use the dev instance if you're developing on your local machine)
+- click "clients" on the menu to the left and select the "dcbr-admin" client from the list of clients
+- go to the "Installation" tab and select "Keycloak OIDC JSON"
+- the secret will be displayed in the text area on the page

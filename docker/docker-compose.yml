@@ -1,7 +1,6 @@
-version: '3'
+version: "3"
 services:
-
-  # 
+  #
   # dcbr-web
   #
   dcbr-web:
@@ -23,10 +22,10 @@ services:
     depends_on:
       - dcbr-api
 
-  # 
+  #
   # dcbr-web-dev
   # -------------------------------------------------
-  # Dockerized vue.js app with hot-reloading, 
+  # Dockerized vue.js app with hot-reloading,
   # for development purposes.
   #
   dcbr-web-dev:
@@ -44,16 +43,16 @@ services:
     depends_on:
       - dcbr-api
 
-  # 
+  #
   # dcbr-api
   # -------------------------------------------------
-  # The API performs the migrations on the database, 
+  # The API performs the migrations on the database,
   # Therefore it needs to come up after the database.
   #
   #
-  # We are using a simple sleep command to do this 
-  # for the moment; refer to the `command` section 
-  # of the configuration for details.  It would be 
+  # We are using a simple sleep command to do this
+  # for the moment; refer to the `command` section
+  # of the configuration for details.  It would be
   # nice to implement a more deterministic solution.
   #
   dcbr-api:
@@ -77,6 +76,14 @@ services:
       AGRI_EMAIL: ${AGRI_EMAIL}
       WEASYPRINT_HOST: ${WEASYPRINT_HOST}
       WEASYPRINT_PORT: ${WEASYPRINT_PORT}
+      OIDC_RP_SIGN_ALGO: ${OIDC_RP_SIGN_ALGO}
+      OIDC_OP_JWKS_ENDPOINT: ${OIDC_OP_JWKS_ENDPOINT}
+      OIDC_RP_CLIENT_ID: ${OIDC_RP_CLIENT_ID}
+      OIDC_RP_CLIENT_SECRET: ${OIDC_RP_CLIENT_SECRET}
+      OIDC_OP_AUTHORIZATION_ENDPOINT: ${OIDC_OP_AUTHORIZATION_ENDPOINT}
+      OIDC_OP_TOKEN_ENDPOINT: ${OIDC_OP_TOKEN_ENDPOINT}
+      OIDC_OP_USER_ENDPOINT: ${OIDC_OP_USER_ENDPOINT}
+      OIDC_LOGOUT_REDIRECT_URL: ${OIDC_LOGOUT_REDIRECT_URL}
     volumes:
       - ../dcbr-api:/opt/app-root/src
     networks:
@@ -86,30 +93,30 @@ services:
     depends_on:
       - dcbr-db
     command: >
-        /bin/bash -c "
-        echo waiting for dcbr-db ...;
-        sleep 5;
-        if [ $DEBUG ] && [ "$DEBUG" == "true" ]; then
-        echo Running in debug mode;
-          python manage.py migrate;
-          python manage.py process_tasks & disown;
-          python manage.py runserver 0.0.0.0:8080;
-        else
-          echo Running s2i container...;
-          env;
-          ${STI_SCRIPTS_PATH}/run;
-        fi"
+      /bin/bash -c "
+      echo waiting for dcbr-db ...;
+      sleep 5;
+      if [ $DEBUG ] && [ "$DEBUG" == "true" ]; then
+      echo Running in debug mode;
+        python manage.py migrate;
+        python manage.py process_tasks & disown;
+        python manage.py runserver 0.0.0.0:8080;
+      else
+        echo Running s2i container...;
+        env;
+        ${STI_SCRIPTS_PATH}/run;
+      fi"
 
-  # 
+  #
   # schema-spy
   #-------------------------------------------------
   # Needs to wait for the schema to be created/migrated
   # by the API server; it's not enough to wait for the
   # database to be available.
   #
-  # We are using a simple sleep command to do this 
-  # for the moment; refer to the `command` section 
-  # of the configuration for details.  It would be 
+  # We are using a simple sleep command to do this
+  # for the moment; refer to the `command` section
+  # of the configuration for details.  It would be
   # nice to implement a more deterministic solution.
   #
   schema-spy:
@@ -131,10 +138,10 @@ services:
         sleep 20;
         ./start.sh;"
 
-  # 
+  #
   # dcbr-db
   # using the same postgresql image we will use on OpenShift
-  # 
+  #
   dcbr-db:
     image: registry.access.redhat.com/rhscl/postgresql-10-rhel7:latest
     environment:
@@ -150,8 +157,8 @@ services:
 
   #
   # keycloak service
-  #  
-  keycloak:      
+  #
+  keycloak:
     build:
       context: ..
       dockerfile: docker/keycloak/Dockerfile
@@ -170,13 +177,13 @@ services:
     ports:
       - 8888:8080
     depends_on:
-      - keycloak-db      
+      - keycloak-db
     command: -Dkeycloak.migration.action=import -Dkeycloak.migration.provider=singleFile -Dkeycloak.migration.file=/tmp/realm.json -Dkeycloak.migration.strategy=IGNORE_EXISTING
-  
-  # 
+
+  #
   # keycloak-db
   # using the same postgresql image we will use on OpenShift
-  # 
+  #
   keycloak-db:
     image: registry.access.redhat.com/rhscl/postgresql-10-rhel7:latest
     environment:
@@ -187,7 +194,7 @@ services:
       - keycloak-db-data:/var/lib/pgsql/data
     networks:
       - dcbr
-  
+
   #
   # Weasyprint server for HTML to PDF printing
   #
