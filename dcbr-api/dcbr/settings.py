@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "dcbr",
     "api",
     "email_service.apps.EmailServiceConfig",
+    "import_export",
 ]
 
 MIDDLEWARE = [
