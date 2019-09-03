@@ -38,6 +38,7 @@
                   <v-flex xs12 md4 v-if="permIdType === 'OTHER'">
                     <v-text-field
                       v-model="otherPermIdType"
+                      :rules="nameRules"
                       label="Other Method"
                       name="otherPermIdType"
                     ></v-text-field>
@@ -58,7 +59,7 @@ export default {
     visited: false,
     nameRules: [
       v => !!v || "Name is required",
-      v => v.length <= 50 || "Name must be less than 50 characters"
+      v => v.length <= 15 || "Name must be less than 15 characters"
     ],
     email: "",
     emailRules: [

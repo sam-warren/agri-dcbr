@@ -73,6 +73,9 @@ export default {
   methods: {
     submitRegistration() {
       console.log("Submit clicked");
+      // ERROR CHECKING
+      
+      
       let addresses = [
         {
           address_type: "PRI",

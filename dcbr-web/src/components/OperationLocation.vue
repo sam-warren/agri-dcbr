@@ -18,28 +18,29 @@
                   <v-text-field
                     v-model="streetNumber"
                     :rules="streetNumberRules"
+                    type="number"
                     label="Street number"
                     required
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="aptNumber" label="Apt/Suite (optional)" required></v-text-field>
+                  <v-text-field v-model="aptNumber" :rules="suiteRules" label="Apt/Suite (optional)" required></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="streetName"
-                    :rules="nameRules"
+                    :rules="streetNameRules"
                     label="Street name"
                     required
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model="city" :rules="nameRules" label="City" required></v-text-field>
+                  <v-text-field v-model="city" :rules="cityRules" label="City" required></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="postalCode"
-                    :rules="nameRules"
+                    :rules="postalCodeRules"
                     label="Postal Code"
                     required
                   ></v-text-field>
