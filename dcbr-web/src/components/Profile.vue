@@ -187,7 +187,7 @@ export default {
     ],
     phoneNumberRules: [
       v => !!v || "Phone number is required",
-      v => /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/.test(v) || "Phone number must be valid"
+      v => /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(v) || "Phone number must be valid"
     ]
 
   }),
