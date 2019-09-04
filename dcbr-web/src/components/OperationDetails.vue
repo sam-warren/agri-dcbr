@@ -152,7 +152,7 @@ export default {
       v => /.+@.+/.test(v) || "E-mail must be valid"
     ],
     websiteRules: [
-      v => /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/.test(v) || "URL must be valid",
+      v => /^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(v) || "URL must be valid",
       v => v.length <= 50 || "Url must be less than 50 characters"
     ],
     numberRules: [

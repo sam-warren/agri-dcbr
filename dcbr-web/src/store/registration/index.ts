@@ -111,9 +111,9 @@ export const BreedingDetailsState: BreedingDetailsTypes = {
 };
 
 export const AnimalIdentificationState: AnimalIdentificationTypes = {
-  hasPermId: "true",
-  permIdType: "OTHER",
-  otherPermIdType: "Paper",
+  hasPermId: "",
+  permIdType: "",
+  otherPermIdType: "",
   error: false
 
   // hasPermId: "",
