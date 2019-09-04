@@ -10,7 +10,6 @@ export interface ProfileTypes {
   streetName: string;
   city: string;
   postalCode: string;
-  homeAsOperation: string;
   error: boolean;
 }
 

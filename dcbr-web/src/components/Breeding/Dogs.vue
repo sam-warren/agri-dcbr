@@ -18,6 +18,7 @@
               <v-flex xs12 md4>
                 <v-text-field
                   v-model.number="femaleIntactDogNum"
+                  :rules="numberRules"
                   type="number"
                   label="Number of Female Dogs"
                 ></v-text-field>
@@ -30,7 +31,7 @@
 
             <v-layout row wrap ma-2>
               <v-flex xs12 md4>
-                <v-text-field v-model.number="littersWhelped" type="number" label="Whelped Litters"></v-text-field>
+                <v-text-field v-model.number="littersWhelped" :rules="numberRules" type="number" label="Whelped Litters"></v-text-field>
               </v-flex>
             </v-layout>
 
@@ -40,16 +41,16 @@
 
             <v-layout row wrap ma-2>
               <v-flex xs12 md4>
-                <v-text-field v-model.number="dogsTransferred" type="number" label="Transfer"></v-text-field>
+                <v-text-field v-model.number="dogsTransferred" :rules="numberRules" type="number" label="Transfer"></v-text-field>
               </v-flex>
               <v-flex xs12 md4>
-                <v-text-field v-model.number="dogsSold" type="number" label="Sell"></v-text-field>
+                <v-text-field v-model.number="dogsSold" :rules="numberRules" type="number" label="Sell"></v-text-field>
               </v-flex>
               <v-flex xs12 md4>
-                <v-text-field v-model.number="dogsTraded" type="number" label="Trade"></v-text-field>
+                <v-text-field v-model.number="dogsTraded" :rules="numberRules" type="number" label="Trade"></v-text-field>
               </v-flex>
               <v-flex xs12 md4>
-                <v-text-field v-model.number="dogsLeased" type="number" label="Lease"></v-text-field>
+                <v-text-field v-model.number="dogsLeased" :rules="numberRules" type="number" label="Lease"></v-text-field>
               </v-flex>
             </v-layout>
           </v-card>
@@ -62,6 +63,9 @@
 export default {
   data: () => ({
     valid: false,
+    numberRules: [
+      v => v >= 0 || "Number cannot be negative"
+    ],
   }),
   computed: {
     femaleIntactDogNum: {
