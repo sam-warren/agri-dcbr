@@ -62,7 +62,8 @@ export default {
     valid: false,
     streetNumberRules: [
       v => !!v || "Street number is required",
-      v => v >= 0 || "Street number cannot be negative"
+      v => v >= 0 || "Number cannot be negative",
+      v => v <= 2147483647 || "Number must be less than 2147483647"
     ],
     suiteRules: [
       v => v.length <= 32 || "Apt/Suite name must be less than 32 characters"

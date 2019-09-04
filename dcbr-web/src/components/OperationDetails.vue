@@ -154,10 +154,11 @@ export default {
     ],
     websiteRules: [
       v => /^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(v) || "URL must be valid",
-      v => v.length <= 50 || "Url must be less than 50 characters"
+      v => v.length <= 4000 || "Url must be less than 4000 characters"
     ],
     numberRules: [
-      v => v >= 0 || "Number cannot be negative"
+      v => v >= 0 || "Number cannot be negative",
+      v => v <= 2147483647 || "Number must be less than 2147483647"
     ],
     membershipNumberRules: [
       v => v.length <= 20 || "Membership number must be less than 20 characters"

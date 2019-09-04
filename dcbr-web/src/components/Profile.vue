@@ -160,11 +160,13 @@ export default {
     ],
     emailRules: [
       v => !!v || "E-mail is required",
-      v => /.+@.+/.test(v) || "E-mail must be valid"
+      v => /.+@.+/.test(v) || "E-mail must be valid",
+      v => v.length <= 32 || "Email address must be less than 32 characters"
     ],
     streetNumberRules: [
       v => !!v || "Street number is required",
-      v => v >= 0 || "Street number cannot be negative"
+      v => v >= 0 || "Street number cannot be negative",
+      v => v <= 2147483647 || "Number must be less than 2147483647"
     ],
     suiteRules: [
       v => v.length <= 32 || "Apt/Suite name must be less than 32 characters"

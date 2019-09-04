@@ -64,7 +64,8 @@ export default {
   data: () => ({
     valid: false,
     numberRules: [
-      v => v >= 0 || "Number cannot be negative"
+      v => v >= 0 || "Number cannot be negative",
+      v => v <= 2147483647 || "Number must be less than 2147483647"
     ],
   }),
   computed: {
