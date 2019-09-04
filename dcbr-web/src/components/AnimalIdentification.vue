@@ -14,7 +14,7 @@
 
               <!-- Type of Operator -->
               <v-layout mx-2 mt-4>
-                <v-subheader>Do you maintain a permanent identification of your animals?</v-subheader>
+                <v-subheader>Do you use permanent identification on your dogs and/or cats and their offspring?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="hasPermId" name="hasPermId" row>

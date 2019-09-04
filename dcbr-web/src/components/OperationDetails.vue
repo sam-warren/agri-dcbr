@@ -12,7 +12,7 @@
             <v-container>
               <!--OPERATION DETAILS-NAME  -->
               <v-layout mx-2 mt-4>
-                <v-subheader>Does your operation run under a specific name? i.e "business name" (Optional)</v-subheader>
+                <v-subheader>What is your business name? (Optional)</v-subheader>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 mr-5>
@@ -37,7 +37,7 @@
               </v-layout>
               <!-- Type of Animal -->
               <v-layout mx-2 mt-4>
-                <v-subheader>What type of animal do you work with?</v-subheader>
+                <v-subheader>What type of animal do you breed and/or sell?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="animalType" row>
@@ -48,7 +48,7 @@
               </v-layout>
               <!-- ACCIDENTAL BREEDING -->
               <v-layout mx-2 mt-4>
-                <v-subheader>Over the past calendar year, did you have an accidental breeding?</v-subheader>
+                <v-subheader>Over the past calendar year, was there an accidental breeding of your dogs and/or cats?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="accidentalBreeding" name="accidentalBreeding" row>
@@ -69,7 +69,7 @@
 
               <!-- How many breeds -->
               <v-layout mx-2 mt-4>
-                <v-subheader>How many breeds of animals are you currently breeding/selling?</v-subheader>
+                <v-subheader>How many different breeds of dogs/cats do you typically breed and/or sell?</v-subheader>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 lg6 v-if="this.animalType !== 'CAT'">
@@ -93,7 +93,7 @@
               </v-layout>
               <!-- NUMBER OF EMPLOYEES -->
               <v-layout mx-2 mt-4>
-                <v-subheader>How many people are currently working in your operation including yourself?</v-subheader>
+                <v-subheader>How many people (e.g. employees, volunteers, etc.) typically work in your operation including yourself?</v-subheader>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 lg6>
