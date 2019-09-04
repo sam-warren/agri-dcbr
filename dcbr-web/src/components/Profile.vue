@@ -21,6 +21,7 @@
                     :rules="nameRules"
                     label="First name"
                     name="firstName"
+                    counter=50
                     required
                   ></v-text-field>
                 </v-flex>
@@ -30,6 +31,7 @@
                     :rules="middleNameRules"
                     label="Middle name (optional)"
                     name="middleName"
+                    counter=50
                   ></v-text-field>
                 </v-flex>
 
@@ -39,6 +41,7 @@
                     :rules="nameRules"
                     label="Last name"
                     name="lastName"
+                    counter=50
                     required
                   ></v-text-field>
                 </v-flex>
@@ -56,7 +59,7 @@
                     label="Street number"
                     name="streetNumber"
                     type="number"
-                    onkeydown="return event.keyCode != 69"
+                    required
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>
@@ -64,8 +67,8 @@
                     v-model="aptNumber" 
                     label="Apt/Suite (optional)" 
                     name="aptNumber" 
+                    counter=32
                     :rules="suiteRules"
-                    required
                   ></v-text-field>
                 </v-flex>
 
@@ -75,6 +78,7 @@
                     :rules="streetNameRules"
                     label="Street name"
                     name="streetName"
+                    counter=32
                     required
                   ></v-text-field>
                 </v-flex>
@@ -84,6 +88,7 @@
                     :rules="cityRules" 
                     label="City" 
                     name="city" 
+                    counter=32
                     required
                   ></v-text-field>
                 </v-flex>
@@ -95,15 +100,6 @@
                     name="postalCode"
                     required
                   ></v-text-field>
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-checkbox
-                    v-model="homeAsOperation"
-                    :label="`My home address is also my operation address`"
-                    name="homeAsOperation"
-                  ></v-checkbox>
-                  <!-- <label for="homeAsOperation">My home address is also my operation address</label> -->
-                  <!-- <input type="checkbox" v-model="homeAsOperation" /> -->
                 </v-flex>
               </v-layout>
 
@@ -318,17 +314,6 @@ export default {
         this.$store.dispatch("profile/postalCode", value);
       }
     },
-    homeAsOperation: {
-      // getter
-      get() {
-        return this.$store.getters["profile/homeAsOperation"];
-      },
-      // setter
-      set(value) {
-        console.log(value);
-        this.$store.dispatch("profile/homeAsOperation", value);
-      }
-    }
   }
 };
 </script>

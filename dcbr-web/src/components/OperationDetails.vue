@@ -16,7 +16,7 @@
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 mr-5>
-                  <v-text-field v-model="operationName" :rules="notRequiredNameRules" label="Operation Name" name="operationName"></v-text-field>
+                  <v-text-field v-model="operationName" :rules="notRequiredNameRules" label="Operation Name" name="operationName" counter=50></v-text-field>
                 </v-flex>
 
                 <v-flex xs12 md4>
@@ -112,7 +112,7 @@
               </v-layout>
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field v-model="assocName" :rules="notRequiredNameRules" label="Association Name" name="assocName"></v-text-field>
+                  <v-text-field v-model="assocName" :rules="notRequiredNameRules" label="Association Name" name="assocName" counter=50></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
@@ -120,6 +120,7 @@
                     :rules="membershipNumberRules"
                     label="Membership #"
                     name="assocMembership"
+                    counter=20
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>

@@ -40,6 +40,7 @@
                       v-model="otherPermIdType"
                       :rules="nameRules"
                       label="Other Method"
+                      counter=15
                       name="otherPermIdType"
                     ></v-text-field>
                   </v-flex>
