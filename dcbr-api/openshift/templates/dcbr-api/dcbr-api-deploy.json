@@ -242,6 +242,38 @@
                   {
                     "name": "WEASYPRINT_PORT",
                     "value": "${WEASYPRINT_HOST}"
+                  },
+                  {
+                    "name": "OIDC_RP_CLIENT_ID",
+                    "value": "${OIDC_RP_CLIENT_ID}"
+                  },
+                  {
+                    "name": "OIDC_RP_CLIENT_SECRET",
+                    "value": "${OIDC_RP_CLIENT_SECRET}"
+                  },
+                  {
+                    "name": "OIDC_RP_SIGN_ALGO",
+                    "value": "${OIDC_RP_SIGN_ALGO}"
+                  },
+                  {
+                    "name": "OIDC_OP_AUTHORIZATION_ENDPOINT",
+                    "value": "${OIDC_OP_AUTHORIZATION_ENDPOINT}"
+                  },
+                  {
+                    "name": "OIDC_OP_TOKEN_ENDPOINT",
+                    "value": "${OIDC_OP_TOKEN_ENDPOINT}"
+                  },
+                  {
+                    "name": "OIDC_OP_USER_ENDPOINT",
+                    "value": "${OIDC_OP_USER_ENDPOINT}"
+                  },
+                  {
+                    "name": "OIDC_OP_JWKS_ENDPOINT",
+                    "value": "${OIDC_OP_JWKS_ENDPOINT}"
+                  },
+                  {
+                    "name": "OIDC_LOGOUT_REDIRECT_URL",
+                    "value": "${OIDC_LOGOUT_REDIRECT_URL}"
                   }
                 ],
                 "resources": {
@@ -420,6 +452,62 @@
       "description": "The AGRI email address to be used as recipient (from) in outbound messages.",
       "required": true,
       "value": "AgriServiceBC@gov.bc.ca"
+    },
+    {
+      "name": "OIDC_RP_CLIENT_ID",
+      "displayName": "OIDC Client Id",
+      "description": "The client id to be used for authentication with the OIDC provider.",
+      "required": true,
+      "value": "dcbr-admin"
+    },
+    {
+      "name": "OIDC_RP_CLIENT_SECRET",
+      "displayName": "OIDC Client Secret",
+      "description": "The secret for the OIDC provider client.",
+      "required": true,
+      "value": ""
+    },
+    {
+      "name": "OIDC_RP_SIGN_ALGO",
+      "displayName": "OIDC Signing Algorithm",
+      "description": "The algorithm used by the OIDC provider to sign tokens.",
+      "required": true,
+      "value": "RS256"
+    },
+    {
+      "name": "OIDC_OP_AUTHORIZATION_ENDPOINT",
+      "displayName": "OIDC Provider Authorization Endpoint",
+      "description": "The OIDC provider endpoint for authorization requests.",
+      "required": true,
+      "value": "https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/auth"
+    },
+    {
+      "name": "OIDC_OP_TOKEN_ENDPOINT",
+      "displayName": "OIDC Provider Token Endpoint",
+      "description": "The OIDC provider endpoint for token requests.",
+      "required": true,
+      "value": "https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/token"
+    },
+    {
+      "name": "OIDC_OP_USER_ENDPOINT",
+      "displayName": "OIDC Provider User Endpoint",
+      "description": "The OIDC provider endpoint for user requests.",
+      "required": true,
+      "value": "https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/userinfo"
+    },
+    {
+      "name": "OIDC_OP_JWKS_ENDPOINT",
+      "displayName": "OIDC Provider JWKS Endpoint",
+      "description": "The OIDC provider endpoint for requesting JWKS key.",
+      "required": true,
+      "value": "https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/certs"
+    },
+    {
+      "name": "OIDC_LOGOUT_REDIRECT_URL",
+      "displayName": "OIDC Logout Redirect URL",
+      "description": "The URL used by the OIDC provider to redirect the request after logout.",
+      "required": true,
+      "value": "https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/logout"
     },
     {
       "name": "CPU_REQUEST",
