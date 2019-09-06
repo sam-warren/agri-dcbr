@@ -1,9 +1,49 @@
 <template>
-  <v-container grid-list-md text-xs-center>
-    <v-layout row wrap>
-
-    </v-layout>
-  </v-container>
+  <div class="grey lighten-4">
+    <v-stepper flat>
+      <v-stepper-header>
+        <v-stepper-step complete editable step="1">Registration</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step complete step="2">Payment($0)</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step complete editable step="3">Review & submit</v-stepper-step>
+      </v-stepper-header>
+    </v-stepper>
+    <v-content class="mx-4 mb-4 my-4">
+      <v-container fluid>
+        <v-container grid-list-md text-xs-center>
+          <v-layout row wrap>
+            <v-card-title primary-title>
+              <div>
+                <h2>Profile</h2>
+              </div>
+            </v-card-title>
+            <v-flex xs12>
+              <v-card flat>
+                <v-container>
+                  <!--Name Section  -->
+                  <v-layout mx-2 mt-2>
+                    <h4>First name</h4>
+                  </v-layout>
+                  <v-layout mx-2 mt-2>
+                    <h4>Middle name</h4>
+                  </v-layout>
+                  <v-layout mx-2 mt-2>
+                    <h4>Last name</h4>
+                  </v-layout>
+                  <v-layout row wrap mx-2>
+                    <v-flex xs12 md4>
+                      
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-card>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-container>
+    </v-content>
+  </div>
 </template>
 
 <script>
