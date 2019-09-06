@@ -4,30 +4,50 @@
       <v-card>
         <v-flex ma-4>
           <h2 class="text-md-center">Welcome!</h2>
-          <h4
-            class="text-md-center"
-          >Welcome to the official British Columbia Government Registry for commercial dog and cat breeders and sellers in British Columbia.</h4>
-          <br>This registry allows you to:
-          <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title>This registry allows you to:</v-list-item-title>
-      </v-list-item-content>
-    </v-list-item>
-          Submit registry information if you are a commercial breeder and/or seller in BC•View registry information of existing commercial breeders and/or sellers in BC, including the status of their registration•Obtain educational information related to commercial dog and cat breeding and/or selling in BCIn B.C., individuals and businesses breeding and/or selling dogs and cats in BC must provide registration information through this registry and confirm they are aware of and abide by the Commercial Dog and Cat Standards of Care Regulation. Why Register?This British Columbia Government Registry is part of a four-pillar policy framework for commercial dog and cat breeders and sellers in British Columbia.
-          <v-subheader>The four pillars are:</v-subheader>
-          <p class="text-md-left">
-              1. Mandatory Registration for all commercial dog and cat breeders, and sellers of their offspring.
-              <br>2. Education and Awareness
-              <br>3. Enforceable provincial minimum Standards of Care for all commercial dog and cat breeders, and sellers of their offspring
-              <br>4. Inspection and Compliance with graduated enforcement
+          <br />
+          <p>
+            Starting in [Date], commercial cat and dog breeders and sellers in B.C. will need to register with the provincial government.
+            <strong>It is a legislated requirement to register.</strong>
+            Individuals and businesses breeding and/or selling dogs and/or cats in B.C. will be able to complete their registration online by providing:
           </p>
-          <v-subheader>This regulatory framework was established to; 1) ensure a high level of animal care and well-being for dogs and cats bred and sold in BC.2) provide consumers with a means to verify a particular breeder or seller is adhering to the regulatory framework.</v-subheader>1. A repository where breeders/sellers will register their operation(s)
-          <br>2. A means for breeders/sellers to agree to follow a minimum standard of care.
-          <br>3. Communicate important documents (provincial minimum Standards of Care regulation) and educational documents with operators
-          <br>4.Provide the public with a place to search for registered breeders and their status.
-          <v-subheader>Who Must Register?</v-subheader>If you are a commercial breeder and/or seller of dogs and/or cats in British Columbia it is mandatory for you to register, provide accurate information, and follow the Standards of Care.
-          <v-subheader>Exceptions:</v-subheader>Persons or businesses that have a one-time accidental breeding whereby the resulting offspring are not sold, traded, nor leased. In this case, registration is not mandatory, nor is adhering to the Commercial Dog and Cat Breeders and Sellers Standards of Care. If persons or businesses plan to
-          sell, trade or lease the resulting offspring of a one-time accidental breeding, they must register and adhere to the Commercial Dog and Cat Breeders and Sellers Standards of Care.How to Register•Online (info...)•By Phone (info...)•By Mail or Fax (info..)
+          <p class="text-md-left">
+            1. Contact information
+            <br />2. Email address
+            <br />3. Location of operation(s)
+            <br />4. Number of cats and/or dogs
+            <br />5. Number of litters
+          </p>
+          <p>There is no fee to register. Commercial cat and dog breeders and/or sellers must confirm they are aware of and abide by the obligations of the Cat and Dog Commercial Breeding Regulation.
+          <br><br>
+
+            <strong>Who must register?</strong><br>
+          
+            If you are a commercial breeder and/or seller of dogs and/or cats in British Columbia it is mandatory for you to register, provide accurate information, and follow the Operator Duties and Standards of Care in the Cat and Dog Commercial Breeding Regulation. <br><br>
+            Exceptions: Persons or businesses that are intending to give puppies and/or kittens away with no monetary or other considerable exchange. In this case, registration is not mandatory, nor is adhering to the Commercial Dog and Cat Breeders and Sellers Standards of Care. <br><br>
+            If persons or businesses plan to sell, trade or lease the offspring of a one-time accidental breeding, registration is mandatory, and they must adhere to the relevant sections of the Cat and Dog Commercial Breeding Regulation. <br><br>
+            Other exceptions include registered charities such as humane societies, rescue societies, the BC SPCA, etc.<br><br>
+
+            <strong>Why register?</strong><br>
+            This regulatory framework was established to 1) ensure a minimum level of animal care and well-being for dogs and cats bred and sold in BC; and 2) provide consumers with a means to verify that a particular breeder and/or seller has agreed to adhere to the regulatory framework. <br><br>
+            The Registry will provide:
+          </p>
+          <p class="text-md-left">
+            1. A repository where breeders/sellers will register their operation(s);
+            <br />2. A means for breeders/sellers to agree to follow a minimum standard of care;
+            <br />3. Communicate important documents (provincial minimum Standards of Care regulation) and educational documents with operators;
+            <br />4. Provide the public with a place to search for registered breeders and their status.
+          </p>
+          <p><strong>How to register?</strong><br>
+            - Online<br>
+            - By Phone<br>
+            - By Mail or Fax<br>
+          </p>
+          <p>
+            YOUR PERSONAL INFORMATION IS COLLECTED BY THE MINISTRY OF AGRICULTURE UNDER SECTION(S) 26 (C) & (E) OF THE FREEDOM OF INFORMATION AND PROTECTION OF PRIVACY ACT FOR THE PURPOSE OF LOCATING IRRESPONSIBLE DOG AND CAT BREEDERS AND SELLERS. FOR ANY QUESTIONS ABOUT THIS COLLECTION, PLEASE CONTACT:
+          </p>
+          <p>
+            MINISTRY OF AGRICULTURE <br><br>PHONE NUMBER (TBD) AND E-MAIL (TBD)
+          </p>
         </v-flex>
       </v-card>
     </v-layout>

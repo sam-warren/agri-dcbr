@@ -47,10 +47,6 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.profile!.postalCode = payload;
   },
-  homeAsOperation(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.profile!.homeAsOperation = payload;
-  },
 
   // Operation Details
   operationName(state: RegistrationState, payload: string) {
