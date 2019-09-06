@@ -159,9 +159,8 @@ configureEnvironment() {
 
   if [ "$COMMAND" == "start" ] || [ "$COMMAND" == "start-api" ] || [ "$COMMAND" == "start-dev" ]; then
     if [ -z "$KEYCLOAK_CLIENT_SECRET" ]; then
-      echo "You must provide a secret for your Keycloak clientseed parameter. For example: KEYCLOAK_CLIENT_SECRET=my-client-secret."
+      echo "For Keycloak authentication to work, you must provide a client secret parameter. For example: KEYCLOAK_CLIENT_SECRET=my-client-secret."
       echo "Please refer to the section \"Obtaining a client secret from Keycloak\" in the README.md in the current directory."
-      exit 1
     fi
   fi
 
