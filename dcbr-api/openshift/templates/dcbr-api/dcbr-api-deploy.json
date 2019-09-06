@@ -507,7 +507,7 @@
       "displayName": "OIDC Logout Redirect URL",
       "description": "The URL used by the OIDC provider to redirect the request after logout.",
       "required": true,
-      "value": "https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/logout"
+      "value": "https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/agriculture"
     },
     {
       "name": "CPU_REQUEST",
