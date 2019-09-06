@@ -1,11 +1,15 @@
+import datetime
+import json
 import logging
 import os
 import tempfile
 
 import requests
 from background_task import background
+from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.core import management
+from django.template import loader
 from post_office import mail
 
 LOGGER = logging.getLogger(__name__)
@@ -26,16 +30,31 @@ def send_reminder_email():
 def send_registration_email(email_addr):
     # TODO: update email logic, refer to https://github.com/ui/django-post_office#usage
 
-    user = {"name": "DCBR Operator " + email_addr, "other_prop": "other_value"}
-
+    operator = {"name": email_addr, "other_prop": "other_value"}
     registration_number = "DCBR-123456"
+    locations_num = 2
+    animal_types = "Dogs"
+    operation_type = "Seller"
+    renewal_date = datetime.datetime.now() + relativedelta(years=2)
+
+    template_context = {
+        "operator": operator,
+        "registration_number": registration_number,
+        "locations_num": locations_num,
+        "animal_types": animal_types,
+        "operation_type": operation_type,
+        "renewal_date": renewal_date.strftime("%B %d, %Y"),
+    }
+
+    template = loader.get_template("certificate/certificate.html")
+    rendered = template.render(template_context)
 
     LOGGER.debug(
         "Requesting PDF certificate for registration #{}".format(registration_number)
     )
     response = requests.post(
         settings.WEASYPRINT_REQUEST_URL + "certificate.pdf",
-        data="<h1>TEST CERTIFICATE</h1><p>A paragraph.</p>",
+        data=rendered,
         headers={"content-type": "text/html"},
     )
 
@@ -58,7 +77,7 @@ def send_registration_email(email_addr):
             settings.AGRI_EMAIL,
             template="registration_email",  # Could be an EmailTemplate instance or name
             context={
-                "user": user,
+                "user": json.dumps(operator),
                 "registration_number": registration_number,
             },
             render_on_delivery=True,
