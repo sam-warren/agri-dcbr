@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.admindocs",
     "django.contrib.auth",
+    "mozilla_django_oidc",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
@@ -71,6 +72,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "mozilla_django_oidc.middleware.SessionRefresh",
+]
+
+AUTHENTICATION_BACKENDS = [
+    "dcbr.oidc_authentication.AdminOIDCAB",
+    "django.contrib.auth.backends.ModelBackend",
 ]
 
 CORS_URLS_REGEX = r"^/(api|email)/.*$"
@@ -175,9 +182,16 @@ API_METADATA = {
 }
 # fmt: on
 
+# Django rest framework
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 100,
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly"
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "mozilla_django_oidc.contrib.drf.OIDCAuthentication"
+    ],
 }
 
 # e-mail management
@@ -196,3 +210,56 @@ if WEASYPRINT_HOST is not None and WEASYPRINT_PORT is not None:
     WEASYPRINT_REQUEST_URL = (
         "http://" + WEASYPRINT_HOST + ":" + WEASYPRINT_PORT + "/pdf?filename="
     )
+
+# mozilla-django-oidc
+OIDC_RP_CLIENT_ID = os.getenv("OIDC_RP_CLIENT_ID")
+OIDC_RP_CLIENT_SECRET = os.getenv("OIDC_RP_CLIENT_SECRET")
+OIDC_OP_AUTHORIZATION_ENDPOINT = os.getenv("OIDC_OP_AUTHORIZATION_ENDPOINT")
+OIDC_OP_TOKEN_ENDPOINT = os.getenv("OIDC_OP_TOKEN_ENDPOINT")
+OIDC_OP_USER_ENDPOINT = os.getenv("OIDC_OP_USER_ENDPOINT")
+OIDC_RP_SIGN_ALGO = os.getenv("OIDC_RP_SIGN_ALGO")
+OIDC_OP_JWKS_ENDPOINT = os.getenv("OIDC_OP_JWKS_ENDPOINT")
+
+LOGIN_URL = "/authenticate"
+LOGIN_REDIRECT_URL = "/admin"
+LOGIN_REDIRECT_URL_FAILURE = "/authenticate"
+LOGOUT_REDIRECT_URL = os.getenv("OIDC_LOGOUT_REDIRECT_URL", "/admin/logout")
+
+# Logging
+DCBR_LOG_LEVEL = "INFO"
+if DEBUG is True:
+    DCBR_LOG_LEVEL = "DEBUG"
+
+# fmt:off
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}
+    },
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
+        },
+        "simple": {"format": "%(levelname)s %(message)s"},
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "DEBUG",
+            "formatter": "verbose",
+        }
+    },
+    "loggers": {
+        "mozilla_django_oidc": {
+            "handlers": ["console"],
+            "level": DCBR_LOG_LEVEL
+        }
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": DCBR_LOG_LEVEL,
+        "propagate": False,
+    },
+}
+# fmt:on

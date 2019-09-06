@@ -99,6 +99,8 @@ writeParameter "DJANGO_ADMIN_PASSWORD" $(generatePassword) "true"
 
 readParameter "EMAIL_HOST - Please provide the SMTP host address. If left blank, 'localhost' will be used:" EMAIL_HOST "localhost"
 
+readParameter "OIDC_RP_CLIENT_SECRET - Please provide the client secret for 'dcbr-admin'. If not set, OIDC authentication will NOT work:" OIDC_RP_CLIENT_SECRET ""
+
 SPECIALDEPLOYPARMS="--param-file=${_overrideParamFile}"
 echo ${SPECIALDEPLOYPARMS}
 # ================================================================================================================
