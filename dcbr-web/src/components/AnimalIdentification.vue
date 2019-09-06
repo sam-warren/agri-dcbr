@@ -14,7 +14,7 @@
 
               <!-- Type of Operator -->
               <v-layout mx-2 mt-4>
-                <v-subheader>Do you maintain a permanent identification of your animals?</v-subheader>
+                <v-subheader>Do you use permanent identification on your dogs and/or cats and their offspring?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="hasPermId" name="hasPermId" row>
@@ -38,7 +38,9 @@
                   <v-flex xs12 md4 v-if="permIdType === 'OTHER'">
                     <v-text-field
                       v-model="otherPermIdType"
+                      :rules="nameRules"
                       label="Other Method"
+                      counter=15
                       name="otherPermIdType"
                     ></v-text-field>
                   </v-flex>
@@ -58,7 +60,7 @@ export default {
     visited: false,
     nameRules: [
       v => !!v || "Name is required",
-      v => v.length <= 50 || "Name must be less than 50 characters"
+      v => v.length <= 15 || "Name must be less than 15 characters"
     ],
     email: "",
     emailRules: [

@@ -12,15 +12,15 @@
             <v-container>
               <!--OPERATION DETAILS-NAME  -->
               <v-layout mx-2 mt-4>
-                <v-subheader>Does your operation run under a specific name? i.e "business name" (Optional)</v-subheader>
+                <v-subheader>What is your business name? (Optional)</v-subheader>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 mr-5>
-                  <v-text-field v-model="operationName" label="Operation Name" name="operationName"></v-text-field>
+                  <v-text-field v-model="operationName" :rules="notRequiredNameRules" label="Operation Name" name="operationName" counter=50></v-text-field>
                 </v-flex>
 
                 <v-flex xs12 md4>
-                  <v-text-field v-model="opWebsite" label="Link to your Website " name="opWebsite"></v-text-field>
+                  <v-text-field v-model="opWebsite" :rules="websiteRules" label="Link to your Website " name="opWebsite"></v-text-field>
                 </v-flex>
               </v-layout>
               <!-- Type of Operator -->
@@ -37,7 +37,7 @@
               </v-layout>
               <!-- Type of Animal -->
               <v-layout mx-2 mt-4>
-                <v-subheader>What type of animal do you work with?</v-subheader>
+                <v-subheader>What type of animal do you breed and/or sell?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="animalType" row>
@@ -48,7 +48,7 @@
               </v-layout>
               <!-- ACCIDENTAL BREEDING -->
               <v-layout mx-2 mt-4>
-                <v-subheader>Over the past calendar year, did you have an accidental breeding?</v-subheader>
+                <v-subheader>Over the past calendar year, was there an accidental breeding of your dogs and/or cats?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="accidentalBreeding" name="accidentalBreeding" row>
@@ -69,13 +69,14 @@
 
               <!-- How many breeds -->
               <v-layout mx-2 mt-4>
-                <v-subheader>How many breeds of animals are you currently breeding/selling?</v-subheader>
+                <v-subheader>How many different breeds of dogs/cats do you typically breed and/or sell?</v-subheader>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 lg6 v-if="this.animalType !== 'CAT'">
                   <v-text-field
                     v-model.number="numDogBreeds"
                     type="number"
+                    :rules="numberRules"
                     label="Number of Dog Breeds"
                     name="numDogBreeds"
                   ></v-text-field>
@@ -84,6 +85,7 @@
                   <v-text-field
                     v-model.number="numCatBreeds"
                     type="number"
+                    :rules="numberRules"
                     label="Number of Cat Breeds"
                     name="numCatBreeds"
                   ></v-text-field>
@@ -91,13 +93,14 @@
               </v-layout>
               <!-- NUMBER OF EMPLOYEES -->
               <v-layout mx-2 mt-4>
-                <v-subheader>How many people are currently working in your operation including yourself?</v-subheader>
+                <v-subheader>How many people (e.g. employees, volunteers, etc.) typically work in your operation including yourself?</v-subheader>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4 lg6>
                   <v-text-field
                     v-model.number="numWorkers"
                     type="number"
+                    :rules="numberRules"
                     label="Number of workers"
                     name="numWorkers"
                   ></v-text-field>
@@ -109,17 +112,19 @@
               </v-layout>
               <v-layout row wrap ma-2>
                 <v-flex xs12 md4>
-                  <v-text-field v-model="assocName" label="Association Name" name="assocName"></v-text-field>
+                  <v-text-field v-model="assocName" :rules="notRequiredNameRules" label="Association Name" name="assocName" counter=50></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="assocMembership"
+                    :rules="membershipNumberRules"
                     label="Membership #"
                     name="assocMembership"
+                    counter=20
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model="assocWebsite" label="Website " name="assocWebsite"></v-text-field>
+                  <v-text-field v-model="assocWebsite" :rules="websiteRules" label="Website " name="assocWebsite"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -140,10 +145,24 @@ export default {
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
     ],
+    notRequiredNameRules: [
+      v => v.length <= 50 || "Name must be less than 50 characters"
+    ],
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+/.test(v) || "E-mail must be valid"
-    ]
+    ],
+    websiteRules: [
+      v => /^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(v) || "URL must be valid",
+      v => v.length <= 4000 || "Url must be less than 4000 characters"
+    ],
+    numberRules: [
+      v => v >= 0 || "Number cannot be negative",
+      v => v <= 2147483647 || "Number must be less than 2147483647"
+    ],
+    membershipNumberRules: [
+      v => v.length <= 20 || "Membership number must be less than 20 characters"
+    ],
   }),
 
   computed: {

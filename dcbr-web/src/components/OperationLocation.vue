@@ -18,28 +18,30 @@
                   <v-text-field
                     v-model="streetNumber"
                     :rules="streetNumberRules"
+                    type="number"
                     label="Street number"
                     required
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="aptNumber" label="Apt/Suite" required></v-text-field>
+                  <v-text-field v-model="aptNumber" :rules="suiteRules" label="Apt/Suite (optional)" counter=32 required></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="streetName"
-                    :rules="nameRules"
+                    :rules="streetNameRules"
                     label="Street name"
+                    counter=32
                     required
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field v-model="city" :rules="nameRules" label="City" required></v-text-field>
+                  <v-text-field v-model="city" :rules="cityRules" label="City" counter=32 required></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="postalCode"
-                    :rules="nameRules"
+                    :rules="postalCodeRules"
                     label="Postal Code"
                     required
                   ></v-text-field>
@@ -58,11 +60,26 @@ export default {
   props: ["number"],
   data: () => ({
     valid: false,
-    nameRules: [
-      v => !!v || "Name is required",
-      v => v.length <= 50 || "Name must be less than 50 characters"
+    streetNumberRules: [
+      v => !!v || "Street number is required",
+      v => v >= 0 || "Number cannot be negative",
+      v => v <= 2147483647 || "Number must be less than 2147483647"
     ],
-    streetNumberRules: [v => !!v || "Street number is required"]
+    suiteRules: [
+      v => v.length <= 32 || "Apt/Suite name must be less than 32 characters"
+    ],
+    streetNameRules: [
+      v => !!v || "Street name is required",
+      v => v.length <= 32 || "Street name must be less than 32 characters"
+    ],
+    cityRules: [
+      v => !!v || "City name is required",
+      v => v.length <= 32 || "City name must be less than 32 characters"
+    ],
+    postalCodeRules: [
+      v => !!v || "Postal code is required",
+      v => /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(v) || "Postal code must be valid"
+    ],
   }),
   methods: {},
   computed: {

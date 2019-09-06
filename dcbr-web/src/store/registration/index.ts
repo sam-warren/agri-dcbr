@@ -22,7 +22,6 @@ export const ProfileState: ProfileTypes = {
   // streetName: "Government St",
   // city: "Langley",
   // postalCode: "V4W1J1",
-  // homeAsOperation: "true",
   // error: false
 
   firstName: "",
@@ -36,7 +35,6 @@ export const ProfileState: ProfileTypes = {
   streetName: "",
   city: "",
   postalCode: "",
-  homeAsOperation: "",
   error: false
 };
 
@@ -112,8 +110,8 @@ export const BreedingDetailsState: BreedingDetailsTypes = {
 
 export const AnimalIdentificationState: AnimalIdentificationTypes = {
   // hasPermId: "true",
-  // permIdType: "OTHER",
-  // otherPermIdType: "Paper",
+  // permIdType: "TATTOO",
+  // otherPermIdType: "",
   // error: false
 
   hasPermId: "",
