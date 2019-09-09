@@ -33,3 +33,6 @@ django-import-export
 
 # Authentication
 mozilla-django-oidc>=1.2.2
+
+# date management
+python-dateutil>=2.8,<3
