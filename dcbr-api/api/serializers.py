@@ -111,20 +111,20 @@ class Registration_Serializer(ModelSerializer):
         registration = Registration.objects.create(**validated_data)
 
         for address_data in addresses_data:
-            Address.objects.create(regNum=registration, **address_data)
+            Address.objects.create(registration_number=registration, **address_data)
         for association_data in associations_data:
             Association_Membership.objects.create(
-                regNum=registration, **association_data
+                registration_number=registration, **association_data
             )
         for animal_data in animals_data:
-            Animal_Risk_Factor.objects.create(regNum=registration, **animal_data)
+            Animal_Risk_Factor.objects.create(registration_number=registration, **animal_data)
 
         for operation_data in operations_data:
             Operation_Risk_Factor.objects.create(
-                regNum=registration, **operation_data
+                registration_number=registration, **operation_data
             )
 
-        Operator.objects.create(regNum=registration, **operator_data)
+        Operator.objects.create(registration_number=registration, **operator_data)
 
         return registration
 
