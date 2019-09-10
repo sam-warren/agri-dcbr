@@ -9,6 +9,7 @@ from api.serializers import (
     Animal_Risk_Factor_Serializer,
     Operation_Risk_Factor_Serializer,
     Inspection_Serializer,
+    Renewal_Serializer,
     Association_Membership_Serializer,
 )
 
@@ -20,6 +21,7 @@ from api.models import (
     Inspection,
     Animal_Risk_Factor,
     Operation_Risk_Factor,
+    Renewal,
     Association_Membership,
 )
 
@@ -85,4 +87,13 @@ class Association_ViewSet(viewsets.ModelViewSet):
 
     queryset = Inspection.objects.all()
     serializer_class = Association_Membership_Serializer
+
+
+class Renewal_ViewSet(viewsets.ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing addresses.
+    """
+
+    queryset = Renewal.objects.all()
+    serializer_class = Renewal_Serializer
 

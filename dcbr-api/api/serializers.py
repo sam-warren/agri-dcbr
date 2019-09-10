@@ -8,6 +8,7 @@ from api.models import (
     Operation_Risk_Factor,
     Animal_Risk_Factor,
     Association_Membership,
+    Renewal,
     Inspection,
 )
 
@@ -59,7 +60,7 @@ class Animal_Risk_Factor_Serializer(ModelSerializer):
             "num_transferred",
             "num_traded",
             "num_leased",
-            "num_animals"
+            "num_animals",
         )
 
 
@@ -81,12 +82,25 @@ class Operator_Serializer(ModelSerializer):
         )
 
 
+class Renewal_Serializer(ModelSerializer):
+    class Meta:
+        model = Renewal
+        fields = (
+            "id",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "previous_registation_number",
+        )
+
+
 class Registration_Serializer(ModelSerializer):
     operator = Operator_Serializer()
     addresses = Address_Serializer(many=True)
     associations = Association_Membership_Serializer(many=True)
     animal_risk_factors = Animal_Risk_Factor_Serializer(many=True)
     operation_risk_factors = Operation_Risk_Factor_Serializer(many=True)
+    renewals = Renewal_Serializer(many=True)
 
     class Meta:
         model = Registration
@@ -98,6 +112,7 @@ class Registration_Serializer(ModelSerializer):
             "associations",
             "animal_risk_factors",
             "operation_risk_factors",
+            "renewals",
         )
 
     def create(self, validated_data):
@@ -108,6 +123,7 @@ class Registration_Serializer(ModelSerializer):
         associations_data = validated_data.pop("associations")
         addresses_data = validated_data.pop("addresses")
         operations_data = validated_data.pop("operation_risk_factors")
+        renewals_data = validated_data.pop("renewals")
 
         registration = Registration.objects.create(**validated_data)
 
@@ -118,12 +134,16 @@ class Registration_Serializer(ModelSerializer):
                 registration_number=registration, **association_data
             )
         for animal_data in animals_data:
-            Animal_Risk_Factor.objects.create(registration_number=registration, **animal_data)
+            Animal_Risk_Factor.objects.create(
+                registration_number=registration, **animal_data
+            )
 
         for operation_data in operations_data:
             Operation_Risk_Factor.objects.create(
                 registration_number=registration, **operation_data
             )
+        for renewal_data in renewals_data:
+            Renewal.objects.create(registration_number=registration, **renewal_data)
 
         Operator.objects.create(registration_number=registration, **operator_data)
 
