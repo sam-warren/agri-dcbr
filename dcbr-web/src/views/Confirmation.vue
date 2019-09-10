@@ -1,6 +1,15 @@
 
 <template>
   <v-app class="grey lighten-4">
+    <v-stepper flat>
+      <v-stepper-header>
+        <v-stepper-step complete step="1">Registration</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step complete step="2">Review & Submit</v-stepper-step>
+        <v-divider></v-divider>
+        <v-stepper-step complete step="3">Confirmation</v-stepper-step>
+      </v-stepper-header>
+    </v-stepper>
     <v-layout>
       <v-flex ma-5 xs9 sm12>
         <v-card class="grey lighten-4">

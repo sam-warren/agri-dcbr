@@ -36,11 +36,11 @@ export interface OperationLocationsTypes {
 }
 
 export interface Location {
-  streetNumber: number, 
-  aptNumber: string, 
-  streetName: string, 
-  city: string, 
-  postalCode: string
+  streetNumber: number;
+  aptNumber: string;
+  streetName: string;
+  city: string; 
+  postalCode: string;
 }
 
 export interface BreedingDetailsTypes {
@@ -62,7 +62,18 @@ export interface BreedingDetailsTypes {
 export interface AnimalIdentificationTypes {
   hasPermId: string;
   permIdType: string;
-  otherPermIdType: string
+  otherPermIdType: string;
+  error: boolean;
+}
+
+export interface TermsAndConditionsTypes {
+  hasAgreed: boolean;
+  error: boolean;
+}
+
+export interface RouteProtectionTypes {
+  registerFormOk: boolean;
+  reviewFormOk: boolean;
   error: boolean;
 }
 
@@ -72,5 +83,7 @@ export interface RegistrationState {
   operationLocations?: OperationLocationsTypes;
   breedingDetails?: BreedingDetailsTypes;
   animalIdentification?: AnimalIdentificationTypes;
+  termsAndConditions?: TermsAndConditionsTypes;  
+  routeProtection?: RouteProtectionTypes;
   error: boolean;
 }

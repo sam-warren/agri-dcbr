@@ -8,6 +8,8 @@ import Payment from "./views/Payment.vue";
 import Review from "./views/Review.vue";
 import Confirmation from "./views/Confirmation.vue";
 
+import store from "@/store/store"
+
 Vue.use(Router);
 
 // export default new Router({
@@ -19,6 +21,9 @@ Vue.use(Router);
 const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
+  scrollBehavior () {
+    return {x: 0, y: 0}
+  },
   routes: [
     {
       path: "/",
@@ -48,16 +53,16 @@ const router = new Router({
       // }
       component: OperationRegistration
     },
-    {
-      path: "/payment",
-      name: "payment",
-      component: () =>
-        // import(/* webpackChunkName: "secret" */ "./views/Secret.vue"),
-        import("./views/Payment.vue"),
-      meta: {
-        requiresAuth: false
-      }
-    },
+    // {
+    //   path: "/payment",
+    //   name: "payment",
+    //   component: () =>
+    //     // import(/* webpackChunkName: "secret" */ "./views/Secret.vue"),
+    //     import("./views/Payment.vue"),
+    //   meta: {
+    //     requiresAuth: false
+    //   }
+    // },
     {
       path: "/review",
       name: "review",
@@ -80,6 +85,29 @@ const router = new Router({
     }
   ]
 });
+
+// router.beforeEach((to: any, from: any, next: any) => {
+//   if (to.fullPath === "/review") {
+//     console.log("REVIEW")
+//     if (!store.getters["routeProtection/registerFormOk"]) {
+//       if (from.path !== "/register") {
+//         next("/register");
+//       } else {
+//         next();
+//       }
+//     }
+//   }
+//   if (to.fullPath === "/confirmation") {
+//     console.log("CONFIRMATION")
+//     if (!store.getters["routeProtection/registerFormOk"] || !store.getters["routeProtection/reviewFormOk"]) {
+//       if (from.path !== "/register") {
+//         next("/register");
+//       } else {
+//         next();
+//       }
+//     }
+//   }
+// });
 
 // router.beforeEach((to, from, next) => {
 //   if (to.matched.some(record => record.meta.requiresAuth)) {

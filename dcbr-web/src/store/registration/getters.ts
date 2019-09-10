@@ -174,4 +174,20 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { animalIdentification } = state;
     return animalIdentification!.otherPermIdType || "";
   },
+
+  // Terms and Conditions
+  hasAgreed(state: RegistrationState): boolean {
+    const { termsAndConditions } = state;
+    return termsAndConditions!.hasAgreed || false;
+  },
+
+  // Route Protection
+  registerFormOk(state: RegistrationState): boolean {
+    const { routeProtection } = state;
+    return routeProtection!.registerFormOk || false;
+  },
+  reviewFormOk(state: RegistrationState): boolean {
+    const { routeProtection } = state;
+    return routeProtection!.reviewFormOk || false;
+  },
 };
