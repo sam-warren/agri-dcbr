@@ -185,7 +185,7 @@ export default {
       console.log(obj);
       if (!this.hasErrors) {
         axios
-          .post("/api/registration_Number/", obj)
+          .post("/api/register/", obj)
           .then(response => {
             console.log(response);
           })

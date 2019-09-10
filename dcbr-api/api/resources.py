@@ -1,6 +1,6 @@
 from import_export import resources
 
-from api.models import Registration_Number
+from api.models import Registration
 from api.models import Operator
 from api.models import Address
 from api.models import Inspection
@@ -9,9 +9,9 @@ from api.models import Animal_Risk_Factor
 from api.models import Association_Membership
 
 
-class Registration_NumberResource(resources.ModelResource):
+class RegistrationResource(resources.ModelResource):
     class Meta:
-        model = Registration_Number
+        model = Registration
 
 
 class OperatorResource(resources.ModelResource):

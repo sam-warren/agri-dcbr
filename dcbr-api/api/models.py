@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 
 
 
-class Registration_Number(models.Model):
+class Registration(models.Model):
     ACTIVE = "ACTIVE"
     SUSPENDED = "SUSPENDED"
     CANCELLED = "CANCELLED"
@@ -33,7 +33,7 @@ class Registration_Number(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name_plural = "Registration_Numbers"
+        verbose_name_plural = "Registrations"
         verbose_name = "new registration"
 
 
@@ -52,8 +52,8 @@ class Operator(models.Model):
     )
 
     description = _("An operator is a seller/breeder of cats and/or dogs")
-    registration_Number = models.OneToOneField(
-        Registration_Number,
+    registration_number = models.OneToOneField(
+        Registration,
         on_delete=models.CASCADE,
         related_name="operator",
         related_query_name="operators",
@@ -82,7 +82,7 @@ class Operator(models.Model):
     
 
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (self.registration_Number, self.last_name, self.first_name)
+        return "Reg ID: \t %s %s , %s" % (self.registration_number, self.last_name, self.first_name)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -97,8 +97,8 @@ class Address(models.Model):
     PRIMARY = "PRI"
     OPERATION = "OPN"
     TYPE_CHOICES = ((PRIMARY, "Primary"), (OPERATION, "Operation"))
-    registration_Number = models.ForeignKey(
-        Registration_Number,
+    registration_number = models.ForeignKey(
+        Registration,
         on_delete=models.CASCADE,
         related_name="addresses",
         related_query_name="addresses",
@@ -116,7 +116,7 @@ class Address(models.Model):
     
 
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (self.registration_Number, self.address_type, self.street_name)
+        return "Reg ID: \t %s %s , %s" % (self.registration_number, self.address_type, self.street_name)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -139,8 +139,8 @@ class Operation_Risk_Factor(models.Model):
     )
 
     
-    registration_Number = models.ForeignKey(
-        Registration_Number,
+    registration_number = models.ForeignKey(
+        Registration,
         on_delete=models.CASCADE,
         related_name="operation_risk_factors",
         related_query_name="operation_risk_factors",
@@ -160,8 +160,8 @@ class Operation_Risk_Factor(models.Model):
     
 
     def __str__(self):
-        return "Operation risk for: \t %s " % (self.registration_Number)
-        return "Reg ID: \t %s %s" % (self.registration_Number, self.animal_type)
+        return "Operation risk for: \t %s " % (self.registration_number)
+        return "Reg ID: \t %s %s" % (self.registration_number, self.animal_type)
 
     def publish(self):
         "operator = breeder / seller"
@@ -175,8 +175,8 @@ class Operation_Risk_Factor(models.Model):
 
 class Animal_Risk_Factor(models.Model):
 
-    registration_Number = models.ForeignKey(
-        Registration_Number,
+    registration_number = models.ForeignKey(
+        Registration,
         on_delete=models.CASCADE,
         related_name="animal_risk_factors",
         related_query_name="animals_risk_factors",
@@ -209,7 +209,7 @@ class Animal_Risk_Factor(models.Model):
     
 
     def __str__(self):
-        return "Reg ID:: \t %s " % (self.registration_Number)
+        return "Reg ID:: \t %s " % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -220,8 +220,8 @@ class Animal_Risk_Factor(models.Model):
 
 class Association_Membership(models.Model):
 
-    registration_Number = models.ForeignKey(
-        Registration_Number, on_delete=models.CASCADE, related_name="associations"
+    registration_number = models.ForeignKey(
+        Registration, on_delete=models.CASCADE, related_name="associations"
     )
 
     assoc_name = models.CharField(max_length=50, default="", blank=True)
@@ -231,7 +231,7 @@ class Association_Membership(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Reg ID:: \t %s " % (self.registration_Number)
+        return "Reg ID:: \t %s " % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -241,8 +241,8 @@ class Association_Membership(models.Model):
 
 
 class Inspection(models.Model):
-    registration_Number = models.ForeignKey(
-        Registration_Number,
+    registration_number = models.ForeignKey(
+        Registration,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -280,7 +280,7 @@ class Inspection(models.Model):
 
     def __str__(self):
         return "Reg ID: \t %s %s , %s" % (
-            self.registration_Number,
+            self.registration_number,
             self.op_last_name,
             self.op_first_name,
         )

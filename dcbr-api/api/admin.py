@@ -9,7 +9,7 @@ from api.resources import AddressResource
 from import_export.formats import base_formats
 
 from api.models import (
-    Registration_Number,
+    Registration,
     Operator,
     Address,
     Inspection,
@@ -77,7 +77,7 @@ class Association_MembershipAdmin(MyAdmin, admin.ModelAdmin):
     pass
 
 
-class Registration_NumberAdmin(MyAdmin, admin.ModelAdmin):
+class RegistrationAdmin(MyAdmin, admin.ModelAdmin):
     pass
     inlines = (
         OperatorInline,
@@ -88,7 +88,7 @@ class Registration_NumberAdmin(MyAdmin, admin.ModelAdmin):
     )
 
 
-admin.site.register(Registration_Number, Registration_NumberAdmin)
+admin.site.register(Registration, RegistrationAdmin)
 admin.site.register(Operator, OperatorAdmin)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(Inspection, InspectionAdmin)

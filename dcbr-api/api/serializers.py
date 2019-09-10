@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from api.models import (
-    Registration_Number,
+    Registration,
     Operator,
     Address,
     Inspection,
@@ -39,7 +39,6 @@ class Operation_Risk_Factor_Serializer(ModelSerializer):
             "id",
             "accidental_breeding",
             "num_workers",
-            
             "has_vet",
             "has_perm_id",
             "perm_id_type",
@@ -81,7 +80,7 @@ class Operator_Serializer(ModelSerializer):
         )
 
 
-class Registration_Number_Serializer(ModelSerializer):
+class Registration_Serializer(ModelSerializer):
     operator = Operator_Serializer()
     addresses = Address_Serializer(many=True)
     associations = Association_Membership_Serializer(many=True)
@@ -89,7 +88,7 @@ class Registration_Number_Serializer(ModelSerializer):
     operation_risk_factors = Operation_Risk_Factor_Serializer(many=True)
 
     class Meta:
-        model = Registration_Number
+        model = Registration
         fields = (
             "id",
             "operator_status",
@@ -109,31 +108,25 @@ class Registration_Number_Serializer(ModelSerializer):
         addresses_data = validated_data.pop("addresses")
         operations_data = validated_data.pop("operation_risk_factors")
 
-        registration_Number = Registration_Number.objects.create(**validated_data)
+        registration = Registration.objects.create(**validated_data)
 
         for address_data in addresses_data:
-            Address.objects.create(
-                registration_Number=registration_Number, **address_data
-            )
+            Address.objects.create(registration_number=registration, **address_data)
         for association_data in associations_data:
             Association_Membership.objects.create(
-                registration_Number=registration_Number, **association_data
+                registration_number=registration, **association_data
             )
         for animal_data in animals_data:
-            Animal_Risk_Factor.objects.create(
-                registration_Number=registration_Number, **animal_data
-            )
+            Animal_Risk_Factor.objects.create(registration_number=registration, **animal_data)
 
         for operation_data in operations_data:
             Operation_Risk_Factor.objects.create(
-                registration_Number=registration_Number, **operation_data
+                registration_number=registration, **operation_data
             )
 
-        Operator.objects.create(
-            registration_Number=registration_Number, **operator_data
-        )
+        Operator.objects.create(registration_number=registration, **operator_data)
 
-        return registration_Number
+        return registration
 
 
 class Inspection_Serializer(ModelSerializer):
