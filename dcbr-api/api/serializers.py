@@ -59,6 +59,7 @@ class Animal_Risk_Factor_Serializer(ModelSerializer):
             "num_transferred",
             "num_traded",
             "num_leased",
+            "num_animals"
         )
 
 

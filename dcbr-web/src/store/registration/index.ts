@@ -105,6 +105,7 @@ export const BreedingDetailsState: BreedingDetailsTypes = {
   catsTransferred: 0,
   catsTraded: 0,
   catsLeased: 0,
+  //totalAnimals: 0,
   error: false
 };
 
