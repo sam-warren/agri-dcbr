@@ -105,6 +105,7 @@ export default {
           num_transferred: this.$store.getters["breedingDetails/dogsTransferred"],
           num_traded: this.$store.getters["breedingDetails/dogsTraded"],
           num_leased: this.$store.getters["breedingDetails/dogsLeased"],
+          total_animals : 0,
         });
       }
       else if (this.$store.getters["breedingDetails/animalType"] == "CAT") {
@@ -117,6 +118,7 @@ export default {
           num_transferred: this.$store.getters["breedingDetails/catsTransferred"],
           num_traded: this.$store.getters["breedingDetails/catsTraded"],
           num_leased: this.$store.getters["breedingDetails/catsLeased"],
+          total_animals : 0,
         })
       } else {
           riskFactors.push({
@@ -128,6 +130,7 @@ export default {
           num_transferred: this.$store.getters["breedingDetails/dogsTransferred"],
           num_traded: this.$store.getters["breedingDetails/dogsTraded"],
           num_leased: this.$store.getters["breedingDetails/dogsLeased"],
+          total_animals : 0,
         },
         {
           animal_type: "CAT",
@@ -138,6 +141,7 @@ export default {
           num_transferred: this.$store.getters["breedingDetails/catsTransferred"],
           num_traded: this.$store.getters["breedingDetails/catsTraded"],
           num_leased: this.$store.getters["breedingDetails/catsLeased"],
+          num_animals : 0,
         })
       }
       let obj = {

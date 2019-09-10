@@ -204,6 +204,7 @@ class Animal_Risk_Factor(models.Model):
     )
     num_traded = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     num_leased = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    num_animals = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     
