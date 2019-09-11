@@ -95,7 +95,7 @@ export default {
     },
     submitRegistration() {
       console.log("Submit clicked");
-      
+      console.log(this.$store.getters["breedingDetails/numDogs"], this.$store.getters["breedingDetails/numCats"]);
       let addresses = [
         {
           address_type: "PRI",
@@ -121,46 +121,67 @@ export default {
         riskFactors.push({
           animal_type: "DOG",
           num_breeds: this.$store.getters["breedingDetails/numDogBreeds"],
-          num_females_intact: this.$store.getters["breedingDetails/femaleIntactDogNum"],
+          num_females_intact: this.$store.getters[
+            "breedingDetails/femaleIntactDogNum"
+          ],
           num_litter: this.$store.getters["breedingDetails/littersWhelped"],
           num_sold: this.$store.getters["breedingDetails/dogsSold"],
-          num_transferred: this.$store.getters["breedingDetails/dogsTransferred"],
+          num_transferred: this.$store.getters[
+            "breedingDetails/dogsTransferred"
+          ],
           num_traded: this.$store.getters["breedingDetails/dogsTraded"],
           num_leased: this.$store.getters["breedingDetails/dogsLeased"],
+          num_animals: this.$store.getters["breedingDetails/numDogs"],
         });
-      }
-      else if (this.$store.getters["breedingDetails/animalType"] == "CAT") {
+      } else if (this.$store.getters["breedingDetails/animalType"] == "CAT") {
         riskFactors.push({
           animal_type: "CAT",
           num_breeds: this.$store.getters["breedingDetails/numCatBreeds"],
-          num_females_intact: this.$store.getters["breedingDetails/femaleIntactCatNum"],
+          num_females_intact: this.$store.getters[
+            "breedingDetails/femaleIntactCatNum"
+          ],
           num_litter: this.$store.getters["breedingDetails/littersQueened"],
           num_sold: this.$store.getters["breedingDetails/catsSold"],
-          num_transferred: this.$store.getters["breedingDetails/catsTransferred"],
+          num_transferred: this.$store.getters[
+            "breedingDetails/catsTransferred"
+          ],
           num_traded: this.$store.getters["breedingDetails/catsTraded"],
           num_leased: this.$store.getters["breedingDetails/catsLeased"],
-        })
+          num_animals: this.$store.getters["breedingDetails/numCats"],
+        });
       } else {
-          riskFactors.push({
-          animal_type: "DOG",
-          num_breeds: this.$store.getters["breedingDetails/numDogBreeds"],
-          num_females_intact: this.$store.getters["breedingDetails/femaleIntactDogNum"],
-          num_litter: this.$store.getters["breedingDetails/littersWhelped"],
-          num_sold: this.$store.getters["breedingDetails/dogsSold"],
-          num_transferred: this.$store.getters["breedingDetails/dogsTransferred"],
-          num_traded: this.$store.getters["breedingDetails/dogsTraded"],
-          num_leased: this.$store.getters["breedingDetails/dogsLeased"],
-        },
-        {
-          animal_type: "CAT",
-          num_breeds: this.$store.getters["breedingDetails/numCatBreeds"],
-          num_females_intact: this.$store.getters["breedingDetails/femaleIntactCatNum"],
-          num_litter: this.$store.getters["breedingDetails/littersQueened"],
-          num_sold: this.$store.getters["breedingDetails/catsSold"],
-          num_transferred: this.$store.getters["breedingDetails/catsTransferred"],
-          num_traded: this.$store.getters["breedingDetails/catsTraded"],
-          num_leased: this.$store.getters["breedingDetails/catsLeased"],
-        })
+        riskFactors.push(
+          {
+            animal_type: "DOG",
+            num_breeds: this.$store.getters["breedingDetails/numDogBreeds"],
+            num_females_intact: this.$store.getters[
+              "breedingDetails/femaleIntactDogNum"
+            ],
+            num_litter: this.$store.getters["breedingDetails/littersWhelped"],
+            num_sold: this.$store.getters["breedingDetails/dogsSold"],
+            num_transferred: this.$store.getters[
+              "breedingDetails/dogsTransferred"
+            ],
+            num_traded: this.$store.getters["breedingDetails/dogsTraded"],
+            num_leased: this.$store.getters["breedingDetails/dogsLeased"],
+            num_animals: this.$store.getters["breedingDetails/numDogs"],
+          },
+          {
+            animal_type: "CAT",
+            num_breeds: this.$store.getters["breedingDetails/numCatBreeds"],
+            num_females_intact: this.$store.getters[
+              "breedingDetails/femaleIntactCatNum"
+            ],
+            num_litter: this.$store.getters["breedingDetails/littersQueened"],
+            num_sold: this.$store.getters["breedingDetails/catsSold"],
+            num_transferred: this.$store.getters[
+              "breedingDetails/catsTransferred"
+            ],
+            num_traded: this.$store.getters["breedingDetails/catsTraded"],
+            num_leased: this.$store.getters["breedingDetails/catsLeased"],
+            num_animals: this.$store.getters["breedingDetails/numCats"],
+          }
+        );
       }
       let obj = {
         operator_status: "ACTIVE",
@@ -185,6 +206,14 @@ export default {
             assoc_URL: this.$store.getters["operationDetails/assocWebsite"]
           }
         ],
+        renewals: [
+          {
+            first_name: "",
+            middle_name: "",
+            last_name: "",
+            previous_registration_number: ""
+          }
+        ],
         animal_risk_factors: riskFactors,
         operation_risk_factors: [
           {
@@ -207,7 +236,7 @@ export default {
       console.log(obj);
       if (!this.hasErrors) {
         axios
-          .post("/api/registration_Number/", obj)
+          .post("/api/register/", obj)
           .then(response => {
             console.log(response);
           })
@@ -301,6 +330,12 @@ export default {
         } if (this.$store.getters["breedingDetails/dogsTraded"] < 0 || this.$store.getters["breedingDetails/dogsTraded"] > 2147483647) {
           return true;
         } if (this.$store.getters["breedingDetails/dogsLeased"] < 0 || this.$store.getters["breedingDetails/dogsLeased"] > 2147483647) {
+          return true;
+        } if (this.$store.getters["breedingDetails/dogsLeased"] < 0 || this.$store.getters["breedingDetails/dogsLeased"] > 2147483647) {
+          return true;
+        } if (this.$store.getters["breedingDetails/numCats"] < 0 || this.$store.getters["breedingDetails/numCats"] > 2147483647) {
+          return true;
+        } if (this.$store.getters["breedingDetails/numDogs"] < 0 || this.$store.getters["breedingDetails/numDogs"] > 2147483647) {
           return true;
         }
         

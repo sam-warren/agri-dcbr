@@ -180,6 +180,14 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.breedingDetails!.catsLeased = payload;
   },
+  numCats(state: RegistrationState, payload: number) {
+    state.error = false;
+    state.breedingDetails!.numCats = payload;
+  },
+  numDogs(state: RegistrationState, payload: number) {
+    state.error = false;
+    state.breedingDetails!.numDogs = payload;
+  },
 
   // Animal Identification
   hasPermId(state: RegistrationState, payload: string) {

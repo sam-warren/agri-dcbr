@@ -93,6 +93,8 @@ export const BreedingDetailsState: BreedingDetailsTypes = {
   // catsTransferred: 5,
   // catsTraded: 2,
   // catsLeased: 0,
+  // numCats: 133,
+  // numDogs: 390,
   // error: false
 
   femaleIntactDogNum: 0,
@@ -107,7 +109,8 @@ export const BreedingDetailsState: BreedingDetailsTypes = {
   catsTransferred: 0,
   catsTraded: 0,
   catsLeased: 0,
-  //totalAnimals: 0,
+  numCats: 0,
+  numDogs: 0,
   error: false
 };
 
