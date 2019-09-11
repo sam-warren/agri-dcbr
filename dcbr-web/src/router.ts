@@ -71,7 +71,8 @@ const router = new Router({
         import("./views/Review.vue"),
       meta: {
         requiresAuth: false
-      }
+      },
+
     },
     {
       path: "/confirmation",
@@ -86,28 +87,44 @@ const router = new Router({
   ]
 });
 
-// router.beforeEach((to: any, from: any, next: any) => {
-//   if (to.fullPath === "/review") {
-//     console.log("REVIEW")
-//     if (!store.getters["routeProtection/registerFormOk"]) {
-//       if (from.path !== "/register") {
-//         next("/register");
-//       } else {
-//         next();
-//       }
-//     }
-//   }
-//   if (to.fullPath === "/confirmation") {
-//     console.log("CONFIRMATION")
-//     if (!store.getters["routeProtection/registerFormOk"] || !store.getters["routeProtection/reviewFormOk"]) {
-//       if (from.path !== "/register") {
-//         next("/register");
-//       } else {
-//         next();
-//       }
-//     }
-//   }
-// });
+router.beforeEach((to: any, from: any, next: any) => {
+  if (to.path === "/review") {
+
+    if (!store.getters["routeProtection/registerFormOk"]) {
+      if (!(from.path === "/register")) {
+        console.log("Illegal route accessed. Redirecting...")
+
+        next("/register")
+      } else {
+        console.log("Already on register.")
+
+        next()
+      }
+    } else {
+      console.log("Register form OK")
+      next();
+    }
+  }
+  else if (to.path === "/confirmation") {
+    if (!store.getters["routeProtection/reviewFormOk"]) {
+      if (!(from.path === "/register")) {
+        console.log("Illegal route accessed. Redirecting...")
+        next("/register")
+      } else {
+        console.log("Already on register.")
+        next()
+      }
+    } else {
+      console.log("Review form OK")
+
+      next()
+    }
+  } else {
+    next()
+  }
+});
+
+
 
 // router.beforeEach((to, from, next) => {
 //   if (to.matched.some(record => record.meta.requiresAuth)) {
