@@ -81,7 +81,8 @@ export default {
           suite: this.$store.getters["profile/aptNumber"],
           street_name: this.$store.getters["profile/streetName"],
           city: this.$store.getters["profile/city"],
-          postal_code: this.$store.getters["profile/postalCode"]
+          postal_code: this.$store.getters["profile/postalCode"],
+          region: ""
         }
       ];
       this.$store.getters["operationLocations/locations"].forEach(location => {
@@ -91,7 +92,8 @@ export default {
           suite: location.aptNumber,
           street_name: location.streetName,
           city: location.city,
-          postal_code: location.postalCode
+          postal_code: location.postalCode,
+          region: ""
         });
       });
       let riskFactors = [];
