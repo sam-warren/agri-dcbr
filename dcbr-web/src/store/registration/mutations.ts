@@ -180,6 +180,14 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.breedingDetails!.catsLeased = payload;
   },
+  numCats(state: RegistrationState, payload: number) {
+    state.error = false;
+    state.breedingDetails!.numCats = payload;
+  },
+  numDogs(state: RegistrationState, payload: number) {
+    state.error = false;
+    state.breedingDetails!.numDogs = payload;
+  },
 
   // Animal Identification
   hasPermId(state: RegistrationState, payload: string) {
@@ -194,4 +202,20 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.animalIdentification!.otherPermIdType = payload;
   },
+
+  // Terms and Conditions
+  hasAgreed(state: RegistrationState, payload: boolean) {
+    state.error = false;
+    state.termsAndConditions!.hasAgreed = payload;
+  },
+
+  // Route Protection
+  registerFormOk(state: RegistrationState, payload: boolean) {
+    state.error = false;
+    state.routeProtection!.registerFormOk = payload;
+  },
+  reviewFormOk(state: RegistrationState, payload: boolean) {
+    state.error = false;
+    state.routeProtection!.reviewFormOk = payload;
+  }
 };

@@ -126,6 +126,12 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   catsLeased(context: any, payload: number) {
     context.commit("catsLeased", payload);
   },
+  numCats(context: any, payload: number) {
+    context.commit("numCats", payload);
+  },
+  numDogs(context: any, payload: number) {
+    context.commit("numDogs", payload);
+  },
 
   // Animal Identification
   hasPermId(context: any, payload: string) {
@@ -137,4 +143,17 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   otherPermIdType(context: any, payload: string) {
     context.commit("otherPermIdType", payload);
   },
+
+  // Terms and Conditions
+  hasAgreed(context: any, payload: boolean) {
+    context.commit("hasAgreed", payload);
+  },
+
+  // Route Protection
+  registerFormOk(context: any, payload: boolean) {
+    context.commit("registerFormOk", payload);
+  },
+  reviewFormOk(context: any, payload: boolean) {
+    context.commit("reviewFormOk", payload);
+  }
 };
