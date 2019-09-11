@@ -9,6 +9,8 @@ import { ProfileTypes } from "./types";
 import { OperationDetailsTypes } from "./types";
 import { BreedingDetailsTypes } from "./types";
 import { AnimalIdentificationTypes } from "./types";
+import { TermsAndConditionsTypes } from "./types"
+import { RouteProtectionTypes } from "./types"
 
 export const ProfileState: ProfileTypes = {
   // firstName: "John",
@@ -90,7 +92,7 @@ export const BreedingDetailsState: BreedingDetailsTypes = {
   // catsSold: 20,
   // catsTransferred: 5,
   // catsTraded: 2,
-  // catsLeased: 3,
+  // catsLeased: 0,
   // error: false
 
   femaleIntactDogNum: 0,
@@ -111,8 +113,8 @@ export const BreedingDetailsState: BreedingDetailsTypes = {
 
 export const AnimalIdentificationState: AnimalIdentificationTypes = {
   // hasPermId: "true",
-  // permIdType: "TATTOO",
-  // otherPermIdType: "",
+  // permIdType: "OTHER",
+  // otherPermIdType: "Paper",
   // error: false
 
   hasPermId: "",
@@ -121,12 +123,25 @@ export const AnimalIdentificationState: AnimalIdentificationTypes = {
   error: false
 };
 
+export const TermsAndConditionsState: TermsAndConditionsTypes = {
+  hasAgreed: false,
+  error: false
+}
+
+export const RouteProtectionState: RouteProtectionTypes = {
+  registerFormOk: false,
+  reviewFormOk: false,
+  error: false
+}
+
 export const state: RegistrationState = {
   profile: ProfileState,
   operationDetails: OperationDetailsState,
   operationLocations: OperationLocationsState,
   breedingDetails: BreedingDetailsState,
   animalIdentification: AnimalIdentificationState,
+  termsAndConditions: TermsAndConditionsState,
+  routeProtection: RouteProtectionState,
   error: false
 };
 
@@ -171,3 +186,19 @@ export const animalIdentification: Module<RegistrationState, RootState> = {
   actions,
   mutations
 };
+
+export const termsAndConditions: Module<RegistrationState, RootState> = {
+  namespaced,
+  state,
+  getters,
+  actions,
+  mutations
+}
+
+export const routeProtection: Module<RegistrationState, RootState> = {
+  namespaced,
+  state,
+  getters,
+  actions,
+  mutations,
+}

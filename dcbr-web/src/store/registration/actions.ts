@@ -137,4 +137,17 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   otherPermIdType(context: any, payload: string) {
     context.commit("otherPermIdType", payload);
   },
+
+  // Terms and Conditions
+  hasAgreed(context: any, payload: boolean) {
+    context.commit("hasAgreed", payload);
+  },
+
+  // Route Protection
+  registerFormOk(context: any, payload: boolean) {
+    context.commit("registerFormOk", payload);
+  },
+  reviewFormOk(context: any, payload: boolean) {
+    context.commit("reviewFormOk", payload);
+  }
 };
