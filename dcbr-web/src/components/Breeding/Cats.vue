@@ -10,7 +10,7 @@
         <v-card flat>
           <!-- INTACT BREEDING CAT -->
           <v-layout mx-2 mt-4>
-            <v-subheader>How many intact breeding female cats over the age of xxxx months do you have at your operation(s)?</v-subheader>
+            <v-subheader>How many intact breeding female cats over the age of five months do you have at your operation(s)?</v-subheader>
           </v-layout>
 
           <v-layout row wrap ma-2>
