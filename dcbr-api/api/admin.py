@@ -1,3 +1,4 @@
+from django.conf.urls import url
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ExportMixin
@@ -6,6 +7,17 @@ from import_export.admin import ExportMixin
 from api.resources import AddressResource
 
 from import_export.formats import base_formats
+
+from api.models import (
+    Registration,
+    Operator,
+    Address,
+    Inspection,
+    Operation_Risk_Factor,
+    Animal_Risk_Factor,
+    Renewal,
+    Association_Membership,
+)
 
 
 class MyAdmin(ExportMixin):
@@ -18,19 +30,33 @@ class MyAdmin(ExportMixin):
         return [f for f in formats if f().can_export()]
 
 
-from api.models import (
-    Registration_Number,
-    Operator,
-    Address,
-    Inspection,
-    Operation_Risk_Factor,
-    Animal_Risk_Factor,
-    Association_Membership,
-)
+class OperatorInline(admin.StackedInline):
+    model = Operator
 
 
-class Registration_NumberAdmin(MyAdmin, admin.ModelAdmin):
-    pass
+class AddressInline(admin.StackedInline):
+    model = Address
+    extra = 0
+
+
+class AssociationsInline(admin.StackedInline):
+    model = Association_Membership
+    extra = 0
+
+
+class Operation_Risk_FactorInline(admin.StackedInline):
+    model = Operation_Risk_Factor
+    extra = 0
+
+
+class Animal_Risk_FactorInline(admin.StackedInline):
+    model = Animal_Risk_Factor
+    extra = 0
+
+
+class RenewalInline(admin.StackedInline):
+    model = Renewal
+    extra = 0
 
 
 class OperatorAdmin(MyAdmin, admin.ModelAdmin):
@@ -57,11 +83,28 @@ class Association_MembershipAdmin(MyAdmin, admin.ModelAdmin):
     pass
 
 
-admin.site.register(Registration_Number, Registration_NumberAdmin)
+class RenewalAdmin(MyAdmin, admin.ModelAdmin):
+    pass
+
+
+class RegistrationAdmin(MyAdmin, admin.ModelAdmin):
+    pass
+    inlines = (
+        OperatorInline,
+        AddressInline,
+        AssociationsInline,
+        Operation_Risk_FactorInline,
+        Animal_Risk_FactorInline,
+        RenewalInline,
+    )
+
+
+admin.site.register(Registration, RegistrationAdmin)
 admin.site.register(Operator, OperatorAdmin)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(Inspection, InspectionAdmin)
 admin.site.register(Operation_Risk_Factor, Operation_Risk_FactorAdmin)
 admin.site.register(Animal_Risk_Factor, Animal_Risk_FactorAdmin)
 admin.site.register(Association_Membership, Association_MembershipAdmin)
+admin.site.register(Renewal, RenewalAdmin)
 
