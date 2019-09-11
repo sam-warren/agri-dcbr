@@ -9,6 +9,15 @@
             </v-layout>
           </v-card-title>
           <v-card flat>
+            <v-layout mx-2 mt-4>
+              <v-subheader>What is the approximate total number of dogs at your establishment?</v-subheader>
+            </v-layout>
+            
+            <v-layout row wrap ma-2>
+              <v-flex xs12 md4>
+                <v-text-field v-model.number="numDogs" :rules="numberRules" type="number" label="Number of Dogs"></v-text-field>
+              </v-flex>
+            </v-layout>
             <!-- INTACT BREEDING DOG -->
             <v-layout mx-2 mt-4>
               <v-subheader>How many intact breeding female dogs over the age of eight months do you have at your operation(s)?</v-subheader>
@@ -135,6 +144,17 @@ export default {
         this.$store.dispatch("breedingDetails/dogsLeased", value);
       }
     },
+    numDogs: {
+      // getter
+      get() {
+        return this.$store.getters["breedingDetails/numDogs"] || "";
+      },
+      // setter
+      set(value) {
+        console.log(value)
+        this.$store.dispatch("breedingDetails/numDogs", value);
+      }
+    }
   }
 };
 </script>

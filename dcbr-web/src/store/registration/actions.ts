@@ -126,6 +126,12 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   catsLeased(context: any, payload: number) {
     context.commit("catsLeased", payload);
   },
+  numCats(context: any, payload: number) {
+    context.commit("numCats", payload);
+  },
+  numDogs(context: any, payload: number) {
+    context.commit("numDogs", payload);
+  },
 
   // Animal Identification
   hasPermId(context: any, payload: string) {

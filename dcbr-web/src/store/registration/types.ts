@@ -56,6 +56,8 @@ export interface BreedingDetailsTypes {
   catsTransferred: number;
   catsTraded: number;
   catsLeased: number;
+  numCats: number;
+  numDogs: number;
   error: boolean;
 }
 

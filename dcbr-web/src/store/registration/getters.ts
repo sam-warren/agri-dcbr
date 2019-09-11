@@ -160,6 +160,14 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { breedingDetails } = state;
     return breedingDetails!.catsLeased || 0;
   },
+  numCats(state: RegistrationState): number {
+    const { breedingDetails } = state;
+    return breedingDetails!.numCats || 0;
+  },
+  numDogs(state: RegistrationState): number {
+    const { breedingDetails } = state;
+    return breedingDetails!.numDogs || 0;
+  },
  
   // Animal Identification
   hasPermId(state: RegistrationState): string {
