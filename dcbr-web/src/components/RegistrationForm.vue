@@ -131,7 +131,7 @@ export default {
           ],
           num_traded: this.$store.getters["breedingDetails/dogsTraded"],
           num_leased: this.$store.getters["breedingDetails/dogsLeased"],
-          total_animals: this.$store.getters["breedingDetails/numDogs"],
+          num_animals: this.$store.getters["breedingDetails/numDogs"],
         });
       } else if (this.$store.getters["breedingDetails/animalType"] == "CAT") {
         riskFactors.push({
@@ -147,7 +147,7 @@ export default {
           ],
           num_traded: this.$store.getters["breedingDetails/catsTraded"],
           num_leased: this.$store.getters["breedingDetails/catsLeased"],
-          total_animals: this.$store.getters["breedingDetails/numCats"],
+          num_animals: this.$store.getters["breedingDetails/numCats"],
         });
       } else {
         riskFactors.push(
@@ -164,7 +164,7 @@ export default {
             ],
             num_traded: this.$store.getters["breedingDetails/dogsTraded"],
             num_leased: this.$store.getters["breedingDetails/dogsLeased"],
-            total_animals: this.$store.getters["breedingDetails/numDogs"],
+            num_animals: this.$store.getters["breedingDetails/numDogs"],
           },
           {
             animal_type: "CAT",
@@ -179,7 +179,7 @@ export default {
             ],
             num_traded: this.$store.getters["breedingDetails/catsTraded"],
             num_leased: this.$store.getters["breedingDetails/catsLeased"],
-            total_animals: this.$store.getters["breedingDetails/numCats"],
+            num_animals: this.$store.getters["breedingDetails/numCats"],
           }
         );
       }
