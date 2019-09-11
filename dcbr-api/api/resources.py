@@ -6,6 +6,7 @@ from api.models import Address
 from api.models import Inspection
 from api.models import Operation_Risk_Factor
 from api.models import Animal_Risk_Factor
+from api.models import Renewal
 from api.models import Association_Membership
 
 
@@ -42,4 +43,8 @@ class Animal_Risk_FactorResource(resources.ModelResource):
 class Association_MembershipResource(resources.ModelResource):
     class Meta:
         model = Association_Membership
+
+class RenewalResource(resources.ModelResource):
+    class Meta:
+        model = Renewal
 

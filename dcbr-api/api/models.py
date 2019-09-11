@@ -241,6 +241,29 @@ class Association_Membership(models.Model):
         verbose_name_plural = "Associations"
 
 
+class Renewal(models.Model):
+
+    registration_number = models.ForeignKey(
+        Registration, on_delete=models.CASCADE, related_name="renewals"
+    )
+
+    first_name = models.CharField(max_length=32, default="", blank=True)
+    middle_name = models.CharField(max_length=50, default="", blank=True)
+    last_name = models.CharField(max_length=50, default="", blank=True)
+    previous_registation_number = models.CharField(max_length=14, default="", blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "Reg ID:: \t %s " % (self.registration_number)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = "Renewals"
+
+
 class Inspection(models.Model):
     registration_number = models.ForeignKey(
         Registration,

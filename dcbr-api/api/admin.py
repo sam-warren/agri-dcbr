@@ -15,6 +15,7 @@ from api.models import (
     Inspection,
     Operation_Risk_Factor,
     Animal_Risk_Factor,
+    Renewal,
     Association_Membership,
 )
 
@@ -53,6 +54,11 @@ class Animal_Risk_FactorInline(admin.StackedInline):
     extra = 0
 
 
+class RenewalInline(admin.StackedInline):
+    model = Renewal
+    extra = 0
+
+
 class OperatorAdmin(MyAdmin, admin.ModelAdmin):
     pass
 
@@ -77,6 +83,10 @@ class Association_MembershipAdmin(MyAdmin, admin.ModelAdmin):
     pass
 
 
+class RenewalAdmin(MyAdmin, admin.ModelAdmin):
+    pass
+
+
 class RegistrationAdmin(MyAdmin, admin.ModelAdmin):
     pass
     inlines = (
@@ -85,6 +95,7 @@ class RegistrationAdmin(MyAdmin, admin.ModelAdmin):
         AssociationsInline,
         Operation_Risk_FactorInline,
         Animal_Risk_FactorInline,
+        RenewalInline,
     )
 
 
@@ -95,4 +106,5 @@ admin.site.register(Inspection, InspectionAdmin)
 admin.site.register(Operation_Risk_Factor, Operation_Risk_FactorAdmin)
 admin.site.register(Animal_Risk_Factor, Animal_Risk_FactorAdmin)
 admin.site.register(Association_Membership, Association_MembershipAdmin)
+admin.site.register(Renewal, RenewalAdmin)
 

@@ -34,6 +34,7 @@ router.register(
 )
 router.register(r"animalrisk", views.Animal_Risk_Factor_ViewSet, "AnimalRisk")
 router.register(r"association", views.Association_ViewSet, "Association")
+router.register(r"renewal", views.Renewal_ViewSet, "Renewal")
 
 # fmt: off
 swaggerpatterns = [
