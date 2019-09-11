@@ -3,34 +3,36 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 from api.serializers import (
-    Registration_Number_Serializer,
+    Registration_Serializer,
     Operator_Serializer,
     Address_Serializer,
     Animal_Risk_Factor_Serializer,
     Operation_Risk_Factor_Serializer,
     Inspection_Serializer,
+    Renewal_Serializer,
     Association_Membership_Serializer,
 )
 
 # from api.models import Category, Entry, Operator, Address
 from api.models import (
-    Registration_Number,
+    Registration,
     Operator,
     Address,
     Inspection,
     Animal_Risk_Factor,
     Operation_Risk_Factor,
+    Renewal,
     Association_Membership,
 )
 
 
-class Registration_Number_ViewSet(viewsets.ModelViewSet):
+class Registration_ViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing registration numbers.
     """
 
-    queryset = Registration_Number.objects.all()
-    serializer_class = Registration_Number_Serializer
+    queryset = Registration.objects.all()
+    serializer_class = Registration_Serializer
 
 
 class Operator_ViewSet(viewsets.ModelViewSet):
@@ -85,4 +87,13 @@ class Association_ViewSet(viewsets.ModelViewSet):
 
     queryset = Inspection.objects.all()
     serializer_class = Association_Membership_Serializer
+
+
+class Renewal_ViewSet(viewsets.ModelViewSet):
+    """
+    A simple ViewSet for viewing and editing addresses.
+    """
+
+    queryset = Renewal.objects.all()
+    serializer_class = Renewal_Serializer
 

@@ -67,13 +67,13 @@ export default {
   },
   data() {
     return {
-      e6: 1,
+      e6: 1
     };
   },
   methods: {
     submitRegistration() {
       console.log("Submit clicked");
-      
+
       let addresses = [
         {
           address_type: "PRI",
@@ -99,46 +99,67 @@ export default {
         riskFactors.push({
           animal_type: "DOG",
           num_breeds: this.$store.getters["breedingDetails/numDogBreeds"],
-          num_females_intact: this.$store.getters["breedingDetails/femaleIntactDogNum"],
+          num_females_intact: this.$store.getters[
+            "breedingDetails/femaleIntactDogNum"
+          ],
           num_litter: this.$store.getters["breedingDetails/littersWhelped"],
           num_sold: this.$store.getters["breedingDetails/dogsSold"],
-          num_transferred: this.$store.getters["breedingDetails/dogsTransferred"],
+          num_transferred: this.$store.getters[
+            "breedingDetails/dogsTransferred"
+          ],
           num_traded: this.$store.getters["breedingDetails/dogsTraded"],
           num_leased: this.$store.getters["breedingDetails/dogsLeased"],
+          total_animals: 0
         });
-      }
-      else if (this.$store.getters["breedingDetails/animalType"] == "CAT") {
+      } else if (this.$store.getters["breedingDetails/animalType"] == "CAT") {
         riskFactors.push({
           animal_type: "CAT",
           num_breeds: this.$store.getters["breedingDetails/numCatBreeds"],
-          num_females_intact: this.$store.getters["breedingDetails/femaleIntactCatNum"],
+          num_females_intact: this.$store.getters[
+            "breedingDetails/femaleIntactCatNum"
+          ],
           num_litter: this.$store.getters["breedingDetails/littersQueened"],
           num_sold: this.$store.getters["breedingDetails/catsSold"],
-          num_transferred: this.$store.getters["breedingDetails/catsTransferred"],
+          num_transferred: this.$store.getters[
+            "breedingDetails/catsTransferred"
+          ],
           num_traded: this.$store.getters["breedingDetails/catsTraded"],
           num_leased: this.$store.getters["breedingDetails/catsLeased"],
-        })
+          total_animals: 0
+        });
       } else {
-          riskFactors.push({
-          animal_type: "DOG",
-          num_breeds: this.$store.getters["breedingDetails/numDogBreeds"],
-          num_females_intact: this.$store.getters["breedingDetails/femaleIntactDogNum"],
-          num_litter: this.$store.getters["breedingDetails/littersWhelped"],
-          num_sold: this.$store.getters["breedingDetails/dogsSold"],
-          num_transferred: this.$store.getters["breedingDetails/dogsTransferred"],
-          num_traded: this.$store.getters["breedingDetails/dogsTraded"],
-          num_leased: this.$store.getters["breedingDetails/dogsLeased"],
-        },
-        {
-          animal_type: "CAT",
-          num_breeds: this.$store.getters["breedingDetails/numCatBreeds"],
-          num_females_intact: this.$store.getters["breedingDetails/femaleIntactCatNum"],
-          num_litter: this.$store.getters["breedingDetails/littersQueened"],
-          num_sold: this.$store.getters["breedingDetails/catsSold"],
-          num_transferred: this.$store.getters["breedingDetails/catsTransferred"],
-          num_traded: this.$store.getters["breedingDetails/catsTraded"],
-          num_leased: this.$store.getters["breedingDetails/catsLeased"],
-        })
+        riskFactors.push(
+          {
+            animal_type: "DOG",
+            num_breeds: this.$store.getters["breedingDetails/numDogBreeds"],
+            num_females_intact: this.$store.getters[
+              "breedingDetails/femaleIntactDogNum"
+            ],
+            num_litter: this.$store.getters["breedingDetails/littersWhelped"],
+            num_sold: this.$store.getters["breedingDetails/dogsSold"],
+            num_transferred: this.$store.getters[
+              "breedingDetails/dogsTransferred"
+            ],
+            num_traded: this.$store.getters["breedingDetails/dogsTraded"],
+            num_leased: this.$store.getters["breedingDetails/dogsLeased"],
+            total_animals: 0
+          },
+          {
+            animal_type: "CAT",
+            num_breeds: this.$store.getters["breedingDetails/numCatBreeds"],
+            num_females_intact: this.$store.getters[
+              "breedingDetails/femaleIntactCatNum"
+            ],
+            num_litter: this.$store.getters["breedingDetails/littersQueened"],
+            num_sold: this.$store.getters["breedingDetails/catsSold"],
+            num_transferred: this.$store.getters[
+              "breedingDetails/catsTransferred"
+            ],
+            num_traded: this.$store.getters["breedingDetails/catsTraded"],
+            num_leased: this.$store.getters["breedingDetails/catsLeased"],
+            num_animals: 0
+          }
+        );
       }
       let obj = {
         operator_status: "ACTIVE",
@@ -163,6 +184,14 @@ export default {
             assoc_URL: this.$store.getters["operationDetails/assocWebsite"]
           }
         ],
+        renewals: [
+          {
+            first_name: "",
+            middle_name: "",
+            last_name: "",
+            previous_registration_number: ""
+          }
+        ],
         animal_risk_factors: riskFactors,
         operation_risk_factors: [
           {
@@ -185,7 +214,7 @@ export default {
       console.log(obj);
       if (!this.hasErrors) {
         axios
-          .post("/api/registration_Number/", obj)
+          .post("/api/register/", obj)
           .then(response => {
             console.log(response);
           })
@@ -199,127 +228,273 @@ export default {
   computed: {
     // error checking
     hasErrors: {
-      get: function () {
+      get: function() {
         // profile
-        if (this.$store.getters["profile/firstName"] === "" || this.$store.getters["profile/firstName"].length > 50) {
-          return true;
-        } if (this.$store.getters["profile/middleName"].length > 50) {
-          return true;
-        } if (this.$store.getters["profile/lastName"] === "" || this.$store.getters["profile/lastName"].length > 50) {
-          return true;
-        } if (this.$store.getters["profile/email"] === "" || /.+@.+/.test(this.$store.getters["profile/email"]) === false || this.$store.getters["profile/email"].length > 32) {
-          return true;
-        } if (this.$store.getters["profile/streetNumber"] <= 0 || this.$store.getters["profile/streetNumber"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["profile/aptNumber"].length > 32) {
-          return true; 
-        } if (this.$store.getters["profile/streetName"] === "" || this.$store.getters["profile/streetName"].length > 32) {
-          return true;
-        } if (this.$store.getters["profile/city"] === "" || this.$store.getters["profile/city"].length > 32) {
-          return true;
-        } if (this.$store.getters["profile/postalCode"] === "" || /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(this.$store.getters["profile/postalCode"]) === false) {
-          return true;
-        } if (this.$store.getters["profile/phone"] === "" || /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(this.$store.getters["profile/phone"]) === false) {
-          return true;
-        } if (this.$store.getters["profile/commType"] == "") {
+        if (
+          this.$store.getters["profile/firstName"] === "" ||
+          this.$store.getters["profile/firstName"].length > 50
+        ) {
           return true;
         }
-        
+        if (this.$store.getters["profile/middleName"].length > 50) {
+          return true;
+        }
+        if (
+          this.$store.getters["profile/lastName"] === "" ||
+          this.$store.getters["profile/lastName"].length > 50
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["profile/email"] === "" ||
+          /.+@.+/.test(this.$store.getters["profile/email"]) === false ||
+          this.$store.getters["profile/email"].length > 32
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["profile/streetNumber"] <= 0 ||
+          this.$store.getters["profile/streetNumber"] > 2147483647
+        ) {
+          return true;
+        }
+        if (this.$store.getters["profile/aptNumber"].length > 32) {
+          return true;
+        }
+        if (
+          this.$store.getters["profile/streetName"] === "" ||
+          this.$store.getters["profile/streetName"].length > 32
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["profile/city"] === "" ||
+          this.$store.getters["profile/city"].length > 32
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["profile/postalCode"] === "" ||
+          /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(
+            this.$store.getters["profile/postalCode"]
+          ) === false
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["profile/phone"] === "" ||
+          /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(
+            this.$store.getters["profile/phone"]
+          ) === false
+        ) {
+          return true;
+        }
+        if (this.$store.getters["profile/commType"] == "") {
+          return true;
+        }
+
         // operationDetails
         if (this.$store.getters["operationDetails/operationName"].length > 50) {
           return true;
-        } if (/^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(this.$store.getters["operationDetails/opWebsite"]) === false || this.$store.getters["operationDetails/opWebsite"].length > 4000) {
+        }
+        if (
+          /^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(
+            this.$store.getters["operationDetails/opWebsite"]
+          ) === false ||
+          this.$store.getters["operationDetails/opWebsite"].length > 4000
+        ) {
           return true;
-        } if (this.$store.getters["operationDetails/operationType"] === "") {
+        }
+        if (this.$store.getters["operationDetails/operationType"] === "") {
           return true;
-        } if (this.$store.getters["operationDetails/animalType"] === "") {
+        }
+        if (this.$store.getters["operationDetails/animalType"] === "") {
           return true;
-        } if (this.$store.getters["operationDetails/accidentalBreeding"] === "") {
+        }
+        if (this.$store.getters["operationDetails/accidentalBreeding"] === "") {
           return true;
-        } if (this.$store.getters["operationDetails/hasVet"] === "") {
+        }
+        if (this.$store.getters["operationDetails/hasVet"] === "") {
           return true;
-        } if (this.$store.getters["operationDetails/numDogBreeds"] < 0 || this.$store.getters["operationDetails/numDogBreeds"] > 2147483647) {
+        }
+        if (
+          this.$store.getters["operationDetails/numDogBreeds"] < 0 ||
+          this.$store.getters["operationDetails/numDogBreeds"] > 2147483647
+        ) {
           return true;
-        } if (this.$store.getters["operationDetails/numCatBreeds"] < 0 || this.$store.getters["operationDetails/numCatBreeds"] > 2147483647) {
+        }
+        if (
+          this.$store.getters["operationDetails/numCatBreeds"] < 0 ||
+          this.$store.getters["operationDetails/numCatBreeds"] > 2147483647
+        ) {
           return true;
-        } if (this.$store.getters["operationDetails/numWorkers"] < 0 || this.$store.getters["operationDetails/numWorkers"] > 2147483647) {
+        }
+        if (
+          this.$store.getters["operationDetails/numWorkers"] < 0 ||
+          this.$store.getters["operationDetails/numWorkers"] > 2147483647
+        ) {
           return true;
-        } if (this.$store.getters["operationDetails/assocName"].length > 50) {
+        }
+        if (this.$store.getters["operationDetails/assocName"].length > 50) {
           return true;
-        } if (this.$store.getters["operationDetails/assocMembership"].length > 20) {
+        }
+        if (
+          this.$store.getters["operationDetails/assocMembership"].length > 20
+        ) {
           return true;
-        } if (this.$store.getters["operationDetails/assocWebsite"].length > 50) {
+        }
+        if (this.$store.getters["operationDetails/assocWebsite"].length > 50) {
           return true;
-        } if (/^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(this.$store.getters["operationDetails/assocWebsite"]) === false || this.$store.getters["operationDetails/assocWebsite"].length > 50) {
+        }
+        if (
+          /^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(
+            this.$store.getters["operationDetails/assocWebsite"]
+          ) === false ||
+          this.$store.getters["operationDetails/assocWebsite"].length > 50
+        ) {
           return true;
         }
 
         // breedingDetails
-        if (this.$store.getters["breedingDetails/femaleIntactCatNum"] < 0 || this.$store.getters["breedingDetails/femaleIntactCatNum"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/littersQueened"] < 0 || this.$store.getters["breedingDetails/littersQueened"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/catsTransferred"] < 0 || this.$store.getters["breedingDetails/catsTransferred"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/catsSold"] < 0 || this.$store.getters["breedingDetails/catsSold"] < 0 > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/catsTraded"] < 0 || this.$store.getters["breedingDetails/catsTraded"] < 0 > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/catsLeased"] < 0 || this.$store.getters["breedingDetails/catsLeased"] < 0 > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/femaleIntactDogNum"] < 0 || this.$store.getters["breedingDetails/femaleIntactDogNum"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/littersWhelped"] < 0 || this.$store.getters["breedingDetails/littersWhelped"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/dogsTransferred"] < 0 || this.$store.getters["breedingDetails/dogsTransferred"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/dogsSold"] < 0 || this.$store.getters["breedingDetails/dogsSold"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/dogsTraded"] < 0 || this.$store.getters["breedingDetails/dogsTraded"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/dogsLeased"] < 0 || this.$store.getters["breedingDetails/dogsLeased"] > 2147483647) {
+        if (
+          this.$store.getters["breedingDetails/femaleIntactCatNum"] < 0 ||
+          this.$store.getters["breedingDetails/femaleIntactCatNum"] > 2147483647
+        ) {
           return true;
         }
-        
+        if (
+          this.$store.getters["breedingDetails/littersQueened"] < 0 ||
+          this.$store.getters["breedingDetails/littersQueened"] > 2147483647
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["breedingDetails/catsTransferred"] < 0 ||
+          this.$store.getters["breedingDetails/catsTransferred"] > 2147483647
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["breedingDetails/catsSold"] < 0 ||
+          this.$store.getters["breedingDetails/catsSold"] < 0 > 2147483647
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["breedingDetails/catsTraded"] < 0 ||
+          this.$store.getters["breedingDetails/catsTraded"] < 0 > 2147483647
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["breedingDetails/catsLeased"] < 0 ||
+          this.$store.getters["breedingDetails/catsLeased"] < 0 > 2147483647
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["breedingDetails/femaleIntactDogNum"] < 0 ||
+          this.$store.getters["breedingDetails/femaleIntactDogNum"] > 2147483647
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["breedingDetails/littersWhelped"] < 0 ||
+          this.$store.getters["breedingDetails/littersWhelped"] > 2147483647
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["breedingDetails/dogsTransferred"] < 0 ||
+          this.$store.getters["breedingDetails/dogsTransferred"] > 2147483647
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["breedingDetails/dogsSold"] < 0 ||
+          this.$store.getters["breedingDetails/dogsSold"] > 2147483647
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["breedingDetails/dogsTraded"] < 0 ||
+          this.$store.getters["breedingDetails/dogsTraded"] > 2147483647
+        ) {
+          return true;
+        }
+        if (
+          this.$store.getters["breedingDetails/dogsLeased"] < 0 ||
+          this.$store.getters["breedingDetails/dogsLeased"] > 2147483647
+        ) {
+          return true;
+        }
+
         // operationLocations
-        if (this.$store.getters["operationLocations/hasAdditionalLocations"] === "") {
+        if (
+          this.$store.getters["operationLocations/hasAdditionalLocations"] ===
+          ""
+        ) {
           return true;
         }
-        if (this.$store.getters["operationLocations/hasAdditionalLocations"] === "true") {
+        if (
+          this.$store.getters["operationLocations/hasAdditionalLocations"] ===
+          "true"
+        ) {
           let hasError = false;
-          this.$store.getters["operationLocations/locations"].forEach(location => {
-            if (location.streetNumber <= 0 || location.streetNumber > 2147483647) {
-              hasError = true;
-            } else if (location.aptNumber.length > 32) {
-              hasError = true;
-            } else if (location.streetName === "" || location.streetName.length > 32) {
-              hasError = true;
-            } else if (location.city === "" || location.city.length > 32) {
-              hasError = true;
-            } else if (location.postalCode === "" || /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(location.postalCode) === false) {
-              hasError = true;
+          this.$store.getters["operationLocations/locations"].forEach(
+            location => {
+              if (
+                location.streetNumber <= 0 ||
+                location.streetNumber > 2147483647
+              ) {
+                hasError = true;
+              } else if (location.aptNumber.length > 32) {
+                hasError = true;
+              } else if (
+                location.streetName === "" ||
+                location.streetName.length > 32
+              ) {
+                hasError = true;
+              } else if (location.city === "" || location.city.length > 32) {
+                hasError = true;
+              } else if (
+                location.postalCode === "" ||
+                /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(
+                  location.postalCode
+                ) === false
+              ) {
+                hasError = true;
+              }
             }
-          });
+          );
           return hasError;
-        } 
+        }
 
         // animalIdentification
         if (this.$store.getters["animalIdentification/hasPermId"] === "") {
           return true;
-        } if (this.$store.getters["animalIdentification/hasPermId"] === "true") {
+        }
+        if (this.$store.getters["animalIdentification/hasPermId"] === "true") {
           let hasError = false;
           if (this.$store.getters["animalIdentification/permIdType"] === "") {
             hasError = true;
-          } else if (this.$store.getters["animalIdentification/permIdType"] === "OTHER"){
-            if (this.$store.getters["animalIdentification/otherPermIdType"] === "" || this.$store.getters["animalIdentification/otherPermIdType"].length > 15) {
-              hasError = true
+          } else if (
+            this.$store.getters["animalIdentification/permIdType"] === "OTHER"
+          ) {
+            if (
+              this.$store.getters["animalIdentification/otherPermIdType"] ===
+                "" ||
+              this.$store.getters["animalIdentification/otherPermIdType"]
+                .length > 15
+            ) {
+              hasError = true;
             }
           }
           return hasError;
         }
         return false;
       }
-    },
+    }
   }
 };
 </script>

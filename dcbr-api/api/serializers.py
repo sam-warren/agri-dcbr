@@ -1,13 +1,14 @@
 from rest_framework.serializers import ModelSerializer
 
 from api.models import (
-    Registration_Number,
+    Registration,
     Operator,
     Address,
     Inspection,
     Operation_Risk_Factor,
     Animal_Risk_Factor,
     Association_Membership,
+    Renewal,
     Inspection,
 )
 
@@ -39,7 +40,6 @@ class Operation_Risk_Factor_Serializer(ModelSerializer):
             "id",
             "accidental_breeding",
             "num_workers",
-            
             "has_vet",
             "has_perm_id",
             "perm_id_type",
@@ -60,6 +60,7 @@ class Animal_Risk_Factor_Serializer(ModelSerializer):
             "num_transferred",
             "num_traded",
             "num_leased",
+            "num_animals",
         )
 
 
@@ -81,15 +82,28 @@ class Operator_Serializer(ModelSerializer):
         )
 
 
-class Registration_Number_Serializer(ModelSerializer):
+class Renewal_Serializer(ModelSerializer):
+    class Meta:
+        model = Renewal
+        fields = (
+            "id",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "previous_registation_number",
+        )
+
+
+class Registration_Serializer(ModelSerializer):
     operator = Operator_Serializer()
     addresses = Address_Serializer(many=True)
     associations = Association_Membership_Serializer(many=True)
     animal_risk_factors = Animal_Risk_Factor_Serializer(many=True)
     operation_risk_factors = Operation_Risk_Factor_Serializer(many=True)
+    renewals = Renewal_Serializer(many=True)
 
     class Meta:
-        model = Registration_Number
+        model = Registration
         fields = (
             "id",
             "operator_status",
@@ -98,6 +112,7 @@ class Registration_Number_Serializer(ModelSerializer):
             "associations",
             "animal_risk_factors",
             "operation_risk_factors",
+            "renewals",
         )
 
     def create(self, validated_data):
@@ -108,32 +123,31 @@ class Registration_Number_Serializer(ModelSerializer):
         associations_data = validated_data.pop("associations")
         addresses_data = validated_data.pop("addresses")
         operations_data = validated_data.pop("operation_risk_factors")
+        renewals_data = validated_data.pop("renewals")
 
-        registration_Number = Registration_Number.objects.create(**validated_data)
+        registration = Registration.objects.create(**validated_data)
 
         for address_data in addresses_data:
-            Address.objects.create(
-                registration_Number=registration_Number, **address_data
-            )
+            Address.objects.create(registration_number=registration, **address_data)
         for association_data in associations_data:
             Association_Membership.objects.create(
-                registration_Number=registration_Number, **association_data
+                registration_number=registration, **association_data
             )
         for animal_data in animals_data:
             Animal_Risk_Factor.objects.create(
-                registration_Number=registration_Number, **animal_data
+                registration_number=registration, **animal_data
             )
 
         for operation_data in operations_data:
             Operation_Risk_Factor.objects.create(
-                registration_Number=registration_Number, **operation_data
+                registration_number=registration, **operation_data
             )
+        for renewal_data in renewals_data:
+            Renewal.objects.create(registration_number=registration, **renewal_data)
 
-        Operator.objects.create(
-            registration_Number=registration_Number, **operator_data
-        )
+        Operator.objects.create(registration_number=registration, **operator_data)
 
-        return registration_Number
+        return registration
 
 
 class Inspection_Serializer(ModelSerializer):
