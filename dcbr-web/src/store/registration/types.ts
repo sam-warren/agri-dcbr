@@ -10,6 +10,7 @@ export interface ProfileTypes {
   streetName: string;
   city: string;
   postalCode: string;
+  homeRegion: string;
   error: boolean;
 }
 
@@ -41,6 +42,7 @@ export interface Location {
   streetName: string;
   city: string; 
   postalCode: string;
+  region: string;
 }
 
 export interface BreedingDetailsTypes {
