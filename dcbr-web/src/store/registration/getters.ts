@@ -50,6 +50,10 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { profile } = state;
     return profile!.postalCode || "";
   },
+  homeRegion(state: RegistrationState): string {
+    const { profile } = state;
+    return profile!.homeRegion || "";
+  },
 
   // Operation Details
   operationName(state: RegistrationState): string {
