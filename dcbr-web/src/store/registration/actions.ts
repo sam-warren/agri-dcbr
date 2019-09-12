@@ -39,9 +39,6 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   postalCode(context: any, payload: string) {
     context.commit("postalCode", payload);
   },
-  homeRegion(context: any, payload: string) {
-    context.commit("homeRegion", payload);
-  },
 
   // Operation Details
   operationName(context: any, payload: string) {

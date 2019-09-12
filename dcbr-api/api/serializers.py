@@ -24,7 +24,6 @@ class Address_Serializer(ModelSerializer):
             "street_name",
             "city",
             "postal_code",
-            "region"
         )
 
 

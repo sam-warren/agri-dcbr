@@ -46,11 +46,6 @@
                     required
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 md4>
-                  <v-flex class="d-flex" cols="12" sm="6">
-                    <v-select :rules="requiredRules" :items="items" v-model="region" label="Region"></v-select>
-                  </v-flex>
-                </v-flex>
               </v-layout>
             </v-container>
           </v-form>
@@ -64,40 +59,7 @@ import {mapState} from "vuex";
 export default {
   props: ["number"],
   data: () => ({
-    items: [
-      "Alberni-Clayoquot",
-      "Bulkley-Nechako",
-      "Capital",
-      "Cariboo",
-      "Central Coast",
-      "Central Kootenay",
-      "Central Okanagan",
-      "Columnbia Shuswap",
-      "Comox Valley",
-      "Cowichan Valley",
-      "East Kootenay",
-      "Fraser Valley",
-      "Fraser-Fort George",
-      "Islands Trust",
-      "Kitimat Stikine",
-      "Kootenay Boundary",
-      "Metro Vancouver",
-      "Mount Waddington",
-      "Nanaimo",
-      "North Okanagan",
-      "North Coast",
-      "Okanagan-Similkameen",
-      "Peace River",
-      "Gathet",
-      "Squamish-Lillooet",
-      "Strathcona",
-      "Sunshine Coast",
-      "Thompson-Nicola"
-    ],
     valid: false,
-    requiredRules: [
-      v => !!v || "This field is required"
-    ],
     streetNumberRules: [
       v => !!v || "Street number is required",
       v => v >= 0 || "Number cannot be negative",
@@ -199,21 +161,6 @@ export default {
         });
       }
     },
-    region: {
-      // getter
-      get() {
-        return this.$store.getters["operationLocations/locations"][this.$props.number].region;
-      }, 
-      // setter
-      set(value) {
-        console.log(value);
-        this.$store.dispatch("operationLocations/updateLocationProperty", {
-          index: this.$props.number,
-          property: "region",
-          value: value,
-        });
-      }
-    }
   }
 };
 </script>

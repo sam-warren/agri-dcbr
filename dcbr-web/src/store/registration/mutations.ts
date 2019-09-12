@@ -47,10 +47,6 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.profile!.postalCode = payload;
   },
-  homeRegion(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.profile!.homeRegion = payload;
-  },
 
   // Operation Details
   operationName(state: RegistrationState, payload: string) {
@@ -116,8 +112,7 @@ export const mutations: MutationTree<RegistrationState> = {
         aptNumber: "", 
         streetName: "", 
         city: "", 
-        postalCode: "",
-        region: ""
+        postalCode: ""
       }
       state.operationLocations!.locations.push(newLocation);
     } else if (payload.operation === "remove") {
