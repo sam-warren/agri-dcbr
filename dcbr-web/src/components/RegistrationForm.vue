@@ -217,13 +217,11 @@ export default {
         animal_risk_factors: riskFactors,
         operation_risk_factors: [
           {
-            accidental_breeding: this.$store.getters[
-              "breedingDetails/accidentalBreeding"
-            ],
+            accidental_breeding: (this.$store.getters["operationDetails/accidentalBreeding"] === "true"),
             num_workers: this.$store.getters["breedingDetails/numWorkers"],
             animal_type: this.$store.getters["breedingDetails/animalType"],
-            has_vet: this.$store.getters["breedingDetails/hasVet"],
-            has_perm_id: this.$store.getters["animalIdentification/hasPermId"],
+            has_vet: (this.$store.getters["operationDetails/hasVet"] === "true"),
+            has_perm_id: (this.$store.getters["animalIdentification/hasPermId"] === "true"),
             perm_id_type: this.$store.getters[
               "animalIdentification/permIdType"
             ],
@@ -233,7 +231,7 @@ export default {
           }
         ]
       };
-      console.log(obj);
+      console.log(obj.operation_risk_factors);
       if (!this.hasErrors) {
         axios
           .post("/api/register/", obj)
