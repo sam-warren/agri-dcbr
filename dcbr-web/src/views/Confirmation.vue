@@ -56,7 +56,7 @@
           <v-card-actions>
             <v-layout justify-center />
             <v-flex>
-              <v-btn @click="resetFormFields" flat color="primary">go to my profile</v-btn>
+              <v-btn flat color="primary">go to my profile</v-btn>
             </v-flex>
           </v-card-actions>
         </v-card>
@@ -65,21 +65,17 @@
   </v-app>
 </template>
 
-<script>
+// <script>
 import { mapActions } from "vuex"
 export default {
-  methods: {
-    ...mapActions(["resetForm"]),
-
-    resetFormFields() {
-      this.$store.dispatch("profile/resetForm");
-      this.$store.dispatch("operationDetails/resetForm");
-      this.$store.dispatch("breedingDetails/resetForm");
-      this.$store.dispatch("operationLocations/resetForm");
-      this.$store.dispatch("animalIdentification/resetForm");
-      this.$store.dispatch("routeProtection/resetForm");
-      this.$store.dispatch("termsAndConditions/resetForm");
-    }
-  }
+  beforeDestroy() {
+    this.$store.dispatch("profile/resetForm");
+    this.$store.dispatch("operationDetails/resetForm");
+    this.$store.dispatch("breedingDetails/resetForm");
+    this.$store.dispatch("operationLocations/resetForm");
+    this.$store.dispatch("animalIdentification/resetForm");
+    this.$store.dispatch("routeProtection/resetForm");
+    this.$store.dispatch("termsAndConditions/resetForm");
+  },
 }
 </script>
