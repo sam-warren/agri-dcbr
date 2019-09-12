@@ -359,7 +359,9 @@ export default {
               hasError = true;
             }
           });
-          return hasError;
+          if (hasError === true) {
+            return true;
+          };
         }
 
         // animalIdentification
@@ -368,22 +370,25 @@ export default {
         } if (this.$store.getters["animalIdentification/hasPermId"] === "true") {
           console.log("has perm id")
           let hasError = false;
-          if (this.$store.getters["animalIdentification/permIdType"] === "NOT_APPLICABLE") {
+          if (this.$store.getters["animalIdentification/permIdType"] === "") {
+            console.log("Pick an id technology")
             hasError = true;
           } else if (this.$store.getters["animalIdentification/permIdType"] === "OTHER"){
             if (this.$store.getters["animalIdentification/otherPermIdType"] === "" || this.$store.getters["animalIdentification/otherPermIdType"].length > 15) {
               hasError = true
             }
           }
-          return hasError;
+          if (hasError === true) {
+            return true;
+          }
         }
 
         // termsAndConditions
-        if (this.$store.getters["termsAndConditions/hasAgreed"] === false && this.$props.formType==="review") {
-            return true;
+        if (!this.$store.getters["termsAndConditions/hasAgreed"]) {
+          return true;
         }
-
         return false;
+
       },
     },
   }
