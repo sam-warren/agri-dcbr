@@ -4,12 +4,12 @@ from api.models import (
     Registration,
     Operator,
     Address,
-    Inspection,
+    Inspection_Report,
     Operation_Risk_Factor,
     Animal_Risk_Factor,
     Association_Membership,
     Renewal,
-    Inspection,
+    Inspection_Report,
 )
 
 
@@ -150,8 +150,8 @@ class Registration_Serializer(ModelSerializer):
         return registration
 
 
-class Inspection_Serializer(ModelSerializer):
+class Inspection_Report_Serializer(ModelSerializer):
     class Meta:
-        model = Inspection
+        model = Inspection_Report
         fields = "__all__"
 
