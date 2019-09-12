@@ -12,7 +12,7 @@ from api.models import (
     Registration,
     Operator,
     Address,
-    Inspection,
+    Inspection_Report,
     Operation_Risk_Factor,
     Animal_Risk_Factor,
     Renewal,
@@ -67,7 +67,7 @@ class AddressAdmin(MyAdmin, admin.ModelAdmin):
     pass
 
 
-class InspectionAdmin(MyAdmin, admin.ModelAdmin):
+class Inspection_ReportAdmin(MyAdmin, admin.ModelAdmin):
     pass
 
 
@@ -102,7 +102,7 @@ class RegistrationAdmin(MyAdmin, admin.ModelAdmin):
 admin.site.register(Registration, RegistrationAdmin)
 admin.site.register(Operator, OperatorAdmin)
 admin.site.register(Address, AddressAdmin)
-admin.site.register(Inspection, InspectionAdmin)
+admin.site.register(Inspection_Report, Inspection_ReportAdmin)
 admin.site.register(Operation_Risk_Factor, Operation_Risk_FactorAdmin)
 admin.site.register(Animal_Risk_Factor, Animal_Risk_FactorAdmin)
 admin.site.register(Association_Membership, Association_MembershipAdmin)

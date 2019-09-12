@@ -8,7 +8,7 @@ from api.serializers import (
     Address_Serializer,
     Animal_Risk_Factor_Serializer,
     Operation_Risk_Factor_Serializer,
-    Inspection_Serializer,
+    Inspection_Report_Serializer,
     Renewal_Serializer,
     Association_Membership_Serializer,
 )
@@ -18,7 +18,7 @@ from api.models import (
     Registration,
     Operator,
     Address,
-    Inspection,
+    Inspection_Report,
     Animal_Risk_Factor,
     Operation_Risk_Factor,
     Renewal,
@@ -58,7 +58,7 @@ class Animal_Risk_Factor_ViewSet(viewsets.ModelViewSet):
     A simple ViewSet for viewing and editing addresses.
     """
 
-    queryset = Inspection.objects.all()
+    queryset = Animal_Risk_Factor.objects.all()
     serializer_class = Animal_Risk_Factor_Serializer
 
 
@@ -67,17 +67,17 @@ class Operation_Risk_Factor_ViewSet(viewsets.ModelViewSet):
     A simple ViewSet for viewing and editing addresses.
     """
 
-    queryset = Inspection.objects.all()
+    queryset = Operation_Risk_Factor.objects.all()
     serializer_class = Operation_Risk_Factor_Serializer
 
 
-class Inspection_ViewSet(viewsets.ModelViewSet):
+class Inspection_ReportViewSet(viewsets.ModelViewSet):
     """
     A simple ViewSet for viewing and editing addresses.
     """
 
-    queryset = Inspection.objects.all()
-    serializer_class = Inspection_Serializer
+    queryset = Inspection_Report.objects.all()
+    serializer_class = Inspection_Report_Serializer
 
 
 class Association_ViewSet(viewsets.ModelViewSet):
@@ -85,7 +85,7 @@ class Association_ViewSet(viewsets.ModelViewSet):
     A simple ViewSet for viewing and editing addresses.
     """
 
-    queryset = Inspection.objects.all()
+    queryset = Association_Membership.objects.all()
     serializer_class = Association_Membership_Serializer
 
 
