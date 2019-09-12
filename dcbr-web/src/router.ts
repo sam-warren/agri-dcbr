@@ -89,34 +89,24 @@ const router = new Router({
 
 router.beforeEach((to: any, from: any, next: any) => {
   if (to.path === "/review") {
-
     if (!store.getters["routeProtection/registerFormOk"]) {
       if (!(from.path === "/register")) {
-        console.log("Illegal route accessed. Redirecting...")
-
         next("/register")
       } else {
-        console.log("Already on register.")
-
         next()
       }
     } else {
-      console.log("Register form OK")
       next();
     }
   }
   else if (to.path === "/confirmation") {
     if (!store.getters["routeProtection/reviewFormOk"]) {
       if (!(from.path === "/register")) {
-        console.log("Illegal route accessed. Redirecting...")
         next("/register")
       } else {
-        console.log("Already on register.")
         next()
       }
     } else {
-      console.log("Review form OK")
-
       next()
     }
   } else {
