@@ -116,10 +116,10 @@ export default {
         });
       });
       let riskFactors = [];
-      if (this.$store.getters["breedingDetails/animalType"] == "DOG") {
+      if (this.$store.getters["operationDetails/animalType"] == "DOG") {
         riskFactors.push({
           animal_type: "DOG",
-          num_breeds: this.$store.getters["breedingDetails/numDogBreeds"],
+          num_breeds: this.$store.getters["operationDetails/numDogBreeds"],
           num_females_intact: this.$store.getters[
             "breedingDetails/femaleIntactDogNum"
           ],
@@ -132,10 +132,10 @@ export default {
           num_leased: this.$store.getters["breedingDetails/dogsLeased"],
           num_animals: this.$store.getters["breedingDetails/numDogs"],
         });
-      } else if (this.$store.getters["breedingDetails/animalType"] == "CAT") {
+      } else if (this.$store.getters["operationDetails/animalType"] == "CAT") {
         riskFactors.push({
           animal_type: "CAT",
-          num_breeds: this.$store.getters["breedingDetails/numCatBreeds"],
+          num_breeds: this.$store.getters["operationDetails/numCatBreeds"],
           num_females_intact: this.$store.getters[
             "breedingDetails/femaleIntactCatNum"
           ],
@@ -152,7 +152,7 @@ export default {
         riskFactors.push(
           {
             animal_type: "DOG",
-            num_breeds: this.$store.getters["breedingDetails/numDogBreeds"],
+            num_breeds: this.$store.getters["operationDetails/numDogBreeds"],
             num_females_intact: this.$store.getters[
               "breedingDetails/femaleIntactDogNum"
             ],
@@ -167,7 +167,7 @@ export default {
           },
           {
             animal_type: "CAT",
-            num_breeds: this.$store.getters["breedingDetails/numCatBreeds"],
+            num_breeds: this.$store.getters["operationDetails/numCatBreeds"],
             num_females_intact: this.$store.getters[
               "breedingDetails/femaleIntactCatNum"
             ],
@@ -217,8 +217,8 @@ export default {
         operation_risk_factors: [
           {
             accidental_breeding: (this.$store.getters["operationDetails/accidentalBreeding"] === "true"),
-            num_workers: this.$store.getters["breedingDetails/numWorkers"],
-            animal_type: this.$store.getters["breedingDetails/animalType"],
+            num_workers: this.$store.getters["operationDetails/numWorkers"],
+            animal_type: this.$store.getters["operationDetails/animalType"],
             has_vet: (this.$store.getters["operationDetails/hasVet"] === "true"),
             has_perm_id: (this.$store.getters["animalIdentification/hasPermId"] === "true"),
             perm_id_type: this.$store.getters[
