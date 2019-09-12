@@ -49,6 +49,8 @@
 <script>
 import { mapState } from "vuex";
 export default {
+  valid: false,
+  mask: "",
   computed: {
     ...mapState({
       termsAndConditions: state => state.termsAndConditions
@@ -58,6 +60,7 @@ export default {
         return this.$store.getters["termsAndConditions/hasAgreed"];
       },
       set(value) {
+        console.log(value)
         this.$store.dispatch("termsAndConditions/hasAgreed", value);
       }
     }

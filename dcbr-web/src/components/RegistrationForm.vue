@@ -231,7 +231,7 @@ export default {
           }
         ]
       };
-      console.log(obj.operation_risk_factors);
+      console.log(obj);
       if (!this.hasErrors) {
         axios
           .post("/api/register/", obj)
@@ -336,14 +336,17 @@ export default {
         } if (this.$store.getters["breedingDetails/numDogs"] < 0 || this.$store.getters["breedingDetails/numDogs"] > 2147483647) {
           return true;
         }
-        
+
         // operationLocations
         if (this.$store.getters["operationLocations/hasAdditionalLocations"] === "") {
+          console.log("Need to be picked")
           return true;
         }
+
         if (this.$store.getters["operationLocations/hasAdditionalLocations"] === "true") {
           let hasError = false;
           this.$store.getters["operationLocations/locations"].forEach(location => {
+            console.log("Location found")
             if (location.streetNumber <= 0 || location.streetNumber > 2147483647) {
               hasError = true;
             } else if (location.aptNumber.length > 32) {
@@ -357,19 +360,15 @@ export default {
             }
           });
           return hasError;
-        } 
-
-        // termsAndConditions
-        if (this.$store.getters["termsAndConditions/hasAgreed"] === false && this.$props.formType==="review") {
-            return true;
         }
 
         // animalIdentification
         if (this.$store.getters["animalIdentification/hasPermId"] === "") {
           return true;
         } if (this.$store.getters["animalIdentification/hasPermId"] === "true") {
+          console.log("has perm id")
           let hasError = false;
-          if (this.$store.getters["animalIdentification/permIdType"] === "") {
+          if (this.$store.getters["animalIdentification/permIdType"] === "NOT_APPLICABLE") {
             hasError = true;
           } else if (this.$store.getters["animalIdentification/permIdType"] === "OTHER"){
             if (this.$store.getters["animalIdentification/otherPermIdType"] === "" || this.$store.getters["animalIdentification/otherPermIdType"].length > 15) {
@@ -379,8 +378,11 @@ export default {
           return hasError;
         }
 
-        
-        
+        // termsAndConditions
+        if (this.$store.getters["termsAndConditions/hasAgreed"] === false && this.$props.formType==="review") {
+            return true;
+        }
+
         return false;
       },
     },

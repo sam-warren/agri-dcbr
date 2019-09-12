@@ -66,7 +66,7 @@ export default {
     OperationLocation
   },
   methods: {
-     addLocation() {
+    addLocation() {
       this.$store.dispatch("operationLocations/locations", { operation: "add" });
     },
     removeLocation() {
@@ -83,6 +83,7 @@ export default {
       },
       // setter
       set(value) {
+        console.log(value)
         this.$store.dispatch("operationLocations/hasAdditionalLocations", value);
         if(value === "true" && this.$store.getters["operationLocations/locations"].length === 0) {
           this.$store.dispatch("operationLocations/locations", { operation: "add" });
