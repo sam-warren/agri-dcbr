@@ -3,7 +3,7 @@ from import_export import resources
 from api.models import Registration
 from api.models import Operator
 from api.models import Address
-from api.models import Inspection
+from api.models import Inspection_Report
 from api.models import Operation_Risk_Factor
 from api.models import Animal_Risk_Factor
 from api.models import Renewal
@@ -25,9 +25,9 @@ class AddressResource(resources.ModelResource):
         model = Address
 
 
-class InspectionResource(resources.ModelResource):
+class Inspection_ReportResource(resources.ModelResource):
     class Meta:
-        model = Inspection
+        model = Inspection_Report
 
 
 class Operation_Risk_FactorResource(resources.ModelResource):
@@ -43,6 +43,7 @@ class Animal_Risk_FactorResource(resources.ModelResource):
 class Association_MembershipResource(resources.ModelResource):
     class Meta:
         model = Association_Membership
+
 
 class RenewalResource(resources.ModelResource):
     class Meta:

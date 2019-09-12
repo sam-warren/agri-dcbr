@@ -28,7 +28,7 @@ router = routers.SimpleRouter()
 router.register(r"register", views.Registration_ViewSet, "Registration")
 router.register(r"operator", views.Operator_ViewSet, "Operator")
 router.register(r"address", views.Address_ViewSet, "Address")
-router.register(r"inspection", views.Inspection_ViewSet, "Inspection")
+router.register(r"inspection", views.Inspection_ReportViewSet, "InspectionReport")
 router.register(
     r"operationrisk", views.Operation_Risk_Factor_ViewSet, "OperationRisk"
 )

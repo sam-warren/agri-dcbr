@@ -264,7 +264,7 @@ class Renewal(models.Model):
         verbose_name_plural = "Renewals"
 
 
-class Inspection(models.Model):
+class Inspection_Report(models.Model):
     registration_number = models.ForeignKey(
         Registration,
         on_delete=models.CASCADE,
@@ -272,41 +272,68 @@ class Inspection(models.Model):
         null=True,
         related_name="inspections",
     )
-   
-    op_first_name = models.CharField(max_length=32)
-    op_middle_name = models.CharField(max_length=50)
-    op_last_name = models.CharField(max_length=50)
+    inspector_full_name= models.CharField(max_length=50, default="")
+    operator_first_name = models.CharField(max_length=32)
+    operator_middle_name = models.CharField(max_length=50, default="", blank=True)
+    operator_last_name = models.CharField(max_length=50)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
-    soc_1 = models.BooleanField(default=False)
-    soc_1_comment = models.TextField(default="", blank=True)
-    soc_2 = models.BooleanField(default=False)
-    soc_2_comment = models.TextField(default="", blank=True)
-    soc_3 = models.BooleanField(default=False)
-    soc_3_comment = models.TextField(default="", blank=True)
-    soc_4 = models.BooleanField(default=False)
-    soc_4_comment = models.TextField(default="", blank=True)
-    soc_5 = models.BooleanField(default=False)
-    soc_5_comment = models.TextField(default="", blank=True)
-    soc_6 = models.BooleanField(default=False)
-    soc_6_comment = models.TextField(default="", blank=True)
-    soc_7 = models.BooleanField(default=False)
-    soc_7_comment = models.TextField(default="", blank=True)
-    soc_8 = models.BooleanField(default=False)
-    soc_8_comment = models.TextField(default="", blank=True)
-    soc_9 = models.BooleanField(default=False)
-    soc_9_comment = models.TextField(default="", blank=True)
-    soc_10 = models.BooleanField(default=False)
-    soc_10_comment = models.TextField(default="", blank=True)
-    soc_11 = models.BooleanField(default=False)
-    soc_11_comment = models.TextField(default="", blank=True)
+    Nutrition = models.BooleanField(default=False)
+    Nutrition_notes = models.TextField(default="", blank=True)
+
+    Grooming_and_Nail_Care = models.BooleanField(default=False)
+    Grooming_and_Nail_Care_notes = models.TextField(default="", blank=True)
+
+    Cleaning_and_Disinfection = models.BooleanField(default=False)
+    Cleaning_and_Disinfection_notes = models.TextField(default="", blank=True)
+
+    Environment_and_Housing = models.BooleanField(default=False)
+    Environment_and_Housing_notes = models.TextField(default="", blank=True)
+
+    Socialization = models.BooleanField(default=False)
+    Socialization_notes = models.TextField(default="", blank=True)
+
+    Breeding = models.BooleanField(default=False)
+    Breeding_notes = models.TextField(default="", blank=True)
+
+    Whelping_and_Queening = models.BooleanField(default=False)
+    Whelping_and_Queening_notes = models.TextField(default="", blank=True)
+
+    Veterinary_Care = models.BooleanField(default=False)
+    Veterinary_Care_notes = models.TextField(default="", blank=True)
+
+    Health_Care_Protocol = models.BooleanField(default=False)
+    Health_Care_Protocol_notes = models.TextField(default="", blank=True)
+
+    Transportation = models.BooleanField(default=False)
+    Transportation_notes = models.TextField(default="", blank=True)
+
+    Plans = models.BooleanField(default=False)
+    Plans_notes = models.TextField(default="", blank=True)
+
+    Registration_and_Record_Keeping = models.BooleanField(default=False)
+    Registration_and_Record_Keeping_notes = models.TextField(default="", blank=True)
+
+    Responsibilities_of_the_Operator = models.BooleanField(default=False)
+    Responsibilities_of_the_Operator_notes = models.TextField(default="", blank=True)
+
+    Exercise = models.BooleanField(default=False)
+    Exercise_notes = models.TextField(default="", blank=True)
+
+    Handling_and_Training = models.BooleanField(default=False)
+    Handling_and_Training_notes = models.TextField(default="", blank=True)
+
+    Euthanasia = models.BooleanField(default=False)
+    Euthanasia_notes = models.TextField(default="", blank=True)
+
+
 
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (
+        return "Reg ID: \t %s Name: \t %s , %s" % (
             self.registration_number,
-            self.op_last_name,
-            self.op_first_name,
+            self.operator_last_name,
+            self.operator_first_name,
         )
 
     def save(self, *args, **kwargs):
