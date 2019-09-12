@@ -95,7 +95,6 @@ export default {
     },
     submitRegistration() {
       console.log("Submit clicked");
-      console.log(this.$store.getters["breedingDetails/numDogs"], this.$store.getters["breedingDetails/numCats"]);
       let addresses = [
         {
           address_type: "PRI",
@@ -339,14 +338,12 @@ export default {
 
         // operationLocations
         if (this.$store.getters["operationLocations/hasAdditionalLocations"] === "") {
-          console.log("Need to be picked")
           return true;
         }
 
         if (this.$store.getters["operationLocations/hasAdditionalLocations"] === "true") {
           let hasError = false;
           this.$store.getters["operationLocations/locations"].forEach(location => {
-            console.log("Location found")
             if (location.streetNumber <= 0 || location.streetNumber > 2147483647) {
               hasError = true;
             } else if (location.aptNumber.length > 32) {
@@ -368,10 +365,8 @@ export default {
         if (this.$store.getters["animalIdentification/hasPermId"] === "") {
           return true;
         } if (this.$store.getters["animalIdentification/hasPermId"] === "true") {
-          console.log("has perm id")
           let hasError = false;
           if (this.$store.getters["animalIdentification/permIdType"] === "") {
-            console.log("Pick an id technology")
             hasError = true;
           } else if (this.$store.getters["animalIdentification/permIdType"] === "OTHER"){
             if (this.$store.getters["animalIdentification/otherPermIdType"] === "" || this.$store.getters["animalIdentification/otherPermIdType"].length > 15) {
