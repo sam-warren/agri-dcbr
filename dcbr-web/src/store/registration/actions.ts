@@ -155,5 +155,10 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   },
   reviewFormOk(context: any, payload: boolean) {
     context.commit("reviewFormOk", payload);
+  },
+
+  // Reset Form
+  resetForm(context: any) {
+    context.commit("resetForm")
   }
 };

@@ -379,7 +379,7 @@ export default {
         }
 
         // termsAndConditions
-        if (!this.$store.getters["termsAndConditions/hasAgreed"]) {
+        if (!this.$store.getters["termsAndConditions/hasAgreed"] && this.$props.formType === "review") {
           return true;
         }
         return false;
