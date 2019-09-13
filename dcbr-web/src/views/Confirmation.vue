@@ -28,37 +28,6 @@
               </v-flex>
             </v-layout>
           </v-container>
-
-          <v-card-title>
-            <div>
-              <span class="grey--text">Your Registration Number:</span>
-              <br />
-              <span class="subheading">DG-253-672</span>
-              <br />
-            </div>
-          </v-card-title>
-          <v-card-title>
-            <div>
-              <span class="grey--text">Renewal date :</span>
-              <br />
-              <span class="subheading">Oct, 21, 2020</span>
-              <br />
-            </div>
-          </v-card-title>
-          <v-card-title>
-            <div>
-              <span class="grey--text">Your status as an operator/seller:</span>
-              <br />
-              <span class="success--text subheading">Active</span>
-              <br />
-            </div>
-          </v-card-title>
-          <v-card-actions>
-            <v-layout justify-center />
-            <v-flex>
-              <v-btn flat color="primary">go to my profile</v-btn>
-            </v-flex>
-          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
