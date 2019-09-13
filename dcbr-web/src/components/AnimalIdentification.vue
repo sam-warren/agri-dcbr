@@ -77,11 +77,12 @@ export default {
       },
       // setter
       set(value) {
+        console.log(value)
         this.$store.dispatch("animalIdentification/hasPermId", value);
         if (value === "false") {
           this.$store.dispatch(
             "animalIdentification/permIdType",
-            "NOT_APPLICABLE"
+            ""
           );
           this.$store.dispatch("animalIdentification/otherPermIdType", "");
         }
