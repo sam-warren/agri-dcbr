@@ -278,6 +278,10 @@
                   {
                     "name": "OIDC_LOGOUT_REDIRECT_URL",
                     "value": "${OIDC_LOGOUT_REDIRECT_URL}"
+                  },
+                  {
+                    "name": "DCBR_LOG_LEVEL",
+                    "value": "${DCBR_LOG_LEVEL}"
                   }
                 ],
                 "resources": {
@@ -519,6 +523,13 @@
       "description": "The URL used by the OIDC provider to redirect the request after logout.",
       "required": true,
       "value": "https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/agriculture"
+    },
+    {
+      "name": "DCBR_LOG_LEVEL",
+      "displayName": "Log Level",
+      "description": "The log level for the component.",
+      "required": true,
+      "value": "WARNING"
     },
     {
       "name": "CPU_REQUEST",

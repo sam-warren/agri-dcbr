@@ -208,6 +208,7 @@ configureEnvironment() {
   export OIDC_OP_USER_ENDPOINT="https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/userinfo"
   export OIDC_OP_JWKS_ENDPOINT="https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/certs"
   export OIDC_LOGOUT_REDIRECT_URL="https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/logout"
+  export DCBR_LOG_LEVEL="DEBUG"
 
   # dcbr-web
   export WEB_HOST_NAME="0.0.0.0"

@@ -83,6 +83,7 @@ services:
       OIDC_OP_TOKEN_ENDPOINT: ${OIDC_OP_TOKEN_ENDPOINT}
       OIDC_OP_USER_ENDPOINT: ${OIDC_OP_USER_ENDPOINT}
       OIDC_LOGOUT_REDIRECT_URL: ${OIDC_LOGOUT_REDIRECT_URL}
+      DCBR_LOG_LEVEL: ${DCBR_LOG_LEVEL}
     volumes:
       - ../dcbr-api:/opt/app-root/src
     networks:
