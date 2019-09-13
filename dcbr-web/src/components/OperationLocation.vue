@@ -93,6 +93,7 @@ export default {
       },
       // setter
       set(value) {
+        console.log(value)
         this.$store.dispatch("operationLocations/updateLocationProperty", {
           index: this.$props.number,
           property: "streetName",
@@ -107,6 +108,7 @@ export default {
       },
       // setter
       set(value) {
+        console.log(value)
         this.$store.dispatch("operationLocations/updateLocationProperty", {
           index: this.$props.number,
           property: "aptNumber",
@@ -121,6 +123,7 @@ export default {
       },
       // setter
       set(value) {
+        console.log(value)
         this.$store.dispatch("operationLocations/updateLocationProperty", {
           index: this.$props.number,
           property: "streetNumber",
@@ -135,6 +138,7 @@ export default {
       },
       // setter
       set(value) {
+        console.log(value)
         this.$store.dispatch("operationLocations/updateLocationProperty", {
           index: this.$props.number,
           property: "city",
@@ -149,6 +153,7 @@ export default {
       },
       // setter
       set(value) {
+        console.log(value)
         this.$store.dispatch("operationLocations/updateLocationProperty", {
           index: this.$props.number,
           property: "postalCode",

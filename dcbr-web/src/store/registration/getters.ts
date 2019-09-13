@@ -160,6 +160,14 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { breedingDetails } = state;
     return breedingDetails!.catsLeased || 0;
   },
+  numCats(state: RegistrationState): number {
+    const { breedingDetails } = state;
+    return breedingDetails!.numCats || 0;
+  },
+  numDogs(state: RegistrationState): number {
+    const { breedingDetails } = state;
+    return breedingDetails!.numDogs || 0;
+  },
  
   // Animal Identification
   hasPermId(state: RegistrationState): string {
@@ -173,5 +181,21 @@ export const getters: GetterTree<RegistrationState, RootState> = {
   otherPermIdType(state: RegistrationState): string {
     const { animalIdentification } = state;
     return animalIdentification!.otherPermIdType || "";
+  },
+
+  // Terms and Conditions
+  hasAgreed(state: RegistrationState): boolean {
+    const { termsAndConditions } = state;
+    return termsAndConditions!.hasAgreed || false;
+  },
+
+  // Route Protection
+  registerFormOk(state: RegistrationState): boolean {
+    const { routeProtection } = state;
+    return routeProtection!.registerFormOk || false;
+  },
+  reviewFormOk(state: RegistrationState): boolean {
+    const { routeProtection } = state;
+    return routeProtection!.reviewFormOk || false;
   },
 };

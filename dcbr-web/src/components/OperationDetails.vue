@@ -306,6 +306,7 @@ export default {
           this.$store.dispatch("breedingDetails/catsTransferred", 0);
           this.$store.dispatch("breedingDetails/femaleIntactCatNum", 0);
           this.$store.dispatch("breedingDetails/littersQueened", 0);
+          this.$store.dispatch("breedingDetails/numCats", 0);
         } else if (value === "CAT") {
           this.$store.dispatch("operationDetails/numDogBreeds", 0)
           this.$store.dispatch("breedingDetails/dogsLeased", 0);
@@ -314,6 +315,7 @@ export default {
           this.$store.dispatch("breedingDetails/dogsTransferred", 0);
           this.$store.dispatch("breedingDetails/femaleIntactDogNum", 0);
           this.$store.dispatch("breedingDetails/littersWhelped", 0);
+          this.$store.dispatch("breedingDetails/numDogs", 0);
         }
       }
     }

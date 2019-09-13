@@ -180,6 +180,14 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.breedingDetails!.catsLeased = payload;
   },
+  numCats(state: RegistrationState, payload: number) {
+    state.error = false;
+    state.breedingDetails!.numCats = payload;
+  },
+  numDogs(state: RegistrationState, payload: number) {
+    state.error = false;
+    state.breedingDetails!.numDogs = payload;
+  },
 
   // Animal Identification
   hasPermId(state: RegistrationState, payload: string) {
@@ -194,4 +202,74 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.animalIdentification!.otherPermIdType = payload;
   },
+
+  // Terms and Conditions
+  hasAgreed(state: RegistrationState, payload: boolean) {
+    state.error = false;
+    state.termsAndConditions!.hasAgreed = payload;
+  },
+
+  // Route Protection
+  registerFormOk(state: RegistrationState, payload: boolean) {
+    state.error = false;
+    state.routeProtection!.registerFormOk = payload;
+  },
+  reviewFormOk(state: RegistrationState, payload: boolean) {
+    state.error = false;
+    state.routeProtection!.reviewFormOk = payload;
+  },
+
+  resetForm(state: RegistrationState) {
+    state.profile!.firstName = "";
+    state.profile!.middleName = "";
+    state.profile!.lastName = "" ;
+    state.profile!.commType = "";
+    state.profile!.phone = "";
+    state.profile!.email = "";
+    state.profile!.streetNumber = 0;
+    state.profile!.aptNumber = "";
+    state.profile!.streetName = "";
+    state.profile!.city = "";
+    state.profile!.postalCode = "";
+    
+    state.operationDetails!.operationName = "";
+    state.operationDetails!.opWebsite = "";
+    state.operationDetails!.operationType = "";
+    state.operationDetails!.assocName = "";
+    state.operationDetails!.assocMembership = 0;
+    state.operationDetails!.assocWebsite = "";
+    state.operationDetails!.accidentalBreeding = "";
+    state.operationDetails!.numWorkers = 0;
+    state.operationDetails!.animalType = "";
+    state.operationDetails!.numDogBreeds = 0;
+    state.operationDetails!.numCatBreeds = 0;
+    state.operationDetails!.hasVet = "";
+
+    state.operationLocations!.hasAdditionalLocations = "";
+    state.operationLocations!.locations = [];
+
+    state.breedingDetails!.femaleIntactDogNum = 0;
+    state.breedingDetails!.femaleIntactCatNum = 0;
+    state.breedingDetails!.littersWhelped = 0;
+    state.breedingDetails!.littersQueened = 0;
+    state.breedingDetails!.dogsSold = 0;
+    state.breedingDetails!.dogsTransferred = 0;
+    state.breedingDetails!.dogsTraded = 0;
+    state.breedingDetails!.dogsLeased = 0;
+    state.breedingDetails!.catsSold = 0;
+    state.breedingDetails!.catsTransferred = 0;
+    state.breedingDetails!.catsTraded = 0;
+    state.breedingDetails!.catsLeased = 0;
+    state.breedingDetails!.numCats = 0;
+    state.breedingDetails!.numDogs = 0;
+
+    state.animalIdentification!.hasPermId = "";
+    state.animalIdentification!.permIdType = "";
+    state.animalIdentification!.otherPermIdType = "";
+
+    state.termsAndConditions!.hasAgreed = false;
+
+    state.routeProtection!.registerFormOk = false;
+    state.routeProtection!.reviewFormOk = false;
+  }
 };
