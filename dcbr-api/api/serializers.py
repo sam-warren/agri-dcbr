@@ -1,4 +1,8 @@
 from rest_framework.serializers import ModelSerializer
+from post_office import mail
+from email_service import tasks
+import datetime
+import json
 
 from api.models import (
     Registration,
@@ -145,7 +149,27 @@ class Registration_Serializer(ModelSerializer):
         for renewal_data in renewals_data:
             Renewal.objects.create(registration_number=registration, **renewal_data)
 
-        Operator.objects.create(registration_number=registration, **operator_data)
+        operator = Operator.objects.create(
+            registration_number=registration, **operator_data
+        )
+
+        def dt_converter(o):
+            if isinstance(o, datetime.datetime):
+                o_date = o.date()
+                print(o_date)
+                return o_date.__str__()
+
+        context = {
+            "op": operator,
+            "email_address": operator.email_address,
+            "registration_date": json.dumps(
+                registration.created_timestamp, default=dt_converter
+            ),
+            "expiry_date": registration.expiry_date,
+        }
+        print(context)
+
+        tasks.send_registration_email(context)
 
         return registration
 

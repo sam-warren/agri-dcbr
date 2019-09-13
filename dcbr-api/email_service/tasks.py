@@ -35,7 +35,7 @@ def send_registration_email(email_addr):
     locations_num = 2
     animal_types = "Dogs"
     operation_type = "Seller"
-    renewal_date = datetime.datetime.now() + relativedelta(years=2)
+    expiry_date = datetime.datetime.now() + relativedelta(minutes=1)
 
     template_context = {
         "operator": operator,

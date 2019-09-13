@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from dateutil.relativedelta import relativedelta
 from django.core.validators import URLValidator, MaxValueValidator, MinValueValidator
 from django.utils.translation import gettext as _
 
@@ -25,6 +26,11 @@ class Registration(models.Model):
     operator_status = models.CharField(
         max_length=50, choices=REG_STATUS_CHOICES, default=ACTIVE
     )
+
+    created_timestamp = models.DateTimeField(auto_now_add=True)
+    updated_timestamp = models.DateTimeField(auto_now=True)
+    registration_date = created_timestamp.value_to_string
+    expiry_date = created_timestamp + relativedelta(minutes=1)
 
     def __str__(self):
         return "BC-DCBR-" + str(self.pk).zfill(6)
