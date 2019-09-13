@@ -47,6 +47,8 @@ class Operator(models.Model):
 
     EMAIL = "Email"
     MAIL = "Mail"
+    PHONE = "Phone"
+    CONTACT_METHOD_CHOICE = ((EMAIL, "Email"), (MAIL, "Mail"), (PHONE, "Phone"))
 
     BREEDER = "BREEDER"
     SELLER = "SELLER"
@@ -71,7 +73,7 @@ class Operator(models.Model):
     email_address = models.CharField(max_length=32, default="", blank=True)
     created_timestamp = models.DateTimeField(auto_now_add=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
-    CONTACT_METHOD_CHOICE = ((EMAIL, "email"), (MAIL, "mail"))
+    
     comm_pref = models.CharField(
         "Communication method",
         max_length=10,

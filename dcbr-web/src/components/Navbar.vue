@@ -6,12 +6,12 @@
           <img src="@/assets/logo.svg" height="45px" />
         </span>
       </v-toolbar-title>
-      <h3>Cats and Dogs Breeder and Seller Registration</h3>
+      <h3>Dog and Cat Breeder Registry</h3>
       <v-spacer></v-spacer>
-      <v-btn height="30px" color="#fcba19">
+      <!-- <v-btn height="30px" color="#fcba19">
         <v-icon>search</v-icon>
       </v-btn>
-      <v-btn icon>
+      <v-btn icon> -->
         <v-icon>menu</v-icon>
       </v-btn>
     </v-toolbar>
