@@ -30,15 +30,22 @@
     
     <v-content class="mx-4 mb-4 my-4" v-if="this.$props.formType === 'register'">
      <v-container fluid>
-        <v-btn
-          large 
-          block
-          round
-          mt-5
-          class="blue darken-4 white--text"
-          @click="navToReview()"
-          :disabled="hasErrors"
-        >Review & Submit</v-btn>
+       <v-tooltip bottom v-if="this.error !== ''">
+         <template v-slot:activator="{on}">
+           <div v-on="on">
+            <v-btn
+              large 
+              block
+              round
+              mt-5
+              class="blue darken-4 white--text"
+              @click="navToReview()"
+              :disabled="hasErrors"
+            >Review & Submit</v-btn>
+           </div>
+         </template>
+         <span>{{error}}</span>
+       </v-tooltip>
       </v-container>
     </v-content>
 
@@ -82,7 +89,7 @@ export default {
   data() {
     return {
       e6: 1,
-      errors: []
+      error: ""
     };
   },
   props: {
@@ -249,110 +256,155 @@ export default {
     // error checking
     hasErrors: {
       get: function () {
+        this.error = "";
         // profile
         if (this.$store.getters["profile/firstName"] === "" || this.$store.getters["profile/firstName"].length > 50) {
+          this.error = "First name must meet requirements";
           return true;
         } if (this.$store.getters["profile/middleName"].length > 50) {
+          this.error = "Middle name must meet requirements";
           return true;
         } if (this.$store.getters["profile/lastName"] === "" || this.$store.getters["profile/lastName"].length > 50) {
+          this.error = "Last name must meet requirements";
           return true;
         } if (this.$store.getters["profile/email"] === "" || /.+@.+/.test(this.$store.getters["profile/email"]) === false || this.$store.getters["profile/email"].length > 32) {
+          this.error = "Personal email must meet requirements";
           return true;
         } if (this.$store.getters["profile/streetNumber"] <= 0 || this.$store.getters["profile/streetNumber"] > 2147483647) {
+          this.error = "Street number must meet requirements";
           return true;
         } if (this.$store.getters["profile/aptNumber"].length > 32) {
+          this.error = "Apt/Suite must meet requirements";
           return true; 
         } if (this.$store.getters["profile/streetName"] === "" || this.$store.getters["profile/streetName"].length > 32) {
+          this.error = "Street name must meet requirements";
           return true;
         } if (this.$store.getters["profile/city"] === "" || this.$store.getters["profile/city"].length > 32) {
+          this.error = "City must meet requirements";
           return true;
         } if (this.$store.getters["profile/postalCode"] === "" || /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(this.$store.getters["profile/postalCode"]) === false) {
+          this.error = "Postal code must meet requirements";
           return true;
         } if (this.$store.getters["profile/phone"] === "" || /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(this.$store.getters["profile/phone"]) === false) {
+          this.error = "Personal phone must meet requirements";
           return true;
         } if (this.$store.getters["profile/commType"] == "") {
+          this.error = "Please select a preferred communication type";
           return true;
         }
         
         // operationDetails
         if (this.$store.getters["operationDetails/operationName"].length > 50) {
+          this.error = "Operation name must meet requirements";
           return true;
         } if (/^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(this.$store.getters["operationDetails/opWebsite"]) === false || this.$store.getters["operationDetails/opWebsite"].length > 4000) {
+          this.error = "Operation website must meet requirements";
           return true;
         } if (this.$store.getters["operationDetails/operationType"] === "") {
+          this.error = "Please select an operator type (breeder / seller / both)";
           return true;
         } if (this.$store.getters["operationDetails/animalType"] === "") {
+          this.error = "Please select an animal type (cat / dog / both)";
           return true;
         } if (this.$store.getters["operationDetails/accidentalBreeding"] === "") {
+          this.error = "Please select whether or not you've had an accidental breeding";
           return true;
         } if (this.$store.getters["operationDetails/hasVet"] === "") {
+          this.error = "Please select whether or not you have a client veterinary relationship";
           return true;
         } if (this.$store.getters["operationDetails/numDogBreeds"] < 0 || this.$store.getters["operationDetails/numDogBreeds"] > 2147483647) {
+          this.error = "Number of dog breeds must meet requirements";
           return true;
         } if (this.$store.getters["operationDetails/numCatBreeds"] < 0 || this.$store.getters["operationDetails/numCatBreeds"] > 2147483647) {
+          this.error = "Number of cat breeds must meet requirements";
           return true;
         } if (this.$store.getters["operationDetails/numWorkers"] < 0 || this.$store.getters["operationDetails/numWorkers"] > 2147483647) {
+          this.error = "Number of workers must meet requirements";
           return true;
         } if (this.$store.getters["operationDetails/assocName"].length > 50) {
+          this.error = "Associaltion name must meet requirements";
           return true;
         } if (this.$store.getters["operationDetails/assocMembership"].length > 20) {
+          this.error = "Membership number must meet requirements";
           return true;
         } if (this.$store.getters["operationDetails/assocWebsite"].length > 50) {
+          this.error = "Association website must meet requirements";
           return true;
         } if (/^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(this.$store.getters["operationDetails/assocWebsite"]) === false || this.$store.getters["operationDetails/assocWebsite"].length > 50) {
+          this.error = "Association URL must meet requirements";
           return true;
         }
 
         // breedingDetails
-        if (this.$store.getters["breedingDetails/femaleIntactCatNum"] < 0 || this.$store.getters["breedingDetails/femaleIntactCatNum"] > 2147483647) {
+        if (this.$store.getters["breedingDetails/numCats"] < 0 || this.$store.getters["breedingDetails/numCats"] > 2147483647) {
+          this.error = "Number of cats must meet requirements";
+          return true;
+        } if (this.$store.getters["breedingDetails/femaleIntactCatNum"] < 0 || this.$store.getters["breedingDetails/femaleIntactCatNum"] > 2147483647) {
+          this.error = "Number of intact female cats must meet requirements";
           return true;
         } if (this.$store.getters["breedingDetails/littersQueened"] < 0 || this.$store.getters["breedingDetails/littersQueened"] > 2147483647) {
+          this.error = "Number of litters queened must meet requirements";
           return true;
         } if (this.$store.getters["breedingDetails/catsTransferred"] < 0 || this.$store.getters["breedingDetails/catsTransferred"] > 2147483647) {
+          this.error = "Number of cats transferred must meet requirements";
           return true;
         } if (this.$store.getters["breedingDetails/catsSold"] < 0 || this.$store.getters["breedingDetails/catsSold"] < 0 > 2147483647) {
+          this.error = "Number of cats sold must meet requirements";
           return true;
         } if (this.$store.getters["breedingDetails/catsTraded"] < 0 || this.$store.getters["breedingDetails/catsTraded"] < 0 > 2147483647) {
+          this.error = "Number of cats traded must meet requirements";
           return true;
         } if (this.$store.getters["breedingDetails/catsLeased"] < 0 || this.$store.getters["breedingDetails/catsLeased"] < 0 > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/femaleIntactDogNum"] < 0 || this.$store.getters["breedingDetails/femaleIntactDogNum"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/littersWhelped"] < 0 || this.$store.getters["breedingDetails/littersWhelped"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/dogsTransferred"] < 0 || this.$store.getters["breedingDetails/dogsTransferred"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/dogsSold"] < 0 || this.$store.getters["breedingDetails/dogsSold"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/dogsTraded"] < 0 || this.$store.getters["breedingDetails/dogsTraded"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/dogsLeased"] < 0 || this.$store.getters["breedingDetails/dogsLeased"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/dogsLeased"] < 0 || this.$store.getters["breedingDetails/dogsLeased"] > 2147483647) {
-          return true;
-        } if (this.$store.getters["breedingDetails/numCats"] < 0 || this.$store.getters["breedingDetails/numCats"] > 2147483647) {
+          this.error = "Number of cats leased must meet requirements";
           return true;
         } if (this.$store.getters["breedingDetails/numDogs"] < 0 || this.$store.getters["breedingDetails/numDogs"] > 2147483647) {
+          this.error = "Number of dogs must meet requirements";
+          return true;
+        } if (this.$store.getters["breedingDetails/femaleIntactDogNum"] < 0 || this.$store.getters["breedingDetails/femaleIntactDogNum"] > 2147483647) {
+          this.error = "Number of intact female dogs must meet requirements";
+          return true;
+        } if (this.$store.getters["breedingDetails/littersWhelped"] < 0 || this.$store.getters["breedingDetails/littersWhelped"] > 2147483647) {
+          this.error = "Number of litters whelped must meet requirements";
+          return true;
+        } if (this.$store.getters["breedingDetails/dogsTransferred"] < 0 || this.$store.getters["breedingDetails/dogsTransferred"] > 2147483647) {
+          this.error = "Number of dogs transferred must meet requirements";
+          return true;
+        } if (this.$store.getters["breedingDetails/dogsSold"] < 0 || this.$store.getters["breedingDetails/dogsSold"] > 2147483647) {
+          this.error = "Number of dogs sold must meet requirements";
+          return true;
+        } if (this.$store.getters["breedingDetails/dogsTraded"] < 0 || this.$store.getters["breedingDetails/dogsTraded"] > 2147483647) {
+          this.error = "Number of dogs traded must meet requirements";
+          return true;
+        } if (this.$store.getters["breedingDetails/dogsLeased"] < 0 || this.$store.getters["breedingDetails/dogsLeased"] > 2147483647) {
+          this.error = "Number of dogs leased must meet requirements";
           return true;
         }
 
         // operationLocations
         if (this.$store.getters["operationLocations/hasAdditionalLocations"] === "") {
+          this.error = "Please select whether or not you have additional operation locations";
           return true;
         }
 
         if (this.$store.getters["operationLocations/hasAdditionalLocations"] === "true") {
           let hasError = false;
+          let locationNumber = 0;
           this.$store.getters["operationLocations/locations"].forEach(location => {
+            locationNumber++;
             if (location.streetNumber <= 0 || location.streetNumber > 2147483647) {
+              this.error = "Street number of additional location " + locationNumber + "must meet requirements";
               hasError = true;
             } else if (location.aptNumber.length > 32) {
+              this.error = "Apt/suite of additional location " + locationNumber + "must meet requirements";
               hasError = true;
             } else if (location.streetName === "" || location.streetName.length > 32) {
+              this.error = "Street name of additional location " + locationNumber + "must meet requirements";
               hasError = true;
             } else if (location.city === "" || location.city.length > 32) {
+              this.error = "City of additional location " + locationNumber + "must meet requirements";
               hasError = true;
             } else if (location.postalCode === "" || /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(location.postalCode) === false) {
+              this.error = "Postal code of additional location " + locationNumber + "must meet requirements";
               hasError = true;
             }
           });
@@ -363,13 +415,16 @@ export default {
 
         // animalIdentification
         if (this.$store.getters["animalIdentification/hasPermId"] === "") {
+          this.error = "Please select whether or not you maintain permanent identification of your animals";
           return true;
         } if (this.$store.getters["animalIdentification/hasPermId"] === "true") {
           let hasError = false;
           if (this.$store.getters["animalIdentification/permIdType"] === "") {
+            this.error = "Please select a type of permanent identification";          
             hasError = true;
           } else if (this.$store.getters["animalIdentification/permIdType"] === "OTHER"){
             if (this.$store.getters["animalIdentification/otherPermIdType"] === "" || this.$store.getters["animalIdentification/otherPermIdType"].length > 15) {
+              this.error = "'Other' permanent identification must meet requirements";          
               hasError = true
             }
           }
@@ -380,6 +435,7 @@ export default {
 
         // termsAndConditions
         if (!this.$store.getters["termsAndConditions/hasAgreed"] && this.$props.formType === "review") {
+          this.error = "Please accept the terms and conditions to continue";          
           return true;
         }
         return false;
