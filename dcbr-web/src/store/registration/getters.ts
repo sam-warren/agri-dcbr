@@ -50,6 +50,10 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { profile } = state;
     return profile!.postalCode || "";
   },
+  homeRegion(state: RegistrationState): string {
+    const { profile } = state;
+    return profile!.homeRegion || "";
+  },
 
   // Operation Details
   operationName(state: RegistrationState): string {
@@ -176,7 +180,7 @@ export const getters: GetterTree<RegistrationState, RootState> = {
   },
   permIdType(state: RegistrationState): string {
     const { animalIdentification } = state;
-    return animalIdentification!.permIdType || "";
+    return animalIdentification!.permIdType || "NOT_APPLICABLE";
   },
   otherPermIdType(state: RegistrationState): string {
     const { animalIdentification } = state;
