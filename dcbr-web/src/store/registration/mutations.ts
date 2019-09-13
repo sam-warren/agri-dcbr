@@ -47,6 +47,10 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.profile!.postalCode = payload;
   },
+  homeRegion(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.profile!.homeRegion = payload;
+  },
 
   // Operation Details
   operationName(state: RegistrationState, payload: string) {
@@ -112,7 +116,8 @@ export const mutations: MutationTree<RegistrationState> = {
         aptNumber: "", 
         streetName: "", 
         city: "", 
-        postalCode: ""
+        postalCode: "",
+        region: ""
       }
       state.operationLocations!.locations.push(newLocation);
     } else if (payload.operation === "remove") {
@@ -231,6 +236,7 @@ export const mutations: MutationTree<RegistrationState> = {
     state.profile!.streetName = "";
     state.profile!.city = "";
     state.profile!.postalCode = "";
+    state.profile!.homeRegion = "";
     
     state.operationDetails!.operationName = "";
     state.operationDetails!.opWebsite = "";
@@ -264,7 +270,7 @@ export const mutations: MutationTree<RegistrationState> = {
     state.breedingDetails!.numDogs = 0;
 
     state.animalIdentification!.hasPermId = "";
-    state.animalIdentification!.permIdType = "";
+    state.animalIdentification!.permIdType = "NOT_APPLICABLE";
     state.animalIdentification!.otherPermIdType = "";
 
     state.termsAndConditions!.hasAgreed = false;
