@@ -30,37 +30,74 @@
     
     <v-content class="mx-4 mb-4 my-4" v-if="this.$props.formType === 'register'">
      <v-container fluid>
-       <v-tooltip bottom v-if="this.error !== ''">
-         <template v-slot:activator="{on}">
-           <div v-on="on">
-            <v-btn
-              large 
-              block
-              round
-              mt-5
-              class="blue darken-4 white--text"
-              @click="navToReview()"
-              :disabled="hasErrors"
-            >Review & Submit</v-btn>
-           </div>
-         </template>
-         <span>{{error}}</span>
-       </v-tooltip>
+      <div v-if="hasErrors">
+        <div>
+          <v-tooltip bottom>
+            <template v-slot:activator="{on}">
+              <div v-on="on">
+                <v-btn
+                  large 
+                  block
+                  round
+                  mt-5
+                  class="blue darken-4 white--text"
+                  disabled
+                >Review & Submit</v-btn>
+              </div>
+            </template>
+            <span>{{error}}</span>
+          </v-tooltip>
+        </div>
+      </div>
+      <div v-else>
+        <div>
+          <v-btn
+            large 
+            block
+            round
+            mt-5
+            class="blue darken-4 white--text"
+            @click="navToReview()"
+          >Review & Submit</v-btn>
+        </div>
+      </div>
       </v-container>
     </v-content>
 
     <v-content class="mx-4 mb-4 my-4" v-if="this.$props.formType === 'review'">
      <v-container fluid>
-        <TermsAndConditions/>
-        <v-btn
-          large
-          block
-          round
-          mt-5
-          class="blue darken-4 white--text"
-          @click="submitRegistration()"
-          :disabled="hasErrors"
-        >Submit</v-btn>
+      <TermsAndConditions/>
+      <div v-if="hasErrors">
+        <div>
+          <v-tooltip bottom>
+            <template v-slot:activator="{on}">
+              <div v-on="on">
+                <v-btn
+                  large 
+                  block
+                  round
+                  mt-5
+                  class="blue darken-4 white--text"
+                  disabled
+                >Submit</v-btn>
+              </div>
+            </template>
+            <span>{{error}}</span>
+          </v-tooltip>
+        </div>
+      </div>
+      <div v-else>
+        <div>
+          <v-btn
+            large 
+            block
+            round
+            mt-5
+            class="blue darken-4 white--text"
+            @click="submitRegistration()"
+          >Submit</v-btn>
+        </div>
+      </div>
       </v-container>
     </v-content>
   </div>
@@ -89,7 +126,8 @@ export default {
   data() {
     return {
       e6: 1,
-      error: ""
+      error: "",
+      errors: []
     };
   },
   props: {
@@ -109,7 +147,8 @@ export default {
           suite: this.$store.getters["profile/aptNumber"],
           street_name: this.$store.getters["profile/streetName"],
           city: this.$store.getters["profile/city"],
-          postal_code: this.$store.getters["profile/postalCode"]
+          postal_code: this.$store.getters["profile/postalCode"],
+          region: this.$store.getters["profile/homeRegion"]
         }
       ];
       this.$store.getters["operationLocations/locations"].forEach(location => {
@@ -119,7 +158,8 @@ export default {
           suite: location.aptNumber,
           street_name: location.streetName,
           city: location.city,
-          postal_code: location.postalCode
+          postal_code: location.postalCode,
+          region: location.region
         });
       });
       let riskFactors = [];
@@ -285,6 +325,9 @@ export default {
         } if (this.$store.getters["profile/postalCode"] === "" || /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(this.$store.getters["profile/postalCode"]) === false) {
           this.error = "Postal code must meet requirements";
           return true;
+        } if (this.$store.getters["profile/homeRegion"] === "") {
+          this.error = "Home region must meet requirements"
+          return true;
         } if (this.$store.getters["profile/phone"] === "" || /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(this.$store.getters["profile/phone"]) === false) {
           this.error = "Personal phone must meet requirements";
           return true;
@@ -392,19 +435,23 @@ export default {
           this.$store.getters["operationLocations/locations"].forEach(location => {
             locationNumber++;
             if (location.streetNumber <= 0 || location.streetNumber > 2147483647) {
-              this.error = "Street number of additional location " + locationNumber + "must meet requirements";
+              this.error = "Street number of additional location " + locationNumber + " must meet requirements";
               hasError = true;
             } else if (location.aptNumber.length > 32) {
-              this.error = "Apt/suite of additional location " + locationNumber + "must meet requirements";
+              this.error = "Apt/suite of additional location " + locationNumber + " must meet requirements";
               hasError = true;
             } else if (location.streetName === "" || location.streetName.length > 32) {
-              this.error = "Street name of additional location " + locationNumber + "must meet requirements";
+              this.error = "Street name of additional location " + locationNumber + " must meet requirements";
               hasError = true;
             } else if (location.city === "" || location.city.length > 32) {
-              this.error = "City of additional location " + locationNumber + "must meet requirements";
+              this.error = "City of additional location " + locationNumber + " must meet requirements";
               hasError = true;
             } else if (location.postalCode === "" || /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(location.postalCode) === false) {
               this.error = "Postal code of additional location " + locationNumber + "must meet requirements";
+              hasError = true;
+            }
+            else if (location.region === "") {
+              this.error = "Region of additional location " + locationNumber + " must meet requirements";
               hasError = true;
             }
           });
@@ -419,7 +466,7 @@ export default {
           return true;
         } if (this.$store.getters["animalIdentification/hasPermId"] === "true") {
           let hasError = false;
-          if (this.$store.getters["animalIdentification/permIdType"] === "") {
+          if (this.$store.getters["animalIdentification/permIdType"] === "NOT_APPLICABLE") {
             this.error = "Please select a type of permanent identification";          
             hasError = true;
           } else if (this.$store.getters["animalIdentification/permIdType"] === "OTHER"){

@@ -24,6 +24,7 @@ export const ProfileState: ProfileTypes = {
   // streetName: "Government St",
   // city: "Langley",
   // postalCode: "V4W1J1",
+  // homeRegion: "Cariboo"
   // error: false
 
   firstName: "",
@@ -37,6 +38,7 @@ export const ProfileState: ProfileTypes = {
   streetName: "",
   city: "",
   postalCode: "",
+  homeRegion: "",
   error: false
 };
 
@@ -72,7 +74,16 @@ export const OperationDetailsState: OperationDetailsTypes = {
 
 export const OperationLocationsState: OperationLocationsTypes = {
   // hasAdditionalLocations: "false",
-  // locations: [],
+  // locations: [
+  //   {
+  //     streetName: "Fake St",
+  //     aptNumber: "B",
+  //     streetNumber: 12345,
+  //     city: "Victoria",
+  //     postalCode: "r1r1r1",
+  //     region: "Capital"
+  //   }
+  // ],
   // error: false
 
   hasAdditionalLocations: "",
@@ -121,7 +132,7 @@ export const AnimalIdentificationState: AnimalIdentificationTypes = {
   // error: false
 
   hasPermId: "",
-  permIdType: "",
+  permIdType: "NOT_APPLICABLE",
   otherPermIdType: "",
   error: false
 };
