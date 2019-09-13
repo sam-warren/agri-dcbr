@@ -162,14 +162,14 @@ class Registration_Serializer(ModelSerializer):
         context = {
             "op": operator,
             "email_address": operator.email_address,
-            "registration_date": json.dumps(
-                registration.created_timestamp, default=dt_converter
-            ),
-            "expiry_date": registration.expiry_date,
+            # "registration_date": json.dumps(
+            #     registration.created_timestamp, default=dt_converter
+            # ),
+            # "expiry_date": registration.expiry_date,
         }
         print(context)
 
-        tasks.send_registration_email(context)
+       # tasks.send_registration_email(context)
 
         return registration
 
