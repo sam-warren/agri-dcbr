@@ -82,7 +82,6 @@ export default {
   data() {
     return {
       e6: 1,
-      errors: []
     };
   },
   props: {
@@ -103,7 +102,8 @@ export default {
           suite: this.$store.getters["profile/aptNumber"],
           street_name: this.$store.getters["profile/streetName"],
           city: this.$store.getters["profile/city"],
-          postal_code: this.$store.getters["profile/postalCode"]
+          postal_code: this.$store.getters["profile/postalCode"],
+          region: this.$store.getters["profile/homeRegion"]
         }
       ];
       this.$store.getters["operationLocations/locations"].forEach(location => {
@@ -113,7 +113,8 @@ export default {
           suite: location.aptNumber,
           street_name: location.streetName,
           city: location.city,
-          postal_code: location.postalCode
+          postal_code: location.postalCode,
+          region: location.region
         });
       });
       let riskFactors = [];
@@ -271,6 +272,8 @@ export default {
           return true;
         } if (this.$store.getters["profile/postalCode"] === "" || /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(this.$store.getters["profile/postalCode"]) === false) {
           return true;
+        } if (this.$store.getters["profile/homeRegion"] === "") {
+          return true;
         } if (this.$store.getters["profile/phone"] === "" || /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(this.$store.getters["profile/phone"]) === false) {
           return true;
         } if (this.$store.getters["profile/commType"] == "") {
@@ -305,7 +308,6 @@ export default {
         } if (/^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(this.$store.getters["operationDetails/assocWebsite"]) === false || this.$store.getters["operationDetails/assocWebsite"].length > 50) {
           return true;
         }
-
         // breedingDetails
         if (this.$store.getters["breedingDetails/femaleIntactCatNum"] < 0 || this.$store.getters["breedingDetails/femaleIntactCatNum"] > 2147483647) {
           return true;
@@ -356,15 +358,12 @@ export default {
               hasError = true;
             } else if (location.postalCode === "" || /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(location.postalCode) === false) {
               hasError = true;
+            } else if (location.region === "") {
+              hasError = true;
             }
           });
           return hasError;
         } 
-
-        // termsAndConditions
-        if (this.$store.getters["termsAndConditions/hasAgreed"] === false && this.$props.formType==="review") {
-            return true;
-        }
 
         // animalIdentification
         if (this.$store.getters["animalIdentification/hasPermId"] === "") {
@@ -380,9 +379,12 @@ export default {
           }
           return hasError;
         }
-
-        
-        
+         
+        // termsAndConditions
+        if (this.$store.getters["termsAndConditions/hasAgreed"] === false && this.$props.formType==="review") {
+            return true;
+        }
+        console.log("Ok dude")
         return false;
       },
     },

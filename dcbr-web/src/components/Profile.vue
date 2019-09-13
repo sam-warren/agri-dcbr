@@ -101,7 +101,13 @@
                     required
                   ></v-text-field>
                 </v-flex>
+                 <v-flex xs12 md4>
+                  <v-flex class="d-flex" cols="12" sm="6">
+                    <v-select :rules="requiredRules" :items="items" v-model="homeRegion" label="Region"></v-select>
+                  </v-flex>
+                </v-flex>
               </v-layout>
+              
 
               <!-- contact info  -->
               <v-layout row mt-5 mx-2>
@@ -149,8 +155,41 @@
 import { mapState } from "vuex";
 export default {
   data: () => ({
+    items: [
+      "Alberni-Clayoquot",
+      "Bulkley-Nechako",
+      "Capital",
+      "Cariboo",
+      "Central Coast",
+      "Central Kootenay",
+      "Central Okanagan",
+      "Columnbia Shuswap",
+      "Comox Valley",
+      "Cowichan Valley",
+      "East Kootenay",
+      "Fraser Valley",
+      "Fraser-Fort George",
+      "Islands Trust",
+      "Kitimat Stikine",
+      "Kootenay Boundary",
+      "Metro Vancouver",
+      "Mount Waddington",
+      "Nanaimo",
+      "North Okanagan",
+      "North Coast",
+      "Okanagan-Similkameen",
+      "Peace River",
+      "Gathet",
+      "Squamish-Lillooet",
+      "Strathcona",
+      "Sunshine Coast",
+      "Thompson-Nicola"
+    ],
     valid: false,
     mask: "",
+    requiredRules: [
+      v => !!v || "This field is required"
+    ],
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
@@ -316,6 +355,17 @@ export default {
         this.$store.dispatch("profile/postalCode", value);
       }
     },
+    homeRegion: {
+      // getter
+      get() {
+        return this.$store.getters["profile/homeRegion"];
+      }, 
+      // setter
+      set(value) {
+        console.log(value);
+        this.$store.dispatch("profile/homeRegion", value);
+      }
+    }
   }
 };
 </script>
