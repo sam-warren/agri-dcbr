@@ -198,6 +198,7 @@ configureEnvironment() {
   export EMAIL_PORT="25"
   export EMAIL_USE_TLS="False"
   export AGRI_EMAIL="AgriServiceBC@gov.bc.ca"
+  export REGISTRATION_VALIDITY_MONTHS="12"
   export APP_SCRIPT="app-dcbr.sh"
   export OIDC_RP_CLIENT_ID="dcbr-admin"
   export OIDC_RP_CLIENT_SECRET=${KEYCLOAK_CLIENT_SECRET}

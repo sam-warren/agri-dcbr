@@ -232,6 +232,10 @@
                     "value": "${EMAIL_USE_TLS}"
                   },
                   {
+                    "name": "REGISTRATION_VALIDITY_MONTHS",
+                    "value": "${REGISTRATION_VALIDITY_MONTHS}"
+                  },
+                  {
                     "name": "AGRI_EMAIL",
                     "value": "${AGRI_EMAIL}"
                   },
@@ -431,6 +435,13 @@
       "description": "Wether to use TLS or not to authenticate to the email server.",
       "required": true,
       "value": "True"
+    },
+    {
+      "name": "REGISTRATION_VALIDITY_MONTHS",
+      "displayName": "Registration Validity",
+      "description": "The number of months after which an operator registration is meant to expire.",
+      "required": true,
+      "value": "12"
     },
     {
       "name": "WEASYPRINT_HOST",
