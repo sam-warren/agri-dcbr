@@ -25,10 +25,10 @@ def send_queued_mail():
 def send_reminder_email():
     LOGGER.debug("Processing operator reminder emails...")
 
-    expiry_date_begin = datetime.combine(
+    expiry_date_begin = datetime.datetime.combine(
         datetime.date.today(), datetime.time()
     ) + relativedelta(months=settings.REGISTRATION_VALIDITY_MONTHS)
-    expiry_date_end = datetime.combine(
+    expiry_date_end = datetime.datetime.combine(
         expiry_date_begin, datetime.time(23, 59, 59, 999999)
     )
 
