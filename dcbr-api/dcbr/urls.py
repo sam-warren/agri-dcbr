@@ -30,5 +30,4 @@ urlpatterns = [
     url(r"^health/", include("health_check.urls")),
     url(r"^api/", include("api.urls")),
     url(r"^oidc/", include("mozilla_django_oidc.urls")),
-    url(r"^email/", include("email_service.urls")),
 ]

@@ -263,3 +263,7 @@ LOGGING = {
     },
 }
 # fmt:on
+
+# Number of months after which the registration will need to be renewed.
+# Set to 0 if the registration will never expire.
+REGISTRATION_VALIDITY_MONTHS = os.getenv("REGISTRATION_VALIDITY_MONTHS", 12)

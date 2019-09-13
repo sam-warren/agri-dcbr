@@ -1,5 +1,4 @@
 import datetime
-import json
 import logging
 import os
 import tempfile
@@ -12,6 +11,8 @@ from django.core import management
 from django.template import loader
 from post_office import mail
 
+from api.models import Operator
+
 LOGGER = logging.getLogger(__name__)
 
 
@@ -22,35 +23,45 @@ def send_queued_mail():
 
 @background(queue="membership-reminder")
 def send_reminder_email():
-    # TODO: implement logic
-    LOGGER.debug("Sending new reminder emails to operators...")
+    LOGGER.debug("Processing operator reminder emails...")
+
+    expiry_date_begin = datetime.combine(
+        datetime.date.today(), datetime.time()
+    ) + relativedelta(months=settings.REGISTRATION_VALIDITY_MONTHS)
+    expiry_date_end = datetime.combine(
+        expiry_date_begin, datetime.time(23, 59, 59, 999999)
+    )
+
+    expiring_operators = Operator.objects.filter(
+        created_timestamp__gt=expiry_date_begin, created_timestamp__lt=expiry_date_end
+    )
+
+    email_list = []
+    for operator in expiring_operators:
+        reminder_email = {
+            "sender": "from@example.com",
+            "recipients": [operator.email_address],
+            "template": "reminder_email",
+            "context": operator,
+        }
+        email_list.append(reminder_email)
+
+    if len(email_list) > 0:
+        LOGGER.info("Sending remider emails to {} operators".format(len(email_list)))
+        mail.send_many(email_list)
+    else:
+        LOGGER.debug("No reminder emails to send this time.")
 
 
 @background(queue="member-registration")
-def send_registration_email(email_addr):
-    # TODO: update email logic, refer to https://github.com/ui/django-post_office#usage
-
-    operator = {"name": email_addr, "other_prop": "other_value"}
-    registration_number = "DCBR-123456"
-    locations_num = 2
-    animal_types = "Dogs"
-    operation_type = "Seller"
-    renewal_date = datetime.datetime.now() + relativedelta(years=2)
-
-    template_context = {
-        "operator": operator,
-        "registration_number": registration_number,
-        "locations_num": locations_num,
-        "animal_types": animal_types,
-        "operation_type": operation_type,
-        "renewal_date": renewal_date.strftime("%B %d, %Y"),
-    }
-
+def send_registration_email(context: dict):
     template = loader.get_template("certificate/certificate.html")
-    rendered = template.render(template_context)
+    rendered = template.render(context)
 
     LOGGER.debug(
-        "Requesting PDF certificate for registration #{}".format(registration_number)
+        "Requesting PDF certificate for registration #{}".format(
+            context["registration_number"]
+        )
     )
     response = requests.post(
         settings.WEASYPRINT_REQUEST_URL + "certificate.pdf",
@@ -59,7 +70,7 @@ def send_registration_email(email_addr):
     )
 
     TMP_DIR = tempfile.gettempdir()
-    DEST_FILE = os.path.join(TMP_DIR, registration_number + ".pdf")
+    DEST_FILE = os.path.join(TMP_DIR, context["registration_number"] + ".pdf")
 
     try:
 
@@ -69,17 +80,14 @@ def send_registration_email(email_addr):
 
         LOGGER.debug(
             "Sending registration confirmation for registration #{}".format(
-                registration_number
+                context["registration_number"]
             )
         )
         mail.send(
-            email_addr,
+            context["operator"].email_address,
             settings.AGRI_EMAIL,
             template="registration_email",  # Could be an EmailTemplate instance or name
-            context={
-                "user": json.dumps(operator),
-                "registration_number": registration_number,
-            },
+            context=context,
             render_on_delivery=True,
             attachments={"certificate.pdf": DEST_FILE},
             # priority="now", # can't use now at this time: https://github.com/ui/django-post_office/issues/218
@@ -91,4 +99,6 @@ def send_registration_email(email_addr):
             LOGGER.debug("Removing temporary file {}".format(DEST_FILE))
             os.remove(DEST_FILE)
 
-    LOGGER.info("Registration confirmation sent to {}".format(email_addr))
+    LOGGER.info(
+        "Registration confirmation sent to {}".format(context["operator"].email_address)
+    )
