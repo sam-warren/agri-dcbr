@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     "background_task",
     "dcbr",
     "api",
-    "email_service.apps.EmailServiceConfig",
+    "email_service",
     "import_export",
 ]
 
