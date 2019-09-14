@@ -3,6 +3,7 @@ import logging
 import os
 import tempfile
 
+import pytz
 import requests
 from background_task import background
 from dateutil.relativedelta import relativedelta
@@ -26,10 +27,10 @@ def send_reminder_email():
     LOGGER.debug("Processing operator reminder emails...")
 
     expiry_date_begin = datetime.datetime.combine(
-        datetime.date.today(), datetime.time()
-    ) + relativedelta(months=settings.REGISTRATION_VALIDITY_MONTHS)
+        datetime.datetime.now(pytz.utc), datetime.time(), tzinfo=pytz.utc
+    ) + relativedelta(months=int(settings.REGISTRATION_VALIDITY_MONTHS))
     expiry_date_end = datetime.datetime.combine(
-        expiry_date_begin, datetime.time(23, 59, 59, 999999)
+        expiry_date_begin, datetime.time(23, 59, 59, 999999), tzinfo=pytz.utc
     )
 
     expiring_operators = Operator.objects.filter(
