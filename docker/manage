@@ -198,6 +198,7 @@ configureEnvironment() {
   export EMAIL_PORT="25"
   export EMAIL_USE_TLS="False"
   export AGRI_EMAIL="AgriServiceBC@gov.bc.ca"
+  export REMINDER_EMAIL_NOTICE_MONTHS="12"
   export APP_SCRIPT="app-dcbr.sh"
   export OIDC_RP_CLIENT_ID="dcbr-admin"
   export OIDC_RP_CLIENT_SECRET=${KEYCLOAK_CLIENT_SECRET}
@@ -207,6 +208,7 @@ configureEnvironment() {
   export OIDC_OP_USER_ENDPOINT="https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/userinfo"
   export OIDC_OP_JWKS_ENDPOINT="https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/certs"
   export OIDC_LOGOUT_REDIRECT_URL="https://sso-dev.pathfinder.gov.bc.ca/auth/realms/uicn0kkh/protocol/openid-connect/logout"
+  export DCBR_LOG_LEVEL="DEBUG"
 
   # dcbr-web
   export WEB_HOST_NAME="0.0.0.0"

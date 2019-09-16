@@ -29,7 +29,7 @@ django-post_office>=3.2.1,<4
 django-background-tasks>=1.2,<2
 
 # Export to CSV
-django-import-export
+django-import-export>=1.2,<2
 
 # Authentication
 mozilla-django-oidc>=1.2.2
