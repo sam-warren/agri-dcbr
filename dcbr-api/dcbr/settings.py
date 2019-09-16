@@ -268,4 +268,4 @@ LOGGING = {
 
 # Number of months after which the registration will need to be renewed.
 # Set to 0 if the registration will never expire.
-REGISTRATION_VALIDITY_MONTHS = os.getenv("REGISTRATION_VALIDITY_MONTHS", 12)
+REMINDER_EMAIL_NOTICE_MONTHS = os.getenv("REMINDER_EMAIL_NOTICE_MONTHS", 12)

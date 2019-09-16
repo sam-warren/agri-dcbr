@@ -232,8 +232,8 @@
                     "value": "${EMAIL_USE_TLS}"
                   },
                   {
-                    "name": "REGISTRATION_VALIDITY_MONTHS",
-                    "value": "${REGISTRATION_VALIDITY_MONTHS}"
+                    "name": "REMINDER_EMAIL_NOTICE_MONTHS",
+                    "value": "${REMINDER_EMAIL_NOTICE_MONTHS}"
                   },
                   {
                     "name": "AGRI_EMAIL",
@@ -441,7 +441,7 @@
       "value": "True"
     },
     {
-      "name": "REGISTRATION_VALIDITY_MONTHS",
+      "name": "REMINDER_EMAIL_NOTICE_MONTHS",
       "displayName": "Registration Validity",
       "description": "The number of months after which an operator registration is meant to expire.",
       "required": true,

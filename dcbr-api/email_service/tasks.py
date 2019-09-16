@@ -28,7 +28,7 @@ def send_reminder_email():
 
     expiry_date_begin = datetime.datetime.combine(
         datetime.datetime.now(pytz.utc), datetime.time(), tzinfo=pytz.utc
-    ) + relativedelta(months=int(settings.REGISTRATION_VALIDITY_MONTHS))
+    ) + relativedelta(months=int(settings.REMINDER_EMAIL_NOTICE_MONTHS))
     expiry_date_end = datetime.datetime.combine(
         expiry_date_begin, datetime.time(23, 59, 59, 999999), tzinfo=pytz.utc
     )
