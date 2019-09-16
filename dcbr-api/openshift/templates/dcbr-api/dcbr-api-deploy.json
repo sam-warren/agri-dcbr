@@ -232,6 +232,10 @@
                     "value": "${EMAIL_USE_TLS}"
                   },
                   {
+                    "name": "REMINDER_EMAIL_NOTICE_MONTHS",
+                    "value": "${REMINDER_EMAIL_NOTICE_MONTHS}"
+                  },
+                  {
                     "name": "AGRI_EMAIL",
                     "value": "${AGRI_EMAIL}"
                   },
@@ -274,6 +278,10 @@
                   {
                     "name": "OIDC_LOGOUT_REDIRECT_URL",
                     "value": "${OIDC_LOGOUT_REDIRECT_URL}"
+                  },
+                  {
+                    "name": "DCBR_LOG_LEVEL",
+                    "value": "${DCBR_LOG_LEVEL}"
                   }
                 ],
                 "resources": {
@@ -433,6 +441,13 @@
       "value": "True"
     },
     {
+      "name": "REMINDER_EMAIL_NOTICE_MONTHS",
+      "displayName": "Registration Validity",
+      "description": "The number of months after which an operator registration is meant to expire.",
+      "required": true,
+      "value": "12"
+    },
+    {
       "name": "WEASYPRINT_HOST",
       "displayName": "Weasyprint Host",
       "description": "The host name for the Weasyprint service.",
@@ -508,6 +523,13 @@
       "description": "The URL used by the OIDC provider to redirect the request after logout.",
       "required": true,
       "value": "https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/agriculture"
+    },
+    {
+      "name": "DCBR_LOG_LEVEL",
+      "displayName": "Log Level",
+      "description": "The log level for the component.",
+      "required": true,
+      "value": "WARNING"
     },
     {
       "name": "CPU_REQUEST",
