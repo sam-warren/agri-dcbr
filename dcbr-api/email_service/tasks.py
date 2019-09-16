@@ -56,6 +56,16 @@ def send_reminder_email():
 
 @background(queue="member-registration")
 def send_registration_email(context: dict):
+    """Send an email with the registration details to an operator. The data to be used to render the message
+       and the certificate should be passed as a dictionary with the following structure:
+       {
+           "operator": operator, # an operator object
+           "registration_number": "DCR-12345" # a string representing the registration number
+       }
+    
+    Arguments:
+        context {dict} -- A dictionary to be used as context for rendering the email and the PDF certificate.
+    """
     template = loader.get_template("certificate/certificate.html")
     rendered = template.render(context)
 
