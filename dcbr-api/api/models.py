@@ -1,6 +1,5 @@
 from django.db import models
 import datetime
-from dateutil.relativedelta import relativedelta
 from django.core.validators import URLValidator, MaxValueValidator, MinValueValidator
 from django.utils.translation import gettext as _
 

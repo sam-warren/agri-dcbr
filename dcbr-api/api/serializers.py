@@ -1,5 +1,4 @@
 from rest_framework.serializers import ModelSerializer
-from post_office import mail
 import datetime
 import json
 
