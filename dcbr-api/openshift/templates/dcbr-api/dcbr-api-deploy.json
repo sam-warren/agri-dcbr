@@ -445,7 +445,7 @@
       "displayName": "Registration Validity",
       "description": "The number of months after which an operator registration is meant to expire.",
       "required": true,
-      "value": "12"
+      "value": "1"
     },
     {
       "name": "WEASYPRINT_HOST",
