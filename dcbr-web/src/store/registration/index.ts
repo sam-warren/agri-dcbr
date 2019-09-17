@@ -169,6 +169,7 @@ export const state: RegistrationState = {
   animalIdentification: AnimalIdentificationState,
   termsAndConditions: TermsAndConditionsState,
   routeProtection: RouteProtectionState,
+  renewal: RenewalState,
   error: false
 };
 
