@@ -37,7 +37,7 @@ def create_registration_template(apps, schema_editor):
     registration_email = EmailTemplate(
         name="registration_email",
         description="Confirmation of successful registration to DCBR",
-        subject="Registration #{{registration_number}} to the Ministry of Agriculture's Dog and Cat Operator registry",
+        subject="Registration #{{registration_number}} to the Ministry of Agriculture's Dog and Cat Breeder registry",
         content=registration_text_content,
         html_content=registration_html_content,
     )

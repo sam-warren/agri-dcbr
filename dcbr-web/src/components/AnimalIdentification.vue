@@ -82,7 +82,7 @@ export default {
         if (value === "false") {
           this.$store.dispatch(
             "animalIdentification/permIdType",
-            ""
+            "NOT_APPLICABLE"
           );
           this.$store.dispatch("animalIdentification/otherPermIdType", "");
         }
