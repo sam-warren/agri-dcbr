@@ -114,18 +114,6 @@
                 <v-flex xs12 md4>
                   <v-text-field v-model="assocName" :rules="notRequiredNameRules" label="Association Name" name="assocName" counter=50></v-text-field>
                 </v-flex>
-                <v-flex xs12 md4>
-                  <v-text-field
-                    v-model="assocMembership"
-                    :rules="membershipNumberRules"
-                    label="Membership #"
-                    name="assocMembership"
-                    counter=20
-                  ></v-text-field>
-                </v-flex>
-                <v-flex xs12 md4>
-                  <v-text-field v-model="assocWebsite" :rules="websiteRules" label="Website " name="assocWebsite"></v-text-field>
-                </v-flex>
               </v-layout>
             </v-container>
           </v-form>

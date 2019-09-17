@@ -56,12 +56,6 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   assocName(context: any, payload: string) {
     context.commit("assocName", payload);
   },
-  assocMembership(context: any, payload: number) {
-    context.commit("assocMembership", payload);
-  },
-  assocWebsite(context: any, payload: string) {
-    context.commit("assocWebsite", payload);
-  },
   accidentalBreeding(context: any, payload: string) {
     context.commit("accidentalBreeding", payload);
   },

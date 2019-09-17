@@ -69,14 +69,6 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.operationDetails!.assocName = payload;
   },
-  assocMembership(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.operationDetails!.assocMembership = payload;
-  },
-  assocWebsite(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.operationDetails!.assocWebsite = payload;
-  },
   accidentalBreeding(state: RegistrationState, payload: string) {
     state.error = false;
     state.operationDetails!.accidentalBreeding = payload;
@@ -242,8 +234,6 @@ export const mutations: MutationTree<RegistrationState> = {
     state.operationDetails!.opWebsite = "";
     state.operationDetails!.operationType = "";
     state.operationDetails!.assocName = "";
-    state.operationDetails!.assocMembership = 0;
-    state.operationDetails!.assocWebsite = "";
     state.operationDetails!.accidentalBreeding = "";
     state.operationDetails!.numWorkers = 0;
     state.operationDetails!.animalType = "";
