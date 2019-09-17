@@ -224,6 +224,25 @@ export const mutations: MutationTree<RegistrationState> = {
     state.routeProtection!.reviewFormOk = payload;
   },
 
+  // Renewal
+  renewalFirstName(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.renewalFirstName = payload;
+  },
+  renewalMiddleName(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.renewalMiddleName = payload;
+  },
+  renewalLastName(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.renewalLastName = payload;
+  },
+  registrationNumber(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.registrationNumber = payload;
+  },
+
+
   resetForm(state: RegistrationState) {
     state.profile!.firstName = "";
     state.profile!.middleName = "";

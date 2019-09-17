@@ -7,6 +7,7 @@ import Preamble from "./views/Preamble.vue";
 import Payment from "./views/Payment.vue";
 import Review from "./views/Review.vue";
 import Confirmation from "./views/Confirmation.vue";
+import Renew from "./views/Renew.vue";
 
 import store from "@/store/store"
 
@@ -39,6 +40,17 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
+    },
+    {
+      path: "/renewal",
+      name: "renewal",
+      component: () =>
+        // import(/* webpackChunkName: "secret" */ "./views/Secret.vue"),
+        import("./views/Renew.vue"),
+      meta: {
+        requiresAuth: false
+      },
+
     },
     {
       path: "/register",

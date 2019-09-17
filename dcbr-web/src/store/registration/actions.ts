@@ -160,6 +160,20 @@ export const actions: ActionTree<RegistrationState, RootState> = {
     context.commit("reviewFormOk", payload);
   },
 
+  // Renewal
+  renewalFirstName(context: any, payload: string) {
+    context.commit("renewalFirstName", payload);
+  },
+  renewalMiddleName(context: any, payload: string) {
+    context.commit("renewalMiddleName", payload);
+  },
+  renewalLastName(context: any, payload: string) {
+    context.commit("renewalLastName", payload);
+  },
+  registrationNumber(context: any, payload: string) {
+    context.commit("registrationNumber", payload);
+  },
+
   // Reset Form
   resetForm(context: any) {
     context.commit("resetForm")

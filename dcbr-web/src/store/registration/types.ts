@@ -81,6 +81,13 @@ export interface RouteProtectionTypes {
   error: boolean;
 }
 
+export interface RenewalTypes {
+  renewalFirstName: string;
+  renewalMiddleName: string;
+  renewalLastName: string;
+  registrationNumber: string;
+}
+
 export interface RegistrationState {
   profile?: ProfileTypes;
   operationDetails?: OperationDetailsTypes;
@@ -89,5 +96,6 @@ export interface RegistrationState {
   animalIdentification?: AnimalIdentificationTypes;
   termsAndConditions?: TermsAndConditionsTypes;  
   routeProtection?: RouteProtectionTypes;
+  renewal?: RenewalTypes;
   error: boolean;
 }

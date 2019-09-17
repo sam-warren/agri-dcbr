@@ -1,6 +1,11 @@
 <template>
   <div class="grey lighten-4">
-    <v-content class="mx-4 mb-4 my-4">
+    <v-content class="mx-4 mb-4 my-4" v-if="this.$props.formType === 'renewal'">
+      <v-container fluid>
+        <RenewalForm/>
+      </v-container>
+    </v-content>
+    <v-content class="mx-4 mb-4 my-4" v-else>
       <v-container fluid>
         <div>
             <h1 v-if="this.$props.formType==='register'">Register</h1>
@@ -111,6 +116,7 @@ import AnimalIdentification from "@/components/AnimalIdentification";
 import BreedingDetails from "@/components/BreedingDetails";
 import MenuOperationLocation from "@/components/MenuOperationLocation";
 import TermsAndConditions from "@/components/TermsAndConditions"
+import RenewalForm from "@/components/RenewalForm"
 import axios from "axios";
 export default {
   name: "App",
@@ -121,7 +127,8 @@ export default {
     AnimalIdentification,
     BreedingDetails,
     MenuOperationLocation,
-    TermsAndConditions
+    TermsAndConditions,
+    RenewalForm,
   },
   data() {
     return {
