@@ -53,8 +53,8 @@
     </v-layout>
     <v-layout>
       <v-flex>
-        <v-btn large round block dark class="primary">
-          <button @click="$router.push('register')">Start Registration</button>
+        <v-btn @click="$router.push('register')" large round block dark class="primary">
+          <button>Start Registration</button>
         </v-btn>
       </v-flex>
     </v-layout>

@@ -1,4 +1,6 @@
 from rest_framework.serializers import ModelSerializer
+import datetime
+import json
 
 from api.models import (
     Registration,
@@ -24,6 +26,7 @@ class Address_Serializer(ModelSerializer):
             "street_name",
             "city",
             "postal_code",
+            "region",
         )
 
 
@@ -145,7 +148,9 @@ class Registration_Serializer(ModelSerializer):
         for renewal_data in renewals_data:
             Renewal.objects.create(registration_number=registration, **renewal_data)
 
-        Operator.objects.create(registration_number=registration, **operator_data)
+        operator = Operator.objects.create(
+            registration_number=registration, **operator_data
+        )
 
         return registration
 

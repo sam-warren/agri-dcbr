@@ -58,7 +58,7 @@ INSTALLED_APPS = [
     "background_task",
     "dcbr",
     "api",
-    "email_service.apps.EmailServiceConfig",
+    "email_service",
     "import_export",
 ]
 
@@ -226,9 +226,7 @@ LOGIN_REDIRECT_URL_FAILURE = "/authenticate"
 LOGOUT_REDIRECT_URL = os.getenv("OIDC_LOGOUT_REDIRECT_URL", "/admin/logout")
 
 # Logging
-DCBR_LOG_LEVEL = "INFO"
-if DEBUG is True:
-    DCBR_LOG_LEVEL = "DEBUG"
+DCBR_LOG_LEVEL = os.getenv("DCBR_LOG_LEVEL", "WARNING")
 
 # fmt:off
 LOGGING = {
@@ -254,7 +252,11 @@ LOGGING = {
         "mozilla_django_oidc": {
             "handlers": ["console"],
             "level": DCBR_LOG_LEVEL
-        }
+        },
+        "post_office": {
+            "handlers": ["console"],
+            "level": DCBR_LOG_LEVEL
+        },
     },
     "root": {
         "handlers": ["console"],
@@ -263,3 +265,7 @@ LOGGING = {
     },
 }
 # fmt:on
+
+# Number of months after which the registration will need to be renewed.
+# Set to 0 if the registration will never expire.
+REMINDER_EMAIL_NOTICE_MONTHS = os.getenv("REMINDER_EMAIL_NOTICE_MONTHS", 12)

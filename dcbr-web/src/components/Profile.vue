@@ -141,6 +141,7 @@
                 <v-radio-group v-model="commType" name="commType" row>
                   <v-radio label="E-mail" value="Email"></v-radio>
                   <v-radio label="Mail" value="Mail"></v-radio>
+                  <v-radio label="Phone" value="Phone"></v-radio>
                 </v-radio-group>
               </v-layout>
             </v-container>
