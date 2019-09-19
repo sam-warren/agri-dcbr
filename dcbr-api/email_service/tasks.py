@@ -2,16 +2,17 @@ import datetime
 import logging
 import os
 import tempfile
+
 import pytz
 import requests
+
+from api.models import Operator
 from background_task import background
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.core import management
 from django.template import loader
 from post_office import mail
-
-from api.models import Operator
 
 LOGGER = logging.getLogger(__name__)
 
@@ -58,26 +59,20 @@ def send_registration_email(context: dict):
     """Send an email with the registration details to an operator. The data to be used to render the message
        and the certificate should be passed as a dictionary with the following structure:
        {
-           "operator": operator, # an operator object
+           "operator": operator, # an operator object,
+           "registration_number": "DCR-12345" # a string representing the registration number
        }
     
     Arguments:
         context {dict} -- A dictionary to be used as context for rendering the email and the PDF certificate.
     """
     LOGGER.debug("send_registration_email(): context={}".format(context))
-    LOGGER.debug(
-        'send_registration_email(): context["registration_number"]={}'.format(
-            context["registration_number"]
-        )
-    )
 
     template = loader.get_template("certificate/certificate.html")
     rendered = template.render(context)
 
     LOGGER.debug(
-        "send_registration_email(): Requesting PDF certificate for {}".format(
-            context["registration_number"]
-        )
+        "Requesting PDF certificate for {}".format(context["registration_number"])
     )
     response = requests.post(
         settings.WEASYPRINT_REQUEST_URL + "certificate.pdf",
@@ -87,7 +82,6 @@ def send_registration_email(context: dict):
 
     TMP_DIR = tempfile.gettempdir()
     DEST_FILE = os.path.join(TMP_DIR, str(context["registration_number"]) + ".pdf")
-    LOGGER.debug("send_registration_email(): DEST_FILE={}".format(DEST_FILE))
 
     try:
 

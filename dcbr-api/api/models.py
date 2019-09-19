@@ -1,7 +1,9 @@
-from django.db import models
-from django.core.validators import URLValidator, MaxValueValidator, MinValueValidator
-from django.utils.translation import gettext as _
 import logging
+
+from django.core.validators import (MaxValueValidator, MinValueValidator,
+                                    URLValidator)
+from django.db import models
+from django.utils.translation import gettext as _
 
 LOGGER = logging.getLogger(__name__)
 
@@ -31,8 +33,6 @@ class Registration(models.Model):
 
     created_timestamp = models.DateTimeField(auto_now_add=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
-    # registration_date = created_timestamp.value_to_string
-    # expiry_date = created_timestamp + relativedelta(minutes=1)
 
     def __str__(self):
         return self.registration_number
@@ -424,4 +424,3 @@ class Inspection_Report(models.Model):
 
     class Meta:
         verbose_name_plural = "Inspections"
-
