@@ -37,7 +37,7 @@
 // <script>
 import { mapActions } from "vuex"
 export default {
-  beforeDestroy() {
+  beforeRouteLeave (to, from, next) {
     this.$store.dispatch("profile/resetForm");
     this.$store.dispatch("operationDetails/resetForm");
     this.$store.dispatch("breedingDetails/resetForm");
@@ -45,6 +45,8 @@ export default {
     this.$store.dispatch("animalIdentification/resetForm");
     this.$store.dispatch("routeProtection/resetForm");
     this.$store.dispatch("termsAndConditions/resetForm");
-  },
+    this.$store.dispatch("renewal/resetForm");
+    next()
+  }
 }
 </script>
