@@ -10,7 +10,7 @@ class AdminOIDCAB(OIDCAuthenticationBackend):
     def verify_claims(self, claims):
         verified = super(AdminOIDCAB, self).verify_claims(claims)
         is_admin = "admin" in claims.get("roles", [])
-        return verified and is_admin
+        return verified #and is_admin # not checking for user roles from keycloak at this time
 
     def create_user(self, claims):
         user = super(AdminOIDCAB, self).create_user(claims)
