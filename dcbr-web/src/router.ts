@@ -42,17 +42,6 @@ const router = new Router({
       }
     },
     {
-      path: "/renewal",
-      name: "renewal",
-      component: () =>
-        // import(/* webpackChunkName: "secret" */ "./views/Secret.vue"),
-        import("./views/Renew.vue"),
-      meta: {
-        requiresAuth: false
-      },
-
-    },
-    {
       path: "/register",
       name: "register",
       // component: () =>
@@ -94,7 +83,7 @@ const router = new Router({
         import("./views/Confirmation.vue"),
       meta: {
         requiresAuth: false
-      }
+      },
     }
   ]
 });
@@ -102,8 +91,8 @@ const router = new Router({
 router.beforeEach((to: any, from: any, next: any) => {
   if (to.path === "/review") {
     if (!store.getters["routeProtection/registerFormOk"]) {
-      if (!(from.path === "/register")) {
-        next("/register")
+      if (!(from.path === "/preamble")) {
+        next("/preamble")
       } else {
         next()
       }
@@ -113,8 +102,8 @@ router.beforeEach((to: any, from: any, next: any) => {
   }
   else if (to.path === "/confirmation") {
     if (!store.getters["routeProtection/reviewFormOk"]) {
-      if (!(from.path === "/register")) {
-        next("/register")
+      if (!(from.path === "/preamble")) {
+        next("/preamble")
       } else {
         next()
       }
