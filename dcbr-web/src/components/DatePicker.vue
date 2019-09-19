@@ -1,7 +1,6 @@
 <template>
   <v-menu
     ref="menu"
-    v-model="menu"
     :close-on-content-click="false"
     :nudge-right="40"
     lazy
@@ -18,24 +17,28 @@
       v-model="date"
       :max="new Date().toISOString().substr(0, 10)"
       min="1950-01-01"
-      @change="save"
+      :error="datePickerRules"
     ></v-date-picker>
   </v-menu>
 </template>
 <script>
 export default {
   data: () => ({
-    date: null,
-    menu: false
+    valid: false,
+    datePickerRules: [
+      v => !!v || "Expiry date is required",
+    ],
   }),
-  watch: {
-    menu(val) {
-      val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
-    }
-  },
-  methods: {
-    save(date) {
-      this.$refs.menu.save(date);
+  computed: {
+    date: {
+      // getter
+      get() {
+        return this.$store.getters["renewal/expiryDate"]
+      },
+      // setter
+      set(value) {
+        this.$store.dispatch("renewal/expiryDate", value);
+      }
     }
   }
 };
