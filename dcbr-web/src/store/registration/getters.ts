@@ -185,6 +185,28 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     return termsAndConditions!.hasAgreed || false;
   },
 
+  // Renewal
+  renewalFirstName(state: RegistrationState): string {
+    const { renewal } = state;
+    return renewal!.renewalFirstName || "";
+  },
+  renewalMiddleName(state: RegistrationState): string {
+    const { renewal } = state;
+    return renewal!.renewalMiddleName || "";
+  },
+  renewalLastName(state: RegistrationState): string {
+    const { renewal } = state;
+    return renewal!.renewalLastName || "";
+  },
+  registrationNumber(state: RegistrationState): string {
+    const { renewal } = state;
+    return renewal!.registrationNumber || "";
+  },
+  expiryDate(state: RegistrationState): string {
+    const { renewal } = state;
+    return renewal!.expiryDate || "";
+  },
+
   // Route Protection
   registerFormOk(state: RegistrationState): boolean {
     const { routeProtection } = state;
@@ -194,4 +216,8 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { routeProtection } = state;
     return routeProtection!.reviewFormOk || false;
   },
+  formType(state: RegistrationState): string {
+    const { routeProtection } = state;
+    return routeProtection!.formType || "";
+  }
 };

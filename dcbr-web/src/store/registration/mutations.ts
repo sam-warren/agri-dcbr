@@ -215,6 +215,33 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.routeProtection!.reviewFormOk = payload;
   },
+  formType(state: RegistrationState, payload: string) {
+    state.error = false,
+    state.routeProtection!.formType = payload;
+  },
+
+  // Renewal
+  renewalFirstName(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.renewalFirstName = payload;
+  },
+  renewalMiddleName(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.renewalMiddleName = payload;
+  },
+  renewalLastName(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.renewalLastName = payload;
+  },
+  registrationNumber(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.registrationNumber = payload;
+  },
+  expiryDate(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.expiryDate = payload;
+  },
+
 
   resetForm(state: RegistrationState) {
     state.profile!.firstName = "";
@@ -267,5 +294,12 @@ export const mutations: MutationTree<RegistrationState> = {
 
     state.routeProtection!.registerFormOk = false;
     state.routeProtection!.reviewFormOk = false;
+    state.routeProtection!.formType = "";
+
+    state.renewal!.expiryDate = "";
+    state.renewal!.renewalFirstName = "";
+    state.renewal!.renewalMiddleName = "";
+    state.renewal!.renewalLastName = "";
+    state.renewal!.registrationNumber = "";
   }
 };

@@ -76,7 +76,16 @@ export interface TermsAndConditionsTypes {
 export interface RouteProtectionTypes {
   registerFormOk: boolean;
   reviewFormOk: boolean;
+  formType: string;
   error: boolean;
+}
+
+export interface RenewalTypes {
+  renewalFirstName: string;
+  renewalMiddleName: string;
+  renewalLastName: string;
+  registrationNumber: string;
+  expiryDate: string;
 }
 
 export interface RegistrationState {
@@ -87,5 +96,6 @@ export interface RegistrationState {
   animalIdentification?: AnimalIdentificationTypes;
   termsAndConditions?: TermsAndConditionsTypes;  
   routeProtection?: RouteProtectionTypes;
+  renewal?: RenewalTypes;
   error: boolean;
 }

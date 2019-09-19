@@ -11,6 +11,7 @@ import { BreedingDetailsTypes } from "./types";
 import { AnimalIdentificationTypes } from "./types";
 import { TermsAndConditionsTypes } from "./types"
 import { RouteProtectionTypes } from "./types"
+import { RenewalTypes } from "./types";
 
 export const ProfileState: ProfileTypes = {
   // firstName: "John",
@@ -141,7 +142,22 @@ export const TermsAndConditionsState: TermsAndConditionsTypes = {
 export const RouteProtectionState: RouteProtectionTypes = {
   registerFormOk: false,
   reviewFormOk: false,
+  formType: "",
   error: false
+}
+
+export const RenewalState: RenewalTypes = {
+  renewalFirstName: "",
+  renewalMiddleName: "",
+  renewalLastName: "",
+  registrationNumber: "",
+  expiryDate: ""
+  
+  // renewalFirstName: "Sam",
+  // renewalMiddleName: "Robert",
+  // renewalLastName: "Warren",
+  // registrationNumber: "3135-1234-1111",
+  // expiryDate: ""
 }
 
 export const state: RegistrationState = {
@@ -152,6 +168,7 @@ export const state: RegistrationState = {
   animalIdentification: AnimalIdentificationState,
   termsAndConditions: TermsAndConditionsState,
   routeProtection: RouteProtectionState,
+  renewal: RenewalState,
   error: false
 };
 
@@ -206,6 +223,14 @@ export const termsAndConditions: Module<RegistrationState, RootState> = {
 }
 
 export const routeProtection: Module<RegistrationState, RootState> = {
+  namespaced,
+  state,
+  getters,
+  actions,
+  mutations,
+}
+
+export const renewal: Module<RegistrationState, RootState> = {
   namespaced,
   state,
   getters,
