@@ -89,7 +89,18 @@ const router = new Router({
 });
 
 router.beforeEach((to: any, from: any, next: any) => {
-  if (to.path === "/review") {
+  if (to.path === "/register") {
+    if (store.getters["routeProtection/formType"] === "") {
+      if (!(from.path === "/preamble")) {
+        next("/preamble")
+      } else {
+        next()
+      }
+    } else {
+      next();
+    }
+  }
+  else if (to.path === "/review") {
     if (!store.getters["routeProtection/registerFormOk"]) {
       if (!(from.path === "/preamble")) {
         next("/preamble")
