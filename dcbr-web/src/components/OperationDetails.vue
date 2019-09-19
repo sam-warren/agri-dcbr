@@ -75,7 +75,6 @@
                 <v-flex xs12 md4 lg6 v-if="this.animalType !== 'CAT'">
                   <v-text-field
                     v-model.number="numDogBreeds"
-                    type="number"
                     mask="#########"
                     :rules="numberRules"
                     label="Number of Dog Breeds"
@@ -85,7 +84,6 @@
                 <v-flex xs12 md4 lg6 v-if="this.animalType !== 'DOG'">
                   <v-text-field
                     v-model.number="numCatBreeds"
-                    type="number"
                     mask="#########"
                     :rules="numberRules"
                     label="Number of Cat Breeds"
@@ -101,7 +99,6 @@
                 <v-flex xs12 md4 lg6>
                   <v-text-field
                     v-model.number="numWorkers"
-                    type="number"
                     mask="#########"
                     :rules="numberRules"
                     label="Number of workers"

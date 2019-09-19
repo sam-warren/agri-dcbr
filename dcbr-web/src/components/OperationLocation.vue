@@ -19,7 +19,6 @@
                     v-model="streetNumber"
                     mask="#########"
                     :rules="streetNumberRules"
-                    type="number"
                     label="Street number"
                     required
                   ></v-text-field>

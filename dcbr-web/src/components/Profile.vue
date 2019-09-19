@@ -59,7 +59,6 @@
                     :rules="streetNumberRules"
                     label="Street number"
                     name="streetNumber"
-                    type="number"
                     required
                   ></v-text-field>
                 </v-flex>
