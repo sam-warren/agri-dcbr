@@ -11,8 +11,6 @@ services:
       WEB_HOST_TLS: ${WEB_HOST_TLS}
       DCBR_API_HOST: ${DCBR_API_HOST}
       DCBR_API_PORT: ${DCBR_API_PORT}
-      WEASYPRINT_HOST: ${WEASYPRINT_HOST}
-      WEASYPRINT_PORT: ${WEASYPRINT_PORT}
     volumes:
       - ../dcbr-web/openshift/config/Caddyfile:/etc/Caddyfile
     networks:
@@ -74,6 +72,7 @@ services:
       EMAIL_BACKEND: ${EMAIL_BACKEND}
       EMAIL_USE_TLS: ${EMAIL_USE_TLS}
       AGRI_EMAIL: ${AGRI_EMAIL}
+      REMINDER_EMAIL_NOTICE_MONTHS: ${REMINDER_EMAIL_NOTICE_MONTHS}
       WEASYPRINT_HOST: ${WEASYPRINT_HOST}
       WEASYPRINT_PORT: ${WEASYPRINT_PORT}
       OIDC_RP_SIGN_ALGO: ${OIDC_RP_SIGN_ALGO}
@@ -84,6 +83,7 @@ services:
       OIDC_OP_TOKEN_ENDPOINT: ${OIDC_OP_TOKEN_ENDPOINT}
       OIDC_OP_USER_ENDPOINT: ${OIDC_OP_USER_ENDPOINT}
       OIDC_LOGOUT_REDIRECT_URL: ${OIDC_LOGOUT_REDIRECT_URL}
+      DCBR_LOG_LEVEL: ${DCBR_LOG_LEVEL}
     volumes:
       - ../dcbr-api:/opt/app-root/src
     networks:
@@ -203,7 +203,7 @@ services:
     networks:
       - dcbr
     ports:
-      - 5001:5001
+      - ${WEASYPRINT_PORT}:${WEASYPRINT_PORT}
 
 networks:
   dcbr:

@@ -72,14 +72,6 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { operationDetails } = state;
     return operationDetails!.assocName || "";
   },
-  assocMembership(state: RegistrationState): number {
-    const { operationDetails } = state;
-    return operationDetails!.assocMembership || 0;
-  },
-  assocWebsite(state: RegistrationState): string {
-    const { operationDetails } = state;
-    return operationDetails!.assocWebsite || "";
-  },
   accidentalBreeding(state: RegistrationState): string {
     const { operationDetails } = state;
     return operationDetails!.accidentalBreeding || "";

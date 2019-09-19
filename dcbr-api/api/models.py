@@ -1,8 +1,11 @@
+import logging
+
+from django.core.validators import (MaxValueValidator, MinValueValidator,
+                                    URLValidator)
 from django.db import models
-import datetime
-from django.core.validators import URLValidator, MaxValueValidator, MinValueValidator
 from django.utils.translation import gettext as _
 
+LOGGER = logging.getLogger(__name__)
 
 
 class Registration(models.Model):
@@ -26,11 +29,27 @@ class Registration(models.Model):
         max_length=50, choices=REG_STATUS_CHOICES, default=ACTIVE
     )
 
+    registration_number = models.CharField(max_length=20,default="", blank=True)
+
+    created_timestamp = models.DateTimeField(auto_now_add=True)
+    updated_timestamp = models.DateTimeField(auto_now=True)
+
     def __str__(self):
-        return "BC-DCBR-" + str(self.pk).zfill(6)
+        return self.registration_number
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+        if not self.registration_number:
+            self.registration_number = "BC-DCBR-" + str(self.pk).zfill(6)
+            LOGGER.debug(
+                'Registration.save(): registration_number is blank.  Saving the value as: {}'
+            .format(self.registration_number))
+            self.save()
+        else:
+            LOGGER.debug("Registration.save(): registration_number={}".format(
+                self.registration_number)
+            )
 
     class Meta:
         verbose_name_plural = "Registrations"
@@ -41,6 +60,8 @@ class Operator(models.Model):
 
     EMAIL = "Email"
     MAIL = "Mail"
+    PHONE = "Phone"
+    CONTACT_METHOD_CHOICE = ((EMAIL, "Email"), (MAIL, "Mail"), (PHONE, "Phone"))
 
     BREEDER = "BREEDER"
     SELLER = "SELLER"
@@ -65,7 +86,7 @@ class Operator(models.Model):
     email_address = models.CharField(max_length=32, default="", blank=True)
     created_timestamp = models.DateTimeField(auto_now_add=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
-    CONTACT_METHOD_CHOICE = ((EMAIL, "email"), (MAIL, "mail"))
+
     comm_pref = models.CharField(
         "Communication method",
         max_length=10,
@@ -79,14 +100,15 @@ class Operator(models.Model):
     operation_name = models.CharField(max_length=32, default="", blank=True)
     operation_URL = models.CharField(max_length=4000, default="", blank=True)
 
-    
-
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (self.registration_number, self.last_name, self.first_name)
+        return "Reg ID: \t %s %s , %s" % (
+            self.registration_number,
+            self.last_name,
+            self.first_name,
+        )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        
 
     class Meta:
         verbose_name_plural = "Operators"
@@ -97,6 +119,69 @@ class Address(models.Model):
     PRIMARY = "PRI"
     OPERATION = "OPN"
     TYPE_CHOICES = ((PRIMARY, "Primary"), (OPERATION, "Operation"))
+
+    # List of regions
+    ALBERNI_CLAYOQUOT = "Alberni-Clayoquot"
+    BULKLEY_NECHAKO = "Bulkley-Nechako"
+    CAPITAL = "Capital"
+    CARIBOO = "Cariboo"
+    CENTRAL_COAST = "Central Coast"
+    CENTRAL_KOOTENAY = "Central Kootenay"
+    CENTRAL_OKANAGAN = "Central Okanagan"
+    COLUMBIA_SHUSWAP = "Columnbia Shuswap"
+    COMOX_VALLEY = "Comox Valley"
+    COWICHAN_VALLEY = "Cowichan Valley"
+    EAST_KOOTENAY = "East Kootenay"
+    FRASER_VALLEY = "Fraser Valley"
+    FRASER_FORT_GEORGE = "Fraser-Fort George"
+    ISLANDS_TRUST = "Islands Trust"
+    KITIMAT_STIKINE = "Kitimat Stikine"
+    KOOTENAY_BOUNDARY = "Kootenay Boundary"
+    METRO_VANCOUVER = "Metro Vancouver"
+    MOUNT_WADDINGTON = "Mount Waddington"
+    NANAIMO = "Nanaimo"
+    NORTH_OKANAGAN = "North Okanagan"
+    NORTH_COAST = "North Coast"
+    OKANAGAN_SIMILKAMEEN = "Okanagan-Similkameen"
+    PEACE_RIVER = "Peace River"
+    GATHET = "Gathet"
+    SQUAMISH_LILLOOET = "Squamish-Lillooet"
+    STRATHCONA = "Strathcona"
+    SUNSHINE_COAST = "Sunshine Coast"
+    THOMPSON_NICOLA = "Thompson-Nicola"
+
+    TYPE_CHOICES = ((PRIMARY, "Primary"), (OPERATION, "Operation"))
+    REGIONAL_CHOICES = (
+        (ALBERNI_CLAYOQUOT, "Alberni-Clayoquot"),
+        (BULKLEY_NECHAKO, "Buckley-Nechako"),
+        (CAPITAL, "Capital"),
+        (CARIBOO, "Cariboo"),
+        (CENTRAL_COAST, "Central Coast"),
+        (CENTRAL_KOOTENAY, "Central Kootenay"),
+        (CENTRAL_OKANAGAN, "Central Okanagan"),
+        (COLUMBIA_SHUSWAP, "Columbia Shuswap"),
+        (COMOX_VALLEY, "Comox Valley"),
+        (COWICHAN_VALLEY, "Cowichan Valley"),
+        (EAST_KOOTENAY, "East Kootenay"),
+        (FRASER_VALLEY, "Fraser Valley"),
+        (FRASER_FORT_GEORGE, "Fraser-Fort George"),
+        (ISLANDS_TRUST, "Islands Trust"),
+        (KITIMAT_STIKINE, "Kitimat-Stikine"),
+        (KOOTENAY_BOUNDARY, "Kootenay-Boundary"),
+        (METRO_VANCOUVER, "Metro Vancouver"),
+        (MOUNT_WADDINGTON, "Mount Waddington"),
+        (NANAIMO, "Nanaimo"),
+        (NORTH_OKANAGAN, "North Okanagan"),
+        (NORTH_COAST, "North Coast"),
+        (OKANAGAN_SIMILKAMEEN, "Okanagan-Similkameen"),
+        (PEACE_RIVER, "Peace River"),
+        (GATHET, "qathet"),
+        (SQUAMISH_LILLOOET, "Squamish-Lillooet"),
+        (STRATHCONA, "Strathcona"),
+        (SUNSHINE_COAST, "Sunshine Coast"),
+        (THOMPSON_NICOLA, "Thompson-Nicola"),
+    )
+
     registration_number = models.ForeignKey(
         Registration,
         on_delete=models.CASCADE,
@@ -110,13 +195,16 @@ class Address(models.Model):
     city = models.CharField(max_length=32)
     postal_code = models.CharField(max_length=7)
     province = models.CharField(max_length=2, default="BC")
+    region = models.CharField(max_length=20, choices=REGIONAL_CHOICES, default="")
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
-    
-
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (self.registration_number, self.address_type, self.street_name)
+        return "Reg ID: \t %s %s , %s" % (
+            self.registration_number,
+            self.address_type,
+            self.street_name,
+        )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -138,7 +226,6 @@ class Operation_Risk_Factor(models.Model):
         (NOT_APPLICABLE, "NOT_APPLICABLE"),
     )
 
-    
     registration_number = models.ForeignKey(
         Registration,
         on_delete=models.CASCADE,
@@ -156,8 +243,6 @@ class Operation_Risk_Factor(models.Model):
     perm_id_other = models.CharField(max_length=15, default="", blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-
-    
 
     def __str__(self):
         return "Operation risk for: \t %s " % (self.registration_number)
@@ -193,21 +278,18 @@ class Animal_Risk_Factor(models.Model):
     )
     num_breeds = models.IntegerField(default=0, validators=[MinValueValidator(0)])
 
-    num_females_intact = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_litter = models.IntegerField(
+    num_females_intact = models.IntegerField(
         default=0, validators=[MinValueValidator(0)]
     )
-    
+    num_litter = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+
     num_sold = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    num_transferred = models.IntegerField(
-        default=0, validators=[MinValueValidator(0)]
-    )
+    num_transferred = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     num_traded = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     num_leased = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     num_animals = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-    
 
     def __str__(self):
         return "Reg ID:: \t %s " % (self.registration_number)
@@ -250,7 +332,9 @@ class Renewal(models.Model):
     first_name = models.CharField(max_length=32, default="", blank=True)
     middle_name = models.CharField(max_length=50, default="", blank=True)
     last_name = models.CharField(max_length=50, default="", blank=True)
-    previous_registation_number = models.CharField(max_length=14, default="", blank=True)
+    previous_registation_number = models.CharField(
+        max_length=20, default="", blank=True
+    )
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -272,7 +356,7 @@ class Inspection_Report(models.Model):
         null=True,
         related_name="inspections",
     )
-    inspector_full_name= models.CharField(max_length=50, default="")
+    inspector_full_name = models.CharField(max_length=50, default="")
     operator_first_name = models.CharField(max_length=32)
     operator_middle_name = models.CharField(max_length=50, default="", blank=True)
     operator_last_name = models.CharField(max_length=50)
@@ -327,8 +411,6 @@ class Inspection_Report(models.Model):
     Euthanasia = models.BooleanField(default=False)
     Euthanasia_notes = models.TextField(default="", blank=True)
 
-
-
     def __str__(self):
         return "Reg ID: \t %s Name: \t %s , %s" % (
             self.registration_number,
@@ -342,6 +424,3 @@ class Inspection_Report(models.Model):
 
     class Meta:
         verbose_name_plural = "Inspections"
-
-
-

@@ -19,8 +19,6 @@ export interface OperationDetailsTypes {
   opWebsite: string;
   operationType: string;
   assocName: string;
-  assocMembership: number;
-  assocWebsite: string;
   accidentalBreeding: string;
   numWorkers: number;
   animalType: string;

@@ -1,5 +1,4 @@
 from rest_framework.serializers import ModelSerializer
-
 from api.models import (
     Registration,
     Operator,
@@ -9,7 +8,6 @@ from api.models import (
     Animal_Risk_Factor,
     Association_Membership,
     Renewal,
-    Inspection_Report,
 )
 
 
@@ -24,6 +22,7 @@ class Address_Serializer(ModelSerializer):
             "street_name",
             "city",
             "postal_code",
+            "region",
         )
 
 
@@ -107,6 +106,7 @@ class Registration_Serializer(ModelSerializer):
         fields = (
             "id",
             "operator_status",
+            "registration_number",
             "operator",
             "addresses",
             "associations",
@@ -116,8 +116,6 @@ class Registration_Serializer(ModelSerializer):
         )
 
     def create(self, validated_data):
-        print(validated_data)
-
         operator_data = validated_data.pop("operator")
         animals_data = validated_data.pop("animal_risk_factors")
         associations_data = validated_data.pop("associations")
