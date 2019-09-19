@@ -336,7 +336,7 @@ export default {
           }
           if (
             this.$store.getters["renewal/renewalLastName"] === "" ||
-            this.$store.getters["profile/lastName"].length > 50
+            this.$store.getters["renewal/renewalLastName"].length > 50
           ) {
             this.error = "Last name must meet requirements";
             return true;
@@ -488,25 +488,6 @@ export default {
         }
         if (this.$store.getters["operationDetails/assocName"].length > 50) {
           this.error = "Associaltion name must meet requirements";
-          return true;
-        }
-        if (
-          this.$store.getters["operationDetails/assocMembership"].length > 20
-        ) {
-          this.error = "Membership number must meet requirements";
-          return true;
-        }
-        if (this.$store.getters["operationDetails/assocWebsite"].length > 50) {
-          this.error = "Association website must meet requirements";
-          return true;
-        }
-        if (
-          /^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(
-            this.$store.getters["operationDetails/assocWebsite"]
-          ) === false ||
-          this.$store.getters["operationDetails/assocWebsite"].length > 50
-        ) {
-          this.error = "Association URL must meet requirements";
           return true;
         }
 
