@@ -146,19 +146,22 @@ export const TermsAndConditionsState: TermsAndConditionsTypes = {
 export const RouteProtectionState: RouteProtectionTypes = {
   registerFormOk: false,
   reviewFormOk: false,
+  formType: "",
   error: false
 }
 
 export const RenewalState: RenewalTypes = {
-  // renewalFirstName: "",
-  // renewalMiddleName: "",
-  // renewalLastName: "",
-  // registrationNumber: ""
+  renewalFirstName: "",
+  renewalMiddleName: "",
+  renewalLastName: "",
+  registrationNumber: "",
+  expiryDate: ""
   
-  renewalFirstName: "Sam",
-  renewalMiddleName: "Robert",
-  renewalLastName: "Warren",
-  registrationNumber: "3135-1234-1111"
+  // renewalFirstName: "Sam",
+  // renewalMiddleName: "Robert",
+  // renewalLastName: "Warren",
+  // registrationNumber: "3135-1234-1111",
+  // expiryDate: ""
 }
 
 export const state: RegistrationState = {

@@ -210,6 +210,10 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { renewal } = state;
     return renewal!.registrationNumber || "";
   },
+  expiryDate(state: RegistrationState): string {
+    const { renewal } = state;
+    return renewal!.expiryDate || "";
+  },
 
   // Route Protection
   registerFormOk(state: RegistrationState): boolean {
@@ -220,4 +224,8 @@ export const getters: GetterTree<RegistrationState, RootState> = {
     const { routeProtection } = state;
     return routeProtection!.reviewFormOk || false;
   },
+  formType(state: RegistrationState): string {
+    const { routeProtection } = state;
+    return routeProtection!.formType || "";
+  }
 };
