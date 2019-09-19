@@ -17,6 +17,7 @@
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="streetNumber"
+                    mask="#########"
                     :rules="streetNumberRules"
                     type="number"
                     label="Street number"
@@ -41,6 +42,7 @@
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="postalCode"
+                    mask="A#A #A#"
                     :rules="postalCodeRules"
                     label="Postal Code"
                     required

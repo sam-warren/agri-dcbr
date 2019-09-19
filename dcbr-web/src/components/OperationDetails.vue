@@ -76,6 +76,7 @@
                   <v-text-field
                     v-model.number="numDogBreeds"
                     type="number"
+                    mask="#########"
                     :rules="numberRules"
                     label="Number of Dog Breeds"
                     name="numDogBreeds"
@@ -85,6 +86,7 @@
                   <v-text-field
                     v-model.number="numCatBreeds"
                     type="number"
+                    mask="#########"
                     :rules="numberRules"
                     label="Number of Cat Breeds"
                     name="numCatBreeds"
@@ -100,6 +102,7 @@
                   <v-text-field
                     v-model.number="numWorkers"
                     type="number"
+                    mask="#########"
                     :rules="numberRules"
                     label="Number of workers"
                     name="numWorkers"
