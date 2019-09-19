@@ -442,10 +442,10 @@
     },
     {
       "name": "REMINDER_EMAIL_NOTICE_MONTHS",
-      "displayName": "Registration Validity",
-      "description": "The number of months after which an operator registration is meant to expire.",
+      "displayName": "Reminder Email Notice",
+      "description": "Determines how many months before registration expiry a reminder email is sent.",
       "required": true,
-      "value": "12"
+      "value": "1"
     },
     {
       "name": "WEASYPRINT_HOST",

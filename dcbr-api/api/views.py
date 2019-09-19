@@ -1,34 +1,20 @@
-from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import mixins
 from rest_framework import viewsets
-from rest_framework.viewsets import GenericViewSet
-from api.serializers import (
-    Registration_Serializer,
-    Operator_Serializer,
-    Address_Serializer,
-    Animal_Risk_Factor_Serializer,
-    Operation_Risk_Factor_Serializer,
-    Inspection_Report_Serializer,
-    Renewal_Serializer,
-    Association_Membership_Serializer,
-)
+from email_service import tasks
+from rest_framework import mixins, status
+
+from api.serializers import Registration_Serializer
 
 # from api.models import Category, Entry, Operator, Address
-from api.models import (
-    Registration,
-    Operator,
-    Address,
-    Inspection_Report,
-    Animal_Risk_Factor,
-    Operation_Risk_Factor,
-    Renewal,
-    Association_Membership,
-)
+from api.models import Registration
 
 
-class Registration_ViewSet(viewsets.ModelViewSet):
+class Registration_ViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
     """
     A simple ViewSet for viewing and editing registration numbers.
     """
@@ -36,5 +22,19 @@ class Registration_ViewSet(viewsets.ModelViewSet):
     queryset = Registration.objects.all()
     serializer_class = Registration_Serializer
 
-    # def post(self, request, *args, **kwargs):
-    #     return self.create(request, *args, **kwargs)
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+
+        # Send registration email
+        registration_email_context = {
+            "operator": serializer.data["operator"],
+            "registration_number": serializer.data["registration_number"],
+        }
+        tasks.send_registration_email(registration_email_context)
+
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )
