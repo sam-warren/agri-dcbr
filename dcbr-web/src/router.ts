@@ -27,7 +27,7 @@ const router = new Router({
   },
   routes: [
     {
-      path: "/",
+      path: "/home",
       name: "home",
       component: Home
     },
@@ -89,10 +89,10 @@ const router = new Router({
 });
 
 router.beforeEach((to: any, from: any, next: any) => {
-  if (to.path === "/register") {
+  if (to.path === "/") {
     if (store.getters["routeProtection/formType"] === "") {
-      if (!(from.path === "/preamble")) {
-        next("/preamble")
+      if (!(from.path === "/home")) {
+        next("/home")
       } else {
         next()
       }
@@ -102,8 +102,8 @@ router.beforeEach((to: any, from: any, next: any) => {
   }
   else if (to.path === "/review") {
     if (!store.getters["routeProtection/registerFormOk"]) {
-      if (!(from.path === "/preamble")) {
-        next("/preamble")
+      if (!(from.path === "/home")) {
+        next("/home")
       } else {
         next()
       }
@@ -113,8 +113,8 @@ router.beforeEach((to: any, from: any, next: any) => {
   }
   else if (to.path === "/confirmation") {
     if (!store.getters["routeProtection/reviewFormOk"]) {
-      if (!(from.path === "/preamble")) {
-        next("/preamble")
+      if (!(from.path === "/home")) {
+        next("/home")
       } else {
         next()
       }

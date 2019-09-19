@@ -325,7 +325,7 @@ export default {
         if (this.$store.getters["routeProtection/formType"] === "renewal") {
           if (
             this.$store.getters["renewal/renewalFirstName"] === "" ||
-            this.$store.getters["renewal/renewalFirstName"].length > 50
+            this.$store.getters["renewal/renewalFirstName"].length > 32
           ) {
             this.error = "First name must meet requirements";
             return true;
@@ -343,7 +343,7 @@ export default {
           }
           if (
             this.$store.getters["renewal/registrationNumber"] === "" ||
-            this.$store.getters["renewal/registrationNumber"].length > 50
+            this.$store.getters["renewal/registrationNumber"].length > 20
           ) {
             this.error = "Registration number must meet requirements";
             return true;

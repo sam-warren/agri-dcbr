@@ -56,9 +56,6 @@
         <v-btn @click="navTo('register')" large round block dark class="primary">
           <span>Start Registration</span>
         </v-btn>
-        <v-btn @click="navTo('renewal')" large round block dark class="primary">
-          <span>Start Renewal</span>
-        </v-btn>
       </v-flex>
     </v-layout>
   </v-container>
@@ -72,15 +69,9 @@ export default {
   },
   methods: {
     navTo(route) {
-      if (route === "register") {
-        this.$store.dispatch("routeProtection/formType", "register");
-        this.$router.push("register");
-      } else if (route === "renewal") {
-        this.$store.dispatch("routeProtection/formType", "renewal");
-        this.$router.push("register");
-      }
+      this.$store.dispatch("routeProtection/formType", "register");
+      this.$router.push("register");
     }
   }
 };
 </script>
-
