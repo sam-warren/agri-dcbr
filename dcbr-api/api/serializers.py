@@ -89,7 +89,7 @@ class Renewal_Serializer(ModelSerializer):
             "first_name",
             "middle_name",
             "last_name",
-            "previous_registation_number",
+            "previous_registration_number",
         )
 
 
@@ -107,6 +107,8 @@ class Registration_Serializer(ModelSerializer):
             "id",
             "operator_status",
             "registration_number",
+            "registration_date",
+            "expiry_date",
             "operator",
             "addresses",
             "associations",

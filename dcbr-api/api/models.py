@@ -1,7 +1,7 @@
 import logging
-
-from django.core.validators import (MaxValueValidator, MinValueValidator,
-                                    URLValidator)
+from dateutil.relativedelta import relativedelta
+from datetime import datetime, timedelta
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import gettext as _
 
@@ -29,7 +29,10 @@ class Registration(models.Model):
         max_length=50, choices=REG_STATUS_CHOICES, default=ACTIVE
     )
 
-    registration_number = models.CharField(max_length=20,default="", blank=True)
+    registration_number = models.CharField(max_length=20, default="", blank=True)
+    registration_date = models.DateTimeField(auto_now_add=True, blank=True)
+    registration_date_str = models.CharField(max_length=30, default="", blank=True)
+    expiry_date = models.DateTimeField(auto_now=True, blank=True)
 
     created_timestamp = models.DateTimeField(auto_now_add=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
@@ -50,6 +53,10 @@ class Registration(models.Model):
             LOGGER.debug("Registration.save(): registration_number={}".format(
                 self.registration_number)
             )
+        self.registration_date_str = self.registration_date.strftime("%B %d, %Y")
+        self.expiry_date = self.registration_date + relativedelta(years=1)
+        LOGGER.debug(
+            'Expiry date set to: {}'.format(self.expiry_date))
 
     class Meta:
         verbose_name_plural = "Registrations"
@@ -332,7 +339,7 @@ class Renewal(models.Model):
     first_name = models.CharField(max_length=32, default="", blank=True)
     middle_name = models.CharField(max_length=50, default="", blank=True)
     last_name = models.CharField(max_length=50, default="", blank=True)
-    previous_registation_number = models.CharField(
+    previous_registration_number = models.CharField(
         max_length=20, default="", blank=True
     )
     created_date = models.DateTimeField(auto_now_add=True)

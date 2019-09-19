@@ -32,6 +32,8 @@ class Registration_ViewSet(
         registration_email_context = {
             "operator": serializer.data["operator"],
             "registration_number": serializer.data["registration_number"],
+            "registration_date": serializer.data["registration_date"],
+            "expiry_date": serializer.data["expiry_date"],
         }
         tasks.send_registration_email(registration_email_context)
 

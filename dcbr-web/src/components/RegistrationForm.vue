@@ -231,6 +231,7 @@ export default {
       }
       let obj = {
         operator_status: "ACTIVE",
+        registration_number: "",
         operator: {
           first_name: this.$store.getters["profile/firstName"],
           middle_name: this.$store.getters["profile/middleName"],
