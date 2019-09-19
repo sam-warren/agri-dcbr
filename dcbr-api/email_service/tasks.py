@@ -5,14 +5,14 @@ import tempfile
 
 import pytz
 import requests
+
+from api.models import Operator
 from background_task import background
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.core import management
 from django.template import loader
 from post_office import mail
-
-from api.models import Operator
 
 LOGGER = logging.getLogger(__name__)
 
@@ -59,20 +59,20 @@ def send_registration_email(context: dict):
     """Send an email with the registration details to an operator. The data to be used to render the message
        and the certificate should be passed as a dictionary with the following structure:
        {
-           "operator": operator, # an operator object
+           "operator": operator, # an operator object,
            "registration_number": "DCR-12345" # a string representing the registration number
        }
     
     Arguments:
         context {dict} -- A dictionary to be used as context for rendering the email and the PDF certificate.
     """
+    LOGGER.debug("send_registration_email(): context={}".format(context))
+
     template = loader.get_template("certificate/certificate.html")
     rendered = template.render(context)
 
     LOGGER.debug(
-        "Requesting PDF certificate for registration #{}".format(
-            context["registration_number"]
-        )
+        "Requesting PDF certificate for {}".format(context["registration_number"])
     )
     response = requests.post(
         settings.WEASYPRINT_REQUEST_URL + "certificate.pdf",
@@ -81,7 +81,7 @@ def send_registration_email(context: dict):
     )
 
     TMP_DIR = tempfile.gettempdir()
-    DEST_FILE = os.path.join(TMP_DIR, context["registration_number"] + ".pdf")
+    DEST_FILE = os.path.join(TMP_DIR, str(context["registration_number"]) + ".pdf")
 
     try:
 
@@ -95,12 +95,12 @@ def send_registration_email(context: dict):
             )
         )
         mail.send(
-            context["operator"].email_address,
+            context["operator"]["email_address"],
             settings.AGRI_EMAIL,
             template="registration_email",  # Could be an EmailTemplate instance or name
             context=context,
             render_on_delivery=True,
-            attachments={"certificate.pdf": DEST_FILE},
+            attachments={"{}.pdf".format(context["registration_number"]): DEST_FILE},
             # priority="now", # can't use now at this time: https://github.com/ui/django-post_office/issues/218
         )
 
@@ -111,5 +111,7 @@ def send_registration_email(context: dict):
             os.remove(DEST_FILE)
 
     LOGGER.info(
-        "Registration confirmation sent to {}".format(context["operator"].email_address)
+        "Registration confirmation sent to {}".format(
+            context["operator"]["email_address"]
+        )
     )

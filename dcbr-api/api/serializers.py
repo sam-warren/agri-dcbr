@@ -1,7 +1,4 @@
 from rest_framework.serializers import ModelSerializer
-import datetime
-import json
-
 from api.models import (
     Registration,
     Operator,
@@ -11,7 +8,6 @@ from api.models import (
     Animal_Risk_Factor,
     Association_Membership,
     Renewal,
-    Inspection_Report,
 )
 
 
@@ -110,6 +106,7 @@ class Registration_Serializer(ModelSerializer):
         fields = (
             "id",
             "operator_status",
+            "registration_number",
             "operator",
             "addresses",
             "associations",
@@ -119,8 +116,6 @@ class Registration_Serializer(ModelSerializer):
         )
 
     def create(self, validated_data):
-        print(validated_data)
-
         operator_data = validated_data.pop("operator")
         animals_data = validated_data.pop("animal_risk_factors")
         associations_data = validated_data.pop("associations")
@@ -148,9 +143,7 @@ class Registration_Serializer(ModelSerializer):
         for renewal_data in renewals_data:
             Renewal.objects.create(registration_number=registration, **renewal_data)
 
-        operator = Operator.objects.create(
-            registration_number=registration, **operator_data
-        )
+        Operator.objects.create(registration_number=registration, **operator_data)
 
         return registration
 
