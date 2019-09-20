@@ -2,7 +2,7 @@ import Vue from "vue";
 import VuexPersistence from "vuex-persist"
 import Vuex, { StoreOptions } from "vuex";
 
-import { profile, operationDetails, operationLocations, breedingDetails, animalIdentification, termsAndConditions, routeProtection } from "./registration";
+import { profile, operationDetails, operationLocations, breedingDetails, animalIdentification, termsAndConditions, routeProtection, renewal } from "./registration";
 import { RootState } from "./types";
 
 Vue.use(Vuex);
@@ -25,7 +25,8 @@ const store: StoreOptions<RootState> = {
     breedingDetails,
     animalIdentification,
     termsAndConditions,
-    routeProtection
+    routeProtection,
+    renewal
   }
 };
 

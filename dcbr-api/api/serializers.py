@@ -29,7 +29,7 @@ class Address_Serializer(ModelSerializer):
 class Association_Membership_Serializer(ModelSerializer):
     class Meta:
         model = Association_Membership
-        fields = ("id", "assoc_name", "membership_num", "assoc_URL")
+        fields = ("id", "assoc_name")
 
 
 class Operation_Risk_Factor_Serializer(ModelSerializer):

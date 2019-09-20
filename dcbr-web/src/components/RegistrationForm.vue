@@ -3,16 +3,35 @@
     <v-content class="mx-4 mb-4 my-4">
       <v-container fluid>
         <div>
-          <h1 v-if="this.$props.formType==='register'">Register</h1>
-          <h1 v-if="this.$props.formType==='review'">Review your Information</h1>
+          <h1
+            v-if="this.$store.getters['routeProtection/formType'] === 'register' && this.$props.formType==='register'"
+          >Register</h1>
+          <h1
+            v-if="this.$store.getters['routeProtection/formType'] === 'register' && this.$props.formType==='review'"
+          >Review your Information</h1>
+          <h1
+            v-if="this.$store.getters['routeProtection/formType'] === 'renewal' && this.$props.formType ==='register'"
+          >Renew your Certification</h1>
+          <h1
+            v-if="this.$store.getters['routeProtection/formType'] === 'renewal' && this.$props.formType==='review'"
+          >Review your Information</h1>
         </div>
         <div>
           <v-subheader
-            v-if="this.$props.formType==='register'"
+            v-if="this.$store.getters['routeProtection/formType'] === 'register' && this.$props.formType==='register'"
           >Fill out the form as accurately as possible. For help, see the Ministry of Agriculture Website.</v-subheader>
           <v-subheader
-            v-if="this.$props.formType==='review'"
+            v-if="this.$store.getters['routeProtection/formType'] === 'register' && this.$props.formType==='review'"
           >Please ensure the information you entered is accurate. It is a crime to enter false information.</v-subheader>
+          <v-subheader
+            v-if="this.$store.getters['routeProtection/formType'] === 'renewal' && this.$props.formType==='register'"
+          >Fill out the form as accurately as possible. For help, see the Ministry of Agriculture Website.</v-subheader>
+          <v-subheader
+            v-if="this.$store.getters['routeProtection/formType'] === 'renewal' && this.$props.formType==='review'"
+          >Please ensure the information you entered is accurate. It is a crime to enter false information.</v-subheader>
+        </div>
+        <div v-if="this.$store.getters['routeProtection/formType'] === 'renewal'">
+          <RenewalForm />
         </div>
         <div>
           <Profile ref="profile" />
@@ -31,7 +50,6 @@
         </div>
       </v-container>
     </v-content>
-
     <v-content class="mx-4 mb-4 my-4" v-if="this.$props.formType === 'register'">
       <v-container fluid>
         <div v-if="hasErrors">
@@ -55,14 +73,7 @@
         </div>
         <div v-else>
           <div>
-            <v-btn
-              large
-              block
-              round
-              mt-5
-              class="blue darken-4 white--text"
-              @click="navToReview()"
-            >Review & Submit</v-btn>
+            <v-btn large block round mt-5 class="primary" @click="navToReview()">Review & Submit</v-btn>
           </div>
         </div>
       </v-container>
@@ -85,14 +96,7 @@
         </div>
         <div v-else>
           <div>
-            <v-btn
-              large
-              block
-              round
-              mt-5
-              class="blue darken-4 white--text"
-              @click="submitRegistration()"
-            >Submit</v-btn>
+            <v-btn large block round mt-5 class="primary" @click="submitRegistration()">Submit</v-btn>
           </div>
         </div>
       </v-container>
@@ -108,6 +112,7 @@ import AnimalIdentification from "@/components/AnimalIdentification";
 import BreedingDetails from "@/components/BreedingDetails";
 import MenuOperationLocation from "@/components/MenuOperationLocation";
 import TermsAndConditions from "@/components/TermsAndConditions";
+import RenewalForm from "@/components/RenewalForm";
 import axios from "axios";
 export default {
   name: "App",
@@ -118,7 +123,8 @@ export default {
     AnimalIdentification,
     BreedingDetails,
     MenuOperationLocation,
-    TermsAndConditions
+    TermsAndConditions,
+    RenewalForm
   },
   data() {
     return {
@@ -148,6 +154,19 @@ export default {
           region: this.$store.getters["profile/homeRegion"]
         }
       ];
+      let renewalDetails = [
+        {
+          first_name: this.$store.getters["renewal/renewalFirstName"],
+          middle_name: this.$store.getters["renewal/renewalMiddleName"],
+          last_name: this.$store.getters["renewal/renewalLastName"],
+          previous_registration_number: this.$store.getters[
+            "renewal/registrationNumber"
+          ]
+        }
+      ];
+      if (this.$store.getters["routeProtection/formType"] === "register") {
+        renewalDetails = [];
+      }
       this.$store.getters["operationLocations/locations"].forEach(location => {
         addresses.push({
           address_type: "OPN",
@@ -243,11 +262,7 @@ export default {
         addresses: addresses,
         associations: [
           {
-            assoc_name: this.$store.getters["operationDetails/assocName"],
-            membership_num: this.$store.getters[
-              "operationDetails/assocMembership"
-            ],
-            assoc_URL: this.$store.getters["operationDetails/assocWebsite"]
+            assoc_name: this.$store.getters["operationDetails/assocName"]
           }
         ],
         renewals: [
@@ -276,7 +291,8 @@ export default {
               "animalIdentification/otherPermIdType"
             ]
           }
-        ]
+        ],
+        renewals: renewalDetails
       };
       console.log(obj);
       if (!this.hasErrors) {
@@ -299,6 +315,38 @@ export default {
       get: function() {
         this.error = "";
         // profile
+        if (this.$store.getters["routeProtection/formType"] === "renewal") {
+          if (
+            this.$store.getters["renewal/renewalFirstName"] === "" ||
+            this.$store.getters["renewal/renewalFirstName"].length > 32
+          ) {
+            this.error = "First name must meet requirements";
+            return true;
+          }
+          if (this.$store.getters["renewal/renewalMiddleName"].length > 50) {
+            this.error = "Middle name must meet requirements";
+            return true;
+          }
+          if (
+            this.$store.getters["renewal/renewalLastName"] === "" ||
+            this.$store.getters["renewal/renewalLastName"].length > 50
+          ) {
+            this.error = "Last name must meet requirements";
+            return true;
+          }
+          if (
+            this.$store.getters["renewal/registrationNumber"] === "" ||
+            this.$store.getters["renewal/registrationNumber"].length > 20
+          ) {
+            this.error = "Registration number must meet requirements";
+            return true;
+          }
+          if (this.$store.getters["renewal/expiryDate"] === "") {
+            this.error = "Expiry date must meet requirements";
+            return true;
+          }
+        }
+
         if (
           this.$store.getters["profile/firstName"] === "" ||
           this.$store.getters["profile/firstName"].length > 50
@@ -432,26 +480,7 @@ export default {
           return true;
         }
         if (this.$store.getters["operationDetails/assocName"].length > 50) {
-          this.error = "Associaltion name must meet requirements";
-          return true;
-        }
-        if (
-          this.$store.getters["operationDetails/assocMembership"].length > 20
-        ) {
-          this.error = "Membership number must meet requirements";
-          return true;
-        }
-        if (this.$store.getters["operationDetails/assocWebsite"].length > 50) {
-          this.error = "Association website must meet requirements";
-          return true;
-        }
-        if (
-          /^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(
-            this.$store.getters["operationDetails/assocWebsite"]
-          ) === false ||
-          this.$store.getters["operationDetails/assocWebsite"].length > 50
-        ) {
-          this.error = "Association URL must meet requirements";
+          this.error = "Association name must meet requirements";
           return true;
         }
 

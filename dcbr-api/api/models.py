@@ -323,8 +323,6 @@ class Association_Membership(models.Model):
     )
 
     assoc_name = models.CharField(max_length=50, default="", blank=True)
-    membership_num = models.CharField(max_length=10, default="", blank=True)
-    assoc_URL = models.CharField(max_length=50, default="", blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
