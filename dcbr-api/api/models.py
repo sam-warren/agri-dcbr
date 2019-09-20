@@ -33,6 +33,7 @@ class Registration(models.Model):
     registration_date = models.CharField(max_length=30, default="", blank=True)
     expiry_date = models.CharField(max_length=30, default="", blank=True)
     num_locations = models.IntegerField(default=0, blank=True)
+    
 
     created_timestamp = models.DateTimeField(auto_now_add=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
@@ -376,45 +377,51 @@ class Inspection_Report(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
-    Nutrition = models.BooleanField(default=False)
-    Nutrition_notes = models.TextField(default="", blank=True)
+    Record_Keeping = models.BooleanField(default=False)
+    Record_Keeping_notes = models.TextField(default="", blank=True)
 
-    Grooming_and_Nail_Care = models.BooleanField(default=False)
-    Grooming_and_Nail_Care_notes = models.TextField(default="", blank=True)
+    Required_Plans = models.BooleanField(default=False)
+    Required_Plans_notes = models.TextField(default="", blank=True)
 
-    Cleaning_and_Disinfection = models.BooleanField(default=False)
-    Cleaning_and_Disinfection_notes = models.TextField(default="", blank=True)
+    Environment = models.BooleanField(default=False)
+    Environment_notes = models.TextField(default="", blank=True)
 
-    Environment_and_Housing = models.BooleanField(default=False)
-    Environment_and_Housing_notes = models.TextField(default="", blank=True)
+    Protection_from_Injury_and_Illness = models.BooleanField(default=False)
+    Protection_from_Injury_and_Illness_notes = models.TextField(default="", blank=True)
 
-    Socialization = models.BooleanField(default=False)
-    Socialization_notes = models.TextField(default="", blank=True)
+    Containement = models.BooleanField(default=False)
+    Containement_notes = models.TextField(default="", blank=True)
 
-    Breeding = models.BooleanField(default=False)
-    Breeding_notes = models.TextField(default="", blank=True)
-
-    Whelping_and_Queening = models.BooleanField(default=False)
-    Whelping_and_Queening_notes = models.TextField(default="", blank=True)
-
-    Veterinary_Care = models.BooleanField(default=False)
-    Veterinary_Care_notes = models.TextField(default="", blank=True)
-
-    Health_Care_Protocol = models.BooleanField(default=False)
-    Health_Care_Protocol_notes = models.TextField(default="", blank=True)
+    Tethering = models.BooleanField(default=False)
+    Tethering_notes = models.TextField(default="", blank=True)
 
     Transportation = models.BooleanField(default=False)
     Transportation_notes = models.TextField(default="", blank=True)
 
-    Plans = models.BooleanField(default=False)
-    Plans_notes = models.TextField(default="", blank=True)
+    Food_and_Water = models.BooleanField(default=False)
+    Food_and_Water_notes = models.TextField(default="", blank=True)
 
-    Registration_and_Record_Keeping = models.BooleanField(default=False)
-    Registration_and_Record_Keeping_notes = models.TextField(default="", blank=True)
+    Handling = models.BooleanField(default=False)
+    Handling_notes = models.TextField(default="", blank=True)
 
-    Responsibilities_of_the_Operator = models.BooleanField(default=False)
-    Responsibilities_of_the_Operator_notes = models.TextField(default="", blank=True)
+    Grooming_and_Nail_Care = models.BooleanField(default=False)
+    Grooming_and_Nail_Care_notes = models.TextField(default="", blank=True)
 
+    Socialization_and_Exercise = models.BooleanField(default=False)
+    Socialization_and_Exercise_notes = models.TextField(default="", blank=True)
+
+    Health_Care = models.BooleanField(default=False)
+    Health_Care_notes = models.TextField(default="", blank=True)
+
+    Breeding = models.BooleanField(default=False)
+    Breeding_notes = models.TextField(default="", blank=True)
+
+    Queening_and_Whelping = models.BooleanField(default=False)
+    Queening_and_Whelping_notes = models.TextField(default="", blank=True)
+
+    Veterinary_Care = models.BooleanField(default=False)
+    Veterinary_Care_notes = models.TextField(default="", blank=True)
+    
     Exercise = models.BooleanField(default=False)
     Exercise_notes = models.TextField(default="", blank=True)
 
