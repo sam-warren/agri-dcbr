@@ -30,9 +30,9 @@ class Registration(models.Model):
     )
 
     registration_number = models.CharField(max_length=20, default="", blank=True)
-    registration_date = models.DateTimeField(auto_now_add=True, blank=True)
-    registration_date_str = models.CharField(max_length=30, default="", blank=True)
-    expiry_date = models.DateTimeField(auto_now=True, blank=True)
+    registration_date = models.CharField(max_length=30, default="", blank=True)
+    expiry_date = models.CharField(max_length=30, default="", blank=True)
+    num_locations = models.IntegerField(default=0, blank=True)
 
     created_timestamp = models.DateTimeField(auto_now_add=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
@@ -53,10 +53,18 @@ class Registration(models.Model):
             LOGGER.debug("Registration.save(): registration_number={}".format(
                 self.registration_number)
             )
-        self.registration_date_str = self.registration_date.strftime("%B %d, %Y")
-        self.expiry_date = self.registration_date + relativedelta(years=1)
-        LOGGER.debug(
-            'Expiry date set to: {}'.format(self.expiry_date))
+
+        if not self.registration_date: 
+            self.registration_date = self.created_timestamp.strftime("%B %d, %Y")
+            self.save()
+        
+        if not self.expiry_date:
+            expiry_date_temp = self.created_timestamp + relativedelta(years=1)
+            self.expiry_date = expiry_date_temp.strftime("%B %d, %Y")
+            LOGGER.debug('Expiry date set to: {}'.format(self.expiry_date))
+            self.save()
+
+
 
     class Meta:
         verbose_name_plural = "Registrations"

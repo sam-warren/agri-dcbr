@@ -34,8 +34,10 @@ class Registration_ViewSet(
             "registration_number": serializer.data["registration_number"],
             "registration_date": serializer.data["registration_date"],
             "expiry_date": serializer.data["expiry_date"],
+            "num_locations": serializer.data["num_locations"],
         }
         tasks.send_registration_email(registration_email_context)
+        
 
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
