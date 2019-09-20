@@ -1,12 +1,13 @@
 from rest_framework.serializers import ModelSerializer
-from api.models import (
-    Registration,
-    Operator,
+
+from .models import (
     Address,
-    Inspection_Report,
-    Operation_Risk_Factor,
     Animal_Risk_Factor,
     Association_Membership,
+    Inspection_Report,
+    Operation_Risk_Factor,
+    Operator,
+    Registration,
     Renewal,
 )
 
@@ -29,7 +30,7 @@ class Address_Serializer(ModelSerializer):
 class Association_Membership_Serializer(ModelSerializer):
     class Meta:
         model = Association_Membership
-        fields = ("id", "assoc_name", "membership_num", "assoc_URL")
+        fields = ("id", "assoc_name")
 
 
 class Operation_Risk_Factor_Serializer(ModelSerializer):
@@ -89,7 +90,7 @@ class Renewal_Serializer(ModelSerializer):
             "first_name",
             "middle_name",
             "last_name",
-            "previous_registation_number",
+            "previous_registration_number",
         )
 
 
@@ -107,6 +108,8 @@ class Registration_Serializer(ModelSerializer):
             "id",
             "operator_status",
             "registration_number",
+            "registration_date",
+            "num_locations",
             "operator",
             "addresses",
             "associations",
@@ -127,6 +130,8 @@ class Registration_Serializer(ModelSerializer):
 
         for address_data in addresses_data:
             Address.objects.create(registration_number=registration, **address_data)
+            registration.num_locations += 1
+
         for association_data in associations_data:
             Association_Membership.objects.create(
                 registration_number=registration, **association_data
@@ -152,4 +157,3 @@ class Inspection_Report_Serializer(ModelSerializer):
     class Meta:
         model = Inspection_Report
         fields = "__all__"
-

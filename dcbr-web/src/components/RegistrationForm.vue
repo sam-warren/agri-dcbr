@@ -3,10 +3,18 @@
     <v-content class="mx-4 mb-4 my-4">
       <v-container fluid>
         <div>
-          <h1 v-if="this.$store.getters['routeProtection/formType'] === 'register' && this.$props.formType==='register'">Register</h1>
-          <h1 v-if="this.$store.getters['routeProtection/formType'] === 'register' && this.$props.formType==='review'">Review your Information</h1>
-          <h1 v-if="this.$store.getters['routeProtection/formType'] === 'renewal' && this.$props.formType ==='register'">Renew your Certification</h1>
-          <h1 v-if="this.$store.getters['routeProtection/formType'] === 'renewal' && this.$props.formType==='review'">Review your Information</h1>
+          <h1
+            v-if="this.$store.getters['routeProtection/formType'] === 'register' && this.$props.formType==='register'"
+          >Register</h1>
+          <h1
+            v-if="this.$store.getters['routeProtection/formType'] === 'register' && this.$props.formType==='review'"
+          >Review your Information</h1>
+          <h1
+            v-if="this.$store.getters['routeProtection/formType'] === 'renewal' && this.$props.formType ==='register'"
+          >Renew your Certification</h1>
+          <h1
+            v-if="this.$store.getters['routeProtection/formType'] === 'renewal' && this.$props.formType==='review'"
+          >Review your Information</h1>
         </div>
         <div>
           <v-subheader
@@ -23,7 +31,7 @@
           >Please ensure the information you entered is accurate. It is a crime to enter false information.</v-subheader>
         </div>
         <div v-if="this.$store.getters['routeProtection/formType'] === 'renewal'">
-          <RenewalForm/>
+          <RenewalForm />
         </div>
         <div>
           <Profile ref="profile" />
@@ -65,14 +73,7 @@
         </div>
         <div v-else>
           <div>
-            <v-btn
-              large
-              block
-              round
-              mt-5
-              class="primary"
-              @click="navToReview()"
-            >Review & Submit</v-btn>
+            <v-btn large block round mt-5 class="primary" @click="navToReview()">Review & Submit</v-btn>
           </div>
         </div>
       </v-container>
@@ -95,14 +96,7 @@
         </div>
         <div v-else>
           <div>
-            <v-btn
-              large
-              block
-              round
-              mt-5
-              class="primary"
-              @click="submitRegistration()"
-            >Submit</v-btn>
+            <v-btn large block round mt-5 class="primary" @click="submitRegistration()">Submit</v-btn>
           </div>
         </div>
       </v-container>
@@ -165,9 +159,11 @@ export default {
           first_name: this.$store.getters["renewal/renewalFirstName"],
           middle_name: this.$store.getters["renewal/renewalMiddleName"],
           last_name: this.$store.getters["renewal/renewalLastName"],
-          previous_registration_number: this.$store.getters["renewal/registrationNumber"]
+          previous_registration_number: this.$store.getters[
+            "renewal/registrationNumber"
+          ]
         }
-      ]
+      ];
       if (this.$store.getters["routeProtection/formType"] === "register") {
         renewalDetails = [];
       }
@@ -251,6 +247,7 @@ export default {
       }
       let obj = {
         operator_status: "ACTIVE",
+        registration_number: "",
         operator: {
           first_name: this.$store.getters["profile/firstName"],
           middle_name: this.$store.getters["profile/middleName"],
@@ -265,11 +262,7 @@ export default {
         addresses: addresses,
         associations: [
           {
-            assoc_name: this.$store.getters["operationDetails/assocName"],
-            membership_num: this.$store.getters[
-              "operationDetails/assocMembership"
-            ],
-            assoc_URL: this.$store.getters["operationDetails/assocWebsite"]
+            assoc_name: this.$store.getters["operationDetails/assocName"]
           }
         ],
         renewals: [
@@ -487,7 +480,7 @@ export default {
           return true;
         }
         if (this.$store.getters["operationDetails/assocName"].length > 50) {
-          this.error = "Associaltion name must meet requirements";
+          this.error = "Association name must meet requirements";
           return true;
         }
 
@@ -701,7 +694,7 @@ export default {
         // termsAndConditions
         if (
           !this.$store.getters["termsAndConditions/hasAgreed"] &&
-          (this.$props.formType === "review")
+          this.$props.formType === "review"
         ) {
           this.error = "Please accept the terms and conditions to continue";
           return true;
