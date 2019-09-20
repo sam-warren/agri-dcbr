@@ -14,7 +14,7 @@
           
           <v-layout row wrap ma-2>
             <v-flex xs12 md4>
-              <v-text-field v-model.number="numCats" :rules="numberRules" type="number" label="Number of Cats"></v-text-field>
+              <v-text-field v-model.number="numCats" mask="#########" :rules="numberRules" label="Number of Cats"></v-text-field>
             </v-flex>
           </v-layout>
 
@@ -27,8 +27,8 @@
             <v-flex xs12 md4>
               <v-text-field
                 v-model.number="femaleIntactCatNum"
+                mask="#########"
                 :rules="numberRules"
-                type="number"
                 label="Number of Female Cats"
               ></v-text-field>
             </v-flex>
@@ -40,7 +40,7 @@
 
           <v-layout row wrap ma-2>
             <v-flex xs12 md4>
-              <v-text-field v-model.number="littersQueened" :rules="numberRules" type="number" label="Queened Litters"></v-text-field>
+              <v-text-field v-model.number="littersQueened" mask="#########" :rules="numberRules" label="Queened Litters"></v-text-field>
             </v-flex>
           </v-layout>
 
@@ -50,16 +50,16 @@
 
           <v-layout row wrap ma-2>
             <v-flex xs12 md4>
-              <v-text-field v-model.number="catsTransferred" :rules="numberRules" type="number" label="Transfer"></v-text-field>
+              <v-text-field v-model.number="catsTransferred" mask="#########" :rules="numberRules" label="Transfer"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field v-model.number="catsSold" :rules="numberRules" type="number" label="Sell"></v-text-field>
+              <v-text-field v-model.number="catsSold" mask="#########" :rules="numberRules" label="Sell"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field v-model.number="catsTraded" :rules="numberRules" type="number" label="Trade"></v-text-field>
+              <v-text-field v-model.number="catsTraded" mask="#########" :rules="numberRules" label="Trade"></v-text-field>
             </v-flex>
             <v-flex xs12 md4>
-              <v-text-field v-model.number="catsLeased" :rules="numberRules" type="number" label="Lease"></v-text-field>
+              <v-text-field v-model.number="catsLeased" mask="#########" :rules="numberRules" label="Lease"></v-text-field>
             </v-flex>
           </v-layout>
         </v-card>

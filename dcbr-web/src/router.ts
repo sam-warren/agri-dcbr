@@ -7,6 +7,7 @@ import Preamble from "./views/Preamble.vue";
 import Payment from "./views/Payment.vue";
 import Review from "./views/Review.vue";
 import Confirmation from "./views/Confirmation.vue";
+import Renew from "./views/Renew.vue";
 
 import store from "@/store/store"
 
@@ -26,7 +27,7 @@ const router = new Router({
   },
   routes: [
     {
-      path: "/",
+      path: "/home",
       name: "home",
       component: Home
     },
@@ -82,16 +83,27 @@ const router = new Router({
         import("./views/Confirmation.vue"),
       meta: {
         requiresAuth: false
-      }
+      },
     }
   ]
 });
 
 router.beforeEach((to: any, from: any, next: any) => {
-  if (to.path === "/review") {
+  if (to.path === "/") {
+    if (store.getters["routeProtection/formType"] === "") {
+      if (!(from.path === "/home")) {
+        next("/home")
+      } else {
+        next()
+      }
+    } else {
+      next();
+    }
+  }
+  else if (to.path === "/review") {
     if (!store.getters["routeProtection/registerFormOk"]) {
-      if (!(from.path === "/register")) {
-        next("/register")
+      if (!(from.path === "/home")) {
+        next("/home")
       } else {
         next()
       }
@@ -101,8 +113,8 @@ router.beforeEach((to: any, from: any, next: any) => {
   }
   else if (to.path === "/confirmation") {
     if (!store.getters["routeProtection/reviewFormOk"]) {
-      if (!(from.path === "/register")) {
-        next("/register")
+      if (!(from.path === "/home")) {
+        next("/home")
       } else {
         next()
       }

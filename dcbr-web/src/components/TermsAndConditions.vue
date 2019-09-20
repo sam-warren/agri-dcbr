@@ -16,24 +16,13 @@
                           <template v-slot:activator="{ on }">
                             <a
                               target="_blank"
-                              href="https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/agriculture"
+                              href="https://www2.qa.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/agriculture-and-seafood/animal-and-crops/animal-health/animal-welfare/cat_and_dog_commercial_breeder_regulation.pdf"
                               @click.stop
                               v-on="on"
-                            >terms</a>
+                            >terms and conditions</a>
                           </template>
                           Opens in new window
                         </v-tooltip> and
-                        <v-tooltip bottom>
-                          <template v-slot:activator="{ on }">
-                            <a
-                              target="_blank"
-                              href="https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/agriculture"
-                              @click.stop
-                              v-on="on"
-                            >conditions</a>
-                          </template>
-                          Opens in new window
-                        </v-tooltip>
                       </div>
                     </template>
                   </v-checkbox>

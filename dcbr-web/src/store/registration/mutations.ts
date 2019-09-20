@@ -69,14 +69,6 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.operationDetails!.assocName = payload;
   },
-  assocMembership(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.operationDetails!.assocMembership = payload;
-  },
-  assocWebsite(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.operationDetails!.assocWebsite = payload;
-  },
   accidentalBreeding(state: RegistrationState, payload: string) {
     state.error = false;
     state.operationDetails!.accidentalBreeding = payload;
@@ -223,6 +215,33 @@ export const mutations: MutationTree<RegistrationState> = {
     state.error = false;
     state.routeProtection!.reviewFormOk = payload;
   },
+  formType(state: RegistrationState, payload: string) {
+    state.error = false,
+    state.routeProtection!.formType = payload;
+  },
+
+  // Renewal
+  renewalFirstName(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.renewalFirstName = payload;
+  },
+  renewalMiddleName(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.renewalMiddleName = payload;
+  },
+  renewalLastName(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.renewalLastName = payload;
+  },
+  registrationNumber(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.registrationNumber = payload;
+  },
+  expiryDate(state: RegistrationState, payload: string) {
+    state.error = false;
+    state.renewal!.expiryDate = payload;
+  },
+
 
   resetForm(state: RegistrationState) {
     state.profile!.firstName = "";
@@ -242,8 +261,6 @@ export const mutations: MutationTree<RegistrationState> = {
     state.operationDetails!.opWebsite = "";
     state.operationDetails!.operationType = "";
     state.operationDetails!.assocName = "";
-    state.operationDetails!.assocMembership = 0;
-    state.operationDetails!.assocWebsite = "";
     state.operationDetails!.accidentalBreeding = "";
     state.operationDetails!.numWorkers = 0;
     state.operationDetails!.animalType = "";
@@ -277,5 +294,12 @@ export const mutations: MutationTree<RegistrationState> = {
 
     state.routeProtection!.registerFormOk = false;
     state.routeProtection!.reviewFormOk = false;
+    state.routeProtection!.formType = "";
+
+    state.renewal!.expiryDate = "";
+    state.renewal!.renewalFirstName = "";
+    state.renewal!.renewalMiddleName = "";
+    state.renewal!.renewalLastName = "";
+    state.renewal!.registrationNumber = "";
   }
 };

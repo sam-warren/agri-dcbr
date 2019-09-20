@@ -55,10 +55,10 @@
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="streetNumber"
+                    mask="#########"
                     :rules="streetNumberRules"
                     label="Street number"
                     name="streetNumber"
-                    type="number"
                     required
                   ></v-text-field>
                 </v-flex>
@@ -95,6 +95,7 @@
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="postalCode"
+                    mask="A#A #A#"
                     :rules="postalCodeRules"
                     label="Postal Code"
                     name="postalCode"
@@ -127,8 +128,9 @@
                 <v-flex xs12 md4 lg6>
                   <v-text-field 
                     v-model="phone" 
-                    :mask="mask" 
-                    :rules="phoneNumberRules" 
+                    type="tel"
+                    mask="(###) ### ####"
+                    :rules="phoneNumberRules"
                     label="Phone" 
                     name="phone"
                   ></v-text-field>
