@@ -1,12 +1,13 @@
 from rest_framework.serializers import ModelSerializer
-from api.models import (
-    Registration,
-    Operator,
+
+from .models import (
     Address,
-    Inspection_Report,
-    Operation_Risk_Factor,
     Animal_Risk_Factor,
     Association_Membership,
+    Inspection_Report,
+    Operation_Risk_Factor,
+    Operator,
+    Registration,
     Renewal,
 )
 
@@ -108,7 +109,6 @@ class Registration_Serializer(ModelSerializer):
             "operator_status",
             "registration_number",
             "registration_date",
-            "expiry_date",
             "num_locations",
             "operator",
             "addresses",
@@ -119,7 +119,6 @@ class Registration_Serializer(ModelSerializer):
         )
 
     def create(self, validated_data):
-        print(validated_data)
         operator_data = validated_data.pop("operator")
         animals_data = validated_data.pop("animal_risk_factors")
         associations_data = validated_data.pop("associations")
@@ -128,13 +127,11 @@ class Registration_Serializer(ModelSerializer):
         renewals_data = validated_data.pop("renewals")
 
         registration = Registration.objects.create(**validated_data)
-        
 
         for address_data in addresses_data:
             Address.objects.create(registration_number=registration, **address_data)
             registration.num_locations += 1
-    
-    
+
         for association_data in associations_data:
             Association_Membership.objects.create(
                 registration_number=registration, **association_data
@@ -153,7 +150,6 @@ class Registration_Serializer(ModelSerializer):
 
         Operator.objects.create(registration_number=registration, **operator_data)
 
-
         return registration
 
 
@@ -161,4 +157,3 @@ class Inspection_Report_Serializer(ModelSerializer):
     class Meta:
         model = Inspection_Report
         fields = "__all__"
-

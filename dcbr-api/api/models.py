@@ -1,6 +1,7 @@
 import logging
-from dateutil.relativedelta import relativedelta
 from datetime import datetime, timedelta
+
+from dateutil.relativedelta import relativedelta
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import gettext as _
@@ -30,11 +31,8 @@ class Registration(models.Model):
     )
 
     registration_number = models.CharField(max_length=20, default="", blank=True)
-    registration_date = models.CharField(max_length=30, default="", blank=True)
-    expiry_date = models.CharField(max_length=30, default="", blank=True)
     num_locations = models.IntegerField(default=0, blank=True)
-    
-
+    registration_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     created_timestamp = models.DateTimeField(auto_now_add=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
 
@@ -47,25 +45,17 @@ class Registration(models.Model):
         if not self.registration_number:
             self.registration_number = "BC-DCBR-" + str(self.pk).zfill(6)
             LOGGER.debug(
-                'Registration.save(): registration_number is blank.  Saving the value as: {}'
-            .format(self.registration_number))
+                "Registration_number is blank.  Saving the value as: {}".format(
+                    self.registration_number
+                )
+            )
             self.save()
         else:
-            LOGGER.debug("Registration.save(): registration_number={}".format(
-                self.registration_number)
+            LOGGER.debug(
+                "Registration_number={}".format(
+                    self.registration_number
+                )
             )
-
-        if not self.registration_date: 
-            self.registration_date = self.created_timestamp.strftime("%B %d, %Y")
-            self.save()
-        
-        if not self.expiry_date:
-            expiry_date_temp = self.created_timestamp + relativedelta(years=1)
-            self.expiry_date = expiry_date_temp.strftime("%B %d, %Y")
-            LOGGER.debug('Expiry date set to: {}'.format(self.expiry_date))
-            self.save()
-
-
 
     class Meta:
         verbose_name_plural = "Registrations"
@@ -389,8 +379,8 @@ class Inspection_Report(models.Model):
     Protection_from_Injury_and_Illness = models.BooleanField(default=False)
     Protection_from_Injury_and_Illness_notes = models.TextField(default="", blank=True)
 
-    Containement = models.BooleanField(default=False)
-    Containement_notes = models.TextField(default="", blank=True)
+    Containment = models.BooleanField(default=False)
+    Containment_notes = models.TextField(default="", blank=True)
 
     Tethering = models.BooleanField(default=False)
     Tethering_notes = models.TextField(default="", blank=True)
@@ -421,7 +411,7 @@ class Inspection_Report(models.Model):
 
     Veterinary_Care = models.BooleanField(default=False)
     Veterinary_Care_notes = models.TextField(default="", blank=True)
-    
+
     Exercise = models.BooleanField(default=False)
     Exercise_notes = models.TextField(default="", blank=True)
 
