@@ -1,223 +1,188 @@
 import { GetterTree } from "vuex";
 
 import { RootState } from "../types";
-import { RegistrationState } from "./types";
+import { OperationDetailsTypes, OperationLocationsTypes, BreedingDetailsTypes, AnimalIdentificationTypes, TermsAndConditionsTypes, RenewalTypes, RouteProtectionTypes } from "./types";
 import { Location } from "./types";
+import { ProfileTypes } from "./types";
 
-export const getters: GetterTree<RegistrationState, RootState> = {
+export const ProfileGetters: GetterTree<ProfileTypes, RootState> = {
   // Profile
-  firstName(state: any): string {
-    const { profile } = state;
-    return profile!.firstName || "";
+  firstName(state: ProfileTypes): string {
+    return state!.firstName || "";
   },
-  middleName(state: RegistrationState): string {
-    const { profile } = state;
-    return profile!.middleName || "";
+  middleName(state: ProfileTypes): string {
+    return state!.middleName || "";
   },
-  lastName(state: RegistrationState): string {
-    const { profile } = state;
-    return profile!.lastName || "";
+  lastName(state: ProfileTypes): string {
+    return state!.lastName || "";
   },
-  commType(state: RegistrationState): string {
-    const { profile } = state;
-    return profile!.commType || "";
+  commType(state: ProfileTypes): string {
+    return state!.commType || "";
   },
-  phone(state: RegistrationState): string {
-    const { profile } = state;
-    return profile!.phone || "";
+  phone(state: ProfileTypes): string {
+    return state!.phone || "";
   },
-  email(state: RegistrationState): string {
-    const { profile } = state;
-    return profile!.email || "";
+  email(state: ProfileTypes): string {
+    return state!.email || "";
   },
-  streetNumber(state: RegistrationState): number {
-    const { profile } = state;
-    return profile!.streetNumber || 0;
+  streetNumber(state: ProfileTypes): number {
+    return state!.streetNumber || 0;
   },
-  aptNumber(state: RegistrationState): string {
-    const { profile } = state;
-    return profile!.aptNumber || "";
+  aptNumber(state: ProfileTypes): string {
+    return state!.aptNumber || "";
   },
-  streetName(state: RegistrationState): string {
-    const { profile } = state;
-    return profile!.streetName || "";
+  streetName(state: ProfileTypes): string {
+    return state!.streetName || "";
   },
-  city(state: RegistrationState): string {
-    const { profile } = state;
-    return profile!.city || "";
+  city(state: ProfileTypes): string {
+    return state!.city || "";
   },
-  postalCode(state: RegistrationState): string {
-    const { profile } = state;
-    return profile!.postalCode || "";
+  postalCode(state: ProfileTypes): string {
+    return state!.postalCode || "";
   },
-  homeRegion(state: RegistrationState): string {
-    const { profile } = state;
-    return profile!.homeRegion || "";
+  homeRegion(state: ProfileTypes): string {
+    return state!.homeRegion || "";
   },
+};
 
+export const OperationDetailsGetters: GetterTree<OperationDetailsTypes, RootState> = {
   // Operation Details
-  operationName(state: RegistrationState): string {
-    const { operationDetails } = state;
-    return operationDetails!.operationName || "";
+  operationName(state: OperationDetailsTypes): string {
+    return state!.operationName || "";
   },
-  operationType(state: RegistrationState): string {
-    const { operationDetails } = state;
-    return operationDetails!.operationType || "";
+  operationType(state: OperationDetailsTypes): string {
+    return state!.operationType || "";
   },
-  opWebsite(state: RegistrationState): string {
-    const { operationDetails } = state;
-    return operationDetails!.opWebsite || "";
+  opWebsite(state: OperationDetailsTypes): string {
+    return state!.opWebsite || "";
   },
-  assocName(state: RegistrationState): string {
-    const { operationDetails } = state;
-    return operationDetails!.assocName || "";
+  assocName(state: OperationDetailsTypes): string {
+    return state!.assocName || "";
   },
-  accidentalBreeding(state: RegistrationState): string {
-    const { operationDetails } = state;
-    return operationDetails!.accidentalBreeding || "";
+  accidentalBreeding(state: OperationDetailsTypes): string {
+    return state!.accidentalBreeding || "";
   },
-  numWorkers(state: RegistrationState): number {
-    const { operationDetails } = state;
-    return operationDetails!.numWorkers || 0;
+  numWorkers(state: OperationDetailsTypes): number {
+    return state!.numWorkers || 0;
   },
-  animalType(state: RegistrationState): string {
-    const { operationDetails } = state;
-    return operationDetails!.animalType || "";
+  animalType(state: OperationDetailsTypes): string {
+    return state!.animalType || "";
   },
-  numDogBreeds(state: RegistrationState): number {
-    const { operationDetails } = state;
-    return operationDetails!.numDogBreeds || 0;
+  numDogBreeds(state: OperationDetailsTypes): number {
+    return state!.numDogBreeds || 0;
   },
-  numCatBreeds(state: RegistrationState): number {
-    const { operationDetails } = state;
-    return operationDetails!.numCatBreeds || 0;
+  numCatBreeds(state: OperationDetailsTypes): number {
+    return state!.numCatBreeds || 0;
   },
-  hasVet(state: RegistrationState): string {
-    const { operationDetails } = state;
-    return operationDetails!.hasVet || "";
+  hasVet(state: OperationDetailsTypes): string {
+    return state!.hasVet || "";
   },
+};
 
+export const OperationLocationsGetters: GetterTree<OperationLocationsTypes, RootState> = {
   // Operation Locations
-  hasAdditionalLocations(state: RegistrationState): string {
-    const { operationLocations } = state;
-    return operationLocations!.hasAdditionalLocations || "";
+  hasAdditionalLocations(state: OperationLocationsTypes): string {
+    return state!.hasAdditionalLocations || "";
   },
-  locations(state: RegistrationState): Location[] {
-    const { operationLocations } = state;
-    return operationLocations!.locations || [];
+  locations(state: OperationLocationsTypes): Location[] {
+    return state!.locations || [];
   },
-  
+};
+
+export const BreedingDetailsGetters: GetterTree<BreedingDetailsTypes, RootState> = {
   // Breeding Details
-  femaleIntactDogNum(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.femaleIntactDogNum || 0;
+  femaleIntactDogNum(state: BreedingDetailsTypes): number {
+    return state!.femaleIntactDogNum || 0;
   },
-  femaleIntactCatNum(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.femaleIntactCatNum || 0;
+  femaleIntactCatNum(state: BreedingDetailsTypes): number {
+    return state!.femaleIntactCatNum || 0;
   },
-  littersWhelped(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.littersWhelped || 0;
+  littersWhelped(state: BreedingDetailsTypes): number {
+    return state!.littersWhelped || 0;
   },
-  littersQueened(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.littersQueened || 0;
+  littersQueened(state: BreedingDetailsTypes): number {
+    return state!.littersQueened || 0;
   },
-  dogsTransferred(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.dogsTransferred || 0;
+  dogsTransferred(state: BreedingDetailsTypes): number {
+    return state!.dogsTransferred || 0;
   },
-  dogsSold(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.dogsSold || 0;
+  dogsSold(state: BreedingDetailsTypes): number {
+    return state!.dogsSold || 0;
   },
-  dogsTraded(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.dogsTraded || 0;
+  dogsTraded(state: BreedingDetailsTypes): number {
+    return state!.dogsTraded || 0;
   },
-  dogsLeased(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.dogsLeased || 0;
+  dogsLeased(state: BreedingDetailsTypes): number {
+    return state!.dogsLeased || 0;
   },
-  catsTransferred(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.catsTransferred || 0;
+  catsTransferred(state: BreedingDetailsTypes): number {
+    return state!.catsTransferred || 0;
   },
-  catsSold(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.catsSold || 0;
+  catsSold(state: BreedingDetailsTypes): number {
+    return state!.catsSold || 0;
   },
-  catsTraded(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.catsTraded || 0;
+  catsTraded(state: BreedingDetailsTypes): number {
+    return state!.catsTraded || 0;
   },
-  catsLeased(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.catsLeased || 0;
+  catsLeased(state: BreedingDetailsTypes): number {
+    return state!.catsLeased || 0;
   },
-  numCats(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.numCats || 0;
+  numCats(state: BreedingDetailsTypes): number {
+    return state!.numCats || 0;
   },
-  numDogs(state: RegistrationState): number {
-    const { breedingDetails } = state;
-    return breedingDetails!.numDogs || 0;
+  numDogs(state: BreedingDetailsTypes): number {
+    return state!.numDogs || 0;
   },
- 
+}
+
+export const AnimalIdentificationGetters: GetterTree<AnimalIdentificationTypes, RootState> = {
   // Animal Identification
-  hasPermId(state: RegistrationState): string {
-    const { animalIdentification } = state;
-    return animalIdentification!.hasPermId || "";
+  hasPermId(state: AnimalIdentificationTypes): string {
+    return state!.hasPermId || "";
   },
-  permIdType(state: RegistrationState): string {
-    const { animalIdentification } = state;
-    return animalIdentification!.permIdType || "NOT_APPLICABLE";
+  permIdType(state: AnimalIdentificationTypes): string {
+    return state!.permIdType || "NOT_APPLICABLE";
   },
-  otherPermIdType(state: RegistrationState): string {
-    const { animalIdentification } = state;
-    return animalIdentification!.otherPermIdType || "";
+  otherPermIdType(state: AnimalIdentificationTypes): string {
+    return state!.otherPermIdType || "";
   },
+}
 
+export const TermsAndConditionsGetters: GetterTree<TermsAndConditionsTypes, RootState> = {
   // Terms and Conditions
-  hasAgreed(state: RegistrationState): boolean {
-    const { termsAndConditions } = state;
-    return termsAndConditions!.hasAgreed || false;
+  hasAgreed(state: TermsAndConditionsTypes): boolean {
+    return state!.hasAgreed || false;
   },
+}
 
+export const RenewalGetters: GetterTree<RenewalTypes, RootState> = {
   // Renewal
-  renewalFirstName(state: RegistrationState): string {
-    const { renewal } = state;
-    return renewal!.renewalFirstName || "";
+  renewalFirstName(state: RenewalTypes): string {
+    return state!.renewalFirstName || "";
   },
-  renewalMiddleName(state: RegistrationState): string {
-    const { renewal } = state;
-    return renewal!.renewalMiddleName || "";
+  renewalMiddleName(state: RenewalTypes): string {
+    return state!.renewalMiddleName || "";
   },
-  renewalLastName(state: RegistrationState): string {
-    const { renewal } = state;
-    return renewal!.renewalLastName || "";
+  renewalLastName(state: RenewalTypes): string {
+    return state!.renewalLastName || "";
   },
-  registrationNumber(state: RegistrationState): string {
-    const { renewal } = state;
-    return renewal!.registrationNumber || "";
+  registrationNumber(state: RenewalTypes): string {
+    return state!.registrationNumber || "";
   },
-  expiryDate(state: RegistrationState): string {
-    const { renewal } = state;
-    return renewal!.expiryDate || "";
+  expiryDate(state: RenewalTypes): string {
+    return state!.expiryDate || "";
   },
+}
 
+export const RouteProtectionGetters: GetterTree<RouteProtectionTypes, RootState> = {
   // Route Protection
-  registerFormOk(state: RegistrationState): boolean {
-    const { routeProtection } = state;
-    return routeProtection!.registerFormOk || false;
+  registerFormOk(state: RouteProtectionTypes): boolean {
+    return state!.registerFormOk || false;
   },
-  reviewFormOk(state: RegistrationState): boolean {
-    const { routeProtection } = state;
-    return routeProtection!.reviewFormOk || false;
+  reviewFormOk(state: RouteProtectionTypes): boolean {
+    return state!.reviewFormOk || false;
   },
-  formType(state: RegistrationState): string {
-    const { routeProtection } = state;
-    return routeProtection!.formType || "";
+  formType(state: RouteProtectionTypes): string {
+    return state!.formType || "";
   }
 };

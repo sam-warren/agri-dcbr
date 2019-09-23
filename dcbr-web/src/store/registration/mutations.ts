@@ -1,106 +1,137 @@
 import { MutationTree } from "vuex";
-import { RegistrationState, Location } from "../registration/types";
+import { ProfileTypes, Location, OperationDetailsTypes, OperationLocationsTypes, BreedingDetailsTypes, AnimalIdentificationTypes, TermsAndConditionsTypes, RouteProtectionTypes, RenewalTypes } from "../registration/types";
+// import { ProfileState, OperationDetailsState, OperationLocationsState, BreedingDetailsState, AnimalIdentificationState, TermsAndConditionsState, RouteProtectionState, RenewalState } from "./state"
 
-export const mutations: MutationTree<RegistrationState> = {
+export const ProfileMutations: MutationTree<ProfileTypes> = {
   // Profile
-  firstName(state: RegistrationState, payload: string) {
+  firstName(state: ProfileTypes, payload: string) {
     state.error = false;
-    state.profile!.firstName = payload;
+    state.firstName = payload;
   },
-  middleName(state: RegistrationState, payload: string) {
+  middleName(state: ProfileTypes, payload: string) {
     state.error = false;
-    state.profile!.middleName = payload;
+    state.middleName = payload;
   },
-  lastName(state: RegistrationState, payload: string) {
+  lastName(state: ProfileTypes, payload: string) {
     state.error = false;
-    state.profile!.lastName = payload;
+    state.lastName = payload;
   },
-  commType(state: RegistrationState, payload: string) {
+  commType(state: ProfileTypes, payload: string) {
     state.error = false;
-    state.profile!.commType = payload;
+    state.commType = payload;
   },
-  phone(state: RegistrationState, payload: string) {
+  phone(state: ProfileTypes, payload: string) {
     state.error = false;
-    state.profile!.phone = payload;
+    state.phone = payload;
   },
-  email(state: RegistrationState, payload: string) {
+  email(state: ProfileTypes, payload: string) {
     state.error = false;
-    state.profile!.email = payload;
+    state.email = payload;
   },
-  streetNumber(state: RegistrationState, payload: number) {
+  streetNumber(state: ProfileTypes, payload: number) {
     state.error = false;
-    state.profile!.streetNumber = payload;
+    state.streetNumber = payload;
   },
-  aptNumber(state: RegistrationState, payload: string) {
+  aptNumber(state: ProfileTypes, payload: string) {
     state.error = false;
-    state.profile!.aptNumber = payload;
+    state.aptNumber = payload;
   },
-  streetName(state: RegistrationState, payload: string) {
+  streetName(state: ProfileTypes, payload: string) {
     state.error = false;
-    state.profile!.streetName = payload;
+    state.streetName = payload;
   },
-  city(state: RegistrationState, payload: string) {
+  city(state: ProfileTypes, payload: string) {
     state.error = false;
-    state.profile!.city = payload;
+    state.city = payload;
   },
-  postalCode(state: RegistrationState, payload: string) {
+  postalCode(state: ProfileTypes, payload: string) {
     state.error = false;
-    state.profile!.postalCode = payload;
+    state.postalCode = payload;
   },
-  homeRegion(state: RegistrationState, payload: string) {
+  homeRegion(state: ProfileTypes, payload: string) {
     state.error = false;
-    state.profile!.homeRegion = payload;
+    state.homeRegion = payload;
   },
+  resetForm(state: ProfileTypes) {
+    state.firstName = "";
+    state.middleName = "";
+    state.lastName = "";
+    state.commType = "";
+    state.phone = "";
+    state.email = "";
+    state.streetNumber = 0;
+    state.aptNumber = "";
+    state.streetName = "";
+    state.city = "";
+    state.postalCode = "";
+    state.homeRegion = "";
+  }
+}
 
+export const OperationDetailsMutations: MutationTree<OperationDetailsTypes> = {
   // Operation Details
-  operationName(state: RegistrationState, payload: string) {
+  operationName(state: OperationDetailsTypes, payload: string) {
     state.error = false;
-    state.operationDetails!.operationName = payload;
+    state.operationName = payload;
   },
-  operationType(state: RegistrationState, payload: string) {
+  operationType(state: OperationDetailsTypes, payload: string) {
     state.error = false;
-    state.operationDetails!.operationType = payload;
+    state.operationType = payload;
   },
-  opWebsite(state: RegistrationState, payload: string) {
+  opWebsite(state: OperationDetailsTypes, payload: string) {
     state.error = false;
-    state.operationDetails!.opWebsite = payload;
+    state.opWebsite = payload;
   },
-  assocName(state: RegistrationState, payload: string) {
+  assocName(state: OperationDetailsTypes, payload: string) {
     state.error = false;
-    state.operationDetails!.assocName = payload;
+    state.assocName = payload;
   },
-  accidentalBreeding(state: RegistrationState, payload: string) {
+  accidentalBreeding(state: OperationDetailsTypes, payload: string) {
     state.error = false;
-    state.operationDetails!.accidentalBreeding = payload;
+    state.accidentalBreeding = payload;
   },
-  numWorkers(state: RegistrationState, payload: number) {
+  numWorkers(state: OperationDetailsTypes, payload: number) {
     state.error = false;
-    state.operationDetails!.numWorkers = payload;
+    state.numWorkers = payload;
   },
-  animalType(state: RegistrationState, payload: string) {
+  animalType(state: OperationDetailsTypes, payload: string) {
     state.error = false;
-    state.operationDetails!.animalType = payload;
+    state.animalType = payload;
   },
-  numDogBreeds(state: RegistrationState, payload: number) {
+  numDogBreeds(state: OperationDetailsTypes, payload: number) {
     state.error = false;
-    state.operationDetails!.numDogBreeds = payload;
+    state.numDogBreeds = payload;
   },
-  numCatBreeds(state: RegistrationState, payload: number) {
+  numCatBreeds(state: OperationDetailsTypes, payload: number) {
     state.error = false;
-    state.operationDetails!.numCatBreeds = payload;
+    state.numCatBreeds = payload;
   },
-  hasVet(state: RegistrationState, payload: string) {
+  hasVet(state: OperationDetailsTypes, payload: string) {
     state.error = false;
-    state.operationDetails!.hasVet = payload;
+    state.hasVet = payload;
   },
+  resetForm(state: OperationDetailsTypes) {
+    state.operationName = "";
+    state.operationType = "";
+    state.opWebsite = "";
+    state.assocName = "";
+    state.accidentalBreeding = "";
+    state.numWorkers = 0;
+    state.animalType = "";
+    state.numDogBreeds = 0;
+    state.numCatBreeds = 0;
+    state.hasVet = "";
+  }
+}
 
+export const OperationLocationsMutations: MutationTree<OperationLocationsTypes> = {
   // Operation Locations
-  hasAdditionalLocations(state: RegistrationState, payload: string) {
+  hasAdditionalLocations(state: OperationLocationsTypes, payload: string) {
     state.error = false;
-    state.operationLocations!.hasAdditionalLocations = payload;
-    state.operationLocations!.locations = [];
+    state.hasAdditionalLocations = payload;
+    state.locations = [];
   },
-  locations(state: RegistrationState, payload: { operation: string }) {
+  locations(state: OperationLocationsTypes, payload: { operation: string }) {
     state.error = false;
     if (payload.operation === "add") {
       let newLocation: Location = {
@@ -111,195 +142,189 @@ export const mutations: MutationTree<RegistrationState> = {
         postalCode: "",
         region: ""
       }
-      state.operationLocations!.locations.push(newLocation);
+      state.locations!.push(newLocation);
     } else if (payload.operation === "remove") {
-      state.operationLocations!.locations.pop();
+      state.locations!.pop();
     } else {
       console.error("Could not perform requested mutation: add/remove location.");
     }
-    // state.operationLocations!.locations = payload;
+    // state.locations = payload;
   },
-  updateLocationProperty(state: RegistrationState, payload: {index: number, property: string, value: any}) {
+  updateLocationProperty(state: OperationLocationsTypes, payload: {index: number, property: string, value: any}) {
     state.error = false;
-    if (state && state.operationLocations && state.operationLocations.locations) {
-      let location: any = state.operationLocations.locations[payload.index];
+    if (state && state && state.locations) {
+      let location: any = state.locations[payload.index];
       location[payload.property] = payload.value;
-      state.operationLocations.locations[payload.index] = location;
+      state.locations[payload.index] = location;
     }
   },
-
-  // Breeding Details
-  femaleIntactDogNum(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.femaleIntactDogNum = payload;
-  },
-  femaleIntactCatNum(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.femaleIntactCatNum = payload;
-  },
-  littersWhelped(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.littersWhelped = payload;
-  },
-  littersQueened(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.littersQueened = payload;
-  },
-  dogsTransferred(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.dogsTransferred = payload;
-  },
-  dogsSold(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.dogsSold = payload;
-  },
-  dogsTraded(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.dogsTraded = payload;
-  },
-  dogsLeased(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.dogsLeased = payload;
-  },
-  catsTransferred(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.catsTransferred = payload;
-  },
-  catsSold(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.catsSold = payload;
-  },
-  catsTraded(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.catsTraded = payload;
-  },
-  catsLeased(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.catsLeased = payload;
-  },
-  numCats(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.numCats = payload;
-  },
-  numDogs(state: RegistrationState, payload: number) {
-    state.error = false;
-    state.breedingDetails!.numDogs = payload;
-  },
-
-  // Animal Identification
-  hasPermId(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.animalIdentification!.hasPermId = payload;
-  },
-  permIdType(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.animalIdentification!.permIdType = payload;
-  },
-  otherPermIdType(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.animalIdentification!.otherPermIdType = payload;
-  },
-
-  // Terms and Conditions
-  hasAgreed(state: RegistrationState, payload: boolean) {
-    state.error = false;
-    state.termsAndConditions!.hasAgreed = payload;
-  },
-
-  // Route Protection
-  registerFormOk(state: RegistrationState, payload: boolean) {
-    state.error = false;
-    state.routeProtection!.registerFormOk = payload;
-  },
-  reviewFormOk(state: RegistrationState, payload: boolean) {
-    state.error = false;
-    state.routeProtection!.reviewFormOk = payload;
-  },
-  formType(state: RegistrationState, payload: string) {
-    state.error = false,
-    state.routeProtection!.formType = payload;
-  },
-
-  // Renewal
-  renewalFirstName(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.renewal!.renewalFirstName = payload;
-  },
-  renewalMiddleName(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.renewal!.renewalMiddleName = payload;
-  },
-  renewalLastName(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.renewal!.renewalLastName = payload;
-  },
-  registrationNumber(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.renewal!.registrationNumber = payload;
-  },
-  expiryDate(state: RegistrationState, payload: string) {
-    state.error = false;
-    state.renewal!.expiryDate = payload;
-  },
-
-
-  resetForm(state: RegistrationState) {
-    state.profile!.firstName = "";
-    state.profile!.middleName = "";
-    state.profile!.lastName = "" ;
-    state.profile!.commType = "";
-    state.profile!.phone = "";
-    state.profile!.email = "";
-    state.profile!.streetNumber = 0;
-    state.profile!.aptNumber = "";
-    state.profile!.streetName = "";
-    state.profile!.city = "";
-    state.profile!.postalCode = "";
-    state.profile!.homeRegion = "";
-    
-    state.operationDetails!.operationName = "";
-    state.operationDetails!.opWebsite = "";
-    state.operationDetails!.operationType = "";
-    state.operationDetails!.assocName = "";
-    state.operationDetails!.accidentalBreeding = "";
-    state.operationDetails!.numWorkers = 0;
-    state.operationDetails!.animalType = "";
-    state.operationDetails!.numDogBreeds = 0;
-    state.operationDetails!.numCatBreeds = 0;
-    state.operationDetails!.hasVet = "";
-
-    state.operationLocations!.hasAdditionalLocations = "";
-    state.operationLocations!.locations = [];
-
-    state.breedingDetails!.femaleIntactDogNum = 0;
-    state.breedingDetails!.femaleIntactCatNum = 0;
-    state.breedingDetails!.littersWhelped = 0;
-    state.breedingDetails!.littersQueened = 0;
-    state.breedingDetails!.dogsSold = 0;
-    state.breedingDetails!.dogsTransferred = 0;
-    state.breedingDetails!.dogsTraded = 0;
-    state.breedingDetails!.dogsLeased = 0;
-    state.breedingDetails!.catsSold = 0;
-    state.breedingDetails!.catsTransferred = 0;
-    state.breedingDetails!.catsTraded = 0;
-    state.breedingDetails!.catsLeased = 0;
-    state.breedingDetails!.numCats = 0;
-    state.breedingDetails!.numDogs = 0;
-
-    state.animalIdentification!.hasPermId = "";
-    state.animalIdentification!.permIdType = "NOT_APPLICABLE";
-    state.animalIdentification!.otherPermIdType = "";
-
-    state.termsAndConditions!.hasAgreed = false;
-
-    state.routeProtection!.registerFormOk = false;
-    state.routeProtection!.reviewFormOk = false;
-    state.routeProtection!.formType = "";
-
-    state.renewal!.expiryDate = "";
-    state.renewal!.renewalFirstName = "";
-    state.renewal!.renewalMiddleName = "";
-    state.renewal!.renewalLastName = "";
-    state.renewal!.registrationNumber = "";
+  resetForm(state: OperationLocationsTypes) {
+    state.hasAdditionalLocations = "";
+    state.locations = [];
   }
-};
+}
+
+export const BreedingDetailsMutations: MutationTree<BreedingDetailsTypes> = {
+  // Breeding Details
+  femaleIntactDogNum(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.femaleIntactDogNum = payload;
+  },
+  femaleIntactCatNum(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.femaleIntactCatNum = payload;
+  },
+  littersWhelped(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.littersWhelped = payload;
+  },
+  littersQueened(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.littersQueened = payload;
+  },
+  dogsTransferred(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.dogsTransferred = payload;
+  },
+  dogsSold(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.dogsSold = payload;
+  },
+  dogsTraded(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.dogsTraded = payload;
+  },
+  dogsLeased(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.dogsLeased = payload;
+  },
+  catsTransferred(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.catsTransferred = payload;
+  },
+  catsSold(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.catsSold = payload;
+  },
+  catsTraded(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.catsTraded = payload;
+  },
+  catsLeased(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.catsLeased = payload;
+  },
+  numCats(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.numCats = payload;
+  },
+  numDogs(state: BreedingDetailsTypes, payload: number) {
+    state.error = false;
+    state.numDogs = payload;
+  },
+  resetForm(state: BreedingDetailsTypes) {
+    state.error = false;
+    state.femaleIntactDogNum = 0;
+    state.femaleIntactCatNum = 0;
+    state.littersQueened = 0;
+    state.littersWhelped = 0;
+    state.dogsTransferred = 0;
+    state.dogsSold = 0;
+    state.dogsTraded = 0;
+    state.dogsLeased = 0;
+    state.catsTransferred = 0;
+    state.catsSold = 0;
+    state.catsTraded = 0;
+    state.catsLeased = 0;
+    state.numCats = 0;
+    state.numDogs = 0;
+  }
+}
+
+export const AnimalIdentificationMutations: MutationTree<AnimalIdentificationTypes> = {
+  // Animal Identification
+  hasPermId(state: AnimalIdentificationTypes, payload: string) {
+    state.error = false;
+    state.hasPermId = payload;
+  },
+  permIdType(state: AnimalIdentificationTypes, payload: string) {
+    state.error = false;
+    state.permIdType = payload;
+  },
+  otherPermIdType(state: AnimalIdentificationTypes, payload: string) {
+    state.error = false;
+    state.otherPermIdType = payload;
+  },
+  resetForm(state: AnimalIdentificationTypes) {
+    state.error = false;
+    state.hasPermId = "";
+    state.permIdType = "NOT_APPLICABLE";
+    state.otherPermIdType = "";
+  }
+}
+
+export const TermsAndConditionsMutations: MutationTree<TermsAndConditionsTypes> = {
+  // Terms and Conditions
+  hasAgreed(state: TermsAndConditionsTypes, payload: boolean) {
+    state.error = false;
+    state.hasAgreed = payload;
+  },
+  resetForm(state: TermsAndConditionsTypes) {
+    state.error = false;
+    state.hasAgreed = false;
+  }
+}
+
+export const RouteProtectionMutations: MutationTree<RouteProtectionTypes> = {
+  // Route Protection
+  registerFormOk(state: RouteProtectionTypes, payload: boolean) {
+    state.error = false;
+    state.registerFormOk = payload;
+  },
+  reviewFormOk(state: RouteProtectionTypes, payload: boolean) {
+    state.error = false;
+    state.reviewFormOk = payload;
+  },
+  formType(state: RouteProtectionTypes, payload: string) {
+    state.error = false;
+    state.formType = payload;
+  },
+  resetForm(state: RouteProtectionTypes) {
+    state.error = false;
+    state.registerFormOk = false;
+    state.reviewFormOk = false;
+    state.formType = "";
+  }
+}
+
+export const RenewalMutations: MutationTree<RenewalTypes> = {
+  // Renewal
+  renewalFirstName(state: RenewalTypes, payload: string) {
+    state.error = false;
+    state.renewalFirstName = payload;
+  },
+  renewalMiddleName(state: RenewalTypes, payload: string) {
+    state.error = false;
+    state.renewalMiddleName = payload;
+  },
+  renewalLastName(state: RenewalTypes, payload: string) {
+    state.error = false;
+    state.renewalLastName = payload;
+  },
+  registrationNumber(state: RenewalTypes, payload: string) {
+    state.error = false;
+    state.registrationNumber = payload;
+  },
+  expiryDate(state: RenewalTypes, payload: string) {
+    state.error = false;
+    state.expiryDate = payload;
+  },
+  resetForm(state: RenewalTypes) {
+    state.error = false;
+    state.renewalFirstName = "";
+    state.renewalMiddleName = "";
+    state.renewalLastName = "";
+    state.registrationNumber = "";
+    state.expiryDate = "";
+  }
+}
