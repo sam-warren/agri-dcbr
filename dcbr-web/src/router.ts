@@ -20,28 +20,33 @@ const router = new Router({
       }
     },
     {
-      path: "/home",
-      name: "home",
-      component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue"),
-      meta: {
-        requiresAuth: false
-      }
-    },
-    {
       path: "/preamble",
       name: "preamble",
       component: () => import(/* webpackChunkName: "preamble" */ "./views/Preamble.vue"),
       meta: {
         requiresAuth: false
-      }
+      },
+      // beforeEnter(to, from, next) {
+      //   if (store.getters["routeProtection/formType"] !== "register") {
+      //     console.log(from.path)
+      //     next(from.path);
+      //   } else {
+      //     next();
+      //   }
+      // }
     },
     {
       path: "/register",
       name: "register",
       component: () => import(/* webpackChunkName: "registration" */ "./views/OperationRegistration.vue"),
-      meta: {
-        requiresAuth: false
-      }
+      // beforeEnter(to, from, next) {
+      //   if (store.getters["routeProtection/formType"] === "") {
+      //     console.log(from.name)
+      //     next(from.path);
+      //   } else {
+      //     next();
+      //   }
+      // }
     },
     {
       path: "/review",
@@ -63,39 +68,37 @@ const router = new Router({
 });
 
 router.beforeEach((to: any, from: any, next: any) => {
-  if (to.path === "/") {
+  if (to.path === "/preamble") {
+    console.log(from.fullPath)
+    if (store.getters["routeProtection/formType"] !== "register") {
+      next(from.path)
+    } else {
+      next();
+    }
+  } else if (to.path === "/register") {
+    console.log(from.fullPath)
     if (store.getters["routeProtection/formType"] === "") {
-      if (!(from.path === "/home")) {
-        next("/home");
-      } else {
-        next();
-      }
+      next(from.path)
     } else {
       next();
     }
   } else if (to.path === "/review") {
+    console.log(from.path)
     if (!store.getters["routeProtection/registerFormOk"]) {
-      if (!(from.path === "/home")) {
-        next("/home");
-      } else {
-        next();
-      }
+      next(from.fullPath)
     } else {
       next();
     }
   } else if (to.path === "/confirmation") {
+    console.log(from.fullPath)
     if (!store.getters["routeProtection/reviewFormOk"]) {
-      if (!(from.path === "/home")) {
-        next("/home");
-      } else {
-        next();
-      }
+      next(from.path)
     } else {
       next();
     }
   } else {
-    next();
-  }
+    next()
+  } 
 });
 
 export default router;
