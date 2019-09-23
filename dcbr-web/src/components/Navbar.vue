@@ -8,12 +8,6 @@
       </v-toolbar-title>
       <h3>Dog and Cat Breeder Registry</h3>
       <v-spacer></v-spacer>
-      <!-- <v-btn height="30px" color="#fcba19">
-        <v-icon>search</v-icon>
-      </v-btn>
-      <v-btn icon> -->
-        <v-icon>menu</v-icon>
-      </v-btn>
     </v-toolbar>
   </header>
 </template>
