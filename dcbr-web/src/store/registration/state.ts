@@ -1,4 +1,4 @@
-import { ProfileTypes, OperationDetailsTypes, OperationLocationsTypes, BreedingDetailsTypes, AnimalIdentificationTypes, RouteProtectionTypes, RenewalTypes, TermsAndConditionsTypes, RegistrationState } from "./types"
+import { ProfileTypes, OperationDetailsTypes, OperationLocationsTypes, BreedingDetailsTypes, AnimalIdentificationTypes, RouteProtectionTypes, RenewalTypes, TermsAndConditionsTypes } from "./types"
 
 export const ProfileState: ProfileTypes = {
     // firstName: "John",

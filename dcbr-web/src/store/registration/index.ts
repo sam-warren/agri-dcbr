@@ -4,8 +4,8 @@ import { RootState } from "../types";
 import { ProfileActions, OperationDetailsActions, OperationLocationsActions, BreedingDetailsActions, AnimalIdentificationActions, TermsAndConditionsActions, RouteProtectionActions, RenewalActions } from "./actions";
 import { ProfileGetters, OperationDetailsGetters, OperationLocationsGetters, BreedingDetailsGetters, AnimalIdentificationGetters, TermsAndConditionsGetters, RouteProtectionGetters, RenewalGetters } from "./getters";
 import { ProfileMutations, OperationDetailsMutations, OperationLocationsMutations, BreedingDetailsMutations, AnimalIdentificationMutations, TermsAndConditionsMutations, RouteProtectionMutations, RenewalMutations } from "./mutations";
-import { ProfileTypes, OperationDetailsTypes, OperationLocationsTypes, BreedingDetailsTypes, AnimalIdentificationTypes, TermsAndConditionsTypes, RouteProtectionTypes, RenewalTypes, RegistrationState } from "./types";
-import { ProfileState, OperationDetailsState, OperationLocationsState, BreedingDetailsState, AnimalIdentificationState, TermsAndConditionsState, RouteProtectionState, RenewalState, AllModulesState } from "./state"
+import { ProfileTypes, OperationDetailsTypes, OperationLocationsTypes, BreedingDetailsTypes, AnimalIdentificationTypes, TermsAndConditionsTypes, RouteProtectionTypes, RenewalTypes } from "./types";
+import { ProfileState, OperationDetailsState, OperationLocationsState, BreedingDetailsState, AnimalIdentificationState, TermsAndConditionsState, RouteProtectionState, RenewalState } from "./state"
 
 import * as allGetters from "./getters";
 
