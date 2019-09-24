@@ -34,7 +34,7 @@
   </v-app>
 </template>
 
-// <script>
+<script>
 import { mapActions } from "vuex"
 export default {
   beforeRouteLeave (to, from, next) {

@@ -42,6 +42,9 @@ export const ProfileActions: ActionTree<ProfileTypes, RootState> = {
   homeRegion(context: any, payload: string) {
     context.commit("homeRegion", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
 };
 
 export const OperationDetailsActions: ActionTree<OperationDetailsTypes, RootState> = {
@@ -76,6 +79,9 @@ export const OperationDetailsActions: ActionTree<OperationDetailsTypes, RootStat
   hasVet(context: any, payload: string) {
     context.commit("hasVet", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
 };
 
 export const OperationLocationsActions: ActionTree<OperationLocationsTypes, RootState> = {
@@ -89,6 +95,9 @@ export const OperationLocationsActions: ActionTree<OperationLocationsTypes, Root
   updateLocationProperty(context: any, payload: {index: number, property: string, value: any}) {
     context.commit("updateLocationProperty", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
 };
 
 export const BreedingDetailsActions: ActionTree<BreedingDetailsTypes, RootState> = {
@@ -135,6 +144,9 @@ export const BreedingDetailsActions: ActionTree<BreedingDetailsTypes, RootState>
   numDogs(context: any, payload: number) {
     context.commit("numDogs", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
 };
 
 export const AnimalIdentificationActions: ActionTree<AnimalIdentificationTypes, RootState> = {
@@ -148,6 +160,9 @@ export const AnimalIdentificationActions: ActionTree<AnimalIdentificationTypes, 
   otherPermIdType(context: any, payload: string) {
     context.commit("otherPermIdType", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
 };
 
 export const TermsAndConditionsActions: ActionTree<TermsAndConditionsTypes, RootState> = {
@@ -155,6 +170,9 @@ export const TermsAndConditionsActions: ActionTree<TermsAndConditionsTypes, Root
   hasAgreed(context: any, payload: boolean) {
     context.commit("hasAgreed", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
 };
 
 export const RouteProtectionActions: ActionTree<RouteProtectionTypes, RootState> = {
@@ -168,18 +186,21 @@ export const RouteProtectionActions: ActionTree<RouteProtectionTypes, RootState>
   formType(context: any, payload: string) {
     context.commit("formType", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
 };
 
 export const RenewalActions: ActionTree<RenewalTypes, RootState> = {
   // Renewal
-  renewalFirstName(context: any, payload: string) {
-    context.commit("renewalFirstName", payload);
+  firstName(context: any, payload: string) {
+    context.commit("firstName", payload);
   },
-  renewalMiddleName(context: any, payload: string) {
-    context.commit("renewalMiddleName", payload);
+  middleName(context: any, payload: string) {
+    context.commit("middleName", payload);
   },
-  renewalLastName(context: any, payload: string) {
-    context.commit("renewalLastName", payload);
+  lastName(context: any, payload: string) {
+    context.commit("lastName", payload);
   },
   registrationNumber(context: any, payload: string) {
     context.commit("registrationNumber", payload);
@@ -187,11 +208,7 @@ export const RenewalActions: ActionTree<RenewalTypes, RootState> = {
   expiryDate(context: any, payload: string) {
     context.commit("expiryDate", payload);
   },
-}
-
-export const ResetFormActions: ActionTree<{ resetForm: any }, RootState> = {
-  // Reset Form
   resetForm(context: any) {
-    context.commit("resetForm")
+    context.commit("resetForm");
   }
-};
+}

@@ -26,27 +26,11 @@ const router = new Router({
       meta: {
         requiresAuth: false
       },
-      // beforeEnter(to, from, next) {
-      //   if (store.getters["routeProtection/formType"] !== "register") {
-      //     console.log(from.path)
-      //     next(from.path);
-      //   } else {
-      //     next();
-      //   }
-      // }
     },
     {
       path: "/register",
       name: "register",
       component: () => import(/* webpackChunkName: "registration" */ "./views/OperationRegistration.vue"),
-      // beforeEnter(to, from, next) {
-      //   if (store.getters["routeProtection/formType"] === "") {
-      //     console.log(from.name)
-      //     next(from.path);
-      //   } else {
-      //     next();
-      //   }
-      // }
     },
     {
       path: "/review",
@@ -69,16 +53,15 @@ const router = new Router({
 
 router.beforeEach((to: any, from: any, next: any) => {
   if (to.path === "/preamble") {
-    console.log(from.fullPath)
     if (store.getters["routeProtection/formType"] !== "register") {
-      next(from.path)
+      next(from.fullPath)
     } else {
       next();
     }
   } else if (to.path === "/register") {
     console.log(from.fullPath)
     if (store.getters["routeProtection/formType"] === "") {
-      next(from.path)
+      next(from.fullPath)
     } else {
       next();
     }
@@ -92,7 +75,7 @@ router.beforeEach((to: any, from: any, next: any) => {
   } else if (to.path === "/confirmation") {
     console.log(from.fullPath)
     if (!store.getters["routeProtection/reviewFormOk"]) {
-      next(from.path)
+      next(from.fullPath)
     } else {
       next();
     }

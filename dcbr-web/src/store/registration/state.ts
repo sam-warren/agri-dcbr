@@ -134,16 +134,16 @@ export const ProfileState: ProfileTypes = {
   }
   
   export const RenewalState: RenewalTypes = {
-    renewalFirstName: "",
-    renewalMiddleName: "",
-    renewalLastName: "",
+    firstName: "",
+    middleName: "",
+    lastName: "",
     registrationNumber: "",
     expiryDate: "",
     error: false
   
-    // renewalFirstName: "Sam",
-    // renewalMiddleName: "Robert",
-    // renewalLastName: "Warren",
+    // firstName: "Sam",
+    // middleName: "Robert",
+    // lastName: "Warren",
     // registrationNumber: "3135-1234-1111",
     // expiryDate: "",
     // error: false

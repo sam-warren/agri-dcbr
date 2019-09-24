@@ -157,14 +157,14 @@ export const TermsAndConditionsGetters: GetterTree<TermsAndConditionsTypes, Root
 
 export const RenewalGetters: GetterTree<RenewalTypes, RootState> = {
   // Renewal
-  renewalFirstName(state: RenewalTypes): string {
-    return state!.renewalFirstName || "";
+  firstName(state: RenewalTypes): string {
+    return state!.firstName || "";
   },
-  renewalMiddleName(state: RenewalTypes): string {
-    return state!.renewalMiddleName || "";
+  middleName(state: RenewalTypes): string {
+    return state!.middleName || "";
   },
-  renewalLastName(state: RenewalTypes): string {
-    return state!.renewalLastName || "";
+  lastName(state: RenewalTypes): string {
+    return state!.lastName || "";
   },
   registrationNumber(state: RenewalTypes): string {
     return state!.registrationNumber || "";

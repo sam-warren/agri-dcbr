@@ -156,9 +156,9 @@ export default {
       ];
       let renewalDetails = [
         {
-          first_name: this.$store.getters["renewal/renewalFirstName"],
-          middle_name: this.$store.getters["renewal/renewalMiddleName"],
-          last_name: this.$store.getters["renewal/renewalLastName"],
+          first_name: this.$store.getters["renewal/firstName"],
+          middle_name: this.$store.getters["renewal/middleName"],
+          last_name: this.$store.getters["renewal/lastName"],
           previous_registration_number: this.$store.getters[
             "renewal/registrationNumber"
           ]
@@ -317,19 +317,19 @@ export default {
         // profile
         if (this.$store.getters["routeProtection/formType"] === "renewal") {
           if (
-            this.$store.getters["renewal/renewalFirstName"] === "" ||
-            this.$store.getters["renewal/renewalFirstName"].length > 32
+            this.$store.getters["renewal/firstName"] === "" ||
+            this.$store.getters["renewal/firstName"].length > 32
           ) {
             this.error = "First name must meet requirements";
             return true;
           }
-          if (this.$store.getters["renewal/renewalMiddleName"].length > 50) {
+          if (this.$store.getters["renewal/middleName"].length > 50) {
             this.error = "Middle name must meet requirements";
             return true;
           }
           if (
-            this.$store.getters["renewal/renewalLastName"] === "" ||
-            this.$store.getters["renewal/renewalLastName"].length > 50
+            this.$store.getters["renewal/lastName"] === "" ||
+            this.$store.getters["renewal/lastName"].length > 50
           ) {
             this.error = "Last name must meet requirements";
             return true;

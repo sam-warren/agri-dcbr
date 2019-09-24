@@ -299,17 +299,17 @@ export const RouteProtectionMutations: MutationTree<RouteProtectionTypes> = {
 
 export const RenewalMutations: MutationTree<RenewalTypes> = {
   // Renewal
-  renewalFirstName(state: RenewalTypes, payload: string) {
+  firstName(state: RenewalTypes, payload: string) {
     state.error = false;
-    state.renewalFirstName = payload;
+    state.firstName = payload;
   },
-  renewalMiddleName(state: RenewalTypes, payload: string) {
+  middleName(state: RenewalTypes, payload: string) {
     state.error = false;
-    state.renewalMiddleName = payload;
+    state.middleName = payload;
   },
-  renewalLastName(state: RenewalTypes, payload: string) {
+  lastName(state: RenewalTypes, payload: string) {
     state.error = false;
-    state.renewalLastName = payload;
+    state.lastName = payload;
   },
   registrationNumber(state: RenewalTypes, payload: string) {
     state.error = false;
@@ -321,9 +321,9 @@ export const RenewalMutations: MutationTree<RenewalTypes> = {
   },
   resetForm(state: RenewalTypes) {
     state.error = false;
-    state.renewalFirstName = "";
-    state.renewalMiddleName = "";
-    state.renewalLastName = "";
+    state.firstName = "";
+    state.middleName = "";
+    state.lastName = "";
     state.registrationNumber = "";
     state.expiryDate = "";
   }

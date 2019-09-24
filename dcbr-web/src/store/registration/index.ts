@@ -7,8 +7,6 @@ import { ProfileMutations, OperationDetailsMutations, OperationLocationsMutation
 import { ProfileTypes, OperationDetailsTypes, OperationLocationsTypes, BreedingDetailsTypes, AnimalIdentificationTypes, TermsAndConditionsTypes, RouteProtectionTypes, RenewalTypes } from "./types";
 import { ProfileState, OperationDetailsState, OperationLocationsState, BreedingDetailsState, AnimalIdentificationState, TermsAndConditionsState, RouteProtectionState, RenewalState } from "./state"
 
-import * as allGetters from "./getters";
-
 const namespaced: boolean = true;
 
 export const profile: Module<ProfileTypes, RootState> = {

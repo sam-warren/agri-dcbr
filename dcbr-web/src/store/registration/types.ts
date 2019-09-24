@@ -81,9 +81,9 @@ export interface RouteProtectionTypes {
 }
 
 export interface RenewalTypes {
-  renewalFirstName?: string;
-  renewalMiddleName?: string;
-  renewalLastName?: string;
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
   registrationNumber?: string;
   expiryDate?: string;
   error?: boolean;
