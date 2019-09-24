@@ -13,6 +13,12 @@
     # Openly exposed health check endpoint for OpenShift
     status 200 /health
 
+    # Required for vue-router to work
+    rewrite {
+        regexp .*
+        to {path} /
+    }
+
     proxy /api {%DCBR_API_HOST%}:{%DCBR_API_PORT%} {
         transparent
         fail_timeout 0 # see https://github.com/mholt/caddy/issues/1925
