@@ -31,7 +31,6 @@ class Registration(models.Model):
     )
 
     registration_number = models.CharField(max_length=20, default="", blank=True)
-    num_locations = models.IntegerField(default=0, blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     created_timestamp = models.DateTimeField(auto_now_add=True)
     updated_timestamp = models.DateTimeField(auto_now=True)

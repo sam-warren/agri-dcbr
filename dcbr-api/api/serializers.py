@@ -110,7 +110,6 @@ class Registration_Serializer(ModelSerializer):
             "operator_status",
             "registration_number",
             "registration_date",
-            "num_locations",
             "operator",
             "addresses",
             "associations",
@@ -131,7 +130,6 @@ class Registration_Serializer(ModelSerializer):
 
         for address_data in addresses_data:
             Address.objects.create(registration_number=registration, **address_data)
-            registration.num_locations += 1
 
         for association_data in associations_data:
             Association_Membership.objects.create(
