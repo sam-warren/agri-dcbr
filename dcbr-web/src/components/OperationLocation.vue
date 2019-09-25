@@ -49,7 +49,7 @@
                 </v-flex>
                  <v-flex xs12 md4>
                   <v-flex class="d-flex" cols="12" sm="6">
-                    <v-select :rules="requiredRules" :items="items" v-model="region" label="Region"></v-select>
+                    <v-select :rules="requiredRules" :items="items" v-model="region" label="Regional District"></v-select>
                   </v-flex>
                 </v-flex>
               </v-layout>

@@ -473,7 +473,7 @@ export default {
           return true;
         }
         if (
-          this.$store.getters["operationDetails/numWorkers"] < 0 ||
+          this.$store.getters["operationDetails/numWorkers"] < 1 ||
           this.$store.getters["operationDetails/numWorkers"] > 2147483647
         ) {
           this.error = "Number of workers must meet requirements";

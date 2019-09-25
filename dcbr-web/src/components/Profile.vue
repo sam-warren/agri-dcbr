@@ -62,16 +62,6 @@
                     required
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 md4 lg6>
-                  <v-text-field 
-                    v-model="aptNumber" 
-                    label="Apt/Suite (optional)" 
-                    name="aptNumber" 
-                    counter=32
-                    :rules="suiteRules"
-                  ></v-text-field>
-                </v-flex>
-
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="streetName"
@@ -80,6 +70,15 @@
                     name="streetName"
                     counter=32
                     required
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 md4 lg6>
+                  <v-text-field 
+                    v-model="aptNumber" 
+                    label="Apt/Suite (optional)" 
+                    name="aptNumber" 
+                    counter=32
+                    :rules="suiteRules"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
@@ -104,7 +103,7 @@
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-flex class="d-flex" cols="12" sm="6">
-                    <v-select :rules="requiredRules" :items="items" v-model="homeRegion" label="Region"></v-select>
+                    <v-select :rules="requiredRules" :items="items" v-model="homeRegion" label="Regional District"></v-select>
                   </v-flex>
                 </v-flex>
               </v-layout>
