@@ -198,6 +198,7 @@ class Address(models.Model):
     street_num = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     suite = models.CharField(max_length=32, default="", blank=True)
     street_name = models.CharField(max_length=32)
+    POBox = models.CharField(max_length=32, default="", blank=True)
     city = models.CharField(max_length=32)
     postal_code = models.CharField(max_length=7)
     province = models.CharField(max_length=2, default="BC")

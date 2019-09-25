@@ -21,6 +21,7 @@ class Address_Serializer(ModelSerializer):
             "street_num",
             "suite",
             "street_name",
+            "POBox",
             "city",
             "postal_code",
             "region",
