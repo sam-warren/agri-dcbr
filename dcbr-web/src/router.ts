@@ -20,28 +20,17 @@ const router = new Router({
       }
     },
     {
-      path: "/home",
-      name: "home",
-      component: () => import(/* webpackChunkName: "home" */ "./views/Home.vue"),
-      meta: {
-        requiresAuth: false
-      }
-    },
-    {
       path: "/preamble",
       name: "preamble",
       component: () => import(/* webpackChunkName: "preamble" */ "./views/Preamble.vue"),
       meta: {
         requiresAuth: false
-      }
+      },
     },
     {
       path: "/register",
       name: "register",
       component: () => import(/* webpackChunkName: "registration" */ "./views/OperationRegistration.vue"),
-      meta: {
-        requiresAuth: false
-      }
     },
     {
       path: "/review",
@@ -63,39 +52,36 @@ const router = new Router({
 });
 
 router.beforeEach((to: any, from: any, next: any) => {
-  if (to.path === "/") {
+  if (to.path === "/preamble") {
+    if (store.getters["routeProtection/formType"] !== "register") {
+      next(from.fullPath)
+    } else {
+      next();
+    }
+  } else if (to.path === "/register") {
+    console.log(from.fullPath)
     if (store.getters["routeProtection/formType"] === "") {
-      if (!(from.path === "/home")) {
-        next("/home");
-      } else {
-        next();
-      }
+      next(from.fullPath)
     } else {
       next();
     }
   } else if (to.path === "/review") {
+    console.log(from.path)
     if (!store.getters["routeProtection/registerFormOk"]) {
-      if (!(from.path === "/home")) {
-        next("/home");
-      } else {
-        next();
-      }
+      next(from.fullPath)
     } else {
       next();
     }
   } else if (to.path === "/confirmation") {
+    console.log(from.fullPath)
     if (!store.getters["routeProtection/reviewFormOk"]) {
-      if (!(from.path === "/home")) {
-        next("/home");
-      } else {
-        next();
-      }
+      next(from.fullPath)
     } else {
       next();
     }
   } else {
-    next();
-  }
+    next()
+  } 
 });
 
 export default router;

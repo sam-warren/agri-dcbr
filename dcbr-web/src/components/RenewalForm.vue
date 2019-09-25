@@ -18,28 +18,28 @@
                 <v-layout row wrap mx-2>
                   <v-flex xs12 md4>
                     <v-text-field
-                      v-model="renewalFirstName"
+                      v-model="firstName"
                       :rules="nameRules"
                       label="First name"
-                      name="renewalFirstName"
+                      name="firstName"
                       required
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12 md4>
                     <v-text-field
-                      v-model="renewalMiddleName"
+                      v-model="middleName"
                       :rules="middleNameRules"
                       label="Middle name (optional)"
-                      name="renewalMiddleName"
+                      name="middleName"
                     ></v-text-field>
                   </v-flex>
 
                   <v-flex xs12 md4>
                     <v-text-field
-                      v-model="renewalLastName"
+                      v-model="lastName"
                       :rules="nameRules"
                       label="Last name"
-                      name="renewalLastName"
+                      name="lastName"
                       required
                     ></v-text-field>
                   </v-flex>
@@ -97,37 +97,37 @@ export default {
     ...mapState({
       renewal: state => state.renewal
     }),
-    renewalFirstName: {
+    firstName: {
       // getter
       get() {
-        return this.$store.getters["renewal/renewalFirstName"];
+        return this.$store.getters["renewal/firstName"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("renewal/renewalFirstName", value);
+        this.$store.dispatch("renewal/firstName", value);
       }
     },
-    renewalMiddleName: {
+    middleName: {
       // getter
       get() {
-        return this.$store.getters["renewal/renewalMiddleName"];
+        return this.$store.getters["renewal/middleName"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("renewal/renewalMiddleName", value);
+        this.$store.dispatch("renewal/middleName", value);
       }
     },
-    renewalLastName: {
+    lastName: {
       // getter
       get() {
-        return this.$store.getters["renewal/renewalLastName"];
+        return this.$store.getters["renewal/lastName"];
       },
       // setter
       set(value) {
         console.log(value);
-        this.$store.dispatch("renewal/renewalLastName", value);
+        this.$store.dispatch("renewal/lastName", value);
       }
     },
     registrationNumber: {
