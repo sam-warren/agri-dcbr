@@ -44,7 +44,7 @@ class Registration_ViewSet(
             "registration_number": serializer.data["registration_number"],
             "registration_date": registration_date.strftime("%B %d, %Y"),
             "expiry_date": expiry_date.strftime("%B %d, %Y"),
-            "num_locations": serializer.data["num_locations"],
+            "num_locations": len(serializer.data["addresses"]),
         }
         tasks.send_registration_email(registration_email_context)
 
