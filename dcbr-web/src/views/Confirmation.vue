@@ -37,7 +37,8 @@
 <script>
 import { mapActions } from "vuex"
 export default {
-  beforeRouteLeave (to, from, next) {
+  beforeMount() {
+    // form destroys upon confirmation page
     this.$store.dispatch("profile/resetForm");
     this.$store.dispatch("operationDetails/resetForm");
     this.$store.dispatch("breedingDetails/resetForm");
@@ -46,7 +47,6 @@ export default {
     this.$store.dispatch("routeProtection/resetForm");
     this.$store.dispatch("termsAndConditions/resetForm");
     this.$store.dispatch("renewal/resetForm");
-    next()
-  }
+  },
 }
 </script>
