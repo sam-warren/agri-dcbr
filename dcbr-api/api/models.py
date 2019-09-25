@@ -31,7 +31,6 @@ class Registration(models.Model):
     )
 
     registration_number = models.CharField(max_length=20, default="", blank=True)
-    num_locations = models.IntegerField(default=0, blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     created_timestamp = models.DateTimeField(auto_now_add=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
@@ -198,6 +197,7 @@ class Address(models.Model):
     street_num = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     suite = models.CharField(max_length=32, default="", blank=True)
     street_name = models.CharField(max_length=32)
+    POBox = models.CharField(max_length=32, default="", blank=True)
     city = models.CharField(max_length=32)
     postal_code = models.CharField(max_length=7)
     province = models.CharField(max_length=2, default="BC")
