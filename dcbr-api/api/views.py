@@ -38,6 +38,15 @@ class Registration_ViewSet(
             months=int(settings.REGISTRATION_VALIDITY_MONTHS)
         )
 
+        animal_type = ""
+        myOrderedDict = serializer.data["animal_risk_factors"]
+        for record in myOrderedDict:
+            myDict = dict(record)
+            if animal_type == "":
+                animal_type += myDict.pop("animal_type")
+            else:
+                animal_type = animal_type + " & " + myDict.pop("animal_type")
+
         # Send registration email
         registration_email_context = {
             "operator": serializer.data["operator"],
@@ -45,6 +54,7 @@ class Registration_ViewSet(
             "registration_date": registration_date.strftime("%B %d, %Y"),
             "expiry_date": expiry_date.strftime("%B %d, %Y"),
             "num_locations": len(serializer.data["addresses"]),
+            "animal_type": animal_type,
         }
         tasks.send_registration_email(registration_email_context)
 
