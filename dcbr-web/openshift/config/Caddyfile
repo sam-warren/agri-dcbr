@@ -15,7 +15,7 @@
 
     # Required for vue-router to work
     rewrite {
-        regexp ^/(home|register|preamble|review|confirmation)/?$
+        regexp ^/(!?api)/?$
         to {path} /
     }
 
