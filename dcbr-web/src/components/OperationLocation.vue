@@ -23,9 +23,6 @@
                     required
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="aptNumber" :rules="suiteRules" label="Apt/Suite (optional)" counter=32 required></v-text-field>
-                </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="streetName"
@@ -34,6 +31,9 @@
                     counter=32
                     required
                   ></v-text-field>
+                </v-flex>
+                <v-flex xs12 md4 lg6>
+                  <v-text-field v-model="aptNumber" :rules="suiteRules" label="Apt/Suite (optional)" counter=32 required></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field v-model="city" :rules="cityRules" label="City" counter=32 required></v-text-field>

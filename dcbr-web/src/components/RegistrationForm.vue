@@ -431,7 +431,7 @@ export default {
           return true;
         }
         if (
-          /^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(
+          /(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#()?&//=]*)/.test(
             this.$store.getters["operationDetails/opWebsite"]
           ) === false ||
           this.$store.getters["operationDetails/opWebsite"].length > 4000
