@@ -64,28 +64,6 @@ export default {
     }
   },
   computed: {
-    hasAdditionalLocations: {
-      // getter
-      get() {
-        return this.$store.getters["operationLocations/hasAdditionalLocations"];
-      },
-      // setter
-      set(value) {
-        console.log(value);
-        this.$store.dispatch(
-          "operationLocations/hasAdditionalLocations",
-          value
-        );
-        if (
-          value === "true" &&
-          this.$store.getters["operationLocations/locations"].length === 0
-        ) {
-          this.$store.dispatch("operationLocations/locations", {
-            operation: "add"
-          });
-        }
-      }
-    },
     locations: {
       // getter
       get() {

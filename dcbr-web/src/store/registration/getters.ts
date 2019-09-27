@@ -81,9 +81,6 @@ export const OperationDetailsGetters: GetterTree<OperationDetailsTypes, RootStat
 
 export const OperationLocationsGetters: GetterTree<OperationLocationsTypes, RootState> = {
   // Operation Locations
-  hasAdditionalLocations(state: OperationLocationsTypes): string {
-    return state!.hasAdditionalLocations || "";
-  },
   locations(state: OperationLocationsTypes): Location[] {
     return state!.locations || [];
   },

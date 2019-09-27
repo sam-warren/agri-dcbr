@@ -126,11 +126,6 @@ export const OperationDetailsMutations: MutationTree<OperationDetailsTypes> = {
 
 export const OperationLocationsMutations: MutationTree<OperationLocationsTypes> = {
   // Operation Locations
-  hasAdditionalLocations(state: OperationLocationsTypes, payload: string) {
-    state.error = false;
-    state.hasAdditionalLocations = payload;
-    state.locations = [];
-  },
   locations(state: OperationLocationsTypes, payload: { operation: string }) {
     state.error = false;
     if (payload.operation === "add") {
@@ -159,7 +154,6 @@ export const OperationLocationsMutations: MutationTree<OperationLocationsTypes> 
     }
   },
   resetForm(state: OperationLocationsTypes) {
-    state.hasAdditionalLocations = "";
     state.locations = [];
   }
 }

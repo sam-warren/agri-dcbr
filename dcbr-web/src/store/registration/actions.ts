@@ -86,9 +86,6 @@ export const OperationDetailsActions: ActionTree<OperationDetailsTypes, RootStat
 
 export const OperationLocationsActions: ActionTree<OperationLocationsTypes, RootState> = {
   // Operation Locations
-  hasAdditionalLocations(context: any, payload: string) {
-    context.commit("hasAdditionalLocations", payload);
-  },
   locations(context: any, payload: { operation: string }) {
     context.commit("locations", payload);
   },

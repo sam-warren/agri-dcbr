@@ -29,7 +29,6 @@ export interface OperationDetailsTypes {
 }
 
 export interface OperationLocationsTypes {
-  hasAdditionalLocations?: string;
   locations?: Location[];
   error?: boolean;
 }
