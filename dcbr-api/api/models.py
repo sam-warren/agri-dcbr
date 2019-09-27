@@ -121,9 +121,9 @@ class Operator(models.Model):
 
 
 class Address(models.Model):
-    PRIMARY = "PRI"
+    MAILING = "MAIL"
     OPERATION = "OPN"
-    TYPE_CHOICES = ((PRIMARY, "Primary"), (OPERATION, "Operation"))
+    TYPE_CHOICES = ((MAILING, "Mailing"), (OPERATION, "Operation"))
 
     # List of regions
     ALBERNI_CLAYOQUOT = "Alberni-Clayoquot"
@@ -155,7 +155,7 @@ class Address(models.Model):
     SUNSHINE_COAST = "Sunshine Coast"
     THOMPSON_NICOLA = "Thompson-Nicola"
 
-    TYPE_CHOICES = ((PRIMARY, "Primary"), (OPERATION, "Operation"))
+    TYPE_CHOICES = ((MAILING, "Mailing"), (OPERATION, "Operation"))
     REGIONAL_CHOICES = (
         (ALBERNI_CLAYOQUOT, "Alberni-Clayoquot"),
         (BULKLEY_NECHAKO, "Buckley-Nechako"),
@@ -193,7 +193,7 @@ class Address(models.Model):
         related_name="addresses",
         related_query_name="addresses",
     )
-    address_type = models.CharField(max_length=3, choices=TYPE_CHOICES, default=PRIMARY)
+    address_type = models.CharField(max_length=4, choices=TYPE_CHOICES, default=MAILING)
     street_num = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     suite = models.CharField(max_length=32, default="", blank=True)
     street_name = models.CharField(max_length=32)

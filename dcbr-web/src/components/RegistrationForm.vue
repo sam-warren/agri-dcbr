@@ -145,10 +145,11 @@ export default {
       console.log("Submit clicked");
       let addresses = [
         {
-          address_type: "PRI",
+          address_type: "MAIL",
           street_num: this.$store.getters["profile/streetNumber"],
           suite: this.$store.getters["profile/aptNumber"],
           street_name: this.$store.getters["profile/streetName"],
+          POBox: this.$store.getters["profile/poBox"],
           city: this.$store.getters["profile/city"],
           postal_code: this.$store.getters["profile/postalCode"],
           region: this.$store.getters["profile/homeRegion"]
@@ -389,6 +390,13 @@ export default {
           this.$store.getters["profile/streetName"].length > 32
         ) {
           this.error = "Street name must meet requirements";
+          return true;
+        }
+        if (
+          this.$store.getters["profile/poBox"] === "" ||
+          this.$store.getters["profile/poBox"].length > 32
+        ) {
+          this.error = "P.O. Box must meet requirements";
           return true;
         }
         if (
