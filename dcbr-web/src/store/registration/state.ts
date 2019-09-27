@@ -28,6 +28,7 @@ export const ProfileState: ProfileTypes = {
     postalCode: "",
     poBox: "",
     homeRegion: "",
+    sameAsOperation: "",
     error: false
   };
   

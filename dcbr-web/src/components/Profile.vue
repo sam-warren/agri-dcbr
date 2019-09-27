@@ -117,6 +117,11 @@
                   </v-flex>
                 </v-flex>
               </v-layout>
+              <v-layout row wrap>
+                <v-flex xs12 md4>
+                  <v-checkbox v-model="sameAsOperation" label="My primary operation address is the same as my mailing address"></v-checkbox>
+                </v-flex>
+              </v-layout>
 
               <!-- contact info  -->
               <v-layout row mt-5 mx-2>
@@ -388,6 +393,19 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("profile/homeRegion", value);
+      }
+    },
+    sameAsOperation: {
+      get() {
+        return this.$store.getters["profile/sameAsOperation"];
+      },
+      set(value) {
+        this.$store.dispatch("profile/sameAsOperation", value);
+        if (value === "true") {
+          // Set operation location properties
+        } else {
+          // Clear operation location properties
+        }
       }
     }
   }

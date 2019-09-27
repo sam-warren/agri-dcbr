@@ -45,6 +45,9 @@ export const ProfileActions: ActionTree<ProfileTypes, RootState> = {
   homeRegion(context: any, payload: string) {
     context.commit("homeRegion", payload);
   },
+  sameAsOperation(context: any, payload: string) {
+    context.commit("sameAsOperation", payload);
+  },
   resetForm(context: any) {
     context.commit("resetForm");
   }

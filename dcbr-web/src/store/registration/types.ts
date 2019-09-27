@@ -12,6 +12,7 @@ export interface ProfileTypes {
   postalCode?: string;
   poBox?: string;
   homeRegion?: string;
+  sameAsOperation?: string;
   error?: boolean;
 }
 

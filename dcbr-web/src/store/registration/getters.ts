@@ -46,6 +46,9 @@ export const ProfileGetters: GetterTree<ProfileTypes, RootState> = {
   homeRegion(state: ProfileTypes): string {
     return state!.homeRegion || "";
   },
+  sameAsOperation(state: ProfileTypes): string {
+    return state!.sameAsOperation || "";
+  }
 };
 
 export const OperationDetailsGetters: GetterTree<OperationDetailsTypes, RootState> = {

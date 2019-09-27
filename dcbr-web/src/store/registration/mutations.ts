@@ -56,6 +56,10 @@ export const ProfileMutations: MutationTree<ProfileTypes> = {
     state.error = false;
     state.homeRegion = payload;
   },
+  sameAsOperation(state: ProfileTypes, payload: string) {
+    state.error = false;
+    state.sameAsOperation = payload;
+  },
   resetForm(state: ProfileTypes) {
     state.firstName = "";
     state.middleName = "";
