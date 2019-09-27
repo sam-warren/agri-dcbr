@@ -5,14 +5,14 @@ import tempfile
 
 import pytz
 import requests
-
-from api.models import Operator
 from background_task import background
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.core import management
 from django.template import loader
 from post_office import mail
+
+from api.models import Operator
 
 LOGGER = logging.getLogger(__name__)
 
@@ -26,11 +26,21 @@ def send_queued_mail():
 def send_reminder_email():
     LOGGER.debug("Processing operator reminder emails...")
 
-    expiry_date_begin = datetime.datetime.combine(
-        datetime.datetime.now(pytz.utc), datetime.time(), tzinfo=pytz.utc
-    ) + relativedelta(months=int(settings.REMINDER_EMAIL_NOTICE_MONTHS))
+    expiry_date_begin = (
+        datetime.datetime.combine(
+            datetime.datetime.now(pytz.utc), datetime.time(), tzinfo=pytz.utc
+        )
+        + relativedelta(months=int(settings.REMINDER_EMAIL_NOTICE_MONTHS))
+        - relativedelta(months=int(settings.REGISTRATION_VALIDITY_MONTHS))
+    )
     expiry_date_end = datetime.datetime.combine(
         expiry_date_begin, datetime.time(23, 59, 59, 999999), tzinfo=pytz.utc
+    )
+
+    LOGGER.debug(
+        "Processing operators registered between {} and {}".format(
+            expiry_date_begin, expiry_date_end
+        )
     )
 
     expiring_operators = Operator.objects.filter(
@@ -40,7 +50,7 @@ def send_reminder_email():
     email_list = []
     for operator in expiring_operators:
         reminder_email = {
-            "sender": "from@example.com",
+            "sender": settings.AGRI_EMAIL,
             "recipients": [operator.email_address],
             "template": "reminder_email",
             "context": operator,
