@@ -8,8 +8,6 @@
         <v-card flat>
           <v-form v-model="valid">
             <v-container>
-              <!-- Home address section  -->
-
               <v-layout row mt-3 mx-2>
                 <h4>Address {{number+1}}</h4>
               </v-layout>

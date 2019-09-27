@@ -47,9 +47,9 @@
                 </v-flex>
               </v-layout>
 
-              <!-- Home address section  -->
+              <!-- Mailing address section  -->
               <v-layout row mt-5 mx-2>
-                <h4>Home Address</h4>
+                <h4>Mailing Address</h4>
               </v-layout>
               <v-layout row wrap mx-2>
                 <v-flex xs12 md4>
