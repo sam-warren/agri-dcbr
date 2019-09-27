@@ -2,32 +2,61 @@
 
 from django.db import migrations
 
-registration_text_content = """Dear {{user.name}},
+registration_text_content = """Hello {{operator.first_name}},
 
-It is with pleasure that the Ministry of Agriculture welcomes you to the Dog and Cat Operator Registry of the Ministry of Agriculture.
+Thank you for successfully completing the BC Commercial Cat and Dog Breeder registration online. This email is confirmation that your dog/cat breeding and/or selling Registration Number is active.
 
-By registering your operation, you are actively contributing to the welfare of all animals across the Province of British Columbia.
+Your registration number is: {{registration_number}}. 
 
-Your registration number is: {{registration_number}}. If you have any questions, please don't hesitate to contact us at AgriServiceBC@gov.bc.ca
+This email provides you with important information regarding your registration and on how to maintain compliance with the Cat and Dog Commercial Breeding Regulation. The link provided takes you directly to the <a href="https://www2.qa.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/agriculture-and-seafood/animal-and-crops/animal-health/animal-welfare/cat_and_dog_commercial_breeder_regulation.pdf">Cat and Dog Commercial Breeding Regulation</a>
+
+The attachment is your Certificate of Registration.  You must always have this Certificate visible in your operation for consumers to see.
+
+We would be grateful for any comments or feedback you have on our new online registration system.  Please feel free to provide input on the online registration system to XXX so that we can improve the system in the future.  Thank you for your time.
+
+Kind regards,
+(name)
 """
 
-registration_html_content = """Dear <strong>{{user.name}}</strong>,
+registration_html_content = """Hello <strong>{{operator.first_name}}</strong>,
 
-<p>It is with pleasure that the Ministry of Agriculture welcomes you to the Dog and Cat Operator Registry of the Ministry of Agriculture.</p>
+<p>Thank you for successfully completing the BC Commercial Cat and Dog Breeder registration online. This email is confirmation that your dog/cat breeding and/or selling Registration Number is active.
+
+Your registration number is: {{registration_number}}.</p>
 
 
 <p>
-By registering your operation, you are actively contributing to the welfare of all animals across the Province of British Columbia.</p>
+This email provides you with important information regarding your registration and on how to maintain compliance with the Cat and Dog Commercial Breeding Regulation. The link provided takes you directly to the <a href="https://www2.qa.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/agriculture-and-seafood/animal-and-crops/animal-health/animal-welfare/cat_and_dog_commercial_breeder_regulation.pdf">Cat and Dog Commercial Breeding Regulation</a>
+
+The attachment is your Certificate of Registration.  You must always have this Certificate visible in your operation for consumers to see.</p>
+
+<p>We would be grateful for any comments or feedback you have on our new online registration system.  Please feel free to provide input on the online registration system to XXX so that we can improve the system in the future.  Thank you for your time.</p>
+
+<p>Kind regards,</p>
+<p>(name)</p>
 """
 
-reminder_text_content = """Dear {{user.name}},
+reminder_text_content = """Hello {{operator.first_name}},
 
-Your registration number {{registration_number}} is about to expire. If you have any questions, please don't hesitate to contact us at AgriServiceBC@gov.bc.ca
+This email is to inform you that your BC Cat and Dog Breeding Registration is soon expiring and needs renewal. 
+
+You are required as per Section XXXX of the Cat and Dog Commercial Breeding Regulation to renew your registration within 30 days from this email.
+
+Please follow the link provided and select the “Renew” button to start the renewal process and your new Certificate of Registration. Once the process is completed you will receive a new Certificate of Registration and you must replace your old version.
+
+Kind regards.
+(name)
 """
 
-reminder_html_content = """Dear <strong>{{user.name}}</strong>,
+reminder_html_content = """Hello <strong>{{operator.first_name}}</strong>,
+<p>This email is to inform you that your BC Cat and Dog Breeding Registration is soon expiring and needs renewal. </p>
 
-<p>Your registration number {{registration_number}} is about to expire. If you have any questions, please don't hesitate to contact us at AgriServiceBC@gov.bc.ca</p>
+<p>You are required as per Section XXXX of the Cat and Dog Commercial Breeding Regulation to renew your registration within 30 days from this email.</p>
+
+<p>Please follow the link provided and select the “Renew” button to start the renewal process and your new Certificate of Registration. Once the process is completed you will receive a new Certificate of Registration and you must replace your old version.</p>
+
+<p>Kind regards.</p>
+<p>(name)</p>
 """
 
 
