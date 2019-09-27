@@ -26,6 +26,7 @@ export const ProfileState: ProfileTypes = {
     streetName: "",
     city: "",
     postalCode: "",
+    poBox: "",
     homeRegion: "",
     error: false
   };
@@ -57,7 +58,6 @@ export const ProfileState: ProfileTypes = {
   };
   
   export const OperationLocationsState: OperationLocationsTypes = {
-    // hasAdditionalLocations: "false",
     // locations: [
     //   {
     //     streetName: "Fake St",
@@ -69,8 +69,6 @@ export const ProfileState: ProfileTypes = {
     //   }
     // ],
     // error: false
-  
-    hasAdditionalLocations: "",
     locations: [],
     error: false
   };

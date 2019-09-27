@@ -48,7 +48,7 @@
               </v-layout>
               <!-- ACCIDENTAL BREEDING -->
               <v-layout mx-2 mt-4>
-                <v-subheader>Over the past calendar year, was there an accidental breeding of your dogs and/or cats?</v-subheader>
+                <v-subheader>Over the past 12 months, was there an accidental breeding of your dogs and/or cats?</v-subheader>
               </v-layout>
               <v-layout mx-2>
                 <v-radio-group v-model="accidentalBreeding" name="accidentalBreeding" row>
@@ -100,7 +100,7 @@
                   <v-text-field
                     v-model.number="numWorkers"
                     mask="#########"
-                    :rules="numberRules"
+                    :rules="numWorkersRules"
                     label="Number of workers"
                     name="numWorkers"
                   ></v-text-field>
@@ -141,11 +141,15 @@ export default {
       v => /.+@.+/.test(v) || "E-mail must be valid"
     ],
     websiteRules: [
-      v => /^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(v) || "URL must be valid",
+      v => /(((((ht|f)tp(s?))\:\/\/)?)+(www\.){1}\S+)+(\.{1}\w{2,})/.test(v) || "URL must be valid",
       v => v.length <= 4000 || "Url must be less than 4000 characters"
     ],
     numberRules: [
       v => v >= 0 || "Number cannot be negative",
+      v => v <= 2147483647 || "Number must be less than 2147483647"
+    ],
+    numWorkersRules: [
+      v => v >= 1 || "There must be at least one worker at your operation",
       v => v <= 2147483647 || "Number must be less than 2147483647"
     ],
     membershipNumberRules: [

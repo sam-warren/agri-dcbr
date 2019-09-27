@@ -10,6 +10,7 @@ export interface ProfileTypes {
   streetName?: string;
   city?: string;
   postalCode?: string;
+  poBox?: string;
   homeRegion?: string;
   error?: boolean;
 }
@@ -29,7 +30,6 @@ export interface OperationDetailsTypes {
 }
 
 export interface OperationLocationsTypes {
-  hasAdditionalLocations?: string;
   locations?: Location[];
   error?: boolean;
 }
