@@ -48,6 +48,10 @@ export const ProfileMutations: MutationTree<ProfileTypes> = {
     state.error = false;
     state.postalCode = payload;
   },
+  poBox(state: ProfileTypes, payload: string) {
+    state.error = false;
+    state.poBox = payload;
+  },
   homeRegion(state: ProfileTypes, payload: string) {
     state.error = false;
     state.homeRegion = payload;
@@ -64,6 +68,7 @@ export const ProfileMutations: MutationTree<ProfileTypes> = {
     state.streetName = "";
     state.city = "";
     state.postalCode = "";
+    state.poBox = "";
     state.homeRegion = "";
   }
 }

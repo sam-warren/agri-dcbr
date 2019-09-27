@@ -10,6 +10,7 @@ export interface ProfileTypes {
   streetName?: string;
   city?: string;
   postalCode?: string;
+  poBox?: string;
   homeRegion?: string;
   error?: boolean;
 }

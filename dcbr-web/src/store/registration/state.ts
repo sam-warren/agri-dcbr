@@ -26,6 +26,7 @@ export const ProfileState: ProfileTypes = {
     streetName: "",
     city: "",
     postalCode: "",
+    poBox: "",
     homeRegion: "",
     error: false
   };

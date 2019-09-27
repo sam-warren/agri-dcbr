@@ -39,6 +39,9 @@ export const ProfileActions: ActionTree<ProfileTypes, RootState> = {
   postalCode(context: any, payload: string) {
     context.commit("postalCode", payload);
   },
+  poBox(context: any, payload: string) {
+    context.commit("poBox", payload);
+  },
   homeRegion(context: any, payload: string) {
     context.commit("homeRegion", payload);
   },

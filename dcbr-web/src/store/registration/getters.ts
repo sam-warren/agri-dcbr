@@ -40,6 +40,9 @@ export const ProfileGetters: GetterTree<ProfileTypes, RootState> = {
   postalCode(state: ProfileTypes): string {
     return state!.postalCode || "";
   },
+  poBox(state: ProfileTypes): string {
+    return state!.poBox || "";
+  },
   homeRegion(state: ProfileTypes): string {
     return state!.homeRegion || "";
   },

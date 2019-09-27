@@ -102,6 +102,16 @@
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
+                  <v-text-field
+                    v-model="poBox"
+                    :rules="poBoxRules"
+                    label="P.O. Box"
+                    name="poBox"
+                    counter="32"
+                    required
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 md4>
                   <v-flex class="d-flex" cols="12" sm="6">
                     <v-select :rules="requiredRules" :items="items" v-model="homeRegion" label="Regional District"></v-select>
                   </v-flex>
@@ -226,8 +236,11 @@ export default {
     phoneNumberRules: [
       v => !!v || "Phone number is required",
       v => /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(v) || "Phone number must be valid"
+    ],
+    poBoxRules: [
+      v => !!v || "P.O. Box is required",
+      v => v.length <= 32 || "P.O. box must be valid"
     ]
-
   }),
 
   computed: {
@@ -356,7 +369,16 @@ export default {
         this.$store.dispatch("profile/postalCode", value);
       }
     },
-
+    poBox: {
+      // getter
+      get() {
+        return this.$store.getters["profile/poBox"]
+      },
+      // setter
+      set(value) {
+        this.$store.dispatch("profile/poBox", value);
+      }
+    },
     homeRegion: {
       // getter
       get() {
