@@ -145,7 +145,7 @@ export default {
       console.log("Submit clicked");
       let addresses = [
         {
-          address_type: "PRI",
+          address_type: "MAIL",
           street_num: this.$store.getters["profile/streetNumber"],
           suite: this.$store.getters["profile/aptNumber"],
           street_name: this.$store.getters["profile/streetName"],
