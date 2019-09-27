@@ -39,6 +39,9 @@ export const ProfileActions: ActionTree<ProfileTypes, RootState> = {
   postalCode(context: any, payload: string) {
     context.commit("postalCode", payload);
   },
+  poBox(context: any, payload: string) {
+    context.commit("poBox", payload);
+  },
   homeRegion(context: any, payload: string) {
     context.commit("homeRegion", payload);
   },
@@ -86,9 +89,6 @@ export const OperationDetailsActions: ActionTree<OperationDetailsTypes, RootStat
 
 export const OperationLocationsActions: ActionTree<OperationLocationsTypes, RootState> = {
   // Operation Locations
-  hasAdditionalLocations(context: any, payload: string) {
-    context.commit("hasAdditionalLocations", payload);
-  },
   locations(context: any, payload: { operation: string }) {
     context.commit("locations", payload);
   },

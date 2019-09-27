@@ -8,8 +8,6 @@
         <v-card flat>
           <v-form v-model="valid">
             <v-container>
-              <!-- Home address section  -->
-
               <v-layout row mt-3 mx-2>
                 <h4>Address {{number+1}}</h4>
               </v-layout>
@@ -23,9 +21,6 @@
                     required
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 md4 lg6>
-                  <v-text-field v-model="aptNumber" :rules="suiteRules" label="Apt/Suite (optional)" counter=32 required></v-text-field>
-                </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="streetName"
@@ -34,6 +29,9 @@
                     counter=32
                     required
                   ></v-text-field>
+                </v-flex>
+                <v-flex xs12 md4 lg6>
+                  <v-text-field v-model="aptNumber" :rules="suiteRules" label="Apt/Suite (optional)" counter=32 required></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-text-field v-model="city" :rules="cityRules" label="City" counter=32 required></v-text-field>
@@ -49,7 +47,7 @@
                 </v-flex>
                  <v-flex xs12 md4>
                   <v-flex class="d-flex" cols="12" sm="6">
-                    <v-select :rules="requiredRules" :items="items" v-model="region" label="Region"></v-select>
+                    <v-select :rules="requiredRules" :items="items" v-model="region" label="Regional District"></v-select>
                   </v-flex>
                 </v-flex>
               </v-layout>
