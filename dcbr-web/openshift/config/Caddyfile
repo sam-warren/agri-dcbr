@@ -15,17 +15,11 @@
 
     # Required for vue-router to work
     rewrite {
-        regexp .*
+        regexp ^/(!?api)/?$
         to {path} /
     }
 
     proxy /api {%DCBR_API_HOST%}:{%DCBR_API_PORT%} {
-        transparent
-        fail_timeout 0 # see https://github.com/mholt/caddy/issues/1925
-    }
-
-    proxy /print-certificate {%WEASYPRINT_HOST%}:{%WEASYPRINT_PORT%}/pdf {
-        without /print-certificate
         transparent
         fail_timeout 0 # see https://github.com/mholt/caddy/issues/1925
     }

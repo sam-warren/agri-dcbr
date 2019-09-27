@@ -53,7 +53,7 @@
     </v-layout>
     <v-layout>
       <v-flex>
-        <v-btn @click="navTo('register')" large round block dark class="primary">
+        <v-btn @click="navToRegister()" large round block dark class="primary">
           <span>Start Registration</span>
         </v-btn>
       </v-flex>
@@ -68,7 +68,7 @@ export default {
     // Navbar
   },
   methods: {
-    navTo(route) {
+    navToRegister() {
       this.$store.dispatch("routeProtection/formType", "register");
       this.$router.push("register");
     }

@@ -1,10 +1,10 @@
 import { ActionTree } from "vuex";
 
 import { RootState } from "../types";
-import { RegistrationState } from "./types";
+import { ProfileTypes, OperationDetailsTypes, OperationLocationsTypes, BreedingDetailsTypes, AnimalIdentificationTypes, TermsAndConditionsTypes, RouteProtectionTypes, RenewalTypes } from "./types";
 import { Location } from "./types";
 
-export const actions: ActionTree<RegistrationState, RootState> = {
+export const ProfileActions: ActionTree<ProfileTypes, RootState> = {
   // Profile
   firstName(context: any, payload: string) {
     context.commit("firstName", payload);
@@ -42,7 +42,12 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   homeRegion(context: any, payload: string) {
     context.commit("homeRegion", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
+};
 
+export const OperationDetailsActions: ActionTree<OperationDetailsTypes, RootState> = {
   // Operation Details
   operationName(context: any, payload: string) {
     context.commit("operationName", payload);
@@ -74,7 +79,12 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   hasVet(context: any, payload: string) {
     context.commit("hasVet", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
+};
 
+export const OperationLocationsActions: ActionTree<OperationLocationsTypes, RootState> = {
   // Operation Locations
   hasAdditionalLocations(context: any, payload: string) {
     context.commit("hasAdditionalLocations", payload);
@@ -85,7 +95,12 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   updateLocationProperty(context: any, payload: {index: number, property: string, value: any}) {
     context.commit("updateLocationProperty", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
+};
 
+export const BreedingDetailsActions: ActionTree<BreedingDetailsTypes, RootState> = {
   // Breeding Details
   femaleIntactDogNum(context: any, payload: number) {
     context.commit("femaleIntactDogNum", payload);
@@ -129,7 +144,12 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   numDogs(context: any, payload: number) {
     context.commit("numDogs", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
+};
 
+export const AnimalIdentificationActions: ActionTree<AnimalIdentificationTypes, RootState> = {
   // Animal Identification
   hasPermId(context: any, payload: string) {
     context.commit("hasPermId", payload);
@@ -140,12 +160,22 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   otherPermIdType(context: any, payload: string) {
     context.commit("otherPermIdType", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
+};
 
+export const TermsAndConditionsActions: ActionTree<TermsAndConditionsTypes, RootState> = {
   // Terms and Conditions
   hasAgreed(context: any, payload: boolean) {
     context.commit("hasAgreed", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
+};
 
+export const RouteProtectionActions: ActionTree<RouteProtectionTypes, RootState> = {
   // Route Protection
   registerFormOk(context: any, payload: boolean) {
     context.commit("registerFormOk", payload);
@@ -156,16 +186,21 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   formType(context: any, payload: string) {
     context.commit("formType", payload);
   },
+  resetForm(context: any) {
+    context.commit("resetForm");
+  }
+};
 
+export const RenewalActions: ActionTree<RenewalTypes, RootState> = {
   // Renewal
-  renewalFirstName(context: any, payload: string) {
-    context.commit("renewalFirstName", payload);
+  firstName(context: any, payload: string) {
+    context.commit("firstName", payload);
   },
-  renewalMiddleName(context: any, payload: string) {
-    context.commit("renewalMiddleName", payload);
+  middleName(context: any, payload: string) {
+    context.commit("middleName", payload);
   },
-  renewalLastName(context: any, payload: string) {
-    context.commit("renewalLastName", payload);
+  lastName(context: any, payload: string) {
+    context.commit("lastName", payload);
   },
   registrationNumber(context: any, payload: string) {
     context.commit("registrationNumber", payload);
@@ -173,9 +208,7 @@ export const actions: ActionTree<RegistrationState, RootState> = {
   expiryDate(context: any, payload: string) {
     context.commit("expiryDate", payload);
   },
-
-  // Reset Form
   resetForm(context: any) {
-    context.commit("resetForm")
+    context.commit("resetForm");
   }
-};
+}
