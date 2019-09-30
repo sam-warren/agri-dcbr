@@ -156,7 +156,7 @@ export const OperationLocationsMutations: MutationTree<OperationLocationsTypes> 
   },
   updateLocationProperty(state: OperationLocationsTypes, payload: {index: number, property: string, value: any}) {
     state.error = false;
-    if (state && state && state.locations) {
+    if (state && state.locations) {
       let location: any = state.locations[payload.index];
       location[payload.property] = payload.value;
       state.locations[payload.index] = location;

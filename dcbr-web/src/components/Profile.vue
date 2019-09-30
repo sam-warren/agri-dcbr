@@ -21,7 +21,7 @@
                     :rules="nameRules"
                     label="First name"
                     name="firstName"
-                    counter=50
+                    counter="50"
                     required
                   ></v-text-field>
                 </v-flex>
@@ -31,7 +31,7 @@
                     :rules="middleNameRules"
                     label="Middle name (optional)"
                     name="middleName"
-                    counter=50
+                    counter="50"
                   ></v-text-field>
                 </v-flex>
 
@@ -41,7 +41,7 @@
                     :rules="nameRules"
                     label="Last name"
                     name="lastName"
-                    counter=50
+                    counter="50"
                     required
                   ></v-text-field>
                 </v-flex>
@@ -68,26 +68,26 @@
                     :rules="streetNameRules"
                     label="Street name"
                     name="streetName"
-                    counter=32
+                    counter="32"
                     required
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4 lg6>
-                  <v-text-field 
-                    v-model="aptNumber" 
-                    label="Apt/Suite (optional)" 
-                    name="aptNumber" 
-                    counter=32
+                  <v-text-field
+                    v-model="aptNumber"
+                    label="Apt/Suite (optional)"
+                    name="aptNumber"
+                    counter="32"
                     :rules="suiteRules"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 md4>
-                  <v-text-field 
-                    v-model="city" 
-                    :rules="cityRules" 
-                    label="City" 
-                    name="city" 
-                    counter=32
+                  <v-text-field
+                    v-model="city"
+                    :rules="cityRules"
+                    label="City"
+                    name="city"
+                    counter="32"
                     required
                   ></v-text-field>
                 </v-flex>
@@ -113,13 +113,21 @@
                 </v-flex>
                 <v-flex xs12 md4>
                   <v-flex class="d-flex" cols="12" sm="6">
-                    <v-select :rules="requiredRules" :items="items" v-model="homeRegion" label="Regional District"></v-select>
+                    <v-select
+                      :rules="requiredRules"
+                      :items="items"
+                      v-model="homeRegion"
+                      label="Regional District"
+                    ></v-select>
                   </v-flex>
                 </v-flex>
               </v-layout>
               <v-layout row wrap>
                 <v-flex xs12 md4>
-                  <v-checkbox v-model="sameAsOperation" label="My primary operation address is the same as my mailing address"></v-checkbox>
+                  <v-checkbox
+                    v-model="sameAsOperation"
+                    label="My primary operation address is the same as my mailing address"
+                  ></v-checkbox>
                 </v-flex>
               </v-layout>
 
@@ -140,12 +148,12 @@
                 </v-flex>
                 <!-- phone number -->
                 <v-flex xs12 md4 lg6>
-                  <v-text-field 
-                    v-model="phone" 
+                  <v-text-field
+                    v-model="phone"
                     type="tel"
                     mask="(###) ### ####"
                     :rules="phoneNumberRules"
-                    label="Phone" 
+                    label="Phone"
                     name="phone"
                   ></v-text-field>
                 </v-flex>
@@ -203,9 +211,7 @@ export default {
     ],
     valid: false,
     mask: "",
-     requiredRules: [
-      v => !!v || "This field is required"
-    ],
+    requiredRules: [v => !!v || "This field is required"],
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 50 || "Name must be less than 50 characters"
@@ -236,17 +242,28 @@ export default {
     ],
     postalCodeRules: [
       v => !!v || "Postal code is required",
-      v => /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(v) || "Postal code must be valid"
+      v =>
+        /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(
+          v
+        ) || "Postal code must be valid"
     ],
     phoneNumberRules: [
       v => !!v || "Phone number is required",
-      v => /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(v) || "Phone number must be valid"
+      v =>
+        /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/.test(v) ||
+        "Phone number must be valid"
     ],
     poBoxRules: [
       v => !!v || "P.O. Box is required",
       v => v.length <= 32 || "P.O. box must be valid"
     ]
   }),
+
+  methods: {
+    checkIfNumber() {
+      console.log("Not a number");
+    }
+  },
 
   computed: {
     ...mapState({
@@ -377,7 +394,7 @@ export default {
     poBox: {
       // getter
       get() {
-        return this.$store.getters["profile/poBox"]
+        return this.$store.getters["profile/poBox"];
       },
       // setter
       set(value) {
@@ -388,7 +405,7 @@ export default {
       // getter
       get() {
         return this.$store.getters["profile/homeRegion"];
-      }, 
+      },
       // setter
       set(value) {
         console.log(value);
@@ -401,10 +418,70 @@ export default {
       },
       set(value) {
         this.$store.dispatch("profile/sameAsOperation", value);
-        if (value === "true") {
+        if (value === true) {
           // Set operation location properties
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "streetName",
+            value: this.streetName
+          });
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "streetNumber",
+            value: this.streetNumber
+          });
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "aptNumber",
+            value: this.aptNumber
+          });
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "city",
+            value: this.city
+          });
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "postalCode",
+            value: this.postalCode
+          });
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "region",
+            value: this.homeRegion
+          });
         } else {
           // Clear operation location properties
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "streetName",
+            value: ""
+          });
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "streetNumber",
+            value: ""
+          });
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "aptNumber",
+            value: ""
+          });
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "city",
+            value: ""
+          });
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "postalCode",
+            value: ""
+          });
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "region",
+            value: ""
+          });
         }
       }
     }
