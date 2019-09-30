@@ -329,6 +329,11 @@ class Association_Membership(models.Model):
 
 class Renewal(models.Model):
 
+    # this model is a temporary fix to allow operators to re-register, without authentication
+    # In the front-end, an operator that renews their registration is expected to enter some 
+    # information from their previous registration.
+    # **************** Please do not count on this information being accurate **************
+
     registration_number = models.ForeignKey(
         Registration, on_delete=models.CASCADE, related_name="renewals"
     )
@@ -339,6 +344,8 @@ class Renewal(models.Model):
     previous_registration_number = models.CharField(
         max_length=20, default="", blank=True
     )
+    # Note - expiry date is simply a self-reported expiry date
+    expiry_date = models.CharField(max_length=10, default= "", blank = True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
