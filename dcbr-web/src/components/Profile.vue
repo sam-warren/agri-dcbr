@@ -18,6 +18,7 @@
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="firstName"
+                    onkeypress="return event.charCode < 48 || event.charCode > 57"
                     :rules="nameRules"
                     label="First name"
                     name="firstName"
@@ -28,6 +29,7 @@
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="middleName"
+                    onkeypress="return event.charCode < 48 || event.charCode > 57"
                     :rules="middleNameRules"
                     label="Middle name (optional)"
                     name="middleName"
@@ -38,6 +40,7 @@
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="lastName"
+                    onkeypress="return event.charCode < 48 || event.charCode > 57"
                     :rules="nameRules"
                     label="Last name"
                     name="lastName"
@@ -84,6 +87,7 @@
                 <v-flex xs12 md4>
                   <v-text-field
                     v-model="city"
+                    onkeypress="return event.charCode < 48 || event.charCode > 57"
                     :rules="cityRules"
                     label="City"
                     name="city"
@@ -258,12 +262,6 @@ export default {
       v => v.length <= 32 || "P.O. box must be valid"
     ]
   }),
-
-  methods: {
-    checkIfNumber() {
-      console.log("Not a number");
-    }
-  },
 
   computed: {
     ...mapState({
