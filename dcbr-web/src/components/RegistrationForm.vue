@@ -342,7 +342,7 @@ export default {
             this.error = "Registration number must meet requirements";
             return true;
           }
-          if (this.$store.getters["renewal/expiryDate"] === "") {
+          if (this.$store.getters["renewal/registrationDate"] === "") {
             this.error = "Expiry date must meet requirements";
             return true;
           }
@@ -439,7 +439,7 @@ export default {
           return true;
         }
         if (
-          /(((((ht|f)tp(s?))\:\/\/)?)+(www\.){1}\S+)+(\.{1}\w{2,})/.test(
+          /^$|(((((ht|f)tp(s?))\:\/\/)?)+(www\.){1}\S+)+(\.{1}\w{2,})/.test(
             this.$store.getters["operationDetails/opWebsite"]
           ) === false ||
           this.$store.getters["operationDetails/opWebsite"].length > 4000

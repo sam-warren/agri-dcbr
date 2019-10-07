@@ -156,7 +156,9 @@ export const OperationLocationsMutations: MutationTree<OperationLocationsTypes> 
   },
   updateLocationProperty(state: OperationLocationsTypes, payload: {index: number, property: string, value: any}) {
     state.error = false;
-    if (state && state.locations) {
+    if (state && state.locations && payload) {
+      console.log(payload);
+      console.log(state.locations[payload.index]);
       let location: any = state.locations[payload.index];
       location[payload.property] = payload.value;
       state.locations[payload.index] = location;
@@ -318,9 +320,9 @@ export const RenewalMutations: MutationTree<RenewalTypes> = {
     state.error = false;
     state.registrationNumber = payload;
   },
-  expiryDate(state: RenewalTypes, payload: string) {
+  registrationDate(state: RenewalTypes, payload: string) {
     state.error = false;
-    state.expiryDate = payload;
+    state.registrationDate = payload;
   },
   resetForm(state: RenewalTypes) {
     state.error = false;
@@ -328,6 +330,6 @@ export const RenewalMutations: MutationTree<RenewalTypes> = {
     state.middleName = "";
     state.lastName = "";
     state.registrationNumber = "";
-    state.expiryDate = "";
+    state.registrationDate = "";
   }
 }

@@ -208,8 +208,8 @@ export const RenewalActions: ActionTree<RenewalTypes, RootState> = {
   registrationNumber(context: any, payload: string) {
     context.commit("registrationNumber", payload);
   },
-  expiryDate(context: any, payload: string) {
-    context.commit("expiryDate", payload);
+  registrationDate(context: any, payload: string) {
+    context.commit("registrationDate", payload);
   },
   resetForm(context: any) {
     context.commit("resetForm");

@@ -172,8 +172,8 @@ export const RenewalGetters: GetterTree<RenewalTypes, RootState> = {
   registrationNumber(state: RenewalTypes): string {
     return state!.registrationNumber || "";
   },
-  expiryDate(state: RenewalTypes): string {
-    return state!.expiryDate || "";
+  registrationDate(state: RenewalTypes): string {
+    return state!.registrationDate || "";
   },
 }
 

@@ -86,7 +86,7 @@ export interface RenewalTypes {
   middleName?: string;
   lastName?: string;
   registrationNumber?: string;
-  expiryDate?: string;
+  registrationDate?: string;
   error?: boolean;
 }
 

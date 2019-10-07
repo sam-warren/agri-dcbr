@@ -141,7 +141,7 @@ export default {
       v => /.+@.+/.test(v) || "E-mail must be valid"
     ],
     websiteRules: [
-      v => /(((((ht|f)tp(s?))\:\/\/)?)+(www\.){1}\S+)+(\.{1}\w{2,})/.test(v) || "URL must be valid",
+      v => /^$|(((((ht|f)tp(s?))\:\/\/)?)+(www\.){1}\S+)+(\.{1}\w{2,})/.test(v) || "URL must be valid",
       v => v.length <= 4000 || "Url must be less than 4000 characters"
     ],
     numberRules: [

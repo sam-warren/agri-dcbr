@@ -343,6 +343,13 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("profile/streetNumber", value);
+        if (this.sameAsOperation) {
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "streetNumber",
+            value: value,
+          })
+        }
       }
     },
     aptNumber: {
@@ -354,6 +361,13 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("profile/aptNumber", value);
+        if (this.sameAsOperation) {
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "aptNumber",
+            value: value,
+          })
+        }
       }
     },
     streetName: {
@@ -365,6 +379,13 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("profile/streetName", value);
+        if (this.sameAsOperation) {
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "streetName",
+            value: value,
+          })
+        }
       }
     },
     city: {
@@ -376,6 +397,13 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("profile/city", value);
+        if (this.sameAsOperation) {
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "city",
+            value: value,
+          })
+        }
       }
     },
     postalCode: {
@@ -387,6 +415,13 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("profile/postalCode", value);
+        if (this.sameAsOperation) {
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "postalCode",
+            value: value,
+          })
+        }
       }
     },
     poBox: {
@@ -408,6 +443,13 @@ export default {
       set(value) {
         console.log(value);
         this.$store.dispatch("profile/homeRegion", value);
+        if (this.sameAsOperation) {
+          this.$store.dispatch("operationLocations/updateLocationProperty", {
+            index: 0,
+            property: "region",
+            value: value,
+          })
+        }
       }
     },
     sameAsOperation: {
