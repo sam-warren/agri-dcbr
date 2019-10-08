@@ -24,7 +24,7 @@
                   I have read and agree to the
                   <a
                     class="v-label"
-                    @click="clickedTOC()"
+                    @click="clickedTaC()"
                     target="_blank"
                     href="https://www2.qa.gov.bc.ca/assets/gov/farming-natural-resources-and-industry/agriculture-and-seafood/animal-and-crops/animal-health/animal-welfare/cat_and_dog_commercial_breeder_regulation.pdf"
                   >terms and conditions</a>
@@ -47,9 +47,8 @@ export default {
     show: false
   }),
   methods: {
-    clickedTOC() {
+    clickedTaC() {
       this.hasClicked = true;
-      show: false;
     }
   },
   computed: {
