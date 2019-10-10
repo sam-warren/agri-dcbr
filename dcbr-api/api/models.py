@@ -1,7 +1,5 @@
 import logging
 from datetime import datetime, timedelta
-
-from dateutil.relativedelta import relativedelta
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import gettext as _
@@ -30,11 +28,17 @@ class Registration(models.Model):
         max_length=50, choices=REG_STATUS_CHOICES, default=ACTIVE
     )
 
+    def default_expiry_date():
+        expiry_date = datetime.now() + timedelta(days=365)
+        return expiry_date
+
     registration_number = models.CharField(max_length=20, default="", blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    created_timestamp = models.DateTimeField(auto_now_add=True)
-    updated_timestamp = models.DateTimeField(auto_now=True)
+    expiry_date = models.DateTimeField(default=default_expiry_date)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
+   
     def __str__(self):
         return self.registration_number
 
@@ -50,11 +54,7 @@ class Registration(models.Model):
             )
             self.save()
         else:
-            LOGGER.debug(
-                "Registration_number={}".format(
-                    self.registration_number
-                )
-            )
+            LOGGER.debug("Registration_number={}".format(self.registration_number))
 
     class Meta:
         verbose_name_plural = "Registrations"
@@ -89,8 +89,8 @@ class Operator(models.Model):
     last_name = models.CharField(max_length=50)
     phone_num = models.CharField(max_length=12, default="", blank=True)
     email_address = models.CharField(max_length=32, default="", blank=True)
-    created_timestamp = models.DateTimeField(auto_now_add=True)
-    updated_timestamp = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     comm_pref = models.CharField(
         "Communication method",
@@ -330,7 +330,7 @@ class Association_Membership(models.Model):
 class Renewal(models.Model):
 
     # this model is a temporary fix to allow operators to re-register, without authentication
-    # In the front-end, an operator that renews their registration is expected to enter some 
+    # In the front-end, an operator that renews their registration is expected to enter some
     # information from their previous registration.
     # **************** Please do not count on this information being accurate **************
 
@@ -345,7 +345,7 @@ class Renewal(models.Model):
         max_length=20, default="", blank=True
     )
     # Note - expiry date is simply a self-reported expiry date
-    expiry_date = models.CharField(max_length=10, default= "", blank = True)
+    expiry_date = models.CharField(max_length=10, default="", blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 

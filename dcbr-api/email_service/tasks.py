@@ -12,7 +12,7 @@ from django.core import management
 from django.template import loader
 from post_office import mail
 
-from api.models import Operator
+from api.models import Operator, Registration
 
 LOGGER = logging.getLogger(__name__)
 
@@ -44,7 +44,7 @@ def send_reminder_email():
     )
 
     expiring_operators = Operator.objects.filter(
-        created_timestamp__gt=expiry_date_begin, created_timestamp__lt=expiry_date_end
+        created_date__gt=expiry_date_begin, created_date__lt=expiry_date_end
     )
 
     email_list = []
@@ -125,3 +125,31 @@ def send_registration_email(context: dict):
             context["operator"]["email_address"]
         )
     )
+
+
+@background()
+def update_registration_status():
+
+    LOGGER.debug(
+        "Processing registration before being set to CANCELLED {}".format(
+            Registration.operator_status
+        )
+    )
+
+    # count = Registration.objects.all().update(operator_status=Registration.CANCELLED)
+    LOGGER.debug(
+        "Registration.expiry_date is {}.".format(
+            str(Registration.objects.first().expiry_date)
+        )
+    )
+    LOGGER.debug("Datetime.date.today() is {}.".format(str(datetime.date.today())))
+    expired_registrations = Registration.objects.filter(
+        expiry_date__lte=datetime.date.today(), operator_status=Registration.ACTIVE
+    ).update(operator_status=Registration.CANCELLED)
+
+    LOGGER.debug(
+        "{} ACTIVE registration(s) have been marked as CANCELLED.".format(
+            expired_registrations
+        )
+    )
+
