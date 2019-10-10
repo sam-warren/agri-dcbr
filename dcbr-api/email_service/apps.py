@@ -14,7 +14,7 @@ def start_reminder_email_task(sender, **kwargs):
     # queued mail is processed every minute
     send_queued_mail(repeat=60 * 60 * 24, repeat_until=None)
 
-    update_registration_status(repeat=60, repeat_until=None)
+    update_registration_status(repeat=60 * 60 * 24, repeat_until=None)
 
 
 class EmailServiceConfig(AppConfig):

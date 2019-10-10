@@ -129,27 +129,14 @@ def send_registration_email(context: dict):
 
 @background()
 def update_registration_status():
-
-    LOGGER.debug(
-        "Processing registration before being set to CANCELLED {}".format(
-            Registration.operator_status
-        )
-    )
-
-    # count = Registration.objects.all().update(operator_status=Registration.CANCELLED)
-    LOGGER.debug(
-        "Registration.expiry_date is {}.".format(
-            str(Registration.objects.first().expiry_date)
-        )
-    )
-    LOGGER.debug("Datetime.date.today() is {}.".format(str(datetime.date.today())))
     expired_registrations = Registration.objects.filter(
         expiry_date__lte=datetime.date.today(), operator_status=Registration.ACTIVE
     ).update(operator_status=Registration.CANCELLED)
 
-    LOGGER.debug(
-        "{} ACTIVE registration(s) have been marked as CANCELLED.".format(
-            expired_registrations
+    if expired_registrations > 0:
+        LOGGER.debug(
+            "{} ACTIVE registration(s) have been marked as CANCELLED.".format(
+                expired_registrations
+            )
         )
-    )
 
