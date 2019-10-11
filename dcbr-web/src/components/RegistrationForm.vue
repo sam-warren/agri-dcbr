@@ -149,6 +149,7 @@ export default {
           street_num: this.$store.getters["profile/streetNumber"],
           suite: this.$store.getters["profile/aptNumber"],
           street_name: this.$store.getters["profile/streetName"],
+          POBox: this.$store.getters["profile/poBox"],
           city: this.$store.getters["profile/city"],
           postal_code: this.$store.getters["profile/postalCode"],
           region: this.$store.getters["profile/homeRegion"]
@@ -341,7 +342,7 @@ export default {
             this.error = "Registration number must meet requirements";
             return true;
           }
-          if (this.$store.getters["renewal/expiryDate"] === "") {
+          if (this.$store.getters["renewal/registrationDate"] === "") {
             this.error = "Expiry date must meet requirements";
             return true;
           }
@@ -392,6 +393,12 @@ export default {
           return true;
         }
         if (
+          this.$store.getters["profile/poBox"].length > 32
+        ) {
+          this.error = "P.O. Box must meet requirements";
+          return true;
+        }
+        if (
           this.$store.getters["profile/city"] === "" ||
           this.$store.getters["profile/city"].length > 32
         ) {
@@ -431,7 +438,7 @@ export default {
           return true;
         }
         if (
-          /^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$/.test(
+          /^$|(((((ht|f)tp(s?))\:\/\/)?)+(www\.){1}\S+)+(\.{1}\w{2,})/.test(
             this.$store.getters["operationDetails/opWebsite"]
           ) === false ||
           this.$store.getters["operationDetails/opWebsite"].length > 4000
@@ -473,7 +480,7 @@ export default {
           return true;
         }
         if (
-          this.$store.getters["operationDetails/numWorkers"] < 0 ||
+          this.$store.getters["operationDetails/numWorkers"] < 1 ||
           this.$store.getters["operationDetails/numWorkers"] > 2147483647
         ) {
           this.error = "Number of workers must meet requirements";
@@ -585,77 +592,63 @@ export default {
         }
 
         // operationLocations
-        if (
-          this.$store.getters["operationLocations/hasAdditionalLocations"] ===
-          ""
-        ) {
-          this.error =
-            "Please select whether or not you have additional operation locations";
-          return true;
-        }
-
-        if (
-          this.$store.getters["operationLocations/hasAdditionalLocations"] ===
-          "true"
-        ) {
-          let hasError = false;
-          let locationNumber = 0;
-          this.$store.getters["operationLocations/locations"].forEach(
-            location => {
-              locationNumber++;
-              if (
-                location.streetNumber <= 0 ||
-                location.streetNumber > 2147483647
-              ) {
-                this.error =
-                  "Street number of additional location " +
-                  locationNumber +
-                  " must meet requirements";
-                hasError = true;
-              } else if (location.aptNumber.length > 32) {
-                this.error =
-                  "Apt/suite of additional location " +
-                  locationNumber +
-                  " must meet requirements";
-                hasError = true;
-              } else if (
-                location.streetName === "" ||
-                location.streetName.length > 32
-              ) {
-                this.error =
-                  "Street name of additional location " +
-                  locationNumber +
-                  " must meet requirements";
-                hasError = true;
-              } else if (location.city === "" || location.city.length > 32) {
-                this.error =
-                  "City of additional location " +
-                  locationNumber +
-                  " must meet requirements";
-                hasError = true;
-              } else if (
-                location.postalCode === "" ||
-                /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(
-                  location.postalCode
-                ) === false
-              ) {
-                this.error =
-                  "Postal code of additional location " +
-                  locationNumber +
-                  "must meet requirements";
-                hasError = true;
-              } else if (location.region === "") {
-                this.error =
-                  "Region of additional location " +
-                  locationNumber +
-                  " must meet requirements";
-                hasError = true;
-              }
+        let locationNumber = 0;
+        let hasError = false;
+        this.$store.getters["operationLocations/locations"].forEach(
+          location => {
+            locationNumber++;
+            if (
+              location.streetNumber <= 0 ||
+              location.streetNumber > 2147483647
+            ) {
+              this.error =
+                "Street number of location " +
+                locationNumber +
+                " must meet requirements";
+              hasError = true;
+            } else if (location.aptNumber.length > 32) {
+              this.error =
+                "Apt/suite of location " +
+                locationNumber +
+                " must meet requirements";
+              hasError = true;
+            } else if (
+              location.streetName === "" ||
+              location.streetName.length > 32
+            ) {
+              this.error =
+                "Street name of location " +
+                locationNumber +
+                " must meet requirements";
+              hasError = true;
+            } else if (location.city === "" || location.city.length > 32) {
+              this.error =
+                "City of location " +
+                locationNumber +
+                " must meet requirements";
+              hasError = true;
+            } else if (
+              location.postalCode === "" ||
+              /^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[A-Za-z]{1}[ ]{0,1}\d{1}[A-Za-z]{1}\d{1}$/.test(
+                location.postalCode
+              ) === false
+            ) {
+              this.error =
+                "Postal code of location " +
+                locationNumber +
+                "must meet requirements";
+              hasError = true;
+            } else if (location.region === "") {
+              this.error =
+                "Region of location " +
+                locationNumber +
+                " must meet requirements";
+              hasError = true;
             }
-          );
-          if (hasError === true) {
-            return true;
           }
+        );
+        if (hasError) {
+          return true;
         }
 
         // animalIdentification

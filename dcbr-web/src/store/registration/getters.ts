@@ -40,9 +40,15 @@ export const ProfileGetters: GetterTree<ProfileTypes, RootState> = {
   postalCode(state: ProfileTypes): string {
     return state!.postalCode || "";
   },
+  poBox(state: ProfileTypes): string {
+    return state!.poBox || "";
+  },
   homeRegion(state: ProfileTypes): string {
     return state!.homeRegion || "";
   },
+  sameAsOperation(state: ProfileTypes): string {
+    return state!.sameAsOperation || "";
+  }
 };
 
 export const OperationDetailsGetters: GetterTree<OperationDetailsTypes, RootState> = {
@@ -81,9 +87,6 @@ export const OperationDetailsGetters: GetterTree<OperationDetailsTypes, RootStat
 
 export const OperationLocationsGetters: GetterTree<OperationLocationsTypes, RootState> = {
   // Operation Locations
-  hasAdditionalLocations(state: OperationLocationsTypes): string {
-    return state!.hasAdditionalLocations || "";
-  },
   locations(state: OperationLocationsTypes): Location[] {
     return state!.locations || [];
   },
@@ -169,8 +172,8 @@ export const RenewalGetters: GetterTree<RenewalTypes, RootState> = {
   registrationNumber(state: RenewalTypes): string {
     return state!.registrationNumber || "";
   },
-  expiryDate(state: RenewalTypes): string {
-    return state!.expiryDate || "";
+  registrationDate(state: RenewalTypes): string {
+    return state!.registrationDate || "";
   },
 }
 

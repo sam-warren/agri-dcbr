@@ -10,7 +10,9 @@ export interface ProfileTypes {
   streetName?: string;
   city?: string;
   postalCode?: string;
+  poBox?: string;
   homeRegion?: string;
+  sameAsOperation?: string;
   error?: boolean;
 }
 
@@ -29,7 +31,6 @@ export interface OperationDetailsTypes {
 }
 
 export interface OperationLocationsTypes {
-  hasAdditionalLocations?: string;
   locations?: Location[];
   error?: boolean;
 }
@@ -85,7 +86,7 @@ export interface RenewalTypes {
   middleName?: string;
   lastName?: string;
   registrationNumber?: string;
-  expiryDate?: string;
+  registrationDate?: string;
   error?: boolean;
 }
 

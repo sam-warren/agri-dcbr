@@ -39,8 +39,14 @@ export const ProfileActions: ActionTree<ProfileTypes, RootState> = {
   postalCode(context: any, payload: string) {
     context.commit("postalCode", payload);
   },
+  poBox(context: any, payload: string) {
+    context.commit("poBox", payload);
+  },
   homeRegion(context: any, payload: string) {
     context.commit("homeRegion", payload);
+  },
+  sameAsOperation(context: any, payload: string) {
+    context.commit("sameAsOperation", payload);
   },
   resetForm(context: any) {
     context.commit("resetForm");
@@ -86,9 +92,6 @@ export const OperationDetailsActions: ActionTree<OperationDetailsTypes, RootStat
 
 export const OperationLocationsActions: ActionTree<OperationLocationsTypes, RootState> = {
   // Operation Locations
-  hasAdditionalLocations(context: any, payload: string) {
-    context.commit("hasAdditionalLocations", payload);
-  },
   locations(context: any, payload: { operation: string }) {
     context.commit("locations", payload);
   },
@@ -205,8 +208,8 @@ export const RenewalActions: ActionTree<RenewalTypes, RootState> = {
   registrationNumber(context: any, payload: string) {
     context.commit("registrationNumber", payload);
   },
-  expiryDate(context: any, payload: string) {
-    context.commit("expiryDate", payload);
+  registrationDate(context: any, payload: string) {
+    context.commit("registrationDate", payload);
   },
   resetForm(context: any) {
     context.commit("resetForm");
