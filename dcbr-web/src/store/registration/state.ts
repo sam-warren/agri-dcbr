@@ -26,7 +26,9 @@ export const ProfileState: ProfileTypes = {
     streetName: "",
     city: "",
     postalCode: "",
+    poBox: "",
     homeRegion: "",
+    sameAsOperation: "",
     error: false
   };
   
@@ -57,7 +59,6 @@ export const ProfileState: ProfileTypes = {
   };
   
   export const OperationLocationsState: OperationLocationsTypes = {
-    // hasAdditionalLocations: "false",
     // locations: [
     //   {
     //     streetName: "Fake St",
@@ -69,9 +70,16 @@ export const ProfileState: ProfileTypes = {
     //   }
     // ],
     // error: false
-  
-    hasAdditionalLocations: "",
-    locations: [],
+    locations: [
+      {
+        streetName: "",
+        aptNumber: "",
+        streetNumber: 0,
+        city: "",
+        postalCode: "",
+        region: "",
+      }
+    ],
     error: false
   };
   
@@ -138,13 +146,13 @@ export const ProfileState: ProfileTypes = {
     middleName: "",
     lastName: "",
     registrationNumber: "",
-    expiryDate: "",
+    registrationDate: "",
     error: false
   
     // firstName: "Sam",
     // middleName: "Robert",
     // lastName: "Warren",
     // registrationNumber: "3135-1234-1111",
-    // expiryDate: "",
+    // registrationDate: "",
     // error: false
   }

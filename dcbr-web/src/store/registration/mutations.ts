@@ -48,9 +48,17 @@ export const ProfileMutations: MutationTree<ProfileTypes> = {
     state.error = false;
     state.postalCode = payload;
   },
+  poBox(state: ProfileTypes, payload: string) {
+    state.error = false;
+    state.poBox = payload;
+  },
   homeRegion(state: ProfileTypes, payload: string) {
     state.error = false;
     state.homeRegion = payload;
+  },
+  sameAsOperation(state: ProfileTypes, payload: string) {
+    state.error = false;
+    state.sameAsOperation = payload;
   },
   resetForm(state: ProfileTypes) {
     state.firstName = "";
@@ -64,6 +72,7 @@ export const ProfileMutations: MutationTree<ProfileTypes> = {
     state.streetName = "";
     state.city = "";
     state.postalCode = "";
+    state.poBox = "";
     state.homeRegion = "";
   }
 }
@@ -126,11 +135,6 @@ export const OperationDetailsMutations: MutationTree<OperationDetailsTypes> = {
 
 export const OperationLocationsMutations: MutationTree<OperationLocationsTypes> = {
   // Operation Locations
-  hasAdditionalLocations(state: OperationLocationsTypes, payload: string) {
-    state.error = false;
-    state.hasAdditionalLocations = payload;
-    state.locations = [];
-  },
   locations(state: OperationLocationsTypes, payload: { operation: string }) {
     state.error = false;
     if (payload.operation === "add") {
@@ -152,14 +156,15 @@ export const OperationLocationsMutations: MutationTree<OperationLocationsTypes> 
   },
   updateLocationProperty(state: OperationLocationsTypes, payload: {index: number, property: string, value: any}) {
     state.error = false;
-    if (state && state && state.locations) {
+    if (state && state.locations && payload) {
+      console.log(payload);
+      console.log(state.locations[payload.index]);
       let location: any = state.locations[payload.index];
       location[payload.property] = payload.value;
       state.locations[payload.index] = location;
     }
   },
   resetForm(state: OperationLocationsTypes) {
-    state.hasAdditionalLocations = "";
     state.locations = [];
   }
 }
@@ -315,9 +320,9 @@ export const RenewalMutations: MutationTree<RenewalTypes> = {
     state.error = false;
     state.registrationNumber = payload;
   },
-  expiryDate(state: RenewalTypes, payload: string) {
+  registrationDate(state: RenewalTypes, payload: string) {
     state.error = false;
-    state.expiryDate = payload;
+    state.registrationDate = payload;
   },
   resetForm(state: RenewalTypes) {
     state.error = false;
@@ -325,6 +330,6 @@ export const RenewalMutations: MutationTree<RenewalTypes> = {
     state.middleName = "";
     state.lastName = "";
     state.registrationNumber = "";
-    state.expiryDate = "";
+    state.registrationDate = "";
   }
 }

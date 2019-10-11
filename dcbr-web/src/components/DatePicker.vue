@@ -10,7 +10,7 @@
     min-width="290px"
   >
     <template v-slot:activator="{ on }">
-      <v-text-field v-model="date" label="Expiry Date" prepend-icon="event" readonly v-on="on"></v-text-field>
+      <v-text-field v-model="date" label="Previous Registration Date" prepend-icon="event" readonly v-on="on"></v-text-field>
     </template>
     <v-date-picker
       ref="picker"
@@ -33,13 +33,14 @@ export default {
     date: {
       // getter
       get() {
-        return this.$store.getters["renewal/expiryDate"]
+        return this.$store.getters["renewal/registrationDate"]
       },
       // setter
       set(value) {
-        this.$store.dispatch("renewal/expiryDate", value);
+        console.log(value)
+        this.$store.dispatch("renewal/registrationDate", value);
       }
-    }
+    },
   }
 };
 </script>
