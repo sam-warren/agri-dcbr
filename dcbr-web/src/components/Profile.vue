@@ -258,7 +258,6 @@ export default {
         "Phone number must be valid"
     ],
     poBoxRules: [
-      v => !!v || "P.O. Box is required",
       v => v.length <= 32 || "P.O. box must be valid"
     ]
   }),

@@ -393,7 +393,6 @@ export default {
           return true;
         }
         if (
-          this.$store.getters["profile/poBox"] === "" ||
           this.$store.getters["profile/poBox"].length > 32
         ) {
           this.error = "P.O. Box must meet requirements";
