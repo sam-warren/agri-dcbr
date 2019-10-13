@@ -40,7 +40,7 @@ class Registration(models.Model):
 
    
     def __str__(self):
-        return self.registration_number
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -106,11 +106,7 @@ class Operator(models.Model):
     operation_URL = models.CharField(max_length=4000, default="", blank=True)
 
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (
-            self.registration_number,
-            self.last_name,
-            self.first_name,
-        )
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -206,11 +202,8 @@ class Address(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (
-            self.registration_number,
-            self.address_type,
-            self.street_name,
-        )
+        return "%s" % (self.registration_number)
+
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -251,8 +244,7 @@ class Operation_Risk_Factor(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Operation risk for: \t %s " % (self.registration_number)
-        return "Reg ID: \t %s %s" % (self.registration_number, self.animal_type)
+        return "%s" % (self.registration_number)
 
     def publish(self):
         "operator = breeder / seller"
@@ -298,7 +290,7 @@ class Animal_Risk_Factor(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Reg ID:: \t %s " % (self.registration_number)
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -318,7 +310,7 @@ class Association_Membership(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Reg ID:: \t %s " % (self.registration_number)
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -345,12 +337,12 @@ class Renewal(models.Model):
         max_length=20, default="", blank=True
     )
     # Note - expiry date is simply a self-reported expiry date
-    expiry_date = models.CharField(max_length=10, default="", blank=True)
+    previous_registration_date = models.CharField(max_length=10, default="", blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Reg ID:: \t %s " % (self.registration_number)
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -429,11 +421,7 @@ class Inspection_Report(models.Model):
     Euthanasia_notes = models.TextField(default="", blank=True)
 
     def __str__(self):
-        return "Reg ID: \t %s Name: \t %s , %s" % (
-            self.registration_number,
-            self.operator_last_name,
-            self.operator_first_name,
-        )
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
 

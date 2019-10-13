@@ -343,7 +343,7 @@ export default {
             return true;
           }
           if (this.$store.getters["renewal/registrationDate"] === "") {
-            this.error = "Expiry date must meet requirements";
+            this.error = "Registration date must meet requirements";
             return true;
           }
         }
