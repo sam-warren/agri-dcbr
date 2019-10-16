@@ -1,7 +1,10 @@
 import logging
-from datetime import datetime, timedelta
+import pytz
+import datetime
+from dateutil.relativedelta import relativedelta
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.conf import settings
 from django.utils.translation import gettext as _
 
 LOGGER = logging.getLogger(__name__)
@@ -29,7 +32,10 @@ class Registration(models.Model):
     )
 
     def default_expiry_date():
-        expiry_date = datetime.now() + timedelta(days=365)
+        expiry_date = datetime.datetime.combine(
+            datetime.datetime.now(pytz.utc), datetime.time(23, 59, 59, 999999), tzinfo=pytz.utc
+        ) + relativedelta(months=int(settings.REGISTRATION_VALIDITY_MONTHS))
+
         return expiry_date
 
     registration_number = models.CharField(max_length=20, default="", blank=True)
@@ -38,7 +44,6 @@ class Registration(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
-   
     def __str__(self):
         return "%s" % (self.registration_number)
 
@@ -203,7 +208,6 @@ class Address(models.Model):
 
     def __str__(self):
         return "%s" % (self.registration_number)
-
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

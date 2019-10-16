@@ -26,25 +26,22 @@ def send_queued_mail():
 def send_reminder_email():
     LOGGER.debug("Processing operator reminder emails...")
 
-    expiry_date_begin = (
-        datetime.datetime.combine(
-            datetime.datetime.now(pytz.utc), datetime.time(), tzinfo=pytz.utc
-        )
-        + relativedelta(months=int(settings.REMINDER_EMAIL_NOTICE_MONTHS))
-        - relativedelta(months=int(settings.REGISTRATION_VALIDITY_MONTHS))
-    )
+    expiry_date_begin = datetime.datetime.combine(
+        datetime.datetime.now(pytz.utc), datetime.time(), tzinfo=pytz.utc
+    ) + relativedelta(months=int(settings.REMINDER_EMAIL_NOTICE_MONTHS))
     expiry_date_end = datetime.datetime.combine(
         expiry_date_begin, datetime.time(23, 59, 59, 999999), tzinfo=pytz.utc
     )
 
     LOGGER.debug(
-        "Processing operators registered between {} and {}".format(
+        "Processing registrations expiring between {} and {}".format(
             expiry_date_begin, expiry_date_end
         )
     )
 
     expiring_operators = Operator.objects.filter(
-        created_date__gt=expiry_date_begin, created_date__lt=expiry_date_end
+        registration_number__expiry_date__gt=expiry_date_begin,
+        registration_number__expiry_date__lte=expiry_date_end,
     )
 
     email_list = []
@@ -134,7 +131,7 @@ def update_registration_status():
     ).update(operator_status=Registration.CANCELLED)
 
     if expired_registrations > 0:
-        LOGGER.debug(
+        LOGGER.info(
             "{} ACTIVE registration(s) have been marked as CANCELLED.".format(
                 expired_registrations
             )

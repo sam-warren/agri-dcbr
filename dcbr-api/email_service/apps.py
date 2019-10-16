@@ -11,9 +11,10 @@ def start_reminder_email_task(sender, **kwargs):
     # reminder emails are scheduled to run daily
     send_reminder_email(repeat=60 * 60 * 24, repeat_until=None)
 
-    # queued mail is processed every minute
-    send_queued_mail(repeat=60 * 60 * 24, repeat_until=None)
+    # queued mail is processed every five minutes
+    send_queued_mail(repeat=60 * 5, repeat_until=None)
 
+    # registration status check scheduled to run daily
     update_registration_status(repeat=60 * 60 * 24, repeat_until=None)
 
 
