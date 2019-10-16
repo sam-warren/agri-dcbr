@@ -1,9 +1,10 @@
 import logging
-from datetime import datetime, timedelta
-
+import pytz
+import datetime
 from dateutil.relativedelta import relativedelta
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.conf import settings
 from django.utils.translation import gettext as _
 
 LOGGER = logging.getLogger(__name__)
@@ -30,13 +31,21 @@ class Registration(models.Model):
         max_length=50, choices=REG_STATUS_CHOICES, default=ACTIVE
     )
 
+    def default_expiry_date():
+        expiry_date = datetime.datetime.combine(
+            datetime.datetime.now(pytz.utc), datetime.time(23, 59, 59, 999999), tzinfo=pytz.utc
+        ) + relativedelta(months=int(settings.REGISTRATION_VALIDITY_MONTHS))
+
+        return expiry_date
+
     registration_number = models.CharField(max_length=20, default="", blank=True)
     registration_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    created_timestamp = models.DateTimeField(auto_now_add=True)
-    updated_timestamp = models.DateTimeField(auto_now=True)
+    expiry_date = models.DateTimeField(default=default_expiry_date)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.registration_number
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -50,11 +59,7 @@ class Registration(models.Model):
             )
             self.save()
         else:
-            LOGGER.debug(
-                "Registration_number={}".format(
-                    self.registration_number
-                )
-            )
+            LOGGER.debug("Registration_number={}".format(self.registration_number))
 
     class Meta:
         verbose_name_plural = "Registrations"
@@ -89,8 +94,8 @@ class Operator(models.Model):
     last_name = models.CharField(max_length=50)
     phone_num = models.CharField(max_length=12, default="", blank=True)
     email_address = models.CharField(max_length=32, default="", blank=True)
-    created_timestamp = models.DateTimeField(auto_now_add=True)
-    updated_timestamp = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     comm_pref = models.CharField(
         "Communication method",
@@ -106,11 +111,7 @@ class Operator(models.Model):
     operation_URL = models.CharField(max_length=4000, default="", blank=True)
 
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (
-            self.registration_number,
-            self.last_name,
-            self.first_name,
-        )
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -206,11 +207,7 @@ class Address(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Reg ID: \t %s %s , %s" % (
-            self.registration_number,
-            self.address_type,
-            self.street_name,
-        )
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -251,8 +248,7 @@ class Operation_Risk_Factor(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Operation risk for: \t %s " % (self.registration_number)
-        return "Reg ID: \t %s %s" % (self.registration_number, self.animal_type)
+        return "%s" % (self.registration_number)
 
     def publish(self):
         "operator = breeder / seller"
@@ -298,7 +294,7 @@ class Animal_Risk_Factor(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Reg ID:: \t %s " % (self.registration_number)
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -318,7 +314,7 @@ class Association_Membership(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Reg ID:: \t %s " % (self.registration_number)
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -330,7 +326,7 @@ class Association_Membership(models.Model):
 class Renewal(models.Model):
 
     # this model is a temporary fix to allow operators to re-register, without authentication
-    # In the front-end, an operator that renews their registration is expected to enter some 
+    # In the front-end, an operator that renews their registration is expected to enter some
     # information from their previous registration.
     # **************** Please do not count on this information being accurate **************
 
@@ -345,12 +341,12 @@ class Renewal(models.Model):
         max_length=20, default="", blank=True
     )
     # Note - expiry date is simply a self-reported expiry date
-    expiry_date = models.CharField(max_length=10, default= "", blank = True)
+    previous_registration_date = models.CharField(max_length=10, default="", blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Reg ID:: \t %s " % (self.registration_number)
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -429,11 +425,7 @@ class Inspection_Report(models.Model):
     Euthanasia_notes = models.TextField(default="", blank=True)
 
     def __str__(self):
-        return "Reg ID: \t %s Name: \t %s , %s" % (
-            self.registration_number,
-            self.operator_last_name,
-            self.operator_first_name,
-        )
+        return "%s" % (self.registration_number)
 
     def save(self, *args, **kwargs):
 

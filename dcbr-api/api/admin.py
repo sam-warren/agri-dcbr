@@ -61,34 +61,57 @@ class RenewalInline(admin.StackedInline):
 
 class OperatorAdmin(MyAdmin, admin.ModelAdmin):
     pass
+    list_display = ("registration_number", "first_name", "last_name","operation_type")
+    list_filter = ("registration_number", "first_name", "last_name","operation_type")
+    search_fields = ("registration_number__registration_number", "first_name", "last_name","operation_type")
 
 
 class AddressAdmin(MyAdmin, admin.ModelAdmin):
     pass
+    list_display = ("registration_number", "street_num", "street_name","POBox", "city", "region")
+    list_filter = ("registration_number", "city", "region")
+    search_fields = ("registration_number__registration_number", "street_num", "street_name","POBox", "city", "region")
 
 
 class Inspection_ReportAdmin(MyAdmin, admin.ModelAdmin):
     pass
+    list_display = ("registration_number", "inspector_full_name", "operator_first_name", "operator_last_name","created_date", "updated_date")
+    list_filter = ("registration_number", "inspector_full_name", "operator_first_name", "operator_last_name","created_date", "updated_date")
+    search_fields = ("registration_number__registration_number", "inspector_full_name", "operator_first_name", "operator_last_name","created_date", "updated_date")
 
 
 class Operation_Risk_FactorAdmin(MyAdmin, admin.ModelAdmin):
     pass
+    list_display = ("registration_number", "accidental_breeding", "num_workers", "has_vet", "has_perm_id")
+    list_filter = ("registration_number", "accidental_breeding", "num_workers", "has_vet", "has_perm_id")
+    search_fields = ("registration_number__registration_number", "accidental_breeding", "num_workers", "has_vet", "has_perm_id")
 
 
 class Animal_Risk_FactorAdmin(MyAdmin, admin.ModelAdmin):
     pass
+    list_display = ("registration_number", "animal_type", "num_breeds", "num_females_intact", "num_litter", "num_sold", "num_animals")
+    list_filter = ("registration_number", "animal_type")
+    search_fields = ("registration_number__registration_number", "animal_type", "num_breeds", "num_females_intact", "num_litter", "num_sold", "num_animals")
 
 
 class Association_MembershipAdmin(MyAdmin, admin.ModelAdmin):
     pass
-
+    list_display = ("registration_number", "assoc_name")
+    list_filter = ("registration_number", "assoc_name")
+    search_fields = ("registration_number__registration_number", "assoc_name")
 
 class RenewalAdmin(MyAdmin, admin.ModelAdmin):
     pass
+    list_display = ("registration_number", "first_name","last_name", "previous_registration_number", "previous_registration_date")
+    list_filter = ("registration_number", "first_name","last_name", "previous_registration_number")
+    search_fields = ("registration_number__registration_number", "first_name","last_name", "previous_registration_number", "previous_registration_date")
 
 
 class RegistrationAdmin(MyAdmin, admin.ModelAdmin):
     pass
+    list_display = ("registration_number", "operator_status", "registration_date")
+    list_filter = ("operator_status", "updated_date")
+    search_fields = ("registration_number", "registration_date")
     inlines = (
         OperatorInline,
         AddressInline,
