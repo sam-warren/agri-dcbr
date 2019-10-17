@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
 from .models import (
     Address,
@@ -12,7 +12,7 @@ from .models import (
 )
 
 
-class Address_Serializer(ModelSerializer):
+class Address_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Address
         fields = (
@@ -28,13 +28,13 @@ class Address_Serializer(ModelSerializer):
         )
 
 
-class Association_Membership_Serializer(ModelSerializer):
+class Association_Membership_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Association_Membership
         fields = ("id", "assoc_name")
 
 
-class Operation_Risk_Factor_Serializer(ModelSerializer):
+class Operation_Risk_Factor_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Operation_Risk_Factor
         fields = (
@@ -48,7 +48,7 @@ class Operation_Risk_Factor_Serializer(ModelSerializer):
         )
 
 
-class Animal_Risk_Factor_Serializer(ModelSerializer):
+class Animal_Risk_Factor_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Animal_Risk_Factor
         fields = (
@@ -65,7 +65,7 @@ class Animal_Risk_Factor_Serializer(ModelSerializer):
         )
 
 
-class Operator_Serializer(ModelSerializer):
+class Operator_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Operator
         fields = (
@@ -83,7 +83,7 @@ class Operator_Serializer(ModelSerializer):
         )
 
 
-class Renewal_Serializer(ModelSerializer):
+class Renewal_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Renewal
         fields = (
@@ -96,7 +96,7 @@ class Renewal_Serializer(ModelSerializer):
         )
 
 
-class Registration_Serializer(ModelSerializer):
+class Registration_Serializer(serializers.ModelSerializer):
     operator = Operator_Serializer()
     addresses = Address_Serializer(many=True)
     associations = Association_Membership_Serializer(many=True)
@@ -154,7 +154,15 @@ class Registration_Serializer(ModelSerializer):
         return registration
 
 
-class Inspection_Report_Serializer(ModelSerializer):
+class Inspection_Report_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Inspection_Report
         fields = "__all__"
+
+
+class Operator_Search_Serializer(serializers.ModelSerializer):
+    registration_number = serializers.StringRelatedField()
+
+    class Meta:
+        model = Operator
+        fields = ("registration_number", "first_name", "last_name")

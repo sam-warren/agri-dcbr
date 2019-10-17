@@ -7,8 +7,8 @@ from rest_framework.response import Response
 
 from email_service import tasks
 
-from .models import Registration
-from .serializers import Registration_Serializer
+from .models import Registration, Operator
+from .serializers import Registration_Serializer, Operator_Search_Serializer
 
 
 class Registration_ViewSet(
@@ -61,3 +61,41 @@ class Registration_ViewSet(
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
+
+
+class Operator_Search_ViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    # add_model_type = False
+
+    queryset = Operator.objects.none()
+    serializer_class = Operator_Search_Serializer
+
+    def filter_queryset(self, queryset):
+        if "string" in self.request.query_params:
+            queryset = (
+                Operator.objects.filter(
+                    last_name__iexact=self.request.query_params["string"]
+                )
+                .union(
+                    Operator.objects.filter(
+                        registration_number__registration_number__iexact=self.request.query_params[
+                            "string"
+                        ]
+                    )
+                )
+                .order_by("registration_number")
+            )
+        else:
+            queryset = Operator.objects.none()
+
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
