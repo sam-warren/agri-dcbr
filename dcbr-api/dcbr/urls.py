@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import RedirectView
 
 from . import views
 
@@ -24,9 +25,10 @@ admin.site.site_title = "Dog and Cat Breeder Registry"
 admin.site.index_title = "Dog and Cat Breeder Registry"
 
 urlpatterns = [
+    path("", RedirectView.as_view(url="authenticate")),
+    path("authenticate", views.authenticate),
     path("admin/doc/", include("django.contrib.admindocs.urls")),
     path("admin/", admin.site.urls),
-    path("authenticate", views.authenticate),
     url(r"^health/", include("health_check.urls")),
     url(r"^api/", include("api.urls")),
     url(r"^oidc/", include("mozilla_django_oidc.urls")),
