@@ -1,13 +1,16 @@
 from datetime import datetime
+
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import mixins, status, viewsets
 from rest_framework.response import Response
 
 from email_service import tasks
 
-from .models import Registration, Operator
-from .serializers import Registration_Serializer, Operator_Search_Serializer
+from .models import Operator, Registration
+from .serializers import Operator_Search_Serializer, Registration_Serializer
 
 
 class Registration_ViewSet(
@@ -69,7 +72,8 @@ class Operator_Search_ViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = Operator_Search_Serializer
 
     def filter_queryset(self, queryset):
-        if "string" in self.request.query_params:
+        search_string = self.request.query_params.get("string", None)
+        if search_string is not None:
             queryset = (
                 Operator.objects.filter(
                     last_name__iexact=self.request.query_params["string"]
@@ -93,6 +97,13 @@ class Operator_Search_ViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
         return queryset
 
+    _swagger_params = [
+        openapi.Parameter(
+            "string", openapi.IN_QUERY, description="Query string", type=openapi.TYPE_STRING
+        )
+    ]
+
+    @swagger_auto_schema(manual_parameters=_swagger_params)
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         page = self.paginate_queryset(queryset)
