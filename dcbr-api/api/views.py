@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from rest_framework import mixins, status, viewsets
@@ -82,6 +81,11 @@ class Operator_Search_ViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
                         ]
                     )
                 )
+                .intersection(
+                    Operator.objects.filter(
+                        registration_number__operator_status=Registration.ACTIVE
+                    )
+                )
                 .order_by("registration_number")
             )
         else:
@@ -91,7 +95,6 @@ class Operator_Search_ViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
