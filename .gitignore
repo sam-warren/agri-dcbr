@@ -165,3 +165,7 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# SSL certificates
+*.crt
+*.key

@@ -6,7 +6,7 @@
 # NAME=dcbr-api
 # APP_GROUP=dcbr
 # IMAGE_NAMESPACE=nbup6o-tools
-APPLICATION_DOMAIN=dcbr-api.pathfinder.gov.bc.ca
+APPLICATION_DOMAIN=dcbr-admin.pathfinder.gov.bc.ca
 # DATABASE_SERVICE_HOST=dcbr-db
 # DATABASE_SERVICE_PORT=5432
 # DATABASE_NAME=DCBR
