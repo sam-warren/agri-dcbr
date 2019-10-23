@@ -9,7 +9,7 @@
         <v-btn large round block dark class="primary" @click="navTo('preamble')">Register</v-btn>
       </v-flex>
     </v-layout>
-    <v-layout align-center>
+    <v-layout justify-center>
       <PublicSearch/>
     </v-layout>
   </v-container>
