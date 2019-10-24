@@ -7,11 +7,7 @@
             <h1>Public Search</h1>
           </v-flex>
           <v-flex>
-            <v-text-field
-              v-model="searchQuery"
-              label="Registration Number"
-              v-mask="'BC-DCBR-######'"
-            />
+            <v-text-field v-model="searchQuery" label="Last Name or Reg #" />
           </v-flex>
           <v-flex mt-2>
             <v-btn text icon @click="search()">
@@ -20,17 +16,12 @@
           </v-flex>
         </v-layout>
         <v-layout mb-4>
-          <div>Enter a valid registration number in the searchbar to see their details.</div>
+          <div>Enter a last name or valid registration number in the searchbar to see the operator's details.</div>
         </v-layout>
         <v-layout>
           <v-data-table :headers="headers" :items="results" class="elevation-1">
             <template slot="headerCell" slot-scope="props">
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <span v-on="on">{{ props.header.text }}</span>
-                </template>
-                <span>{{ props.header.text }}</span>
-              </v-tooltip>
+              <span>{{ props.header.text }}</span>
             </template>
             <template v-slot:items="props">
               <td class="text-xs-left">{{ props.item.first_name }}</td>

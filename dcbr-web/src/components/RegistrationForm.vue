@@ -162,6 +162,9 @@ export default {
           last_name: this.$store.getters["renewal/lastName"],
           previous_registration_number: this.$store.getters[
             "renewal/registrationNumber"
+          ],
+          previous_registration_date: this.$store.getters[
+            "renewal/registrationDate"
           ]
         }
       ];
@@ -271,7 +274,8 @@ export default {
             first_name: "",
             middle_name: "",
             last_name: "",
-            previous_registration_number: ""
+            previous_registration_number: "",
+            previous_registration_date: "",
           }
         ],
         animal_risk_factors: riskFactors,
