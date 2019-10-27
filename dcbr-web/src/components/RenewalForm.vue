@@ -87,7 +87,7 @@ export default {
     ],
     registrationNumberRules: [
       v => !!v || "Registration number is required",
-      v => v.length <= 50 || "Registration number must be less than 50 characters"
+      v => v.length <= 20 || "Registration number must be less than 20 characters"
     ],
     middleNameRules: [
       v => v.length <= 50 || "Middle name must be less than 50 characters"
