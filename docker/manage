@@ -5,9 +5,12 @@ set -e
 
 S2I_EXE=s2i
 if [ -z $(type -P "$S2I_EXE") ]; then
-  echo -e "The ${S2I_EXE} executable is needed and not on your path."
-  echo -e "It can be downloaded from here: https://github.com/openshift/source-to-image"
-  echo -e "Make sure you place it in a directory on your path."
+  _red='\033[0;31m'
+  _nc='\033[0m' # No Color
+
+  echo -e "${_red}The ${S2I_EXE} executable is needed and not on your path.${_nc}"
+  echo -e "${_red}It can be downloaded from here: https://github.com/openshift/source-to-image${_nc}"
+  echo -e "${_red}Make sure you place it in a directory on your path.${_nc}"
   exit 1
 fi
 
@@ -159,8 +162,11 @@ configureEnvironment() {
 
   if [ "$COMMAND" == "start" ] || [ "$COMMAND" == "start-api" ] || [ "$COMMAND" == "start-dev" ]; then
     if [ -z "$KEYCLOAK_CLIENT_SECRET" ]; then
-      echo "For Keycloak authentication to work, you must provide a client secret parameter. For example: KEYCLOAK_CLIENT_SECRET=my-client-secret."
-      echo "Please refer to the section \"Obtaining a client secret from Keycloak\" in the README.md in the current directory."
+      _yellow='\033[0;31m'
+      _nc='\033[0m' # No Color
+
+      echo -e "${_yellow}For Keycloak authentication to work, you must provide a client secret parameter. For example: KEYCLOAK_CLIENT_SECRET=my-client-secret.${_nc}"
+      echo -e "${_yellow}Please refer to the section \"Obtaining a client secret from Keycloak\" in the README.md in the current directory.${_nc}"
     fi
   fi
 
