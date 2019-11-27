@@ -6,6 +6,7 @@ import tempfile
 import pytz
 import requests
 from background_task import background
+from background_task.models_completed import CompletedTask
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.core import management
@@ -137,3 +138,11 @@ def update_registration_status():
             )
         )
 
+
+@background()
+def clear_old_tasks():
+    # delete old completed tasks to prevent the background task table to become excessively big
+    deleted_tasks = CompletedTask.objects.filter(
+        run_at__lte=datetime.datetime.now()
+    ).delete()
+    LOGGER.debug(f"Deleted {deleted_tasks} old CompltedTask objects")
